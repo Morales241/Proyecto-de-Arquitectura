@@ -1,12 +1,12 @@
 package view;
 
-import model.DomoDominoModel;
+import model.LoginModel;
 
-public class DomoDominoView extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame {
 
-    private DomoDominoModel domoDominoModel;
+    private LoginModel domoDominoModel;
     
-    public DomoDominoView(DomoDominoModel domoDominoModel) {
+    public LoginView(LoginModel domoDominoModel) {
         initComponents();
         this.domoDominoModel = domoDominoModel;
     }
