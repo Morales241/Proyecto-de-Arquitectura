@@ -7,11 +7,11 @@ import view.LoginView;
 public class DomoDominoMain {
 
     public static void main(String[] args) {
-        LoginModel ddm = new LoginModel();
-        LoginView ddv = new LoginView(ddm);
-        LoginControler lc = new LoginControler(ddm, ddv);
+        LoginModel lm = new LoginModel();
+        LoginView lv = new LoginView(lm);
+        LoginControler lc = new LoginControler(lm, lv);
         
-        ddv.setVisible(true);
+        lv.setVisible(true);
     }
     
 }
