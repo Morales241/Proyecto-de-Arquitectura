@@ -1,7 +1,6 @@
 package com.mycompany.domodominopersistencia;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -12,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "jugador")
