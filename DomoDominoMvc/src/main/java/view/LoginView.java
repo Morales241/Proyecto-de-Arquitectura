@@ -16,64 +16,62 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelTitulo = new javax.swing.JLabel();
-        labelNombre = new javax.swing.JLabel();
-        labelContra = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
+        labelTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelTitulo.setText("Inicio de Sesión");
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelNombre.setText("Nombre");
+        txtNombre.setBackground(new java.awt.Color(244, 244, 244));
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombre.setToolTipText("");
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 190, -1));
 
-        labelContra.setText("Contraseña");
+        txtContra.setBackground(new java.awt.Color(247, 247, 247));
+        txtContra.setForeground(new java.awt.Color(0, 0, 0));
+        txtContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
 
-        btnIniciarSesion.setText("Iniciar Sesión");
+        btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
+        btnIniciarSesion.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\source\\Regresar.png")); // NOI18N
+        btnIniciarSesion.setBorderPainted(false);
+        btnIniciarSesion.setContentAreaFilled(false);
+        btnIniciarSesion.setFocusPainted(false);
+        btnIniciarSesion.setFocusable(false);
+        btnIniciarSesion.setOpaque(false);
+        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 180, 40));
+
+        labelTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        labelTitulo.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\source\\FondoInicioSesion.jpg")); // NOI18N
+        jPanel1.add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelTitulo)
-                            .addComponent(labelContra)
-                            .addComponent(labelNombre))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(txtContra)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(btnIniciarSesion)))
-                .addContainerGap(77, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelTitulo)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelContra)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addComponent(btnIniciarSesion)
-                .addContainerGap(87, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraActionPerformed
 
     public JButton getBtnIniciarSesion() {
         return btnIniciarSesion;
@@ -82,8 +80,7 @@ public class LoginView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JLabel labelContra;
-    private javax.swing.JLabel labelNombre;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtNombre;
