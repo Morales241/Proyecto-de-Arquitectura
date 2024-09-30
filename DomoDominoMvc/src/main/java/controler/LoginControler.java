@@ -19,6 +19,8 @@ public class LoginControler implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Iniciando Sesion.... (mentira nomas imprimi esto)");
+        System.out.println(domoDominoModel.getNombre());
+        System.out.println(domoDominoModel.getContra());
     }
     
 }
