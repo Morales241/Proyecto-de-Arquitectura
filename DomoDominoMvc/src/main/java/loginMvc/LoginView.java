@@ -3,6 +3,7 @@ package loginMvc;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import observers.IObservable;
 import observers.IObserver;
 
@@ -74,18 +75,8 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         domoDominoModel.setNombre(txtNombre.getText());
         
         notificarObservadores();
-        
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    /**
-     * Metodo que agrega un actionListener al boton, sin tener que pasarle el 
-     * boton a la clase control.
-     * @param actionListener 
-     */
-    public void agregarListener(ActionListener actionListener){
-        btnIniciarSesion.addActionListener(actionListener);
-    }
-    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JPanel jPanel1;
@@ -96,6 +87,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
 
     @Override
     public void actualizar() {
+        JOptionPane.showConfirmDialog(rootPane, "ASDA");
     }
 
     @Override
