@@ -39,6 +39,7 @@ public class LoginView extends javax.swing.JFrame {
         });
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
 
+        btnIniciarSesion.setIcon(new javax.swing.ImageIcon("D:\\Berry\\Documents\\NetBeansProjects\\Proyecti de arqui\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\java\\loginMvc\\Regresar.png")); // NOI18N
         btnIniciarSesion.setBorderPainted(false);
         btnIniciarSesion.setContentAreaFilled(false);
         btnIniciarSesion.setFocusPainted(false);

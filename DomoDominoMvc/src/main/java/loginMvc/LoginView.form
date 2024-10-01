@@ -74,6 +74,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnIniciarSesion">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoMvc\src\main\java\loginMvc\Regresar.png"/>
+            </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="focusPainted" type="boolean" value="false"/>
