@@ -1,8 +1,6 @@
 package loginMvc;
 
-import javax.swing.JButton;
 import loginMvc.LoginModel;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginView extends javax.swing.JFrame {
