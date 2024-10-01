@@ -39,7 +39,7 @@ public class LoginView extends javax.swing.JFrame {
         });
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
 
-        btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/iniciarsesion.png"))); // NOI18N
+        btnIniciarSesion.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\resources\\iniciarsesion.png")); // NOI18N
         btnIniciarSesion.setBorderPainted(false);
         btnIniciarSesion.setContentAreaFilled(false);
         btnIniciarSesion.setFocusPainted(false);
@@ -51,7 +51,7 @@ public class LoginView extends javax.swing.JFrame {
         });
         jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 260, 40));
 
-        labelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/domodomino.png"))); // NOI18N
+        labelFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\resources\\domodomino.png")); // NOI18N
         jPanel1.add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
