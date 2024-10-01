@@ -1,17 +1,17 @@
 package main;
 
-import controler.LoginControler;
-import model.LoginModel;
-import view.LoginView;
+import loginMvc.LoginControler;
+import loginMvc.LoginModel;
+import loginMvc.LoginView;
 
 public class DomoDominoMain {
 
     public static void main(String[] args) {
-        LoginModel lm = new LoginModel();
-        LoginView lv = new LoginView(lm);
-        LoginControler lc = new LoginControler(lm, lv);
+        LoginModel loginModel = new LoginModel();
+        LoginView loginView = new LoginView(loginModel);
+        LoginControler loginControler = new LoginControler(loginModel, loginView);
         
-        lv.setVisible(true);
+        loginView.setVisible(true);
     }
     
 }

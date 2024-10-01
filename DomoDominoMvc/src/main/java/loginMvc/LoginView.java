@@ -1,7 +1,7 @@
-package view;
+package loginMvc;
 
-import javax.swing.JButton;
-import model.LoginModel;
+import loginMvc.LoginModel;
+import java.awt.event.ActionListener;
 
 public class LoginView extends javax.swing.JFrame {
 
@@ -28,12 +28,10 @@ public class LoginView extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNombre.setBackground(new java.awt.Color(244, 244, 244));
-        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
         txtNombre.setToolTipText("");
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 190, -1));
 
         txtContra.setBackground(new java.awt.Color(247, 247, 247));
-        txtContra.setForeground(new java.awt.Color(0, 0, 0));
         txtContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraActionPerformed(evt);
@@ -41,17 +39,16 @@ public class LoginView extends javax.swing.JFrame {
         });
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
 
-        btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
-        btnIniciarSesion.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\source\\Regresar.png")); // NOI18N
         btnIniciarSesion.setBorderPainted(false);
         btnIniciarSesion.setContentAreaFilled(false);
         btnIniciarSesion.setFocusPainted(false);
         btnIniciarSesion.setFocusable(false);
-        btnIniciarSesion.setOpaque(false);
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 180, 40));
-
-        labelTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        labelTitulo.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\source\\FondoInicioSesion.jpg")); // NOI18N
         jPanel1.add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -73,10 +70,20 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContraActionPerformed
 
-    public JButton getBtnIniciarSesion() {
-        return btnIniciarSesion;
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+
+        domoDominoModel.setNombre(txtNombre.getText());
+        domoDominoModel.setContra(txtContra.getText());
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    /**
+     * Metodo que agrega un actionListener al boton, sin tener que pasarle el 
+     * boton a la clase control.
+     * @param actionListener 
+     */
+    public void agregarListener(ActionListener actionListener){
+        btnIniciarSesion.addActionListener(actionListener);
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
