@@ -1,9 +1,7 @@
-package controler;
+package loginMvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.LoginModel;
-import view.LoginView;
 
 public class LoginControler{
     

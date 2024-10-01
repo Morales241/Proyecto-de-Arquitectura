@@ -1,8 +1,8 @@
 package main;
 
-import controler.LoginControler;
-import model.LoginModel;
-import view.LoginView;
+import loginMvc.LoginControler;
+import loginMvc.LoginModel;
+import loginMvc.LoginView;
 
 public class DomoDominoMain {
 

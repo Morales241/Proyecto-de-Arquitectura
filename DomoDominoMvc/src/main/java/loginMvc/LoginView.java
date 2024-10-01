@@ -1,7 +1,7 @@
-package view;
+package loginMvc;
 
 import javax.swing.JButton;
-import model.LoginModel;
+import loginMvc.LoginModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
