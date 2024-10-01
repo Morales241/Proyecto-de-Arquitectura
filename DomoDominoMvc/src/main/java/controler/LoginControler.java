@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import model.LoginModel;
 import view.LoginView;
 
-public class LoginControler implements ActionListener{
+public class LoginControler{
     
     private LoginModel domoDominoModel;
     private LoginView domoDominoView;
@@ -19,15 +19,13 @@ public class LoginControler implements ActionListener{
         
         //Las demas correcciones a lo que yo se ya se aplicaron, es esto y el de abajo checarlo, no recuerdo
         //que dijo gibran sobre ese metodo, suerte plebes ahi ahorita me meto al discordo :D
-        ActionListener actionListener = new ActionListener();
-        domoDominoView.agregarListener(actionListener);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Iniciando Sesion.... (mentira nomas imprimi esto)");
-        System.out.println(domoDominoModel.getNombre());
-        System.out.println(domoDominoModel.getContra());
-    }
-    
+        domoDominoView.agregarListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Iniciando Sesion.... (mentira nomas imprimi esto)");
+                System.out.println(domoDominoModel.getNombre());
+                System.out.println(domoDominoModel.getContra());
+            }
+        });
+    }   
 }

@@ -87,12 +87,6 @@ public class LoginView extends javax.swing.JFrame {
         btnIniciarSesion.addActionListener(actionListener);
     }
     
-//    public JButton getBtnIniciarSesion() {
-//        
-//        return btnIniciarSesion;
-//    }
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JPanel jPanel1;
