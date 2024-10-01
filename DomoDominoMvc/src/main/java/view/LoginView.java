@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JButton;
 import model.LoginModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginView extends javax.swing.JFrame {
 
@@ -71,15 +73,24 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContraActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        // TODO add your handling code here:
+
         domoDominoModel.setNombre(txtNombre.getText());
         domoDominoModel.setContra(txtContra.getText());
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
-    public JButton getBtnIniciarSesion() {
-        
-        return btnIniciarSesion;
+    /**
+     * Metodo que agrega un actionListener al boton, sin tener que pasarle el 
+     * boton a la clase control.
+     * @param actionListener 
+     */
+    public void agregarListener(ActionListener actionListener){
+        btnIniciarSesion.addActionListener(actionListener);
     }
+    
+//    public JButton getBtnIniciarSesion() {
+//        
+//        return btnIniciarSesion;
+//    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

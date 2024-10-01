@@ -13,7 +13,14 @@ public class LoginControler implements ActionListener{
     public LoginControler(LoginModel domoDominoModel, LoginView domoDominoView) {
         this.domoDominoModel = domoDominoModel;
         this.domoDominoView = domoDominoView;
-        this.domoDominoView.getBtnIniciarSesion().addActionListener(this);
+        
+        //Esto sigue estando mal, hay que buscar como hacer una "instancia de ActionListenen En linea"
+        //o algo asi dijo el profe, recuerdo que dijo que se llamaba en linea.
+        
+        //Las demas correcciones a lo que yo se ya se aplicaron, es esto y el de abajo checarlo, no recuerdo
+        //que dijo gibran sobre ese metodo, suerte plebes ahi ahorita me meto al discordo :D
+        ActionListener actionListener = new ActionListener();
+        domoDominoView.agregarListener(actionListener);
     }
 
     @Override
