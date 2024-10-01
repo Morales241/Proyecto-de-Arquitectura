@@ -20,7 +20,7 @@ public class LoginView extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
-        labelTitulo = new javax.swing.JLabel();
+        labelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,7 +39,7 @@ public class LoginView extends javax.swing.JFrame {
         });
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
 
-        btnIniciarSesion.setIcon(new javax.swing.ImageIcon("D:\\Berry\\Documents\\NetBeansProjects\\Proyecti de arqui\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\java\\loginMvc\\Regresar.png")); // NOI18N
+        btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/iniciarsesion.png"))); // NOI18N
         btnIniciarSesion.setBorderPainted(false);
         btnIniciarSesion.setContentAreaFilled(false);
         btnIniciarSesion.setFocusPainted(false);
@@ -49,8 +49,10 @@ public class LoginView extends javax.swing.JFrame {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 180, 40));
-        jPanel1.add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 260, 40));
+
+        labelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/domodomino.png"))); // NOI18N
+        jPanel1.add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,7 +91,7 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelFondo;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
