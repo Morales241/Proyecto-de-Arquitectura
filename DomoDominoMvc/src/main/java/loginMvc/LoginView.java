@@ -1,15 +1,20 @@
 package loginMvc;
 
-import loginMvc.LoginModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import observers.IObservable;
+import observers.IObserver;
 
-public class LoginView extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame implements IObserver, IObservable{
 
     private LoginModel domoDominoModel;
+    private List<IObserver> observadores = new ArrayList<>();
     
     public LoginView(LoginModel domoDominoModel) {
         initComponents();
         this.domoDominoModel = domoDominoModel;
+        domoDominoModel.agregarObservador(this);
     }
     
     @SuppressWarnings("unchecked")
@@ -32,11 +37,6 @@ public class LoginView extends javax.swing.JFrame {
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 190, -1));
 
         txtContra.setBackground(new java.awt.Color(247, 247, 247));
-        txtContra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraActionPerformed(evt);
-            }
-        });
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
 
         btnIniciarSesion.setIcon(new javax.swing.ImageIcon("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\resources\\iniciarsesion.png")); // NOI18N
@@ -69,14 +69,12 @@ public class LoginView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraActionPerformed
-
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-
-        domoDominoModel.setNombre(txtNombre.getText());
         domoDominoModel.setContra(txtContra.getText());
+        domoDominoModel.setNombre(txtNombre.getText());
+        
+        notificarObservadores();
+        
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
@@ -95,4 +93,27 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+    }
+
+    @Override
+    public void agregarObservador(IObserver observador) {
+        observadores.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(IObserver observador) {
+        observadores.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores() {
+        observadores.forEach(IObserver -> {
+            IObserver.actualizar();
+        });
+    }
+
+    
 }
