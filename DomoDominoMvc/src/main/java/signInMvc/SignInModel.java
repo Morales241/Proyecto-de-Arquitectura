@@ -4,18 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
 import observers.IObserver;
+import registrarUsuario.LogicaRegistrar;
+import registrarUsuario.UsuarioDto;
 
 public class SignInModel implements IObservable {
 
     private List<IObserver> observadores = new ArrayList<>();
-    private String nombre, contra;
+    private String nombre, contra,correo;
+    private LogicaRegistrar logicaRegistrar;
+    
     
     public SignInModel() {
         
     }
-    
-    public void registrarse(){
-        //logica de registrarse, probablemente solo llame a un control y que el lo haga, pero eso va aqui    
+    public UsuarioDto encapsulamiento(){
+       UsuarioDto usuario = new UsuarioDto(correo,contra,nombre);
+        return usuario;
+    }
+    public boolean registrarse(){
+        return logicaRegistrar.registrarUsuario(encapsulamiento());
+        
     }
     public String getNombre() {
         return nombre;
