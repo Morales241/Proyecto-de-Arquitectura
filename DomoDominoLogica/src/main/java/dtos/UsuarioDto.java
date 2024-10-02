@@ -1,4 +1,4 @@
-package registrarUsuario;
+package dtos;
 
 public class UsuarioDto {
     
@@ -13,6 +13,11 @@ public class UsuarioDto {
         this.nombre = nombre;
     }
 
+    public UsuarioDto(String correo, String contraseña) {
+        this.correo = correo;
+        this.contraseña = contraseña;
+    }
+    
     public String getCorreo() {
         return correo;
     }

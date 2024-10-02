@@ -1,5 +1,7 @@
 package registrarUsuario;
 
+import dtos.UsuarioDto;
+
 /**
  *
  * @author tacot

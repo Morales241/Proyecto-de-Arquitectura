@@ -8,7 +8,7 @@ import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
 
-public class LoginView extends javax.swing.JFrame implements IObserver, IObservable, IComponente{
+public class LoginView extends javax.swing.JFrame implements IObservable, IComponente{
 
     private LoginModel loginModel;
     private List<IObserver> observadores = new ArrayList<>();
@@ -17,7 +17,19 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     public LoginView(LoginModel loginModel) {
         initComponents();
         this.loginModel = loginModel;
-        loginModel.agregarObservador(this);
+        
+        loginModel.agregarObservador((String estado) -> {
+            if (estado.equals("Login exitoso")) {
+                JOptionPane.showMessageDialog(null, "¡Login completado con éxito!");
+                mediador.mostrarViewConcreta("inicioView");
+            }
+        });
+
+        loginModel.agregarObservador((String estado) -> {
+            if (estado.equals("Error en el login")) {
+                JOptionPane.showMessageDialog(null, "Error: No se pudo Loguear el usuario.");
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -28,7 +40,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         nombreLbl = new javax.swing.JLabel();
         nombreLbl1 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
         labelFondo = new javax.swing.JLabel();
@@ -45,8 +57,8 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
 
         nombreLbl1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nombreLbl1.setForeground(new java.awt.Color(248, 230, 195));
-        nombreLbl1.setText("Nombre");
-        jPanel1.add(nombreLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
+        nombreLbl1.setText("Correo");
+        jPanel1.add(nombreLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
         btnRegistrar.setBorderPainted(false);
@@ -60,9 +72,9 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 260, 50));
 
-        txtNombre.setBackground(new java.awt.Color(244, 244, 244));
-        txtNombre.setToolTipText("");
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 190, -1));
+        txtCorreo.setBackground(new java.awt.Color(244, 244, 244));
+        txtCorreo.setToolTipText("");
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 190, -1));
 
         txtContra.setBackground(new java.awt.Color(247, 247, 247));
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 190, -1));
@@ -99,7 +111,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         loginModel.setContra(txtContra.getText());
-        loginModel.setNombre(txtNombre.getText());
+        loginModel.setCorreo(txtCorreo.getText());
         
         notificarObservadores("");
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
@@ -116,14 +128,8 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     private javax.swing.JLabel nombreLbl;
     private javax.swing.JLabel nombreLbl1;
     private javax.swing.JTextField txtContra;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void actualizar(String estado) {
-        JOptionPane.showConfirmDialog(rootPane, "se logueo");
-        mediador.mostrarViewConcreta("InicioView");
-    }
 
     @Override
     public void agregarObservador(IObserver observador) {

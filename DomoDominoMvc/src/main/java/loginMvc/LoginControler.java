@@ -1,8 +1,6 @@
 package loginMvc;
 
-import observers.IObserver;
-
-public class LoginControler implements IObserver {
+public class LoginControler {
 
     private LoginModel loginModel;
     private LoginView loginView;
@@ -11,13 +9,8 @@ public class LoginControler implements IObserver {
         this.loginModel = loginModell;
         this.loginView = loginView;
 
-        loginView.agregarObservador(this);
-    }
-
-    @Override
-    public void actualizar(String estado) {
-        loginModel.iniciarSesion();
-    }
-    
-    
+        loginView.agregarObservador((String estado) -> {
+            loginModel.iniciarSesion();
+        });
+    }  
 }

@@ -1,5 +1,7 @@
 package loginMvc;
 
+import dtos.UsuarioDto;
+import iniciarSesion.LogicaIniciarSesion;
 import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
@@ -7,22 +9,20 @@ import observers.IObserver;
 
 public class LoginModel implements IObservable {
 
-    private String nombre, contra;
-    private String validaNombre, validarContra;
-
+    private String correo, contra;
     private List<IObserver> observadores = new ArrayList<>();
+    private LogicaIniciarSesion logicaIniciarSesion;
 
-    public LoginModel(String validaNombre, String validaContra) {
-       this.validaNombre = validaNombre;
-       this.validarContra = validaContra;
-    }
-    
-    public String getNombre() {
-        return nombre;
+    public LoginModel() {
+        logicaIniciarSesion = new LogicaIniciarSesion(); 
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getContra() {
@@ -32,11 +32,20 @@ public class LoginModel implements IObservable {
     public void setContra(String contra) {
         this.contra = contra;
     }
+    
+    public UsuarioDto encapsulamiento() {
+        UsuarioDto usuario = new UsuarioDto(correo, contra);
+        return usuario;
+    }
 
     public void iniciarSesion(){
-        if(nombre.equals(validaNombre) && contra.equals(validarContra)){
-            notificarObservadores("");
+        if(logicaIniciarSesion.iniciarSesion(encapsulamiento())){
+            notificarObservadores("Login exitoso");
         }
+        else{
+            notificarObservadores("Error en el login");
+        }
+        
     }
     
     @Override
