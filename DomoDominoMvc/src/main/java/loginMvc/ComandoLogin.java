@@ -19,7 +19,7 @@ public class ComandoLogin implements IComando{
 
     @Override
     public void ejecutarComando() {
-        controlador.logIn();
+        //controlador.logIn();
     }
     
     

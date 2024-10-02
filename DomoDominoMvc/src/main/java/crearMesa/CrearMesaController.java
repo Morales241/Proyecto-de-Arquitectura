@@ -20,12 +20,12 @@ public class CrearMesaController implements IObserver{
         this.modelo = modelo;
     }
 
-    @Override
-    public void actualizar(IComando comando) {
-        if (comando != null) {
-            comando.ejecutarComando();
-        }
-    }
+//    @Override
+//    public void actualizar(IComando comando) {
+//        if (comando != null) {
+//            comando.ejecutarComando();
+//        }
+//    }
     
     public void Regresar(){
     //codigo pa regresar asajssjad
@@ -33,6 +33,11 @@ public class CrearMesaController implements IObserver{
     
     public void CrearMesa(){
     //codigo pa crear mesa jajsaj
+    }
+
+    @Override
+    public void actualizar(String estado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
