@@ -7,6 +7,7 @@ import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
+import pozo.Ficha;
 import pozo.Pozo;
 
 public class TableroView extends javax.swing.JFrame implements IObservable, IComponente{
@@ -21,11 +22,10 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         initComponents();
         this.tableroModel = tableroModel;
         
-        tableroModel.agregarObservador((String estado) -> {
-            
-        });
-        
         notificarObservadores("inicio");
+        tableroModel.agregarObservador((String estado) -> {
+            imprimirFichas(tableroModel.getFichas());
+        });
     }
 
     /**
@@ -94,4 +94,10 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         this.mediador = mediador;
     }
 
+    
+    public void imprimirFichas(List<Ficha> fichas){
+        for (Object ficha : fichas) {
+            System.out.println(ficha);
+        }
+    }
 }
