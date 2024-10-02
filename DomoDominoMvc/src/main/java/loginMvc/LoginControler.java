@@ -15,7 +15,7 @@ public class LoginControler implements IObserver {
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar(String estado) {
         loginModel.iniciarSesion();
     }
     

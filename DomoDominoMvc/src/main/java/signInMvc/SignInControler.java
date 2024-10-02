@@ -15,7 +15,7 @@ public class SignInControler implements IObserver{
     }
  
     @Override
-    public void actualizar() {
+    public void actualizar(String estado) {
         signInModel.registrarse();
     }
     

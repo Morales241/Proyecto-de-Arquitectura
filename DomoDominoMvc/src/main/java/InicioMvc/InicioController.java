@@ -14,7 +14,7 @@ public class InicioController implements IObserver{
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar(String estado) {
         
     }
 }

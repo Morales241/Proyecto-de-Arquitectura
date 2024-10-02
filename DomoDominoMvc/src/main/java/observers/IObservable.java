@@ -5,6 +5,6 @@ public interface IObservable {
     
     public void eliminarObservador(IObserver observador);
     
-    public void notificarObservadores();
+    public void notificarObservadores(String mensaje);
     
 }

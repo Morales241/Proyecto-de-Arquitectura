@@ -2,25 +2,38 @@ package signInMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
 import registrarUsuario.LogicaRegistrar;
 
-public class SignInView extends javax.swing.JFrame implements IObserver, IObservable, IComponente {
-    
+public class SignInView extends javax.swing.JFrame implements IObservable, IComponente {
+
     private SignInModel signInModel;
     private List<IObserver> observadores = new ArrayList<>();
     private Mediador mediador;
-  
+
     /**
      * Creates new form signInView
      */
     public SignInView(SignInModel signInModel) {
         initComponents();
         this.signInModel = signInModel;
-        signInModel.agregarObservador(this);
+
+        signInModel.agregarObservador((String estado) -> {
+            if (estado.equals("Registro exitoso")) {
+                JOptionPane.showMessageDialog(null, "¡Registro completado con éxito!");
+                mediador.mostrarViewConcreta("inicioView");
+            }
+        });
+
+        signInModel.agregarObservador((String estado) -> {
+            if (estado.equals("Error en el registro")) {
+                JOptionPane.showMessageDialog(null, "Error: No se pudo registrar el usuario.");
+            }
+        });
     }
 
     /**
@@ -78,11 +91,13 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        signInModel.setNombre(txtCorreo.getText());
+        signInModel.setNombre(txtNombre.getText());
         signInModel.setContra(txtContra.getText());
-        
-        notificarObservadores();
-        
+        signInModel.setCorreo(txtCorreo.getText());
+
+        notificarObservadores("");
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -97,12 +112,6 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar() {
-        if(signInModel.registrarse())
-        mediador.mostrarViewConcreta("LoginView");
-    }
-
-    @Override
     public void agregarObservador(IObserver observador) {
         observadores.add(observador);
     }
@@ -113,9 +122,9 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(String mensaje) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(mensaje);
         });
     }
 

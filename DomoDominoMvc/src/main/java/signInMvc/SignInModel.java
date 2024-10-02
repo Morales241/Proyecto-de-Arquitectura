@@ -10,21 +10,27 @@ import registrarUsuario.UsuarioDto;
 public class SignInModel implements IObservable {
 
     private List<IObserver> observadores = new ArrayList<>();
-    private String nombre, contra,correo;
+    private String nombre, contra, correo;
     private LogicaRegistrar logicaRegistrar;
-    
-    
+
     public SignInModel() {
-        
+        logicaRegistrar = new LogicaRegistrar();
     }
-    public UsuarioDto encapsulamiento(){
-       UsuarioDto usuario = new UsuarioDto(correo,contra,nombre);
+
+    public UsuarioDto encapsulamiento() {
+        UsuarioDto usuario = new UsuarioDto(correo, contra, nombre);
         return usuario;
     }
-    public boolean registrarse(){
-        return logicaRegistrar.registrarUsuario(encapsulamiento());
-        
+
+    public void registrarse() {
+        if (logicaRegistrar.registrarUsuario(encapsulamiento())) {
+            notificarObservadores("Registro exitoso");
+        } else {
+            notificarObservadores("Error en el registro");
+        }
+
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -40,7 +46,15 @@ public class SignInModel implements IObservable {
     public void setContra(String contra) {
         this.contra = contra;
     }
-    
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     @Override
     public void agregarObservador(IObserver observador) {
         observadores.add(observador);
@@ -52,10 +66,10 @@ public class SignInModel implements IObservable {
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(String mensaje) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(mensaje);
         });
     }
-    
+
 }
