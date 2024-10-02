@@ -77,7 +77,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="labelTitulo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Resistrate"/>
+        <Property name="text" type="java.lang.String" value="Registrate"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelNombre">

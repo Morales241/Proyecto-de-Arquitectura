@@ -40,7 +40,7 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelTitulo.setText("Resistrate");
+        labelTitulo.setText("Registrate");
 
         labelNombre.setText("Nombre");
 
