@@ -1,9 +1,11 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package com.mycompany.domodominologica;
 
+import com.mycompany.domodominopersistencia.Ficha;
+import java.util.ArrayList;
+import java.util.List;
 import pozo.Pozo;
 
 /**
@@ -14,7 +16,14 @@ public class DomoDominoLogica {
 
     public static void main(String[] args) {
         Pozo pozo = new Pozo();
-        pozo.inciarlizarPozo();
-        System.out.println("");
+        pozo.crearFichasPozo();
+        System.out.println(pozo.sacarFicha());
+        
+        List<Ficha> fichas = new ArrayList<>();
+        fichas = pozo.repartirFichas();
+        
+        for (Ficha ficha: fichas) {
+            System.out.println(ficha);
+        }
     }
 }
