@@ -4,24 +4,10 @@
  */
 package loginMvc;
 
-import comands.IComando;
-
 /**
  *
  * @author favel
  */
-public class ComandoLogin implements IComando{
-    private LoginControler controlador;
-
-    public ComandoLogin(LoginControler control) {
-        controlador = control;
-    }
-
-    @Override
-    public void ejecutarComando() {
-        controlador.logIn();
-    }
-    
-    
+public class ComandoLogin {
     
 }
