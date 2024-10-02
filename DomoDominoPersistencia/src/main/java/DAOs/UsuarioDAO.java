@@ -45,10 +45,7 @@ public class UsuarioDAO {
     public boolean iniciarSesion(String correo, String contra) {
         Usuario usuario = buscarPorCorreo(correo);
         System.out.println("Usuario encontrado: " + usuario); 
-        if (usuario != null && usuario.getContraseña().equals(contra)) {
-            return true;
-        }
-        return false;
+        return usuario != null && usuario.getContraseña().equals(contra);
     }
 
     /**
