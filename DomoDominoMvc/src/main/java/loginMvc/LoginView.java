@@ -1,6 +1,5 @@
 package loginMvc;
 
-import comands.IComando;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -121,7 +120,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar(IComando comando) {
+    public void actualizar() {
         JOptionPane.showConfirmDialog(rootPane, "se logueo");
         mediador.mostrarViewConcreta("InicioView");
     }
@@ -137,9 +136,9 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     }
 
     @Override
-    public void notificarObservadores(IComando comando) {
+    public void notificarObservadores() {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar(comando);
+            IObserver.actualizar();
         });
     }
 

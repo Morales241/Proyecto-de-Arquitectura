@@ -1,6 +1,5 @@
 package loginMvc;
 
-import comands.IComando;
 import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
@@ -51,7 +50,7 @@ public class LoginModel implements IObservable {
     }
 
     @Override
-    public void notificarObservadores(IComando comando) {
+    public void notificarObservadores() {
         observadores.forEach(IObserver -> {
             IObserver.actualizar();
         });
