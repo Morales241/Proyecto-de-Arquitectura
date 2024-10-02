@@ -1,6 +1,5 @@
 package crearMesa;
 
-import comands.IComando;
 import java.util.ArrayList;
 import java.util.List;
 import mediador.IComponente;
@@ -135,7 +134,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar(IComando comando) {
+    public void actualizar(String estado) {
         
     }
 
@@ -150,7 +149,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
     }
 
     @Override
-    public void notificarObservadores(IComando comando) {
+    public void notificarObservadores(String mensaje) {
         
     }
 

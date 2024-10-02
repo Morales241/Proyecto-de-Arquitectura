@@ -1,6 +1,6 @@
 package pozo;
 
-import com.mycompany.domodominopersistencia.Ficha;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,13 +29,13 @@ public class Pozo {
      */
     public void crearFichasPozo() {
 
-        for (int i = 0; i < 7; i++) {
-            for (int j = i; j < 7; j++) {
-
-                fichas.add(new Ficha(i, j));
-
+        for (int i = 0; i <= 6; i++) {
+            for (int j = i; j <= 6; j++) {
+                String rutaImagen = String.format("/imgPartidaFichas/ficha%d_%d.png", i, j);
+                Ficha ficha = new Ficha(i, j, rutaImagen);
+                fichas.add(ficha);
             }
-        }
+    }
     }
 
     /**

@@ -1,9 +1,5 @@
 package registrarUsuario;
 
-/**
- *
- * @author tacot
- */
 public class UsuarioDto {
     
     private String correo, contraseña, nombre;

@@ -27,17 +27,14 @@ public class Jugador implements Serializable {
     @Column(name = "puntuacion", nullable = true, length = 30)
     private String puntuacion;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Ficha")
-    private List<Ficha> fichas;
-
+  
     public Jugador() {
     }
 
-    public Jugador(Long id, String nombre, String puntuacion, List<Ficha> fichas) {
+    public Jugador(Long id, String nombre, String puntuacion) {
         this.id = id;
         this.nombre = nombre;
         this.puntuacion = puntuacion;
-        this.fichas = fichas;
     }
 
     public Long getId() {
@@ -64,21 +61,14 @@ public class Jugador implements Serializable {
         this.puntuacion = puntuacion;
     }
 
-    public List<Ficha> getFichas() {
-        return fichas;
-    }
-
-    public void setFichas(List<Ficha> fichas) {
-        this.fichas = fichas;
-    }
-
+  
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 59 * hash + Objects.hashCode(this.id);
         hash = 59 * hash + Objects.hashCode(this.nombre);
         hash = 59 * hash + Objects.hashCode(this.puntuacion);
-        hash = 59 * hash + Objects.hashCode(this.fichas);
+      
         return hash;
     }
 
@@ -103,7 +93,8 @@ public class Jugador implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        return Objects.equals(this.fichas, other.fichas);
+        return false;
+       
     }
 
     
@@ -115,7 +106,6 @@ public class Jugador implements Serializable {
         sb.append("id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", puntuacion=").append(puntuacion);
-        sb.append(", fichas=").append(fichas);
         sb.append('}');
         return sb.toString();
     }

@@ -3,9 +3,10 @@
  */
 package com.mycompany.domodominologica;
 
-import com.mycompany.domodominopersistencia.Ficha;
+
 import java.util.ArrayList;
 import java.util.List;
+import pozo.Ficha;
 import pozo.Pozo;
 
 /**
