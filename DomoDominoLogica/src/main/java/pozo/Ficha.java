@@ -1,51 +1,31 @@
-package com.mycompany.domodominopersistencia;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package pozo;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-
-@Entity
-@Table(name = "ficha")
 public class Ficha implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
     
-    @Column(name = "lado1", nullable = false)
     private Integer lado1;
-    
-    @Column(name = "lado2", nullable = false)
     private Integer lado2;
+    private String rutaImagen;
 
     public Ficha() {
+    }
+
+    public Ficha(Integer lado1, Integer lado2, String rutaImagen) {
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+        this.rutaImagen = rutaImagen;
     }
 
     public Ficha(Integer lado1, Integer lado2) {
         this.lado1 = lado1;
         this.lado2 = lado2;
-    }
-
-    
-    public Ficha(Long id, Integer lado1, Integer lado2) {
-        this.id = id;
-        this.lado1 = lado1;
-        this.lado2 = lado2;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Integer getLado1() {
@@ -64,12 +44,20 @@ public class Ficha implements Serializable {
         this.lado2 = lado2;
     }
 
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.id);
         hash = 13 * hash + Objects.hashCode(this.lado1);
         hash = 13 * hash + Objects.hashCode(this.lado2);
+        hash = 13 * hash + Objects.hashCode(this.rutaImagen);
         return hash;
     }
 
@@ -85,7 +73,7 @@ public class Ficha implements Serializable {
             return false;
         }
         final Ficha other = (Ficha) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.rutaImagen, other.rutaImagen)) {
             return false;
         }
         if (!Objects.equals(this.lado1, other.lado1)) {
@@ -94,17 +82,15 @@ public class Ficha implements Serializable {
         return Objects.equals(this.lado2, other.lado2);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Ficha{");
-        sb.append("id=").append(id);
-        sb.append(", lado1=").append(lado1);
-        sb.append(", lado2=").append(lado2);
-        sb.append('}');
-        return sb.toString();
-    }
-    
-    
-    
+   @Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Ficha{");
+    sb.append("lado1=").append(lado1);
+    sb.append(", lado2=").append(lado2);
+    sb.append(", rutaImagen='").append(rutaImagen).append('\'');
+    sb.append('}');
+    return sb.toString();
+}
+
 }
