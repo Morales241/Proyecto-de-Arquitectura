@@ -5,6 +5,7 @@
 package registrarUsuario;
 
 import DAOs.UsuarioDAO;
+import com.mycompany.domodominopersistencia.Usuario;
 
 /**
  *
@@ -12,9 +13,33 @@ import DAOs.UsuarioDAO;
  */
 public class LogicaRegistrar implements ILogicaRegistrar {
 
+    private final UsuarioDAO usuarioDAO;
+
+    /**
+     * Constructor de la clase
+     */
+    public LogicaRegistrar() {
+        this.usuarioDAO = new UsuarioDAO();
+    }
+    
+    /**
+     * Metodo para registrar usuarios
+     * @param usuario
+     * @return verdadero o falso para confirmar el registro
+     */
     @Override
     public boolean registrarUsuario(UsuarioDto usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (validarNombre(usuario.getNombre()) &&
+            validarCorreo(usuario.getCorreo()) &&
+            validarContraseña(usuario.getContraseña())) {
+            
+            Usuario nuevoUsuario = new Usuario(usuario.getNombre(), usuario.getCorreo(), usuario.getContraseña());
+         
+            usuarioDAO.registrar(nuevoUsuario);
+            
+            return true; 
+        }
+        return false; 
     }
 
     /**
