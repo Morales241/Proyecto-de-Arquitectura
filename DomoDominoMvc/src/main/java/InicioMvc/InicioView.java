@@ -1,5 +1,6 @@
 package InicioMvc;
 
+import comands.IComando;
 import java.util.ArrayList;
 import java.util.List;
 import mediador.IComponente;
@@ -117,11 +118,6 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar() {
-   
-    }
-
-    @Override
     public void agregarObservador(IObserver observador) {
        
     }
@@ -132,12 +128,17 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(IComando comando) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void setMediador(Mediador mediador) {
         this.mediador = mediador;
+    }
+
+    @Override
+    public void actualizar(IComando comando) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

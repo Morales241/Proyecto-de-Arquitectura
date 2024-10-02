@@ -1,5 +1,6 @@
 package InicioMvc;
 
+import comands.IComando;
 import observers.IObserver;
 
 public class InicioController implements IObserver{
@@ -13,8 +14,9 @@ public class InicioController implements IObserver{
         inicioView.agregarObservador(this);
     }
 
+
     @Override
-    public void actualizar() {
-        
+    public void actualizar(IComando comando) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

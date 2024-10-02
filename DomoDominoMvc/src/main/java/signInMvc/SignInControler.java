@@ -1,5 +1,6 @@
 package signInMvc;
 
+import comands.IComando;
 import observers.IObserver;
 
 public class SignInControler implements IObserver{
@@ -15,7 +16,13 @@ public class SignInControler implements IObserver{
     }
  
     @Override
-    public void actualizar() {
+    public void actualizar(IComando comando) {
+        if (comando != null) {
+            comando.ejecutarComando();
+        }
+    }
+    
+    public void registrar(){
         signInModel.registrarse();
     }
     

@@ -1,5 +1,6 @@
 package signInMvc;
 
+import comands.IComando;
 import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
@@ -52,9 +53,9 @@ public class SignInModel implements IObservable {
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(IComando comando) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(comando);
         });
     }
     

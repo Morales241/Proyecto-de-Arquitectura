@@ -1,5 +1,6 @@
 package loginMvc;
 
+import comands.IComando;
 import observers.IObserver;
 
 public class LoginControler implements IObserver {
@@ -15,7 +16,7 @@ public class LoginControler implements IObserver {
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar(IComando comando) {
         loginModel.iniciarSesion();
     }
     

@@ -1,5 +1,6 @@
 package signInMvc;
 
+import comands.IComando;
 import java.util.ArrayList;
 import java.util.List;
 import mediador.IComponente;
@@ -81,7 +82,7 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
         signInModel.setNombre(txtCorreo.getText());
         signInModel.setContra(txtContra.getText());
         
-        notificarObservadores();
+        notificarObservadores(new ComandoRegistrar((SignInControler) observadores.get(0)));
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -97,7 +98,7 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar() {
+    public void actualizar(IComando comando) {
         if(signInModel.registrarse())
         mediador.mostrarViewConcreta("LoginView");
     }
@@ -113,9 +114,9 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(IComando comando) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(comando);
         });
     }
 
