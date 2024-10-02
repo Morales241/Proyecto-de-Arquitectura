@@ -8,6 +8,7 @@ package crearMesa;
  *
  * @author tacot
  */
-public class CrearMesaControl {
-    
+public class CrearMesaController {
+    private CrearMesaView vista;
+    private CrearMesaModel modelo;
 }
