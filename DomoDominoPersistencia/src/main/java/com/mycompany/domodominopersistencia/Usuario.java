@@ -1,33 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.domodominopersistencia;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.bson.types.ObjectId;
 
-@Entity
-@Table(name = "Usuarios")
-public class Usuario implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Usuario  {
 
-    @Column(name = "nombre", nullable = false, length = 25)
+    
+    private ObjectId id;
+
     private String nombre;
-    
-    @Column(name = "correo", nullable = false)
     private String correo;
-    
-    @Column(name = "contraseña", nullable = false)
+   
     private String contraseña; 
 
     public Usuario() {
@@ -38,15 +22,15 @@ public class Usuario implements Serializable{
         this.correo = correo;
         this.contraseña = contraseña;
     }
-    
-    
-    public Long getId() {
+
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
+    
 
     public String getNombre() {
         return nombre;
