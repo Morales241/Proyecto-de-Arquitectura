@@ -36,7 +36,7 @@ public class LoginModel implements IObservable {
 
     public void iniciarSesion(){
         if(nombre.equals(validaNombre) && contra.equals(validarContra)){
-            notificarObservadores();
+            notificarObservadores(new ComandoLogin((LoginControler) observadores.get(0)));
         }
     }
     
@@ -53,7 +53,7 @@ public class LoginModel implements IObservable {
     @Override
     public void notificarObservadores(IComando comando) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(comando);
         });
     }
 

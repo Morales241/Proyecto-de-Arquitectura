@@ -102,7 +102,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         loginModel.setContra(txtContra.getText());
         loginModel.setNombre(txtNombre.getText());
         
-        notificarObservadores();
+        notificarObservadores(new ComandoLogin((LoginControler) observadores.get(0)));
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
