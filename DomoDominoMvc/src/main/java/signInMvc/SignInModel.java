@@ -5,7 +5,7 @@ import java.util.List;
 import observers.IObservable;
 import observers.IObserver;
 import registrarUsuario.LogicaRegistrar;
-import registrarUsuario.UsuarioDto;
+import dtos.UsuarioDto;
 
 public class SignInModel implements IObservable {
 
