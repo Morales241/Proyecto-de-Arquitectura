@@ -7,7 +7,6 @@ import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
-import registrarUsuario.LogicaRegistrar;
 
 public class SignInView extends javax.swing.JFrame implements IObservable, IComponente {
 
@@ -96,8 +95,6 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
         signInModel.setCorreo(txtCorreo.getText());
 
         notificarObservadores("");
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
