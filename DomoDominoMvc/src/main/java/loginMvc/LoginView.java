@@ -1,6 +1,5 @@
 package loginMvc;
 
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -39,13 +38,15 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        nombreLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nombreLbl.setForeground(new java.awt.Color(245, 209, 174));
         nombreLbl.setText("Contraseña");
-        jPanel1.add(nombreLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+        jPanel1.add(nombreLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
 
+        nombreLbl1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nombreLbl1.setForeground(new java.awt.Color(248, 230, 195));
         nombreLbl1.setText("Nombre");
-        jPanel1.add(nombreLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+        jPanel1.add(nombreLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
         btnRegistrar.setBorderPainted(false);
@@ -57,7 +58,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 260, 50));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 260, 50));
 
         txtNombre.setBackground(new java.awt.Color(244, 244, 244));
         txtNombre.setToolTipText("");

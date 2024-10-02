@@ -19,28 +19,41 @@ public class UsuarioDAO {
         this.database = Conexion.getDatabase();
     }
 
-    // Colección de usuario
+    /**
+     * Metodo que retorna la coleccion de usuarios
+     * @return 
+     */
     private MongoCollection<Usuario> getCollection() {
         return database.getCollection("Usuarios", Usuario.class);
     }
 
-    // Registrar un nuevo usuario
+    /**
+     * Registrar un nuevo usuario
+     * @param usuario 
+     */
     public void registrar(Usuario usuario) {
         MongoCollection<Usuario> collection = getCollection();
         collection.insertOne(usuario);
     }
 
-    // Buscar un usuario por su nombre
+    /**
+     * Metodo que busca usuario
+     * @param nombre
+     * @return 
+     */
     public Usuario buscarPorNombre(String nombre) {
         MongoCollection<Usuario> collection = getCollection();
         Bson filter = Filters.eq("nombre", nombre);
-        return collection.find(filter).first();  // Retorna el primer usuario encontrado
+        return collection.find(filter).first(); 
     }
 
-    // Eliminar un usuario
+    /**
+     * Metodo que eliminar un usuario
+     * @param id 
+     */
     public void eliminar(Long id) {
         MongoCollection<Usuario> collection = getCollection();
         Bson filter = Filters.eq("id", id);
-        collection.deleteOne(filter);  // Elimina el usuario por ID
+        collection.deleteOne(filter);  
     }
 }

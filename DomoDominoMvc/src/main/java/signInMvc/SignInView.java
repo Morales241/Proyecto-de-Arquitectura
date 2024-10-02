@@ -31,69 +31,39 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelTitulo = new javax.swing.JLabel();
-        labelNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        labelContra = new javax.swing.JLabel();
         txtContra = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        nombreLbl1 = new javax.swing.JLabel();
+        nombreLbl = new javax.swing.JLabel();
+        labelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 120, -1));
+        getContentPane().add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 120, -1));
 
-        labelTitulo.setText("Registrate");
-
-        labelNombre.setText("Nombre");
-
-        labelContra.setText("Contraseña");
-
-        jButton1.setText("Registrarse");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 190, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(labelTitulo)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelNombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelContra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(126, 126, 126))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(103, 103, 103))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(labelTitulo)
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelContra)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(jButton1)
-                .addContainerGap(119, Short.MAX_VALUE))
-        );
+        nombreLbl1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nombreLbl1.setForeground(new java.awt.Color(248, 230, 195));
+        nombreLbl1.setText("Nombre");
+        getContentPane().add(nombreLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
+        nombreLbl.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nombreLbl.setForeground(new java.awt.Color(245, 209, 174));
+        nombreLbl.setText("Contraseña");
+        getContentPane().add(nombreLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, -1, -1));
+
+        labelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,21 +73,21 @@ public class SignInView extends javax.swing.JFrame implements IObserver, IObserv
         signInModel.setContra(txtContra.getText());
         
         notificarObservadores();
-        mediador.mostrarViewConcreta("LoginView");
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel labelContra;
-    private javax.swing.JLabel labelNombre;
-    private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelFondo;
+    private javax.swing.JLabel nombreLbl;
+    private javax.swing.JLabel nombreLbl1;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actualizar() {
-        //aqui va el codigo de cuando SingInModel cambie Nyejejej
+        mediador.mostrarViewConcreta("LoginView");
     }
 
     @Override
