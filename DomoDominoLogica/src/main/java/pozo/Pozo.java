@@ -40,7 +40,7 @@ public class Pozo {
 
     /**
      * MMetodo que retorna una ficha al azar y elimina la ficha del pozo
-     * @return Ficha al azar del poso
+     * @return Ficha al azar del pozo
      */
     public Ficha sacarFicha() {
         Random random = new Random();

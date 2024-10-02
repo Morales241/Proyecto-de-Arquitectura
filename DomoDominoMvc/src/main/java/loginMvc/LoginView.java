@@ -38,10 +38,10 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
 
         txtNombre.setBackground(new java.awt.Color(244, 244, 244));
         txtNombre.setToolTipText("");
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 190, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 190, -1));
 
         txtContra.setBackground(new java.awt.Color(247, 247, 247));
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 190, -1));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 190, -1));
 
         btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniciarsesion.png"))); // NOI18N
         btnIniciarSesion.setBorderPainted(false);

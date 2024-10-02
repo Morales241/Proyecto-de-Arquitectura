@@ -7,43 +7,39 @@ package DAOs;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.mycompany.domodominopersistencia.Jugador;
+import com.mycompany.domodominopersistencia.Usuario;
 import conexion.Conexion;
 import org.bson.conversions.Bson;
-import java.util.List;
 
-/**
- *
- * @author favel
- */
-public class JugadorDAO {
+
+public class UsuarioDAO {
     private final MongoDatabase database;
 
-    public JugadorDAO() {
+    public UsuarioDAO() {
         this.database = Conexion.getDatabase();
     }
 
     // Colección de jugadores
-    private MongoCollection<Jugador> getCollection() {
-        return database.getCollection("jugadores", Jugador.class);
+    private MongoCollection<Usuario> getCollection() {
+        return database.getCollection("Usuarios", Usuario.class);
     }
 
     // Registrar un nuevo jugador
-    public void registrar(Jugador jugador) {
-        MongoCollection<Jugador> collection = getCollection();
-        collection.insertOne(jugador);
+    public void registrar(Usuario usuario) {
+        MongoCollection<Usuario> collection = getCollection();
+        collection.insertOne(usuario);
     }
 
-    // Buscar un jugador por su nombre
-    public Jugador buscarPorNombre(String nombre) {
-        MongoCollection<Jugador> collection = getCollection();
+    // Buscar un usuario por su nombre
+    public Usuario buscarPorNombre(String nombre) {
+        MongoCollection<Usuario> collection = getCollection();
         Bson filter = Filters.eq("nombre", nombre);
         return collection.find(filter).first();  // Retorna el primer jugador encontrado
     }
 
-    // Eliminar un jugador
+    // Eliminar un usuario
     public void eliminar(Long id) {
-        MongoCollection<Jugador> collection = getCollection();
+        MongoCollection<Usuario> collection = getCollection();
         Bson filter = Filters.eq("id", id);
         collection.deleteOne(filter);  // Elimina el jugador por ID
     }
