@@ -1,30 +1,35 @@
 package TableroMvc;
 
+import java.awt.Graphics;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
 import pozo.Ficha;
-import pozo.Pozo;
 
-public class TableroView extends javax.swing.JFrame implements IObservable, IComponente{
+public class TableroView extends javax.swing.JFrame implements IObservable, IComponente {
 
     private List<IObserver> observadores = new ArrayList<>();
     private Mediador mediador;
     private TableroModel tableroModel;
+
     /**
      * Creates new form TableroView
      */
     public TableroView(TableroModel tableroModel) {
         initComponents();
+        jPanFichas.setPreferredSize(new java.awt.Dimension(720, 190));
         this.tableroModel = tableroModel;
-        
-        notificarObservadores("inicio");
+
         tableroModel.agregarObservador((String estado) -> {
-            imprimirFichas(tableroModel.getFichas());
+            if (estado.equals("repartirFicha")) {
+                repaint();
+            }
         });
     }
 
@@ -40,8 +45,14 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanFichas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -51,6 +62,19 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/nWFiIuU.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+
+        javax.swing.GroupLayout jPanFichasLayout = new javax.swing.GroupLayout(jPanFichas);
+        jPanFichas.setLayout(jPanFichasLayout);
+        jPanFichasLayout.setHorizontalGroup(
+            jPanFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+        jPanFichasLayout.setVerticalGroup(
+            jPanFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 720, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,11 +90,48 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        notificarObservadores("inicio");
+    }//GEN-LAST:event_formWindowOpened
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanFichas;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g); 
+        dibujarFichas(g); 
+    }
+    
+    
+    private void dibujarFichas(Graphics g) {
+        List<Ficha> fichas = tableroModel.getFichas();
+        if (fichas != null) {
+            int x = 150; 
+            int y = 500; 
+            
+            for (Ficha ficha : fichas) {
+                URL imageURL = getClass().getResource(ficha.getRutaImagen());
+                if (imageURL != null) {
+                    ImageIcon icon = new ImageIcon(imageURL);
+                    g.drawImage(icon.getImage(), x, y, this);
+                } else {
+                    System.out.println("Imagen no encontrada: " + ficha.getRutaImagen());
+                }
+                x += 80;
+            }
+        }
+    }
 
     @Override
     public void agregarObservador(IObserver observador) {
@@ -94,10 +155,4 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         this.mediador = mediador;
     }
 
-    
-    public void imprimirFichas(List<Ficha> fichas){
-        for (Object ficha : fichas) {
-            System.out.println(ficha);
-        }
-    }
 }

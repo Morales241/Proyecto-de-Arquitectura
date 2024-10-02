@@ -10,16 +10,18 @@ import pozo.Pozo;
 public class TableroModel implements IObservable {
     
     private Pozo pozo;
-    private int numeroFichas;
+    private int numeroFichas = 7;
     private List<Ficha> fichas;
     private List<IObserver> observadores = new ArrayList<>();
-    
+
+    public TableroModel() {
+        pozo = new Pozo(numeroFichas); 
+    }
+
     public void repartirFichas(){
-        pozo = new Pozo(numeroFichas);
-        
-       fichas = pozo.repartirFichas();
+        fichas = pozo.repartirFichas();
       
-        notificarObservadores("");
+        notificarObservadores("repartirFicha");
     }
 
     public List<Ficha> getFichas() {

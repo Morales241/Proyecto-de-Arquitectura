@@ -22,20 +22,20 @@ public class Pozo {
     public Pozo(int numeroFichasIniciales) {
         fichas = new ArrayList<>();
         this.numeroFichasIniciales = numeroFichasIniciales;
+        crearFichasPozo();
     }
 
     /**
      * Metodo que agrega al pozo la lista de 28 fichas 
      */
     public void crearFichasPozo() {
-
         for (int i = 0; i <= 6; i++) {
             for (int j = i; j <= 6; j++) {
                 String rutaImagen = String.format("/imgPartidaFichas/ficha%d_%d.png", i, j);
                 Ficha ficha = new Ficha(i, j, rutaImagen);
                 fichas.add(ficha);
             }
-    }
+        }
     }
 
     /**

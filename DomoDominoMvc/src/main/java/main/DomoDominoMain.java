@@ -47,7 +47,7 @@ public class DomoDominoMain {
         inicioView.setMediador(mediador);
         tableroView.setMediador(mediador);
         
-        loginView.setVisible(true);
+        inicioView.setVisible(true);
     }
     
 }
