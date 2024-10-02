@@ -26,6 +26,9 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        nombreLbl = new javax.swing.JLabel();
+        nombreLbl1 = new javax.swing.JLabel();
+        btnRegistrar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
@@ -36,12 +39,32 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        nombreLbl.setForeground(new java.awt.Color(245, 209, 174));
+        nombreLbl.setText("Contraseña");
+        jPanel1.add(nombreLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+
+        nombreLbl1.setForeground(new java.awt.Color(248, 230, 195));
+        nombreLbl1.setText("Nombre");
+        jPanel1.add(nombreLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
+        btnRegistrar.setBorderPainted(false);
+        btnRegistrar.setContentAreaFilled(false);
+        btnRegistrar.setFocusPainted(false);
+        btnRegistrar.setFocusable(false);
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 260, 50));
+
         txtNombre.setBackground(new java.awt.Color(244, 244, 244));
         txtNombre.setToolTipText("");
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 190, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 190, -1));
 
         txtContra.setBackground(new java.awt.Color(247, 247, 247));
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 190, -1));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 190, -1));
 
         btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniciarsesion.png"))); // NOI18N
         btnIniciarSesion.setBorderPainted(false);
@@ -53,7 +76,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 260, 40));
+        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 260, 40));
 
         labelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
         jPanel1.add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -79,11 +102,18 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         
         notificarObservadores();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        mediador.mostrarViewConcreta("SignInView");
+    }//GEN-LAST:event_btnRegistrarActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelFondo;
+    private javax.swing.JLabel nombreLbl;
+    private javax.swing.JLabel nombreLbl1;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

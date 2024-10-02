@@ -38,7 +38,7 @@ public class DomoDominoMain {
         signInView.setMediador(mediador);
         inicioView.setMediador(mediador);
         
-        inicioView.setVisible(true);
+        loginView.setVisible(true);
     }
     
 }
