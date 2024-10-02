@@ -28,6 +28,12 @@ public class Ficha implements Serializable {
     public Ficha() {
     }
 
+    public Ficha(Integer lado1, Integer lado2) {
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+    }
+
+    
     public Ficha(Long id, Integer lado1, Integer lado2) {
         this.id = id;
         this.lado1 = lado1;

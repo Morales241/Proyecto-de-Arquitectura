@@ -30,7 +30,6 @@ public class Mesa implements Serializable {
     public Mesa() {
     }
 
-    
     public Mesa(Long id, String codigo, List<Jugador> jugadores) {
         this.id = id;
         this.codigo = codigo;
