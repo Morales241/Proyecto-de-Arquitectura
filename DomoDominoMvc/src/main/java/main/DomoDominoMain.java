@@ -42,6 +42,8 @@ public class DomoDominoMain {
         mediador.registrarView("inicioView", inicioView);
         mediador.registrarView("TableroView", tableroView);
         
+        //empaquetar cada mvc para que jale chilo
+        
         loginView.setMediador(mediador);
         signInView.setMediador(mediador);
         inicioView.setMediador(mediador);

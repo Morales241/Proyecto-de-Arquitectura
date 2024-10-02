@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Pasar  A DOMINIO HEHHHE
  * Clase que representa el pozo
  * @author tacot
  */
@@ -28,9 +29,10 @@ public class Pozo {
     /**
      * Metodo que agrega al pozo la lista de 28 fichas 
      */
-    public void crearFichasPozo() {
+    private void crearFichasPozo() {
         for (int i = 0; i <= 6; i++) {
             for (int j = i; j <= 6; j++) {
+                //en presentacion se le debe dar su refernecia de imagen
                 String rutaImagen = String.format("/imgPartidaFichas/ficha%d_%d.png", i, j);
                 Ficha ficha = new Ficha(i, j, rutaImagen);
                 fichas.add(ficha);
@@ -64,13 +66,13 @@ public class Pozo {
      * @return Lista con las fichas  al azar del pozo
      */
     public List<Ficha> repartirFichas(){
-        List<Ficha> fichasJugador = new ArrayList<>();
+        List<Ficha> fichasARepartir = new ArrayList<>();
         
         for (int i = 0; i < numeroFichasIniciales; i++) {
-            fichasJugador.add(sacarFicha());
+            fichasARepartir.add(sacarFicha());
         }
         
-        return fichasJugador;
+        return fichasARepartir;
     }
     
     /**
