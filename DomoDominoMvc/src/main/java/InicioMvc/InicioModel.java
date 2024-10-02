@@ -19,9 +19,9 @@ public class InicioModel  implements IObservable{
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(String mensaje) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(mensaje);
         });
     }
      

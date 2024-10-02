@@ -101,7 +101,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         loginModel.setContra(txtContra.getText());
         loginModel.setNombre(txtNombre.getText());
         
-        notificarObservadores();
+        notificarObservadores("");
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -120,7 +120,7 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar() {
+    public void actualizar(String estado) {
         JOptionPane.showConfirmDialog(rootPane, "se logueo");
         mediador.mostrarViewConcreta("InicioView");
     }
@@ -136,9 +136,9 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(String mensaje) {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar();
+            IObserver.actualizar(mensaje);
         });
     }
 

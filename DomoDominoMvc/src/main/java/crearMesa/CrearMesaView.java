@@ -134,7 +134,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar() {
+    public void actualizar(String estado) {
         
     }
 
@@ -149,7 +149,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
     }
 
     @Override
-    public void notificarObservadores() {
+    public void notificarObservadores(String mensaje) {
         
     }
 
