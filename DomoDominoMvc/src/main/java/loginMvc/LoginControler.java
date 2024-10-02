@@ -17,8 +17,13 @@ public class LoginControler implements IObserver {
 
     @Override
     public void actualizar(IComando comando) {
-        loginModel.iniciarSesion();
+        if (comando != null) {
+            comando.ejecutarComando();
+        }
     }
     
+    public void logIn(){
+        loginModel.iniciarSesion();
+    }
     
 }
