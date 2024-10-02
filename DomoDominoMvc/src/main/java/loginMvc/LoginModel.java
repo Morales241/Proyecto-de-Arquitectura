@@ -36,7 +36,7 @@ public class LoginModel implements IObservable {
 
     public void iniciarSesion(){
         if(nombre.equals(validaNombre) && contra.equals(validarContra)){
-            notificarObservadores(new ComandoLogin((LoginControler) observadores.get(0)));
+           //logica de inicio de sesion
         }
     }
     
