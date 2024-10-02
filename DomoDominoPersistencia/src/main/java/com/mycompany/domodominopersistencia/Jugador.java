@@ -119,7 +119,4 @@ public class Jugador implements Serializable {
         sb.append('}');
         return sb.toString();
     }
-    
-    
-
 }

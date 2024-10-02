@@ -42,9 +42,5 @@ public class Conexion {
         
         // si no es null, la regresamos nuevamente
         return mongoClient.getDatabase(DATABASE_NAME);
-        
     }
-
-    
-    
 }
