@@ -1,6 +1,8 @@
 package TableroMvc;
 
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,29 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         tableroModel.agregarObservador((String estado) -> {
             if (estado.equals("repartirFicha")) {
                 repaint();
+            }
+        });
+
+        jPanFichas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int xClick = e.getX();
+                int yClick = e.getY();
+                List<Ficha> fichas = tableroModel.getFichas();
+                if (fichas != null) {
+                    int fichaWidth = 56;
+                    int fichaHeight = 102;
+
+                    for (int i = 0; i < fichas.size(); i++) {
+                        int x = 65 + (i * fichaWidth); 
+                        int y = 102; 
+
+                        if (xClick >= x && xClick <= x + fichaWidth && yClick >= y && yClick <= y + fichaHeight) {
+                            JOptionPane.showMessageDialog(TableroView.this, "Se hizo clic en la ficha: " + fichas.get(i).getRutaImagen());
+                            break; 
+                        }
+                    }
+                }
             }
         });
     }
@@ -93,13 +118,7 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         notificarObservadores("inicio");
     }//GEN-LAST:event_formWindowOpened
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-            }
-        });
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -109,17 +128,16 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g); 
-        dibujarFichas(g); 
+        super.paint(g);
+        dibujarFichas(g);
     }
-    
-    
+
     private void dibujarFichas(Graphics g) {
         List<Ficha> fichas = tableroModel.getFichas();
         if (fichas != null) {
-            int x = 150; 
-            int y = 500; 
-            
+            int x = 150;
+            int y = 500;
+
             for (Ficha ficha : fichas) {
                 URL imageURL = getClass().getResource(ficha.getRutaImagen());
                 if (imageURL != null) {
