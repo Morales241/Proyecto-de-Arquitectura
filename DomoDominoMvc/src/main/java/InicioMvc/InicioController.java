@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package InicioMvc;
 
 import observers.IObserver;
 
-/**
- *
- * @author JOSUE GOMEZ
- */
 public class InicioController implements IObserver{
     
     private InicioModel inicioModel;
@@ -23,6 +15,6 @@ public class InicioController implements IObserver{
 
     @Override
     public void actualizar() {
-      
+        
     }
 }

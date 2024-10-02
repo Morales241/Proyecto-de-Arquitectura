@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package InicioMvc;
 
 import java.util.ArrayList;
@@ -11,21 +7,19 @@ import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
 
-/**
- *
- * @author JOSUE GOMEZ
- */
 public class InicioView extends javax.swing.JFrame implements IObserver, IObservable, IComponente{
-private InicioModel inicioModel;
+    
+    private InicioModel inicioModel;
     private List<IObserver> observadores = new ArrayList<>();
     private Mediador mediador;
+    
     /**
      * Creates new form InicioView
      */
     public InicioView(InicioModel inicioModel) {
         initComponents();
         this.inicioModel = inicioModel;
-         inicioModel.agregarObservador(this);
+        inicioModel.agregarObservador(this);
     }
 
     /**
@@ -101,15 +95,15 @@ private InicioModel inicioModel;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-       mediador.mostrarViewConcreta("RegistrarView");
+        mediador.mostrarViewConcreta("SignInView");
     }//GEN-LAST:event_btnRegistrarActionPerformed
  
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-      
+        mediador.mostrarViewConcreta("");
     }//GEN-LAST:event_btnJugarActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-    
+        mediador.mostrarViewConcreta("LoginView");
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     
@@ -144,6 +138,6 @@ private InicioModel inicioModel;
 
     @Override
     public void setMediador(Mediador mediador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.mediador = mediador;
     }
 }

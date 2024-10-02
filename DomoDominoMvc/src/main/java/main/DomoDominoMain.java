@@ -1,5 +1,8 @@
 package main;
 
+import InicioMvc.InicioController;
+import InicioMvc.InicioModel;
+import InicioMvc.InicioView;
 import loginMvc.LoginControler;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
@@ -19,17 +22,23 @@ public class DomoDominoMain {
         SignInView signInView = new SignInView(signInModel);
         SignInControler signInControler = new SignInControler(signInView, signInModel);
         
+        InicioModel inicioModel = new InicioModel();
+        InicioView inicioView = new InicioView(inicioModel);
+        InicioController inicioController = new InicioController(inicioModel, inicioView);
+        
         //si se crean mas pantallas ponganlas aqui arriba
         
         Mediador mediador = new Mediador();
         
         mediador.registrarView("LoginView", loginView);
         mediador.registrarView("SignInView", signInView);
+        mediador.registrarView("inicioView", inicioView);
         
         loginView.setMediador(mediador);
         signInView.setMediador(mediador);
+        inicioView.setMediador(mediador);
         
-        loginView.setVisible(true);
+        inicioView.setVisible(true);
     }
     
 }
