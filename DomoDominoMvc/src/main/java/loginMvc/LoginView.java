@@ -4,18 +4,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import mediador.IComponente;
+import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
 
-public class LoginView extends javax.swing.JFrame implements IObserver, IObservable{
+public class LoginView extends javax.swing.JFrame implements IObserver, IObservable, IComponente{
 
-    private LoginModel domoDominoModel;
+    private LoginModel loginModel;
     private List<IObserver> observadores = new ArrayList<>();
+    private Mediador mediador;
     
-    public LoginView(LoginModel domoDominoModel) {
+    public LoginView(LoginModel loginModel) {
         initComponents();
-        this.domoDominoModel = domoDominoModel;
-        domoDominoModel.agregarObservador(this);
+        this.loginModel = loginModel;
+        loginModel.agregarObservador(this);
     }
     
     @SuppressWarnings("unchecked")
@@ -71,8 +74,8 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        domoDominoModel.setContra(txtContra.getText());
-        domoDominoModel.setNombre(txtNombre.getText());
+        loginModel.setContra(txtContra.getText());
+        loginModel.setNombre(txtNombre.getText());
         
         notificarObservadores();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
@@ -87,7 +90,8 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
 
     @Override
     public void actualizar() {
-        JOptionPane.showConfirmDialog(rootPane, "ASDA");
+        JOptionPane.showConfirmDialog(rootPane, "se logueo");
+        mediador.mostrarViewConcreta("SignInView");
     }
 
     @Override
@@ -105,6 +109,11 @@ public class LoginView extends javax.swing.JFrame implements IObserver, IObserva
         observadores.forEach(IObserver -> {
             IObserver.actualizar();
         });
+    }
+
+    @Override
+    public void setMediador(Mediador mediador) {
+        this.mediador = mediador;
     }
 
     

@@ -12,12 +12,16 @@ import java.util.Random;
 public class Pozo {
 
     private final List<Ficha> fichas ;
+    private int numeroFichasIniciales;
     
     /**
      * Constructor que inicializa la lista de fichas
+     * 
+     * @param numeroFichasIniciales
      */
-    public Pozo() {
+    public Pozo(int numeroFichasIniciales) {
         fichas = new ArrayList<>();
+        this.numeroFichasIniciales = numeroFichasIniciales;
     }
 
     /**
@@ -62,7 +66,7 @@ public class Pozo {
     public List<Ficha> repartirFichas(){
         List<Ficha> fichasJugador = new ArrayList<>();
         
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < numeroFichasIniciales; i++) {
             fichasJugador.add(sacarFicha());
         }
         

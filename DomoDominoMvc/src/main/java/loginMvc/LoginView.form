@@ -71,9 +71,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnIniciarSesion">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\tacot\OneDrive\Documentos\GitHub\Proyecto-de-Arquitectura\DomoDominoMvc\src\main\resources\iniciarsesion.png"/>
-            </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="focusPainted" type="boolean" value="false"/>
@@ -89,11 +86,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="labelFondo">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\tacot\OneDrive\Documentos\GitHub\Proyecto-de-Arquitectura\DomoDominoMvc\src\main\resources\domodomino.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>

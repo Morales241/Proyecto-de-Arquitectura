@@ -4,19 +4,19 @@ import observers.IObserver;
 
 public class LoginControler implements IObserver {
 
-    private LoginModel domoDominoModel;
-    private LoginView domoDominoView;
+    private LoginModel loginModel;
+    private LoginView loginView;
 
-    public LoginControler(LoginModel domoDominoModel, LoginView domoDominoView) {
-        this.domoDominoModel = domoDominoModel;
-        this.domoDominoView = domoDominoView;
+    public LoginControler(LoginModel loginModell, LoginView loginView) {
+        this.loginModel = loginModell;
+        this.loginView = loginView;
 
-        domoDominoView.agregarObservador(this);
+        loginView.agregarObservador(this);
     }
 
     @Override
     public void actualizar() {
-        domoDominoModel.iniciarSesion();
+        loginModel.iniciarSesion();
     }
     
     

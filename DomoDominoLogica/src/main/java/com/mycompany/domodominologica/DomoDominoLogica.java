@@ -15,7 +15,7 @@ import pozo.Pozo;
 public class DomoDominoLogica {
 
     public static void main(String[] args) {
-        Pozo pozo = new Pozo();
+        Pozo pozo = new Pozo(7);
         pozo.crearFichasPozo();
         System.out.println(pozo.sacarFicha());
         
