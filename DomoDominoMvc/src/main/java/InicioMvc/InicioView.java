@@ -32,26 +32,12 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnRegistrar = new javax.swing.JButton();
         btnJugar = new javax.swing.JButton();
-        btnIniciarSesion = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
-        btnRegistrar.setBorderPainted(false);
-        btnRegistrar.setContentAreaFilled(false);
-        btnRegistrar.setFocusPainted(false);
-        btnRegistrar.setFocusable(false);
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 260, 50));
 
         btnJugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jugar - copia.png"))); // NOI18N
         btnJugar.setBorderPainted(false);
@@ -63,19 +49,7 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
                 btnJugarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 260, 40));
-
-        btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iniciarsesion.png"))); // NOI18N
-        btnIniciarSesion.setBorderPainted(false);
-        btnIniciarSesion.setContentAreaFilled(false);
-        btnIniciarSesion.setFocusPainted(false);
-        btnIniciarSesion.setFocusable(false);
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 260, 40));
+        jPanel1.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 260, 40));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
         jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 610));
@@ -93,25 +67,15 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        mediador.mostrarViewConcreta("SignInView");
-    }//GEN-LAST:event_btnRegistrarActionPerformed
  
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        mediador.mostrarViewConcreta("");
+        mediador.mostrarViewConcreta("TableroView");
     }//GEN-LAST:event_btnJugarActionPerformed
-
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        mediador.mostrarViewConcreta("LoginView");
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnJugar;
-    private javax.swing.JButton btnRegistrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables

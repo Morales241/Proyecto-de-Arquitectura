@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package registrarUsuario;
 
+import dtos.UsuarioDto;
 import DAOs.UsuarioDAO;
 import com.mycompany.domodominopersistencia.Usuario;
 
-/**
- *
- * @author tacot
- */
 public class LogicaRegistrar implements ILogicaRegistrar {
 
     private final UsuarioDAO usuarioDAO;

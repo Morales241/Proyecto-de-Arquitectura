@@ -35,7 +35,31 @@ public class UsuarioDAO {
         MongoCollection<Usuario> collection = getCollection();
         collection.insertOne(usuario);
     }
+    
+    /**
+     * Método para iniciar sesión
+     * @param correo
+     * @param contra
+     * @return devielve Usuario si las credenciales son validas
+     */
+    public boolean iniciarSesion(String correo, String contra) {
+        Usuario usuario = buscarPorCorreo(correo);
+        System.out.println("Usuario encontrado: " + usuario); 
+        return usuario != null && usuario.getContraseña().equals(contra);
+    }
 
+    /**
+     * Metodo que busca usuario por el correo
+     * @param correo
+     * @return usuario
+     */
+    public Usuario buscarPorCorreo(String correo) {
+        MongoCollection<Usuario> collection = getCollection();
+        Bson filter = Filters.eq("correo", correo);
+        System.out.println(collection.find(filter).first());
+        return collection.find(filter).first(); 
+    }
+    
     /**
      * Metodo que busca usuario
      * @param nombre

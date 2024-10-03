@@ -1,27 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TableroMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import mediador.IComponente;
+import mediador.Mediador;
+import observers.IObservable;
+import observers.IObserver;
+import pozo.Ficha;
 import pozo.Pozo;
 
-/**
- *
- * @author favel
- */
-public class TableroView extends javax.swing.JFrame {
-private Pozo pozo = new Pozo(7);
+public class TableroView extends javax.swing.JFrame implements IObservable, IComponente{
+
+    private List<IObserver> observadores = new ArrayList<>();
+    private Mediador mediador;
+    private TableroModel tableroModel;
     /**
      * Creates new form TableroView
      */
-    public TableroView() {
+    public TableroView(TableroModel tableroModel) {
         initComponents();
-        pozo.crearFichasPozo();
-        System.out.println("Fichas del jugador 1: "+pozo.repartirFichas());
-         System.out.println("Fichas del jugador 2: "+pozo.repartirFichas());
-         System.out.println("Fichas del jugador 3: "+pozo.repartirFichas());
-         System.out.println("Fichas del jugador 4: "+pozo.repartirFichas());
+        this.tableroModel = tableroModel;
+        
+        notificarObservadores("inicio");
+        tableroModel.agregarObservador((String estado) -> {
+            imprimirFichas(tableroModel.getFichas());
+        });
     }
 
     /**
@@ -67,35 +71,33 @@ private Pozo pozo = new Pozo(7);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
- /**
-     * Main method to run the application.
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TableroView().setVisible(true);
-            }
+    @Override
+    public void agregarObservador(IObserver observador) {
+        observadores.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(IObserver observador) {
+        observadores.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores(String mensaje) {
+        observadores.forEach(IObserver -> {
+            IObserver.actualizar(mensaje);
         });
+    }
+
+    @Override
+    public void setMediador(Mediador mediador) {
+        this.mediador = mediador;
+    }
+
+    
+    public void imprimirFichas(List<Ficha> fichas){
+        for (Object ficha : fichas) {
+            System.out.println(ficha);
+        }
     }
 }
