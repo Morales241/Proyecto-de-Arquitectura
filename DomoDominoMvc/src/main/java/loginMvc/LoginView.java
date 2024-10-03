@@ -21,7 +21,7 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
         loginModel.agregarObservador((String estado) -> {
             if (estado.equals("Login exitoso")) {
                 JOptionPane.showMessageDialog(null, "¡Login completado con éxito!");
-                mediador.mostrarViewConcreta("inicioView");
+                mediador.mostrarPantallaConcreta("inicio");
             }
         });
 
@@ -117,7 +117,7 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        mediador.mostrarViewConcreta("SignInView");
+        mediador.mostrarPantallaConcreta("SignInView");
     }//GEN-LAST:event_btnRegistrarActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

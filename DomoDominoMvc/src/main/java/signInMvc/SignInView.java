@@ -24,7 +24,7 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
         signInModel.agregarObservador((String estado) -> {
             if (estado.equals("Registro exitoso")) {
                 JOptionPane.showMessageDialog(null, "¡Registro completado con éxito!");
-                mediador.mostrarViewConcreta("inicioView");
+                mediador.mostrarPantallaConcreta("inicioView");
             }
         });
 
