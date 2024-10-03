@@ -46,7 +46,7 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
 
                     for (int i = 0; i < fichas.size(); i++) {
                         int x = 65 + (i * fichaWidth); 
-                        int y = 102; 
+                        int y = 62; 
 
                         if (xClick >= x && xClick <= x + fichaWidth && yClick >= y && yClick <= y + fichaHeight) {
                             JOptionPane.showMessageDialog(TableroView.this, "Se hizo clic en la ficha: " + fichas.get(i).getRutaImagen());
@@ -146,7 +146,7 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
                 } else {
                     System.out.println("Imagen no encontrada: " + ficha.getRutaImagen());
                 }
-                x += 80;
+                x += 57;
             }
         }
     }
