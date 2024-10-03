@@ -3,7 +3,6 @@ package mediador;
 import contenedor.ContenedorMvc;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 /**
@@ -40,11 +39,9 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
         //saca en pantalla concreta el nombre que encuentre
         ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
         if (pantallaConcreta != null) {
-            // Ocultar todas las vistas
-            pantallas.values().forEach((t) -> {
-                t.getVista().setVisible(false);
+            pantallas.values().forEach((otrasPantallas) -> {
+                otrasPantallas.getVista().setVisible(false);
             });
-            // Mostrar la vista concreta
             pantallaConcreta.getVista().setVisible(true);
 
         } else {

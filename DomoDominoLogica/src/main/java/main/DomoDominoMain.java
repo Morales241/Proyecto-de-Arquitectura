@@ -19,8 +19,7 @@ public class DomoDominoMain {
         InicializadorClases inicializadorClases = new InicializadorClases();
         inicializadorClases.InicializarClases(mediador);
         
-        mediador.mostrarPantallaConcreta("login");
-        
+        mediador.mostrarPantallaConcreta("login");        
     }
     
 }

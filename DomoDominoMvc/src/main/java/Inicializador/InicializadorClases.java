@@ -58,7 +58,7 @@ public class InicializadorClases {
         //si se crean mas pantallas ponganlas aqui arriba y registrenlas abajo
         
         mediador.registrarPantalla("login", loginContenedor);
-        mediador.registrarPantalla("singIn", signInContenedor);
+        mediador.registrarPantalla("signIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
     }

@@ -117,7 +117,7 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        mediador.mostrarPantallaConcreta("SignInView");
+        mediador.mostrarPantallaConcreta("signIn");
     }//GEN-LAST:event_btnRegistrarActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
