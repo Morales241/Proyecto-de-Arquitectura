@@ -10,7 +10,7 @@ public class TableroController {
         this.tableroView = tableroView;
         
         tableroView.agregarObservador((String estado) -> {
-            if(estado.equals("inicio")){
+            if(estado.equals("inicio")) {
                 tableroModel.repartirFichas();
             }
         });

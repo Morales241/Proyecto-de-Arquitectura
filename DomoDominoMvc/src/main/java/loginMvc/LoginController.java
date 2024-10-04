@@ -1,11 +1,11 @@
 package loginMvc;
 
-public class LoginControler {
+public class LoginController {
 
     private LoginModel loginModel;
     private LoginView loginView;
 
-    public LoginControler(LoginModel loginModell, LoginView loginView) {
+    public LoginController(LoginModel loginModell, LoginView loginView) {
         this.loginModel = loginModell;
         this.loginView = loginView;
 

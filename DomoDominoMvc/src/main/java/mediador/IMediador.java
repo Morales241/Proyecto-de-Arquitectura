@@ -1,8 +1,9 @@
 package mediador;
 
+import contenedor.ContenedorMvc;
 import javax.swing.JFrame;
 
-public interface IMediador {
-    public void registrarView(String nombre, JFrame view);
-    public void mostrarViewConcreta(String nombre);
+public interface IMediador<M, V extends JFrame, C> {
+    public void registrarPantalla(String nombre, ContenedorMvc<M, V, C> contenedorMvc);
+    public void mostrarPantallaConcreta(String nombre);
 }

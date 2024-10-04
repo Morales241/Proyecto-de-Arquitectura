@@ -69,7 +69,7 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
     }// </editor-fold>//GEN-END:initComponents
  
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        mediador.mostrarViewConcreta("TableroView");
+        mediador.mostrarPantallaConcreta("tablero");
     }//GEN-LAST:event_btnJugarActionPerformed
 
     
