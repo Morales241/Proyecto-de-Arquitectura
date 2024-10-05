@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class Ficha implements Serializable {
 
-    
     private Integer lado1;
     private Integer lado2;
     private String rutaImagen;
@@ -82,15 +81,15 @@ public class Ficha implements Serializable {
         return Objects.equals(this.lado2, other.lado2);
     }
 
-   @Override
-public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("Ficha{");
-    sb.append("lado1=").append(lado1);
-    sb.append(", lado2=").append(lado2);
-    sb.append(", rutaImagen='").append(rutaImagen).append('\'');
-    sb.append('}');
-    return sb.toString();
-}
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ficha{");
+        sb.append("lado1=").append(lado1);
+        sb.append(", lado2=").append(lado2);
+        sb.append(", rutaImagen='").append(rutaImagen).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 
 }

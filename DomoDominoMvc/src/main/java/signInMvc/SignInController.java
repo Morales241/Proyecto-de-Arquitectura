@@ -2,12 +2,12 @@ package signInMvc;
 
 import observers.IObserver;
 
-public class SignInControler implements IObserver{
+public class SignInController implements IObserver{
 
     private SignInView signInView;
     private SignInModel signInModel;
 
-    public SignInControler(SignInView signInView, SignInModel signInModel) {
+    public SignInController(SignInView signInView, SignInModel signInModel) {
         this.signInView = signInView;
         this.signInModel = signInModel;
         

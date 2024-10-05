@@ -1,27 +1,61 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TableroMvc;
 
-import pozo.Pozo;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import mediador.IComponente;
+import mediador.Mediador;
+import observers.IObservable;
+import observers.IObserver;
+import pozo.Ficha;
 
-/**
- *
- * @author favel
- */
-public class TableroView extends javax.swing.JFrame {
-private Pozo pozo = new Pozo(7);
+public class TableroView extends javax.swing.JFrame implements IObservable, IComponente {
+
+    private List<IObserver> observadores = new ArrayList<>();
+    private Mediador mediador;
+    private TableroModel tableroModel;
+
     /**
      * Creates new form TableroView
      */
-    public TableroView() {
+    public TableroView(TableroModel tableroModel) {
         initComponents();
-        pozo.crearFichasPozo();
-        System.out.println("Fichas del jugador 1: "+pozo.repartirFichas());
-         System.out.println("Fichas del jugador 2: "+pozo.repartirFichas());
-         System.out.println("Fichas del jugador 3: "+pozo.repartirFichas());
-         System.out.println("Fichas del jugador 4: "+pozo.repartirFichas());
+        jPanFichas.setPreferredSize(new java.awt.Dimension(720, 190));
+        this.tableroModel = tableroModel;
+
+        tableroModel.agregarObservador((String estado) -> {
+            if (estado.equals("repartirFicha")) {
+                repaint();
+            }
+        });
+
+        jPanFichas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int xClick = e.getX();
+                int yClick = e.getY();
+                List<Ficha> fichas = tableroModel.getFichas();
+                if (fichas != null) {
+                    int fichaWidth = 56;
+                    int fichaHeight = 102;
+
+                    for (int i = 0; i < fichas.size(); i++) {
+                        int x = 65 + (i * fichaWidth); 
+                        int y = 62; 
+
+                        if (xClick >= x && xClick <= x + fichaWidth && yClick >= y && yClick <= y + fichaHeight) {
+                            JOptionPane.showMessageDialog(TableroView.this, "Se hizo clic en la ficha: " + fichas.get(i).getRutaImagen());
+                            break; 
+                        }
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -36,8 +70,14 @@ private Pozo pozo = new Pozo(7);
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanFichas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -47,6 +87,19 @@ private Pozo pozo = new Pozo(7);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/nWFiIuU.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+
+        javax.swing.GroupLayout jPanFichasLayout = new javax.swing.GroupLayout(jPanFichas);
+        jPanFichas.setLayout(jPanFichasLayout);
+        jPanFichasLayout.setHorizontalGroup(
+            jPanFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+        jPanFichasLayout.setVerticalGroup(
+            jPanFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 720, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,40 +115,62 @@ private Pozo pozo = new Pozo(7);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        notificarObservadores("inicio");
+    }//GEN-LAST:event_formWindowOpened
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanFichas;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
- /**
-     * Main method to run the application.
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TableroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TableroView().setVisible(true);
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        dibujarFichas(g);
+    }
+
+    private void dibujarFichas(Graphics g) {
+        List<Ficha> fichas = tableroModel.getFichas();
+        if (fichas != null) {
+            int x = 150;
+            int y = 500;
+
+            for (Ficha ficha : fichas) {
+                URL imageURL = getClass().getResource(ficha.getRutaImagen());
+                if (imageURL != null) {
+                    ImageIcon icon = new ImageIcon(imageURL);
+                    g.drawImage(icon.getImage(), x, y, this);
+                } else {
+                    System.out.println("Imagen no encontrada: " + ficha.getRutaImagen());
+                }
+                x += 57;
             }
+        }
+    }
+
+    @Override
+    public void agregarObservador(IObserver observador) {
+        observadores.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(IObserver observador) {
+        observadores.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores(String mensaje) {
+        observadores.forEach(IObserver -> {
+            IObserver.actualizar(mensaje);
         });
     }
+
+    @Override
+    public void setMediador(Mediador mediador) {
+        this.mediador = mediador;
+    }
+
 }
