@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package crearMesa;
 
 import observers.IObserver;
 
-/**
- *
- * @author tacot
- */
+
 public class CrearMesaController implements IObserver{
     private CrearMesaView vista;
     private CrearMesaModel modelo;
@@ -30,7 +23,7 @@ public class CrearMesaController implements IObserver{
     //codigo pa regresar asajssjad
     }
     
-    public void CrearMesa(){
+     void CrearMesa(){
     //codigo pa crear mesa jajsaj
     }
 
