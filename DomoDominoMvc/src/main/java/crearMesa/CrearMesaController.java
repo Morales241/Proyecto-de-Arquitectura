@@ -4,7 +4,6 @@
  */
 package crearMesa;
 
-import comands.IComando;
 import observers.IObserver;
 
 /**
