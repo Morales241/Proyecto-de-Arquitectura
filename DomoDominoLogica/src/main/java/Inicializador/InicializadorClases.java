@@ -65,5 +65,7 @@ public class InicializadorClases {
         mediador.registrarPantalla("signIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
+        
+        /*Logica de inicio de secion*/
     }
 }

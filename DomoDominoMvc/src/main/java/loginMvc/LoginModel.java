@@ -39,8 +39,11 @@ public class LoginModel implements IObservable {
     }
 
     public void iniciarSesion(){
+        
+        
         if(logicaIniciarSesion.iniciarSesion(encapsulamiento())){
             notificarObservadores("Login exitoso");
+            
         }
         else{
             notificarObservadores("Error: Usuario o contraseña incorrectos");
