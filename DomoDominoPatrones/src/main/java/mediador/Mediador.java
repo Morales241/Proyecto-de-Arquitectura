@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 public class Mediador<M, V extends JFrame, C>  implements IMediador {
 
     private Map<String, ContenedorMvc<M, V, C>> pantallas;
+    
 
     /**
      * Contructor de la clase mediador

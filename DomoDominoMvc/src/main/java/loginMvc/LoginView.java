@@ -19,18 +19,6 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
         initComponents();
         this.loginModel = loginModel;
         
-        loginModel.agregarObservador((String estado) -> {
-            if (estado.equals("Login exitoso")) {
-                JOptionPane.showMessageDialog(null, "¡Login completado con éxito!");
-                mediador.mostrarPantallaConcreta("inicio");
-            }
-        });
-
-        loginModel.agregarObservador((String estado) -> {
-            if (estado.equals("Error en el login")) {
-                JOptionPane.showMessageDialog(null, "Error: No se pudo Loguear el usuario.");
-            }
-        });
     }
     
     @SuppressWarnings("unchecked")
@@ -129,7 +117,7 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
 
     @Override
     public void actualizar(String estado) {
-        JOptionPane.showMessageDialog(null, "La contraseña o el usuario es incorrecto");
+        JOptionPane.showMessageDialog(null, estado);
     }
 
     

@@ -15,6 +15,7 @@ public class LoginController {
         loginView.btnInciarSecion(new oyenteIniciarSesion());
         
         loginView.btnRegistrarse(new oyenteRegistrarse());
+        
     }  
     
     public void iniciarSesion(){

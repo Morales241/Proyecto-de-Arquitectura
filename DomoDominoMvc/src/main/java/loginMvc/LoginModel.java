@@ -43,10 +43,11 @@ public class LoginModel implements IObservable {
             notificarObservadores("Login exitoso");
         }
         else{
-            notificarObservadores("Error en el login");
+            notificarObservadores("Error: Usuario o contraseña incorrectos");
         }
         
     }
+    
     
     @Override
     public void agregarObservador(IObserver observador) {

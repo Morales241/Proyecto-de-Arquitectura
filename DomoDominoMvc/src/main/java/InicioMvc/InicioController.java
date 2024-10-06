@@ -2,6 +2,7 @@ package InicioMvc;
 
 import observers.IObserver;
 
+
 public class InicioController implements IObserver{
     
     private InicioModel inicioModel;
