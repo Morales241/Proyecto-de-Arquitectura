@@ -48,7 +48,6 @@ public class LoginModel implements IObservable {
         
     }
     
-    
     @Override
     public void agregarObservador(IObserver observador) {
         observadores.add(observador);
