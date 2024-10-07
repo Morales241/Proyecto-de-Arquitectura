@@ -41,9 +41,9 @@ public class LoginModel implements IObservable {
 
     public void ejecutarAccionRegistro(){
         
-//        if (listenerRegistro != null) {
-//            listenerRegistro.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
-//        }
+        if (listenerRegistro != null) {
+            listenerRegistro.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+        }
     }
 
     public String getCorreo() {
