@@ -1,13 +1,35 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package TableroMvc;
 
+import dtos.Arreglo;
+import dtos.JugadorDto;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.TransferHandler;
 import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
@@ -17,45 +39,230 @@ import pozo.Ficha;
 public class TableroView extends javax.swing.JFrame implements IObservable, IComponente {
 
     private List<IObserver> observadores = new ArrayList<>();
+    TableroModel tableroModel;
+    Arreglo array;
+    JugadorDto jugador;
     private Mediador mediador;
-    private TableroModel tableroModel;
 
     /**
      * Creates new form TableroView
+     *
+     * @param tableroModel
+     * @param array
+     * @param jugador
      */
-    public TableroView(TableroModel tableroModel) {
-        initComponents();
-        jPanFichas.setPreferredSize(new java.awt.Dimension(720, 190));
+    public TableroView(TableroModel tableroModel, Arreglo array, JugadorDto jugador) {
+        this.setSize(1200, 850);
         this.tableroModel = tableroModel;
+        this.array = array;
+        this.jugador = jugador;
+        setTitle("Tablero de Dominó");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
-        tableroModel.agregarObservador((String estado) -> {
-            if (estado.equals("repartirFicha")) {
-                repaint();
-            }
-        });
+      
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(1000, 750)); 
 
-        jPanFichas.addMouseListener(new MouseAdapter() {
+       
+        JPanel fichasJugadorPanel = new JPanel();
+        fichasJugadorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); 
+        fichasJugadorPanel.setOpaque(false);
+
+    
+        fichasJugadorPanel.setBounds(0, 650, 1000, 100); 
+
+   
+        layeredPane.add(fichasJugadorPanel, Integer.valueOf(2)); 
+
+    
+        TableroPanel tableroPanel = new TableroPanel(array);
+        tableroPanel.setBounds(200, 150, 600, 400); 
+        tableroPanel.setOpaque(false); 
+        layeredPane.add(tableroPanel, Integer.valueOf(1));
+
+       
+        JLabel backgroundLabel = new JLabel(new ImageIcon(getClass().getResource("/fondoPrueba1.png")));
+        backgroundLabel.setBounds(0, 0, 1000, 750);
+        layeredPane.add(backgroundLabel, Integer.valueOf(0));
+
+        
+        getContentPane().add(layeredPane, BorderLayout.CENTER);
+
+        for (Ficha ficha : jugador.getFichas()) {
+            JLabel fichaLabel = new JLabel(ficha.getIcono());
+            fichaLabel.setTransferHandler(new FichaTransferHandler(ficha, fichaLabel, fichasJugadorPanel));
+            fichaLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    JComponent comp = (JComponent) e.getSource();
+                    TransferHandler handler = comp.getTransferHandler();
+                    handler.exportAsDrag(comp, e, TransferHandler.MOVE);
+                }
+            });
+            fichasJugadorPanel.add(fichaLabel);
+        }
+
+        add(fichasJugadorPanel, BorderLayout.SOUTH);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        // Configuramos el drag-and-drop para el tablero
+        new DropTarget(tableroPanel, new DropTargetListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int xClick = e.getX();
-                int yClick = e.getY();
-                List<Ficha> fichas = tableroModel.getFichas();
-                if (fichas != null) {
-                    int fichaWidth = 56;
-                    int fichaHeight = 102;
+            public void dragEnter(DropTargetDragEvent dtde) {
+            }
 
-                    for (int i = 0; i < fichas.size(); i++) {
-                        int x = 65 + (i * fichaWidth); 
-                        int y = 62; 
+            @Override
+            public void dragOver(DropTargetDragEvent dtde) {
+            }
 
-                        if (xClick >= x && xClick <= x + fichaWidth && yClick >= y && yClick <= y + fichaHeight) {
-                            JOptionPane.showMessageDialog(TableroView.this, "Se hizo clic en la ficha: " + fichas.get(i).getRutaImagen());
-                            break; 
+            @Override
+            public void dropActionChanged(DropTargetDragEvent dtde) {
+            }
+
+            @Override
+            public void dragExit(DropTargetEvent dte) {
+            }
+
+            @Override
+            public void drop(DropTargetDropEvent dtde) {
+                System.out.println("Ficha soltada en el tablero");
+                try {
+                    Transferable transferable = dtde.getTransferable();
+                    ImageIcon icon = (ImageIcon) transferable.getTransferData(DataFlavor.imageFlavor);
+
+                    
+                    Point dropPoint = dtde.getLocation();
+                    int fila = dropPoint.y / 40; 
+                    int columna = dropPoint.x / 40;
+
+             
+                    if (esPosicionValida(fila, columna)) {
+                        Ficha fichaColocada = encontrarFichaPorIcono(icon);
+                        if (fichaColocada != null) {
+
+                            array.colocarFichaHorizontal(fichaColocada, fila, columna);
+                            jugador.getFichas().remove(fichaColocada);
+
+                            tableroPanel.repaint();
+                            tableroPanel.revalidate();
+
+                            removerFichaDelPanel(fichaColocada, fichasJugadorPanel);
+
+                            fichasJugadorPanel.revalidate();
+                            fichasJugadorPanel.repaint();
+                        }
+                    } else {
+                        System.out.println("Posición inválida para colocar la ficha.");
+                    }
+                    dtde.dropComplete(true);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    dtde.dropComplete(false);
+                }
+            }
+           
+
+            private boolean esPosicionValida(int fila, int columna) {
+          
+                return array.estaVacio(fila, columna) && array.estaVacio(fila, columna + 1);
+            }
+
+           
+            private Ficha encontrarFichaPorIcono(ImageIcon icon) {
+                for (Ficha ficha : jugador.getFichas()) {
+                    if (ficha.getIcono().getImage().equals(icon.getImage())) {
+                        return ficha;
+                    }
+                }
+                return null;
+            }
+
+          
+            private void removerFichaDelPanel(Ficha fichaColocada, JPanel fichasJugadorPanel) {
+                for (Component component : fichasJugadorPanel.getComponents()) {
+                    if (component instanceof JLabel) {
+                        JLabel label = (JLabel) component;
+                        if (((ImageIcon) label.getIcon()).getImage().equals(fichaColocada.getIcono().getImage())) {
+                            fichasJugadorPanel.remove(label);
+                            break;
                         }
                     }
                 }
             }
         });
+    }
+
+    private TableroView() {
+        initComponents();
+    }
+
+    public class TableroPanel extends JPanel {
+
+        private int[][] tablero;
+
+        public TableroPanel(Arreglo array) {
+            this.tablero = array.obtenerTablero();
+            setPreferredSize(new Dimension(800, 800));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            int cellSize = 40;
+
+            for (int i = 0; i < tablero.length; i++) {
+                for (int j = 0; j < tablero[i].length; j++) {
+                    g.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    if (tablero[i][j] != 0) { 
+                        g.drawString(String.valueOf(tablero[i][j]), j * cellSize + cellSize / 4, i * cellSize + cellSize / 2);
+                    }
+                }
+            }
+        }
+    }
+
+    class FichaTransferHandler extends TransferHandler {
+
+        private Ficha ficha;
+        private JLabel fichaLabel;
+        private JPanel fichasJugadorPanel;
+
+        public FichaTransferHandler(Ficha objetoFicha, JLabel objetofichaLabel, JPanel objetofichasJugadorPanel) {
+            this.ficha = objetoFicha;
+            this.fichaLabel = objetofichaLabel;
+            this.fichasJugadorPanel = objetofichasJugadorPanel;
+        }
+
+        @Override
+        protected Transferable createTransferable(JComponent c) {
+            return new Transferable() {
+                @Override
+                public DataFlavor[] getTransferDataFlavors() {
+                    return new DataFlavor[]{DataFlavor.imageFlavor};
+                }
+
+                @Override
+                public boolean isDataFlavorSupported(DataFlavor flavor) {
+                    return DataFlavor.imageFlavor.equals(flavor);
+                }
+
+                @Override
+                public Object getTransferData(DataFlavor flavor) {
+                    if (DataFlavor.imageFlavor.equals(flavor)) {
+                        return ficha.getIcono();
+                    }
+                    return null;
+                }
+            };
+        }
+
+        @Override
+        public int getSourceActions(JComponent c) {
+            return MOVE;
+        }
     }
 
     /**
@@ -67,89 +274,25 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanFichas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domoCafe.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 70, 70));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/nWFiIuU.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
-
-        javax.swing.GroupLayout jPanFichasLayout = new javax.swing.GroupLayout(jPanFichas);
-        jPanFichas.setLayout(jPanFichasLayout);
-        jPanFichasLayout.setHorizontalGroup(
-            jPanFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        jPanFichasLayout.setVerticalGroup(
-            jPanFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 720, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        notificarObservadores("inicio");
-    }//GEN-LAST:event_formWindowOpened
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanFichas;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        dibujarFichas(g);
-    }
-
-    private void dibujarFichas(Graphics g) {
-        List<Ficha> fichas = tableroModel.getFichas();
-        if (fichas != null) {
-            int x = 150;
-            int y = 500;
-
-            for (Ficha ficha : fichas) {
-                URL imageURL = getClass().getResource(ficha.getRutaImagen());
-                if (imageURL != null) {
-                    ImageIcon icon = new ImageIcon(imageURL);
-                    g.drawImage(icon.getImage(), x, y, this);
-                } else {
-                    System.out.println("Imagen no encontrada: " + ficha.getRutaImagen());
-                }
-                x += 57;
-            }
-        }
-    }
 
     @Override
     public void agregarObservador(IObserver observador) {
@@ -173,4 +316,8 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         this.mediador = mediador;
     }
 
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
 }

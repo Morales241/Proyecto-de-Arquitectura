@@ -6,20 +6,21 @@ package pozo;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 
 public class Ficha implements Serializable {
 
     private Integer lado1;
     private Integer lado2;
-    private String rutaImagen;
+    private ImageIcon icono; // Cambiado de String a ImageIcon
 
     public Ficha() {
     }
 
-    public Ficha(Integer lado1, Integer lado2, String rutaImagen) {
+    public Ficha(Integer lado1, Integer lado2, ImageIcon icono) { // Constructor actualizado
         this.lado1 = lado1;
         this.lado2 = lado2;
-        this.rutaImagen = rutaImagen;
+        this.icono = icono;
     }
 
     public Ficha(Integer lado1, Integer lado2) {
@@ -43,12 +44,8 @@ public class Ficha implements Serializable {
         this.lado2 = lado2;
     }
 
-    public String getRutaImagen() {
-        return rutaImagen;
-    }
-
-    public void setRutaImagen(String rutaImagen) {
-        this.rutaImagen = rutaImagen;
+    public ImageIcon getIcono() { // Método actualizado
+        return icono;
     }
 
     @Override
@@ -56,7 +53,7 @@ public class Ficha implements Serializable {
         int hash = 7;
         hash = 13 * hash + Objects.hashCode(this.lado1);
         hash = 13 * hash + Objects.hashCode(this.lado2);
-        hash = 13 * hash + Objects.hashCode(this.rutaImagen);
+        hash = 13 * hash + Objects.hashCode(this.icono); // Actualizado a icono
         return hash;
     }
 
@@ -72,7 +69,7 @@ public class Ficha implements Serializable {
             return false;
         }
         final Ficha other = (Ficha) obj;
-        if (!Objects.equals(this.rutaImagen, other.rutaImagen)) {
+        if (!Objects.equals(this.icono, other.icono)) { // Actualizado a icono
             return false;
         }
         if (!Objects.equals(this.lado1, other.lado1)) {
@@ -87,9 +84,8 @@ public class Ficha implements Serializable {
         sb.append("Ficha{");
         sb.append("lado1=").append(lado1);
         sb.append(", lado2=").append(lado2);
-        sb.append(", rutaImagen='").append(rutaImagen).append('\'');
+        sb.append(", icono=").append(icono); // Actualizado a icono
         sb.append('}');
         return sb.toString();
     }
-
 }

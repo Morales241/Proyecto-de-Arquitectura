@@ -7,10 +7,13 @@ import TableroMvc.TableroController;
 import TableroMvc.TableroModel;
 import TableroMvc.TableroView;
 import contenedor.ContenedorMvc;
+import dtos.Arreglo;
+import dtos.JugadorDto;
 import loginMvc.LoginController;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
 import mediador.Mediador;
+import pozo.Pozo;
 import signInMvc.SignInController;
 import signInMvc.SignInModel;
 import signInMvc.SignInView;
@@ -48,9 +51,13 @@ public class InicializadorClases {
         inicioView.setMediador(mediador);
         InicioController inicioController = new InicioController(inicioModel, inicioView);
         ContenedorMvc<InicioModel, InicioView, InicioController> inicioContenedor = new ContenedorMvc<>(inicioModel,inicioView,inicioController);
-        
+      
+        Pozo pozo = new Pozo(7);
+        JugadorDto jugador = new JugadorDto("josue");
+        jugador.agregarFichas(pozo.repartirFichas());
+         Arreglo array = new Arreglo(); 
         TableroModel tableroModel = new TableroModel();
-        TableroView tableroView = new TableroView(tableroModel);
+        TableroView tableroView = new TableroView(tableroModel,array,jugador);
         tableroView.setMediador(mediador);
         TableroController tableroController = new TableroController(tableroModel, tableroView);
         ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel,tableroView,tableroController);
