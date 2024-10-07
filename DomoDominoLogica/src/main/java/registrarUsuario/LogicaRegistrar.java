@@ -3,12 +3,16 @@ package registrarUsuario;
 import dtos.UsuarioDto;
 import DAOs.UsuarioDAO;
 import com.mycompany.domodominopersistencia.Usuario;
+import mediador.IMediador;
+import observers.IObserver;
 
-public class LogicaRegistrar implements ILogicaRegistrar {
+public class LogicaRegistrar implements ILogicaRegistrar, IObserver {
 
     private final UsuarioDAO usuarioDAO;
+    private final IMediador mediador = null;
 
     /**
+     * 
      * Constructor de la clase
      */
     public LogicaRegistrar() {
@@ -75,6 +79,11 @@ public class LogicaRegistrar implements ILogicaRegistrar {
     @Override
     public boolean validarContraseña(String contraseña) {
         return contraseña.matches("^[a-zA-Z0-9]{1,20}$");
+    }
+
+    @Override
+    public void actualizar(String estado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 

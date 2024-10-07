@@ -43,6 +43,7 @@ public class UsuarioDAO {
      * @return devielve Usuario si las credenciales son validas
      */
     public boolean iniciarSesion(String correo, String contra) {
+        
         Usuario usuario = buscarPorCorreo(correo);
         System.out.println("Usuario encontrado: " + usuario); 
         return usuario != null && usuario.getContraseña().equals(contra);

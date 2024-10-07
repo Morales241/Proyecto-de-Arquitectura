@@ -1,35 +1,21 @@
 package loginMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObservable;
 import observers.IObserver;
 
-public class LoginView extends javax.swing.JFrame implements IObservable, IComponente{
+public class LoginView extends javax.swing.JFrame implements IComponente, IObserver{
 
-    private LoginModel loginModel;
-    private List<IObserver> observadores = new ArrayList<>();
+    private final LoginModel loginModel;
     private Mediador mediador;
     
     public LoginView(LoginModel loginModel) {
         initComponents();
         this.loginModel = loginModel;
+        loginModel.agregarObservador(this);
         
-        loginModel.agregarObservador((String estado) -> {
-            if (estado.equals("Login exitoso")) {
-                JOptionPane.showMessageDialog(null, "¡Login completado con éxito!");
-                mediador.mostrarPantallaConcreta("inicio");
-            }
-        });
-
-        loginModel.agregarObservador((String estado) -> {
-            if (estado.equals("Error en el login")) {
-                JOptionPane.showMessageDialog(null, "Error: No se pudo Loguear el usuario.");
-            }
-        });
     }
     
     @SuppressWarnings("unchecked")
@@ -65,11 +51,6 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setFocusPainted(false);
         btnRegistrar.setFocusable(false);
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 260, 50));
 
         txtCorreo.setBackground(new java.awt.Color(244, 244, 244));
@@ -84,11 +65,6 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
         btnIniciarSesion.setContentAreaFilled(false);
         btnIniciarSesion.setFocusPainted(false);
         btnIniciarSesion.setFocusable(false);
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 260, 40));
 
         labelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
@@ -109,17 +85,16 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        loginModel.setContra(txtContra.getText());
-        loginModel.setCorreo(txtCorreo.getText());
+    public void btnInciarSecion(ActionListener actionListener){
         
-        notificarObservadores("");
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        mediador.mostrarPantallaConcreta("signIn");
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-   
+        btnIniciarSesion.addActionListener(actionListener);
+    }   
+    
+    public void btnRegistrarse(ActionListener actionListener){
+        btnRegistrar.addActionListener(actionListener);
+    } 
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnRegistrar;
@@ -132,26 +107,16 @@ public class LoginView extends javax.swing.JFrame implements IObservable, ICompo
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void agregarObservador(IObserver observador) {
-        observadores.add(observador);
-    }
-
-    @Override
-    public void eliminarObservador(IObserver observador) {
-        observadores.remove(observador);
-    }
-
-    @Override
-    public void notificarObservadores(String mensaje) {
-        observadores.forEach(IObserver -> {
-            IObserver.actualizar(mensaje);
-        });
-    }
-
-    @Override
     public void setMediador(Mediador mediador) {
         this.mediador = mediador;
     }
 
-    
+    @Override
+    public void actualizar(String estado) {
+        JOptionPane.showMessageDialog(null, estado);
+    }
+
+    public String getUsuario(){
+        return txtCorreo.getText() + "%" + txtContra.getText();
+    } 
 }
