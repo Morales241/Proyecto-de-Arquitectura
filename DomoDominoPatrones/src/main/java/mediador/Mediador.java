@@ -20,12 +20,12 @@ import javax.swing.JFrame;
 public class Mediador<M, V extends JFrame, C>  implements IMediador {
 
     private Map<String, ContenedorMvc<M, V, C>> pantallas;
-    
+    private static Mediador instancia;
 
     /**
      * Contructor de la clase mediador
      */
-    public Mediador() {
+    private Mediador() {
         this.pantallas = new HashMap<>();
     }
     
@@ -61,6 +61,18 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
     @Override
     public void registrarPantalla(String nombre, ContenedorMvc contenedorMvc) {
         pantallas.put(nombre, contenedorMvc);
+    }
+    
+    /**
+     * Método para obtener la instancia única del Singleton.
+     * 
+     * @return La única instancia del Mediador
+     */
+    public static synchronized <M, V extends JFrame, C> Mediador<M, V, C> getInstancia() {
+        if (instancia == null) {
+            instancia = new Mediador<>();
+        }
+        return instancia;
     }
 
 }
