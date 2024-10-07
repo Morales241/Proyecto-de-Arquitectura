@@ -113,6 +113,7 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

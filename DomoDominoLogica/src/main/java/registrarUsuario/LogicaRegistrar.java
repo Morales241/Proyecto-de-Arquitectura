@@ -6,7 +6,7 @@ import com.mycompany.domodominopersistencia.Usuario;
 import mediador.IMediador;
 import observers.IObserver;
 
-public class LogicaRegistrar implements ILogicaRegistrar, IObserver {
+public class LogicaRegistrar implements ILogicaRegistrar {
 
     private final UsuarioDAO usuarioDAO;
     private final IMediador mediador = null;
@@ -81,10 +81,6 @@ public class LogicaRegistrar implements ILogicaRegistrar, IObserver {
         return contraseña.matches("^[a-zA-Z0-9]{1,20}$");
     }
 
-    @Override
-    public void actualizar(String estado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 
 }

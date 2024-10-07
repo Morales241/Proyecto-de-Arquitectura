@@ -84,6 +84,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 //
 //    /**

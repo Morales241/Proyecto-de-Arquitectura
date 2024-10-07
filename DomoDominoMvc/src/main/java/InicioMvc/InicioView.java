@@ -64,6 +64,7 @@ public class InicioView extends javax.swing.JFrame implements IObserver, ICompon
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
  
     

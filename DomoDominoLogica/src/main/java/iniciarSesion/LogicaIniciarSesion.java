@@ -37,6 +37,11 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
         mediador.mostrarPantallaConcreta("signIn");
     }
     
+    public void cambiarPantallaInicio(){
+        mediador.mostrarPantallaConcreta("inicio");
+        
+    }
+    
     private class AccionIniciarSesion implements ActionListener{
 
         @Override
@@ -45,11 +50,11 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
             
             if(iniciarSesion(usuario)){
                 loginModel.notificarObservadores("Se incio secion de manera satisfactoria");
+                cambiarPantallaInicio();
             }else{
                 loginModel.notificarObservadores("Error: el usuario o la contraseña es incorrecta");
             }
         }
-        
     }
     
     private class ActionRegistrarse implements ActionListener {

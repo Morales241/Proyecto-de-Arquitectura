@@ -51,7 +51,7 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
         }
 
     }
-
+    
     /**
      * Resgistra la pantalla, se guarda el nombre y su contenedor
      *
