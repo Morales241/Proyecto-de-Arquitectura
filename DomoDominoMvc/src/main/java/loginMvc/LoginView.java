@@ -1,23 +1,20 @@
 package loginMvc;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObservable;
 import observers.IObserver;
 
 public class LoginView extends javax.swing.JFrame implements IComponente, IObserver{
 
-    private LoginModel loginModel;
-    private List<IObserver> observadores = new ArrayList<>();
+    private final LoginModel loginModel;
     private Mediador mediador;
     
     public LoginView(LoginModel loginModel) {
         initComponents();
         this.loginModel = loginModel;
+        loginModel.agregarObservador(this);
         
     }
     
@@ -89,8 +86,7 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
     }// </editor-fold>//GEN-END:initComponents
 
     public void btnInciarSecion(ActionListener actionListener){
-        loginModel.setContra(txtContra.getText());
-        loginModel.setCorreo(txtCorreo.getText());
+        
         btnIniciarSesion.addActionListener(actionListener);
     }   
     
@@ -120,5 +116,7 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
         JOptionPane.showMessageDialog(null, estado);
     }
 
-    
+    public String getUsuario(){
+        return txtCorreo.getText() + "%" + txtContra.getText();
+    } 
 }

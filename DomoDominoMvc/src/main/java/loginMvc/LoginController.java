@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class LoginController {
 
-    private LoginModel loginModel;
+    private final LoginModel loginModel;
     private LoginView loginView;
 
     public LoginController(LoginModel loginModell, LoginView loginView) {
@@ -13,34 +13,42 @@ public class LoginController {
         this.loginView = loginView;
 
         loginView.btnInciarSecion(new oyenteIniciarSesion());
-        
+
         loginView.btnRegistrarse(new oyenteRegistrarse());
-        
-    }  
-    
-    public void iniciarSesion(){
-        loginModel.iniciarSesion();
+
     }
-    
-    public void registrarCuenta(){
-        //logica para registrar 
+
+    public void iniciarSesion() {
+
+        loginModel.ejecutarAccionIniciarSesion();
     }
-    
-    private class oyenteIniciarSesion implements ActionListener{
+
+    public void registrarCuenta() {
+        loginModel.ejecutarAccionRegistro();
+    }
+
+    private class oyenteIniciarSesion implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            String[] Usuario = loginView.getUsuario().split("%");
+
+            loginModel.setCorreo(Usuario[0]);
+
+            loginModel.setContra(Usuario[1]);
+
             iniciarSesion();
         }
-    
-    }  
-    
-    private class oyenteRegistrarse implements ActionListener{
+
+    }
+
+    private class oyenteRegistrarse implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             registrarCuenta();
         }
-    
+
     }
 }

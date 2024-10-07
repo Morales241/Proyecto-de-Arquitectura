@@ -7,6 +7,7 @@ import TableroMvc.TableroController;
 import TableroMvc.TableroModel;
 import TableroMvc.TableroView;
 import contenedor.ContenedorMvc;
+import iniciarSesion.LogicaIniciarSesion;
 import loginMvc.LoginController;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
@@ -66,6 +67,8 @@ public class InicializadorClases {
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
         
-        /*Logica de inicio de secion*/
+        /*Logica de inicio de sesion*/
+        LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion(loginModel);
+        
     }
 }

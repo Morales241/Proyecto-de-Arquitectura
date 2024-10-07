@@ -2,6 +2,8 @@ package loginMvc;
 
 import dtos.UsuarioDto;
 import iniciarSesion.LogicaIniciarSesion;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
@@ -10,11 +12,38 @@ import observers.IObserver;
 public class LoginModel implements IObservable {
 
     private String correo, contra;
-    private List<IObserver> observadores = new ArrayList<>();
-    private LogicaIniciarSesion logicaIniciarSesion;
+    private final List<IObserver> observadores = new ArrayList<>();
+    private ActionListener listenerIniciarSesion;
+    private ActionListener listenerRegistro;
 
     public LoginModel() {
-        logicaIniciarSesion = new LogicaIniciarSesion(); 
+        
+    }
+
+    public void agregarActionListenerIniciarSesion(ActionListener listener) {
+        this.listenerIniciarSesion = listener;
+        
+    }
+    
+    public void ejecutarAccionIniciarSesion(){
+        
+        
+        
+        if (listenerIniciarSesion != null) {
+            System.out.println(contra + correo);
+            listenerIniciarSesion.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+        }
+    }
+    
+    public void agregarActionListenerRegistro(ActionListener listener) {
+        this.listenerRegistro = listener;
+    }
+
+    public void ejecutarAccionRegistro(){
+        
+//        if (listenerRegistro != null) {
+//            listenerRegistro.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+//        }
     }
 
     public String getCorreo() {
@@ -32,25 +61,12 @@ public class LoginModel implements IObservable {
     public void setContra(String contra) {
         this.contra = contra;
     }
-    
+
     public UsuarioDto encapsulamiento() {
         UsuarioDto usuario = new UsuarioDto(correo, contra);
         return usuario;
     }
 
-    public void iniciarSesion(){
-        
-        
-        if(logicaIniciarSesion.iniciarSesion(encapsulamiento())){
-            notificarObservadores("Login exitoso");
-            
-        }
-        else{
-            notificarObservadores("Error: Usuario o contraseña incorrectos");
-        }
-        
-    }
-    
     @Override
     public void agregarObservador(IObserver observador) {
         observadores.add(observador);
