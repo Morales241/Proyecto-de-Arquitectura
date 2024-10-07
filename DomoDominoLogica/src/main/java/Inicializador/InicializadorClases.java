@@ -9,6 +9,7 @@ import TableroMvc.TableroView;
 import contenedor.ContenedorMvc;
 import dtos.Arreglo;
 import dtos.JugadorDto;
+import iniciarSesion.LogicaIniciarSesion;
 import loginMvc.LoginController;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
@@ -68,5 +69,6 @@ public class InicializadorClases {
         mediador.registrarPantalla("singIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
+        LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion(loginModel);
     }
 }
