@@ -5,12 +5,14 @@ import dtos.UsuarioDto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import loginMvc.LoginModel;
+import mediador.Mediador;
 
 public class LogicaIniciarSesion implements ILogicaIniciarSesion {
     
     
     private final UsuarioDAO usuarioDao;
     private final LoginModel loginModel;
+    private final Mediador mediador;
 
     /**
      * Constructor de la clase
@@ -19,6 +21,8 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
     public LogicaIniciarSesion(LoginModel loginModel) {
         this.usuarioDao = new UsuarioDAO();
         this.loginModel = loginModel;
+        this.mediador = Mediador.getInstancia();
+        
         loginModel.agregarActionListenerIniciarSesion(new AccionIniciarSesion());
         loginModel.agregarActionListenerRegistro(new  ActionRegistrarse());
         
@@ -30,7 +34,7 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
     }
     
     public void cambiarPantallaRegistrio(){
-        System.out.println("se cambio a la otra pantalla");
+        mediador.mostrarPantallaConcreta("signIn");
     }
     
     private class AccionIniciarSesion implements ActionListener{

@@ -14,7 +14,7 @@ import mediador.Mediador;
 public class DomoDominoMain {
 
     public static void main(String[] args) {
-        Mediador mediador = new Mediador();
+        Mediador mediador = Mediador.getInstancia();
         
         InicializadorClases inicializadorClases = new InicializadorClases();
         inicializadorClases.InicializarClases(mediador);
