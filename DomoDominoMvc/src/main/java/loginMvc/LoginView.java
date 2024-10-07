@@ -14,7 +14,7 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
     public LoginView(LoginModel loginModel) {
         initComponents();
         this.loginModel = loginModel;
-        loginModel.agregarObservador(this);
+        this.loginModel.agregarObservador(this);
         
     }
     
@@ -86,7 +86,6 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
     }// </editor-fold>//GEN-END:initComponents
 
     public void btnInciarSecion(ActionListener actionListener){
-        
         btnIniciarSesion.addActionListener(actionListener);
     }   
     

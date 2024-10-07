@@ -6,15 +6,28 @@ import observers.IObservable;
 import observers.IObserver;
 import registrarUsuario.LogicaRegistrar;
 import dtos.UsuarioDto;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SignInModel implements IObservable {
 
     private List<IObserver> observadores = new ArrayList<>();
     private String nombre, contra, correo;
-    private LogicaRegistrar logicaRegistrar;
+    private ActionListener listenerRegistro;
 
     public SignInModel() {
-        logicaRegistrar = new LogicaRegistrar();
+
+    }
+    
+    public void agregarActionListenerRegistro(ActionListener listener) {
+        this.listenerRegistro = listener;
+    }
+
+    public void ejecutarAccionRegistro(){
+        
+        if (listenerRegistro != null) {
+            listenerRegistro.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+        }
     }
 
     public UsuarioDto encapsulamiento() {
@@ -23,11 +36,6 @@ public class SignInModel implements IObservable {
     }
 
     public void registrarse() {
-        if (logicaRegistrar.registrarUsuario(encapsulamiento())) {
-            notificarObservadores("Registro exitoso");
-        } else {
-            notificarObservadores("Error en el registro");
-        }
 
     }
 

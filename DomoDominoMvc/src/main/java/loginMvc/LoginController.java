@@ -12,9 +12,9 @@ public class LoginController {
         this.loginModel = loginModell;
         this.loginView = loginView;
 
-        loginView.btnInciarSecion(new oyenteIniciarSesion());
+        loginView.btnInciarSecion(new OyenteIniciarSesion());
 
-        loginView.btnRegistrarse(new oyenteRegistrarse());
+        loginView.btnRegistrarse(new OyenteRegistrarse());
 
     }
 
@@ -27,7 +27,7 @@ public class LoginController {
         loginModel.ejecutarAccionRegistro();
     }
 
-    private class oyenteIniciarSesion implements ActionListener {
+    private class OyenteIniciarSesion implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -43,7 +43,7 @@ public class LoginController {
 
     }
 
-    private class oyenteRegistrarse implements ActionListener {
+    private class OyenteRegistrarse implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {

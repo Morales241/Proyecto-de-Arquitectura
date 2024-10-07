@@ -1,8 +1,9 @@
 package signInMvc;
 
-import observers.IObserver;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SignInController implements IObserver{
+public class SignInController {
 
     private SignInView signInView;
     private SignInModel signInModel;
@@ -11,12 +12,30 @@ public class SignInController implements IObserver{
         this.signInView = signInView;
         this.signInModel = signInModel;
         
-        signInView.agregarObservador(this);
+        signInView.btnRegistrarse(new OyenteRegistrarCuenta());
     }
  
-    @Override
-    public void actualizar(String estado) {
-        signInModel.registrarse();
+    public void registrarCuenta(){
+        
+    }
+    
+    private class OyenteRegistrarCuenta implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            String[] Usuario = signInView.getUsuario().split("%");
+            
+            signInModel.setNombre(Usuario[0]);
+            
+            signInModel.setCorreo(Usuario[1]);
+
+            signInModel.setContra(Usuario[2]);
+            
+            registrarCuenta();
+            
+        }
+    
     }
     
 }

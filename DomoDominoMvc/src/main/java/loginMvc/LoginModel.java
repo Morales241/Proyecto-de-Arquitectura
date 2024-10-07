@@ -1,7 +1,6 @@
 package loginMvc;
 
 import dtos.UsuarioDto;
-import iniciarSesion.LogicaIniciarSesion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,10 +26,7 @@ public class LoginModel implements IObservable {
     
     public void ejecutarAccionIniciarSesion(){
         
-        
-        
         if (listenerIniciarSesion != null) {
-            System.out.println(contra + correo);
             listenerIniciarSesion.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
         }
     }
