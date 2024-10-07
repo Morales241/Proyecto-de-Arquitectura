@@ -16,7 +16,7 @@ public class SignInController {
     }
  
     public void registrarCuenta(){
-        
+        signInModel.ejecutarAccionRegistro();
     }
     
     private class OyenteRegistrarCuenta implements ActionListener {

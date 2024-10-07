@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
 import observers.IObserver;
-import registrarUsuario.LogicaRegistrar;
 import dtos.UsuarioDto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

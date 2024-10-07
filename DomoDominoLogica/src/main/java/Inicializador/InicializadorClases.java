@@ -1,5 +1,6 @@
 package Inicializador;
 
+import Inicio.LogicaInicio;
 import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
 import InicioMvc.InicioView;
@@ -15,6 +16,7 @@ import loginMvc.LoginModel;
 import loginMvc.LoginView;
 import mediador.Mediador;
 import pozo.Pozo;
+import registrarUsuario.LogicaRegistrar;
 import signInMvc.SignInController;
 import signInMvc.SignInModel;
 import signInMvc.SignInView;
@@ -33,6 +35,7 @@ public class InicializadorClases {
     
     /**
      * Inicializar clases MVC
+     * @param mediador
      */
     public void InicializarClases(Mediador mediador){
     LoginModel loginModel = new LoginModel();
@@ -63,12 +66,18 @@ public class InicializadorClases {
         TableroController tableroController = new TableroController(tableroModel, tableroView);
         ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel,tableroView,tableroController);
         
-        //si se crean mas pantallas ponganlas aqui arriba y registrenlas abajo
+//        si se crean mas pantallas ponganlas aqui arriba y registrenlas abajo
         
         mediador.registrarPantalla("login", loginContenedor);
         mediador.registrarPantalla("singIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
+        
+        //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
         LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion(loginModel);
+        
+        LogicaRegistrar logicaRegistrar = new LogicaRegistrar(signInModel);
+        
+        LogicaInicio logicaInicio = new LogicaInicio(inicioModel);
     }
 }

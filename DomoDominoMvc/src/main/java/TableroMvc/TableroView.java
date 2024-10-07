@@ -39,9 +39,9 @@ import pozo.Ficha;
 public class TableroView extends javax.swing.JFrame implements IObservable, IComponente {
 
     private List<IObserver> observadores = new ArrayList<>();
-    TableroModel tableroModel;
-    Arreglo array;
-    JugadorDto jugador;
+    private TableroModel tableroModel;
+    private Arreglo array;
+    private JugadorDto jugador;
     private Mediador mediador;
 
     /**

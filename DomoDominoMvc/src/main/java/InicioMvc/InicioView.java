@@ -2,6 +2,7 @@ package InicioMvc;
 
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObserver;
@@ -13,6 +14,7 @@ public class InicioView extends javax.swing.JFrame implements IObserver, ICompon
     
     /**
      * Creates new form InicioView
+     * @param inicioModel
      */
     public InicioView(InicioModel inicioModel) {
         initComponents();
@@ -78,7 +80,7 @@ public class InicioView extends javax.swing.JFrame implements IObserver, ICompon
 
     @Override
     public void actualizar(String estado) {
-        
+        JOptionPane.showMessageDialog(null, estado);
     }
     
     @Override
