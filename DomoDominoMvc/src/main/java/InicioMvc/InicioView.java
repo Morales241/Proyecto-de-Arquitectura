@@ -1,20 +1,20 @@
 package InicioMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObservable;
-import observers.IObserver;
+import observers.IObserverString;
 
-public class InicioView extends javax.swing.JFrame implements IObserver, IObservable, IComponente{
+public class InicioView extends javax.swing.JFrame implements IObserverString, IComponente{
     
     private InicioModel inicioModel;
-    private List<IObserver> observadores = new ArrayList<>();
     private Mediador mediador;
     
     /**
      * Creates new form InicioView
+     * @param inicioModel
      */
     public InicioView(InicioModel inicioModel) {
         initComponents();
@@ -22,6 +22,10 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
         inicioModel.agregarObservador(this);
     }
 
+    public void btnJugar(ActionListener actionListener){
+        btnJugar.addActionListener(actionListener);
+    }   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +35,7 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnJugar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
@@ -44,11 +49,6 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
         btnJugar.setContentAreaFilled(false);
         btnJugar.setFocusPainted(false);
         btnJugar.setFocusable(false);
-        btnJugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJugarActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 260, 40));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
@@ -66,40 +66,23 @@ public class InicioView extends javax.swing.JFrame implements IObserver, IObserv
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
  
-    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        mediador.mostrarPantallaConcreta("tablero");
-    }//GEN-LAST:event_btnJugarActionPerformed
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actualizar(String estado) {
-   
+        JOptionPane.showMessageDialog(null, estado);
     }
-
-    @Override
-    public void agregarObservador(IObserver observador) {
-       
-    }
-
-    @Override
-    public void eliminarObservador(IObserver observador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void notificarObservadores(String mensaje) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
     @Override
     public void setMediador(Mediador mediador) {
         this.mediador = mediador;

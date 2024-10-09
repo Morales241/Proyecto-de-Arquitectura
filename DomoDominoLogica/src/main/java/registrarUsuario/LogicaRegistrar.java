@@ -2,17 +2,31 @@ package registrarUsuario;
 
 import dtos.UsuarioDto;
 import DAOs.UsuarioDAO;
-import com.mycompany.domodominopersistencia.Usuario;
+import Entidades.Usuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import loginMvc.LoginModel;
+import mediador.IMediador;
+import mediador.Mediador;
+import observers.IObserver;
+import signInMvc.SignInModel;
 
 public class LogicaRegistrar implements ILogicaRegistrar {
-
+    
     private final UsuarioDAO usuarioDAO;
+    private final SignInModel signInModel;
+    private final IMediador mediador;
 
     /**
+     * 
      * Constructor de la clase
      */
     public LogicaRegistrar() {
         this.usuarioDAO = new UsuarioDAO();
+        this.mediador = Mediador.getInstancia();
+        this.signInModel = (SignInModel) mediador.obtenerPantallaConcreta("signIn").getModelo();
+        
+        signInModel.agregarActionListenerRegistro(new AccionRegistrarUsuario());
     }
     
     /**
@@ -33,6 +47,25 @@ public class LogicaRegistrar implements ILogicaRegistrar {
             return true; 
         }
         return false; 
+    }
+    
+    public void cambiarPantallaInicio(){
+        mediador.mostrarPantallaConcreta("login");
+    }
+    
+    private class AccionRegistrarUsuario implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            UsuarioDto usuario = signInModel.encapsulamiento();
+            
+            if(registrarUsuario(usuario)){
+                signInModel.notificarObservadores("El usuario se registro de manera satisfactoria");
+                cambiarPantallaInicio();
+            }else{
+                signInModel.notificarObservadores("Error: el usuario no se pudo registrar");
+            }
+        }
     }
 
     /**
@@ -76,6 +109,7 @@ public class LogicaRegistrar implements ILogicaRegistrar {
     public boolean validarContraseña(String contraseña) {
         return contraseña.matches("^[a-zA-Z0-9]{1,20}$");
     }
+
 
 
 }

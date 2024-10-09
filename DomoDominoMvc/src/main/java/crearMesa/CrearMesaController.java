@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package crearMesa;
 
-import comands.IComando;
-import observers.IObserver;
+import observers.IObserverString;
 
-/**
- *
- * @author tacot
- */
-public class CrearMesaController implements IObserver{
+
+public class CrearMesaController implements IObserverString{
     private CrearMesaView vista;
     private CrearMesaModel modelo;
 
@@ -20,19 +12,24 @@ public class CrearMesaController implements IObserver{
         this.modelo = modelo;
     }
 
-    @Override
-    public void actualizar(IComando comando) {
-        if (comando != null) {
-            comando.ejecutarComando();
-        }
-    }
+//    @Override
+//    public void actualizar(IComando comando) {
+//        if (comando != null) {
+//            comando.ejecutarComando();
+//        }
+//    }
     
     public void Regresar(){
     //codigo pa regresar asajssjad
     }
     
-    public void CrearMesa(){
+     void CrearMesa(){
     //codigo pa crear mesa jajsaj
+    }
+
+    @Override
+    public void actualizar(String estado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

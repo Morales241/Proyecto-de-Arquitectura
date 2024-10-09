@@ -1,40 +1,31 @@
 package signInMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObservable;
-import observers.IObserver;
+import observers.IObserverString;
 
-public class SignInView extends javax.swing.JFrame implements IObservable, IComponente {
+public class SignInView extends javax.swing.JFrame implements IObserverString, IComponente {
 
-    private SignInModel signInModel;
-    private List<IObserver> observadores = new ArrayList<>();
+    private final SignInModel signInModel;
     private Mediador mediador;
-
+    
     /**
      * Creates new form signInView
+     * @param signInModel
      */
     public SignInView(SignInModel signInModel) {
         initComponents();
         this.signInModel = signInModel;
-
-        signInModel.agregarObservador((String estado) -> {
-            if (estado.equals("Registro exitoso")) {
-                JOptionPane.showMessageDialog(null, "¡Registro completado con éxito!");
-                mediador.mostrarPantallaConcreta("inicioView");
-            }
-        });
-
-        signInModel.agregarObservador((String estado) -> {
-            if (estado.equals("Error en el registro")) {
-                JOptionPane.showMessageDialog(null, "Error: No se pudo registrar el usuario.");
-            }
-        });
+        this.signInModel.agregarObservador(this);
+        
     }
 
+    public void btnRegistrarse(ActionListener actionListener){
+        btnRegistrarse.addActionListener(actionListener);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +38,7 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
         txtCorreo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnRegistrarse = new javax.swing.JButton();
         nombreLbl2 = new javax.swing.JLabel();
         nombreLbl1 = new javax.swing.JLabel();
         nombreLbl = new javax.swing.JLabel();
@@ -59,14 +50,9 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 150, -1));
         getContentPane().add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, 150, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 190, 50));
+        btnRegistrarse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Registrar.png"))); // NOI18N
+        btnRegistrarse.setContentAreaFilled(false);
+        getContentPane().add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 190, 50));
 
         nombreLbl2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nombreLbl2.setForeground(new java.awt.Color(245, 209, 174));
@@ -87,18 +73,11 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
         getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        signInModel.setNombre(txtNombre.getText());
-        signInModel.setContra(txtContra.getText());
-        signInModel.setCorreo(txtCorreo.getText());
-
-        notificarObservadores("");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JLabel labelFondo;
     private javax.swing.JLabel nombreLbl;
     private javax.swing.JLabel nombreLbl1;
@@ -109,20 +88,8 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void agregarObservador(IObserver observador) {
-        observadores.add(observador);
-    }
-
-    @Override
-    public void eliminarObservador(IObserver observador) {
-        observadores.remove(observador);
-    }
-
-    @Override
-    public void notificarObservadores(String mensaje) {
-        observadores.forEach(IObserver -> {
-            IObserver.actualizar(mensaje);
-        });
+    public void actualizar(String estado) {
+        JOptionPane.showMessageDialog(null, estado);
     }
 
     @Override
@@ -130,4 +97,7 @@ public class SignInView extends javax.swing.JFrame implements IObservable, IComp
         this.mediador = mediador;
     }
 
+    public String getUsuario(){
+        return txtNombre.getText() + "%" + txtCorreo.getText() + "%" + txtContra.getText();
+    } 
 }

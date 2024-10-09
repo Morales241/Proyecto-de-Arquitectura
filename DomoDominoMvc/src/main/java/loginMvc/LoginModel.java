@@ -1,20 +1,42 @@
 package loginMvc;
 
 import dtos.UsuarioDto;
-import iniciarSesion.LogicaIniciarSesion;
 import java.util.ArrayList;
 import java.util.List;
-import observers.IObservable;
-import observers.IObserver;
+import observers.IObservableString;
+import observers.IObserverString;
+import observers.IObserverUsuarioDto;
 
-public class LoginModel implements IObservable {
+public class LoginModel implements IObservableString {
 
     private String correo, contra;
-    private List<IObserver> observadores = new ArrayList<>();
-    private LogicaIniciarSesion logicaIniciarSesion;
+    private final List<IObserverString> observadores = new ArrayList<>();
+    private IObserverUsuarioDto listenerIniciarSesion;
+    private IObserverUsuarioDto listenerRegistro;
 
     public LoginModel() {
-        logicaIniciarSesion = new LogicaIniciarSesion(); 
+        
+    }
+
+    public void agregarIObserverUsuarioDtoIniciarSesion(IObserverUsuarioDto listener) {
+        this.listenerIniciarSesion = listener;
+        
+    }
+    
+    public void ejecutarAccionIniciarSesion(){
+        if (listenerIniciarSesion != null) {
+            listenerIniciarSesion.actualizar(encapsulamiento());
+        }
+    }
+    
+    public void agregarIObserverUsuarioDtoRegistro(IObserverUsuarioDto listener) {
+        this.listenerRegistro = listener;
+    }
+
+    public void ejecutarAccionRegistro(){
+        if (listenerRegistro != null) {
+            listenerRegistro.actualizar(encapsulamiento());
+        }
     }
 
     public String getCorreo() {
@@ -32,29 +54,19 @@ public class LoginModel implements IObservable {
     public void setContra(String contra) {
         this.contra = contra;
     }
-    
+
     public UsuarioDto encapsulamiento() {
         UsuarioDto usuario = new UsuarioDto(correo, contra);
         return usuario;
     }
 
-    public void iniciarSesion(){
-        if(logicaIniciarSesion.iniciarSesion(encapsulamiento())){
-            notificarObservadores("Login exitoso");
-        }
-        else{
-            notificarObservadores("Error en el login");
-        }
-        
-    }
-    
     @Override
-    public void agregarObservador(IObserver observador) {
+    public void agregarObservador(IObserverString observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserver observador) {
+    public void eliminarObservador(IObserverString observador) {
         observadores.remove(observador);
     }
 
