@@ -23,7 +23,6 @@ public class InicioView extends javax.swing.JFrame implements IObserverString, I
     }
 
     public void btnJugar(ActionListener actionListener){
-        System.out.println("Entro al btnJugar");
         btnJugar.addActionListener(actionListener);
     }   
     

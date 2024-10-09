@@ -20,8 +20,6 @@ public class LogicaInicio implements ILogicaInicio {
     private final InicioModel inicioModel;
 
     public LogicaInicio() {
-        InicializadorClases inicializadorClases = new InicializadorClases();
-        inicializadorClases.InicializarClases();
         this.mediador = Mediador.getInstancia();
         this.inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
         

@@ -14,6 +14,7 @@ import loginMvc.LoginController;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
 import Entidades.Pozo;
+import Inicio.LogicaInicio;
 import mediador.Mediador;
 import registrarUsuario.LogicaRegistrar;
 import signInMvc.SignInController;
@@ -77,5 +78,7 @@ public class InicializadorClases {
         LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion();
         
         LogicaRegistrar logicaRegistrar = new LogicaRegistrar();
+        
+        LogicaInicio logicaInicio = new LogicaInicio();
     }
 }
