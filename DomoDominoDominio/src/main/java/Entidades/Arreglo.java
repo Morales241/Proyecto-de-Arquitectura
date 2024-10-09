@@ -34,7 +34,6 @@ public class Arreglo {
         }
         return false;
     }
-    
 
     public boolean colocarFichaVertical(Ficha ficha, int fila, int columna) {
         if (ficha.esMula()) {
