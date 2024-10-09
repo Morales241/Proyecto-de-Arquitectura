@@ -2,7 +2,7 @@ package registrarUsuario;
 
 import dtos.UsuarioDto;
 import DAOs.UsuarioDAO;
-import com.mycompany.domodominopersistencia.Usuario;
+import Entidades.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import mediador.IMediador;

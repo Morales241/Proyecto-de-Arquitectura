@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import observers.IObservable;
 import observers.IObserver;
-import pozo.Ficha;
-import pozo.Pozo;
+import Entidades.Ficha;
+import Entidades.Pozo;
 
 public class TableroModel implements IObservable {
     

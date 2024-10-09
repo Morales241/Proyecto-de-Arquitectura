@@ -6,7 +6,6 @@ package dtos;
 
 import java.util.ArrayList;
 import java.util.List;
-import pozo.Ficha;
 
 /**
  *
@@ -14,7 +13,7 @@ import pozo.Ficha;
  */
 public class JugadorDto {
     private String nombre;
-    private List<Ficha> fichas; // Lista para guardar las fichas del jugador
+    private List<FichaDto> fichas; // Lista para guardar las fichas del jugador
 
     // Constructor
     public JugadorDto(String nombre) {
@@ -33,23 +32,23 @@ public class JugadorDto {
     }
 
     // Método para obtener la lista de fichas del jugador
-    public List<Ficha> getFichas() {
+    public List<FichaDto> getFichas() {
         return fichas;
     }
 
     // Método para agregar una ficha a la lista del jugador
-    public void agregarFicha(Ficha ficha) {
+    public void agregarFicha(FichaDto ficha) {
         this.fichas.add(ficha);
     }
 
     // Método para agregar varias fichas a la lista del jugador
-    public void agregarFichas(List<Ficha> fichas) {
+    public void agregarFichas(List<FichaDto> fichas) {
         this.fichas.addAll(fichas);
     }
 
     // Método para mostrar las fichas del jugador
     public void mostrarFichas() {
-        for (Ficha ficha : fichas) {
+        for (FichaDto ficha : fichas) {
             System.out.println(ficha);
         }
     }

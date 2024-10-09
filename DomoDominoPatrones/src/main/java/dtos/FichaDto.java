@@ -2,28 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pozo;
+package dtos;
 
 import java.io.Serializable;
 import java.util.Objects;
 import javax.swing.ImageIcon;
 
-public class Ficha implements Serializable {
+/**
+ *
+ * @author tacot
+ */
+public class FichaDto implements Serializable {
 
     private Integer lado1;
     private Integer lado2;
     private ImageIcon icono; // Cambiado de String a ImageIcon
 
-    public Ficha() {
+    public FichaDto() {
     }
 
-    public Ficha(Integer lado1, Integer lado2, ImageIcon icono) { // Constructor actualizado
+    public FichaDto(Integer lado1, Integer lado2, ImageIcon icono) { // Constructor actualizado
         this.lado1 = lado1;
         this.lado2 = lado2;
         this.icono = icono;
     }
 
-    public Ficha(Integer lado1, Integer lado2) {
+    public FichaDto(Integer lado1, Integer lado2) {
         this.lado1 = lado1;
         this.lado2 = lado2;
     }
@@ -68,7 +72,7 @@ public class Ficha implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Ficha other = (Ficha) obj;
+        final FichaDto other = (FichaDto) obj;
         if (!Objects.equals(this.icono, other.icono)) { // Actualizado a icono
             return false;
         }

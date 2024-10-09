@@ -4,7 +4,7 @@
  */
 package TableroMvc;
 
-import dtos.Arreglo;
+import Entidades.Arreglo;
 import dtos.JugadorDto;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -34,7 +34,7 @@ import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
 import observers.IObserver;
-import pozo.Ficha;
+import Entidades.Ficha;
 
 public class TableroView extends javax.swing.JFrame implements IObservable, IComponente {
 
@@ -89,19 +89,19 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
         
         getContentPane().add(layeredPane, BorderLayout.CENTER);
 
-        for (Ficha ficha : jugador.getFichas()) {
-            JLabel fichaLabel = new JLabel(ficha.getIcono());
-            fichaLabel.setTransferHandler(new FichaTransferHandler(ficha, fichaLabel, fichasJugadorPanel));
-            fichaLabel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    JComponent comp = (JComponent) e.getSource();
-                    TransferHandler handler = comp.getTransferHandler();
-                    handler.exportAsDrag(comp, e, TransferHandler.MOVE);
-                }
-            });
-            fichasJugadorPanel.add(fichaLabel);
-        }
+//        for (Ficha ficha : jugador.getFichas()) {
+//            JLabel fichaLabel = new JLabel(ficha.getIcono());
+//            fichaLabel.setTransferHandler(new FichaTransferHandler(ficha, fichaLabel, fichasJugadorPanel));
+//            fichaLabel.addMouseListener(new MouseAdapter() {
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                    JComponent comp = (JComponent) e.getSource();
+//                    TransferHandler handler = comp.getTransferHandler();
+//                    handler.exportAsDrag(comp, e, TransferHandler.MOVE);
+//                }
+//            });
+//            fichasJugadorPanel.add(fichaLabel);
+//        }
 
         add(fichasJugadorPanel, BorderLayout.SOUTH);
         pack();
@@ -139,24 +139,24 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
                     int columna = dropPoint.x / 40;
 
              
-                    if (esPosicionValida(fila, columna)) {
-                        Ficha fichaColocada = encontrarFichaPorIcono(icon);
-                        if (fichaColocada != null) {
-
-                            array.colocarFichaHorizontal(fichaColocada, fila, columna);
-                            jugador.getFichas().remove(fichaColocada);
-
-                            tableroPanel.repaint();
-                            tableroPanel.revalidate();
-
-                            removerFichaDelPanel(fichaColocada, fichasJugadorPanel);
-
-                            fichasJugadorPanel.revalidate();
-                            fichasJugadorPanel.repaint();
-                        }
-                    } else {
-                        System.out.println("Posición inválida para colocar la ficha.");
-                    }
+//                    if (esPosicionValida(fila, columna)) {
+//                        Ficha fichaColocada = encontrarFichaPorIcono(icon);
+//                        if (fichaColocada != null) {
+//
+//                            array.colocarFichaHorizontal(fichaColocada, fila, columna);
+//                            jugador.getFichas().remove(fichaColocada);
+//
+//                            tableroPanel.repaint();
+//                            tableroPanel.revalidate();
+//
+//                            removerFichaDelPanel(fichaColocada, fichasJugadorPanel);
+//
+//                            fichasJugadorPanel.revalidate();
+//                            fichasJugadorPanel.repaint();
+//                        }
+//                    } else {
+//                        System.out.println("Posición inválida para colocar la ficha.");
+//                    }
                     dtde.dropComplete(true);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -171,14 +171,14 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
             }
 
            
-            private Ficha encontrarFichaPorIcono(ImageIcon icon) {
-                for (Ficha ficha : jugador.getFichas()) {
-                    if (ficha.getIcono().getImage().equals(icon.getImage())) {
-                        return ficha;
-                    }
-                }
-                return null;
-            }
+//            private Ficha encontrarFichaPorIcono(ImageIcon icon) {
+//                for (Ficha ficha : jugador.getFichas()) {
+//                    if (ficha.getIcono().getImage().equals(icon.getImage())) {
+//                        return ficha;
+//                    }
+//                }
+//                return null;
+//            }
 
           
             private void removerFichaDelPanel(Ficha fichaColocada, JPanel fichasJugadorPanel) {

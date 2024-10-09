@@ -7,7 +7,7 @@ package DAOs;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import com.mycompany.domodominopersistencia.Usuario;
+import Entidades.Usuario;
 import conexion.Conexion;
 import org.bson.conversions.Bson;
 

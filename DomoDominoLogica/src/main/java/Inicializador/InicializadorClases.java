@@ -8,14 +8,14 @@ import TableroMvc.TableroController;
 import TableroMvc.TableroModel;
 import TableroMvc.TableroView;
 import contenedor.ContenedorMvc;
-import dtos.Arreglo;
+import Entidades.Arreglo;
 import dtos.JugadorDto;
 import iniciarSesion.LogicaIniciarSesion;
 import loginMvc.LoginController;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
 import mediador.Mediador;
-import pozo.Pozo;
+import Entidades.Pozo;
 import registrarUsuario.LogicaRegistrar;
 import signInMvc.SignInController;
 import signInMvc.SignInModel;
@@ -58,7 +58,7 @@ public class InicializadorClases {
       
         Pozo pozo = new Pozo(7);
         JugadorDto jugador = new JugadorDto("josue");
-        jugador.agregarFichas(pozo.repartirFichas());
+//        jugador.agregarFichas(pozo.repartirFichas());
          Arreglo array = new Arreglo(); 
         TableroModel tableroModel = new TableroModel();
         TableroView tableroView = new TableroView(tableroModel,array,jugador);

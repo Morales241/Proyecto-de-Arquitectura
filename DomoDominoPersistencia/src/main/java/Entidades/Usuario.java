@@ -1,4 +1,4 @@
-package com.mycompany.domodominopersistencia;
+package Entidades;
 
 import org.bson.types.ObjectId;
 
