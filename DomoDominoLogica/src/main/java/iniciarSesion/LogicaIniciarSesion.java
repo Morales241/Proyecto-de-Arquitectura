@@ -1,8 +1,8 @@
 package iniciarSesion;
 
 import DAOs.UsuarioDAO;
+import InicioMvc.InicioModel;
 import dtos.UsuarioDto;
-import java.awt.event.ActionEvent;
 import loginMvc.LoginModel;
 import mediador.Mediador;
 import observers.IObserverUsuarioDto;
@@ -16,12 +16,12 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
 
     /**
      * Constructor de la clase
-     * @param loginModel
      */
-    public LogicaIniciarSesion(LoginModel loginModel) {
+    public LogicaIniciarSesion() {
         this.usuarioDao = new UsuarioDAO();
-        this.loginModel = loginModel;
         this.mediador = Mediador.getInstancia();
+        
+        this.loginModel =  (LoginModel) mediador.obtenerPantallaConcreta("login").getModelo();
         
         loginModel.agregarIObserverUsuarioDtoIniciarSesion(new AccionIniciarSesion());
         loginModel.agregarIObserverUsuarioDtoRegistro(new  ActionRegistrarse());

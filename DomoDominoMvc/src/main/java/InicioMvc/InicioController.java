@@ -21,9 +21,10 @@ public class InicioController{
     }
     
     private class OyenteJugar implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("Se hizo la acction perform");
             Jugar();
         }
 

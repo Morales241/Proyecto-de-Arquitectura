@@ -1,28 +1,27 @@
 package InicioMvc;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import observers.IObservableString;
+import observers.IObserver;
 import observers.IObserverString;
 
 public class InicioModel  implements IObservableString{
     private List<IObserverString> observadores = new ArrayList<>();
-    private ActionListener listenerJugar;
+    private IObserver listenerJugar;
     
     public InicioModel() {
     }
 
-    public void agregarActionListenerJugar(ActionListener listener) {
+    public void agregarIObserverJugar(IObserver  listener) {
         this.listenerJugar = listener;
-        
     }
     
     public void ejecutarAccionJugar(){
-        
+        System.out.println("entro a ejecutarAccionjuGAR");
         if (listenerJugar != null) {
-            listenerJugar.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+            
+            listenerJugar.actualizar();
         }
     }
     

@@ -5,6 +5,7 @@ import DAOs.UsuarioDAO;
 import Entidades.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import loginMvc.LoginModel;
 import mediador.IMediador;
 import mediador.Mediador;
 import observers.IObserver;
@@ -20,10 +21,10 @@ public class LogicaRegistrar implements ILogicaRegistrar {
      * 
      * Constructor de la clase
      */
-    public LogicaRegistrar(SignInModel signInModel) {
+    public LogicaRegistrar() {
         this.usuarioDAO = new UsuarioDAO();
         this.mediador = Mediador.getInstancia();
-        this.signInModel = signInModel;
+        this.signInModel = (SignInModel) mediador.obtenerPantallaConcreta("signIn").getModelo();
         
         signInModel.agregarActionListenerRegistro(new AccionRegistrarUsuario());
     }

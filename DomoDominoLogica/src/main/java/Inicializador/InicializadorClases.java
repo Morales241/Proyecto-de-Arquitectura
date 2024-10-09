@@ -1,6 +1,5 @@
 package Inicializador;
 
-import Inicio.LogicaInicio;
 import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
 import InicioMvc.InicioView;
@@ -14,8 +13,8 @@ import iniciarSesion.LogicaIniciarSesion;
 import loginMvc.LoginController;
 import loginMvc.LoginModel;
 import loginMvc.LoginView;
-import mediador.Mediador;
 import Entidades.Pozo;
+import mediador.Mediador;
 import registrarUsuario.LogicaRegistrar;
 import signInMvc.SignInController;
 import signInMvc.SignInModel;
@@ -35,10 +34,11 @@ public class InicializadorClases {
     
     /**
      * Inicializar clases MVC
-     * @param mediador
      */
-    public void InicializarClases(Mediador mediador){
-    LoginModel loginModel = new LoginModel();
+    public void InicializarClases(){
+        Mediador mediador = Mediador.getInstancia();
+        
+        LoginModel loginModel = new LoginModel();
         LoginView loginView = new LoginView(loginModel);
         loginView.setMediador(mediador);
         LoginController loginController = new LoginController(loginModel, loginView);
@@ -69,15 +69,13 @@ public class InicializadorClases {
 //        si se crean mas pantallas ponganlas aqui arriba y registrenlas abajo
         
         mediador.registrarPantalla("login", loginContenedor);
-        mediador.registrarPantalla("singIn", signInContenedor);
+        mediador.registrarPantalla("signIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
         
         //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
-        LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion(loginModel);
+        LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion();
         
-        LogicaRegistrar logicaRegistrar = new LogicaRegistrar(signInModel);
-        
-        LogicaInicio logicaInicio = new LogicaInicio(inicioModel);
+        LogicaRegistrar logicaRegistrar = new LogicaRegistrar();
     }
 }
