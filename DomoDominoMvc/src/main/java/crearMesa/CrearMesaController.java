@@ -1,9 +1,9 @@
 package crearMesa;
 
-import observers.IObserver;
+import observers.IObserverString;
 
 
-public class CrearMesaController implements IObserver{
+public class CrearMesaController implements IObserverString{
     private CrearMesaView vista;
     private CrearMesaModel modelo;
 

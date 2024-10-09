@@ -3,9 +3,9 @@ package iniciarSesion;
 import DAOs.UsuarioDAO;
 import dtos.UsuarioDto;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import loginMvc.LoginModel;
 import mediador.Mediador;
+import observers.IObserverUsuarioDto;
 
 public class LogicaIniciarSesion implements ILogicaIniciarSesion {
     
@@ -23,8 +23,8 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
         this.loginModel = loginModel;
         this.mediador = Mediador.getInstancia();
         
-        loginModel.agregarActionListenerIniciarSesion(new AccionIniciarSesion());
-        loginModel.agregarActionListenerRegistro(new  ActionRegistrarse());
+        loginModel.agregarIObserverUsuarioDtoIniciarSesion(new AccionIniciarSesion());
+        loginModel.agregarIObserverUsuarioDtoRegistro(new  ActionRegistrarse());
         
     }
 
@@ -42,13 +42,11 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
         
     }
     
-    private class AccionIniciarSesion implements ActionListener{
+    private class AccionIniciarSesion implements IObserverUsuarioDto{
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            UsuarioDto usuario = loginModel.encapsulamiento();
-            
-            if(iniciarSesion(usuario)){
+        public void actualizar(UsuarioDto usuarioDto) {
+            if(iniciarSesion(usuarioDto)){
                 loginModel.notificarObservadores("Se incio secion de manera satisfactoria");
                 cambiarPantallaInicio();
             }else{
@@ -57,10 +55,9 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
         }
     }
     
-    private class ActionRegistrarse implements ActionListener {
-
+    private class ActionRegistrarse implements IObserverUsuarioDto{
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actualizar(UsuarioDto usuarioDto) {
             cambiarPantallaRegistrio();
         }
     

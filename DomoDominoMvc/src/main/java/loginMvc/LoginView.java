@@ -4,9 +4,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObserver;
+import observers.IObserverString;
 
-public class LoginView extends javax.swing.JFrame implements IComponente, IObserver{
+public class LoginView extends javax.swing.JFrame implements IComponente, IObserverString{
 
     private final LoginModel loginModel;
     private Mediador mediador;

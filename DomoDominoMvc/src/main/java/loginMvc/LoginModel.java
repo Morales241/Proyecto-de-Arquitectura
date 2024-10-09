@@ -1,44 +1,41 @@
 package loginMvc;
 
 import dtos.UsuarioDto;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import observers.IObservable;
-import observers.IObserver;
+import observers.IObservableString;
+import observers.IObserverString;
+import observers.IObserverUsuarioDto;
 
-public class LoginModel implements IObservable {
+public class LoginModel implements IObservableString {
 
     private String correo, contra;
-    private final List<IObserver> observadores = new ArrayList<>();
-    private ActionListener listenerIniciarSesion;
-    private ActionListener listenerRegistro;
+    private final List<IObserverString> observadores = new ArrayList<>();
+    private IObserverUsuarioDto listenerIniciarSesion;
+    private IObserverUsuarioDto listenerRegistro;
 
     public LoginModel() {
         
     }
 
-    public void agregarActionListenerIniciarSesion(ActionListener listener) {
+    public void agregarIObserverUsuarioDtoIniciarSesion(IObserverUsuarioDto listener) {
         this.listenerIniciarSesion = listener;
         
     }
     
     public void ejecutarAccionIniciarSesion(){
-        
         if (listenerIniciarSesion != null) {
-            listenerIniciarSesion.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+            listenerIniciarSesion.actualizar(encapsulamiento());
         }
     }
     
-    public void agregarActionListenerRegistro(ActionListener listener) {
+    public void agregarIObserverUsuarioDtoRegistro(IObserverUsuarioDto listener) {
         this.listenerRegistro = listener;
     }
 
     public void ejecutarAccionRegistro(){
-        
         if (listenerRegistro != null) {
-            listenerRegistro.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Accion"));
+            listenerRegistro.actualizar(encapsulamiento());
         }
     }
 
@@ -64,12 +61,12 @@ public class LoginModel implements IObservable {
     }
 
     @Override
-    public void agregarObservador(IObserver observador) {
+    public void agregarObservador(IObserverString observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserver observador) {
+    public void eliminarObservador(IObserverString observador) {
         observadores.remove(observador);
     }
 

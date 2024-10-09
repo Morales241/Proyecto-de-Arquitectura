@@ -4,9 +4,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObserver;
+import observers.IObserverString;
 
-public class SignInView extends javax.swing.JFrame implements IObserver, IComponente {
+public class SignInView extends javax.swing.JFrame implements IObserverString, IComponente {
 
     private final SignInModel signInModel;
     private Mediador mediador;

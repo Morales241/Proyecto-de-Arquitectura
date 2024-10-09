@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObserver;
+import observers.IObserverString;
 
-public class InicioView extends javax.swing.JFrame implements IObserver, IComponente{
+public class InicioView extends javax.swing.JFrame implements IObserverString, IComponente{
     
     private InicioModel inicioModel;
     private Mediador mediador;

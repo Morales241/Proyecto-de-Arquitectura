@@ -5,13 +5,15 @@ import java.util.List;
 import mediador.IComponente;
 import mediador.Mediador;
 import observers.IObservable;
+import observers.IObservableString;
 import observers.IObserver;
+import observers.IObserverString;
 
 /**
  *
  * @author tacot
  */
-public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObservable, IComponente{
+public class CrearMesaView extends javax.swing.JFrame implements IObserverString, IObservableString, IComponente{
 
         private List<IObserver> observadores = new ArrayList<>();
         private CrearMesaModel model;
@@ -86,42 +88,6 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-//
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CrearMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CrearMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CrearMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CrearMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CrearMesaView().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cantidadFichas;
@@ -140,12 +106,12 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserver, IObs
     }
 
     @Override
-    public void agregarObservador(IObserver observador) {
+    public void agregarObservador(IObserverString observador) {
         
     }
 
     @Override
-    public void eliminarObservador(IObserver observador) {
+    public void eliminarObservador(IObserverString observador) {
         
     }
 

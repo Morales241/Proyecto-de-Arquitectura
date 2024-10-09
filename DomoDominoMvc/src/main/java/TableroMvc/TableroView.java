@@ -32,13 +32,13 @@ import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 import mediador.IComponente;
 import mediador.Mediador;
-import observers.IObservable;
-import observers.IObserver;
 import Entidades.Ficha;
+import observers.IObservableString;
+import observers.IObserverString;
 
-public class TableroView extends javax.swing.JFrame implements IObservable, IComponente {
+public class TableroView extends javax.swing.JFrame implements IObservableString, IComponente {
 
-    private List<IObserver> observadores = new ArrayList<>();
+    private List<IObserverString> observadores = new ArrayList<>();
     private TableroModel tableroModel;
     private Arreglo array;
     private JugadorDto jugador;
@@ -296,12 +296,12 @@ public class TableroView extends javax.swing.JFrame implements IObservable, ICom
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    public void agregarObservador(IObserver observador) {
+    public void agregarObservador(IObserverString observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserver observador) {
+    public void eliminarObservador(IObserverString observador) {
         observadores.remove(observador);
     }
 

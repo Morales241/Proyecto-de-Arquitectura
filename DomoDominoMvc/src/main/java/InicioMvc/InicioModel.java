@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import observers.IObservable;
-import observers.IObserver;
+import observers.IObservableString;
+import observers.IObserverString;
 
-public class InicioModel  implements IObservable{
-    private List<IObserver> observadores = new ArrayList<>();
+public class InicioModel  implements IObservableString{
+    private List<IObserverString> observadores = new ArrayList<>();
     private ActionListener listenerJugar;
     
     public InicioModel() {
@@ -27,12 +27,12 @@ public class InicioModel  implements IObservable{
     }
     
     @Override
-    public void agregarObservador(IObserver observador) {
+    public void agregarObservador(IObserverString observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserver observador) {
+    public void eliminarObservador(IObserverString observador) {
         observadores.remove(observador);
     }
 

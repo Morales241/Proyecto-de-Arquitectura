@@ -2,17 +2,17 @@ package TableroMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import observers.IObservable;
-import observers.IObserver;
 import Entidades.Ficha;
 import Entidades.Pozo;
+import observers.IObservableString;
+import observers.IObserverString;
 
-public class TableroModel implements IObservable {
+public class TableroModel implements IObservableString {
     
     private Pozo pozo;
     private int numeroFichas = 7;
     private List<Ficha> fichas;
-    private List<IObserver> observadores = new ArrayList<>();
+    private List<IObserverString> observadores = new ArrayList<>();
 
     public TableroModel() {
         pozo = new Pozo(numeroFichas); 
@@ -35,12 +35,12 @@ public class TableroModel implements IObservable {
     }
     
     @Override
-    public void agregarObservador(IObserver observador) {
+    public void agregarObservador(IObserverString observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserver observador) {
+    public void eliminarObservador(IObserverString observador) {
         observadores.remove(observador);
     }
 
