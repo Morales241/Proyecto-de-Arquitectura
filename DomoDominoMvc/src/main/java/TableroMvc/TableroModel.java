@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import Entidades.Ficha;
 import Entidades.Pozo;
-import observers.IObservableString;
+import observers.IObservable;
+import observers.IObserver;
 import observers.IObserverString;
 
-public class TableroModel implements IObservableString {
+public class TableroModel implements IObservable {
     
     private Pozo pozo;
     private int numeroFichas = 7;
     private List<Ficha> fichas;
-    private List<IObserverString> observadores = new ArrayList<>();
+    private List<IObserver> observadores = new ArrayList<>();
 
     public TableroModel() {
         pozo = new Pozo(numeroFichas); 
@@ -21,10 +22,12 @@ public class TableroModel implements IObservableString {
     public void repartirFichas(){
         fichas = pozo.repartirFichas();
       
-        notificarObservadores("repartirFicha");
+        notificarObservadores();
     }
     
-    
+    public void accion(){
+        //accion de acualizacion
+    } 
 
     public List<Ficha> getFichas() {
         return fichas;
@@ -35,19 +38,19 @@ public class TableroModel implements IObservableString {
     }
     
     @Override
-    public void agregarObservador(IObserverString observador) {
+    public void agregarObservador(IObserver observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserverString observador) {
+    public void eliminarObservador(IObserver observador) {
         observadores.remove(observador);
     }
 
     @Override
-    public void notificarObservadores(String mensaje) {
+    public void notificarObservadores() {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar(mensaje);
+            IObserver.actualizar();
         });
     }
     

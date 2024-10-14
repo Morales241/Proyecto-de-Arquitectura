@@ -62,7 +62,7 @@ public class InicializadorClases {
 //        jugador.agregarFichas(pozo.repartirFichas());
          Arreglo array = new Arreglo(); 
         TableroModel tableroModel = new TableroModel();
-        TableroView tableroView = new TableroView(tableroModel,array,jugador);
+        TableroView tableroView = new TableroView(tableroModel);
         tableroView.setMediador(mediador);
         TableroController tableroController = new TableroController(tableroModel, tableroView);
         ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel,tableroView,tableroController);
