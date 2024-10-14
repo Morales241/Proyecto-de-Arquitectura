@@ -69,21 +69,14 @@ public class TableroView extends javax.swing.JFrame implements IObserver,ICompon
     public void actualizar() {
         this.repaint();
     }
-<<<<<<< HEAD
-=======
-    @Override
->>>>>>> 0b020c396b4c398869396634f18f860177b3d77c
     
     public void setMediador(Mediador mediador) {
         this.mediador = mediador;
     }
 
-<<<<<<< HEAD
     @Override
     public void setMediador(IMediador mediador) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-=======
->>>>>>> 0b020c396b4c398869396634f18f860177b3d77c
 }
