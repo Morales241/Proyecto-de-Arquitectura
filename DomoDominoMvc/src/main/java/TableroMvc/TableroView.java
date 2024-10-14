@@ -17,7 +17,6 @@ public class TableroView extends javax.swing.JFrame implements IObserver,ICompon
     private ActionListener oyente;
     
 
-
     /**
      * Creates new form TableroView
      *
@@ -25,6 +24,10 @@ public class TableroView extends javax.swing.JFrame implements IObserver,ICompon
      */
     public TableroView(TableroModel tableroModel) {
 
+        initComponents();
+        this.tableroModel = tableroModel;
+        this.tableroModel.agregarObservador(this);
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,9 +60,25 @@ public class TableroView extends javax.swing.JFrame implements IObserver,ICompon
     }// </editor-fold>//GEN-END:initComponents
 
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
+
+    public void agregarOyente(ActionListener oyente){
+        this.oyente = oyente;
+    }   
+    
     @Override
     public void setMediador(IMediador mediador) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public void actualizar() {
+        this.repaint();
+    }
+    @Override
+    
+    public void setMediador(Mediador mediador) {
+        this.mediador = mediador;
     }
 
 }
