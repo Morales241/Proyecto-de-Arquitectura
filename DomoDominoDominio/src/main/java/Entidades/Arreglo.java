@@ -10,7 +10,7 @@ import Entidades.Ficha;
 public class Arreglo {
 
     private int[][] tablero;
-    private int extremoIzquierdo, extremoDerecha;
+    private int extremoIzquierdo, extremoDerecho;
     private int extremoIzquierdoColumna, extremoIzquierdoFila;
     private int extremoDerechoColumna, extremoDerechoFila;
 
@@ -47,12 +47,12 @@ public class Arreglo {
         this.extremoIzquierdo = extremoIzquierdo;
     }
 
-    public int getExtremoDerecha() {
-        return extremoDerecha;
+    public int getExtremoDerecho() {
+        return extremoDerecho;
     }
 
-    public void setExtremoDerecha(int extremoDerecha) {
-        this.extremoDerecha = extremoDerecha;
+    public void setExtremoDerecho(int extremoDerecha) {
+        this.extremoDerecho = extremoDerecha;
     }
 
     public int getExtremoIzquierdoColumna() {
