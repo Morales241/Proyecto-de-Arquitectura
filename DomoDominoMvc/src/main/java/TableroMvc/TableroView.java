@@ -4,97 +4,27 @@
  */
 package TableroMvc;
 
-
+import java.awt.event.ActionListener;
 import mediador.IComponente;
 import mediador.IMediador;
+import mediador.Mediador;
 import observers.IObserver;
 
-public class TableroView extends javax.swing.JFrame implements IObserver, IComponente {
+public class TableroView extends javax.swing.JFrame implements IObserver,IComponente {
 
     private TableroModel tableroModel;
-    private IMediador mediador;
+    private Mediador mediador;
+    private ActionListener oyente;
+    
+
 
     /**
      * Creates new form TableroView
      *
      * @param tableroModel
-     * @param array
-     * @param jugador
      */
     public TableroView(TableroModel tableroModel) {
-       initComponents();
-       this.tableroModel = tableroModel;
-    }
 
-    private TableroView() {
-        initComponents();
-    }
-
-//    public class TableroPanel extends JPanel {
-//
-//        private int[][] tablero;
-//
-//        public TableroPanel(Arreglo array) {
-//            this.tablero = array.obtenerTablero();
-//            setPreferredSize(new Dimension(800, 800));
-//        }
-//
-//        @Override
-//        protected void paintComponent(Graphics g) {
-//            super.paintComponent(g);
-//            int cellSize = 40;
-//
-//            for (int i = 0; i < tablero.length; i++) {
-//                for (int j = 0; j < tablero[i].length; j++) {
-//                    g.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
-//                    if (tablero[i][j] != 0) { 
-//                        g.drawString(String.valueOf(tablero[i][j]), j * cellSize + cellSize / 4, i * cellSize + cellSize / 2);
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    class FichaTransferHandler extends TransferHandler {
-//
-//        private Ficha ficha;
-//        private JLabel fichaLabel;
-//        private JPanel fichasJugadorPanel;
-//
-//        public FichaTransferHandler(Ficha objetoFicha, JLabel objetofichaLabel, JPanel objetofichasJugadorPanel) {
-//            this.ficha = objetoFicha;
-//            this.fichaLabel = objetofichaLabel;
-//            this.fichasJugadorPanel = objetofichasJugadorPanel;
-//        }
-//
-//        @Override
-//        protected Transferable createTransferable(JComponent c) {
-//            return new Transferable() {
-//                @Override
-//                public DataFlavor[] getTransferDataFlavors() {
-//                    return new DataFlavor[]{DataFlavor.imageFlavor};
-//                }
-//
-//                @Override
-//                public boolean isDataFlavorSupported(DataFlavor flavor) {
-//                    return DataFlavor.imageFlavor.equals(flavor);
-//                }
-//
-//                @Override
-//                public Object getTransferData(DataFlavor flavor) {
-//                    if (DataFlavor.imageFlavor.equals(flavor)) {
-//                        return ficha.getIcono();
-//                    }
-//                    return null;
-//                }
-//            };
-//        }
-//
-//        @Override
-//        public int getSourceActions(JComponent c) {
-//            return MOVE;
-//        }
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,20 +56,10 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-  
 
     @Override
     public void setMediador(IMediador mediador) {
-        this.mediador = mediador;
-    }
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void actualizar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }
