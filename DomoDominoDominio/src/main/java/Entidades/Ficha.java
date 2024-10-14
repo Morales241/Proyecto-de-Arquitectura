@@ -6,7 +6,6 @@ package Entidades;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.swing.ImageIcon;
 
 public class Ficha implements Serializable {
 
