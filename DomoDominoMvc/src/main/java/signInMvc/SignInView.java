@@ -3,13 +3,14 @@ package signInMvc;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
+import mediador.IMediador;
 import mediador.Mediador;
 import observers.IObserverString;
 
 public class SignInView extends javax.swing.JFrame implements IObserverString, IComponente {
 
     private final SignInModel signInModel;
-    private Mediador mediador;
+    private IMediador mediador;
     
     /**
      * Creates new form signInView
@@ -93,7 +94,7 @@ public class SignInView extends javax.swing.JFrame implements IObserverString, I
     }
 
     @Override
-    public void setMediador(Mediador mediador) {
+    public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 

@@ -1,6 +1,6 @@
 package mediador;
 
 public interface IComponente {
-    public void setMediador(Mediador mediador);
+    public void setMediador(IMediador mediador);
     public String getName();
 }

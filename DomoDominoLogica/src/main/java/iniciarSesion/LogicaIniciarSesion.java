@@ -1,9 +1,8 @@
 package iniciarSesion;
 
 import DAOs.UsuarioDAO;
-import InicioMvc.InicioModel;
 import dtos.UsuarioDto;
-import loginMvc.LoginModel;
+import fachadas.ILoginFachada;
 import mediador.Mediador;
 import observers.IObserverUsuarioDto;
 
@@ -11,56 +10,53 @@ public class LogicaIniciarSesion implements ILogicaIniciarSesion {
     
     
     private final UsuarioDAO usuarioDao;
-    private final LoginModel loginModel;
+    private final ILoginFachada loginFachada;
     private final Mediador mediador;
 
     /**
      * Constructor de la clase
+     * @param loginFachada
      */
-    public LogicaIniciarSesion() {
+    public LogicaIniciarSesion(ILoginFachada loginFachada) {
         this.usuarioDao = new UsuarioDAO();
+        this.loginFachada = loginFachada;
         this.mediador = Mediador.getInstancia();
         
-        this.loginModel =  (LoginModel) mediador.obtenerPantallaConcreta("login").getModelo();
-        
-        loginModel.agregarIObserverUsuarioDtoIniciarSesion(new AccionIniciarSesion());
-        loginModel.agregarIObserverUsuarioDtoRegistro(new  ActionRegistrarse());
-        
+        loginFachada.agregarObserverIniciarSesion(new AccionIniciarSesion());
+        loginFachada.agregarObserverRegistro(new ActionRegistrarse());
     }
 
     @Override
     public boolean iniciarSesion(UsuarioDto usuario) {
         return usuarioDao.iniciarSesion(usuario.getCorreo(), usuario.getContraseña());  
     }
-    
-    public void cambiarPantallaRegistrio(){
+
+    public void cambiarPantallaRegistro(){
         mediador.mostrarPantallaConcreta("signIn");
     }
-    
+
     public void cambiarPantallaInicio(){
         mediador.mostrarPantallaConcreta("inicio");
-        
     }
-    
-    private class AccionIniciarSesion implements IObserverUsuarioDto{
+
+    private class AccionIniciarSesion implements IObserverUsuarioDto {
 
         @Override
         public void actualizar(UsuarioDto usuarioDto) {
-            if(iniciarSesion(usuarioDto)){
-                loginModel.notificarObservadores("Se incio secion de manera satisfactoria");
+            if (iniciarSesion(usuarioDto)) {
+                loginFachada.notificarObservadores("Se inició sesión de manera satisfactoria");
                 cambiarPantallaInicio();
-            }else{
-                loginModel.notificarObservadores("Error: el usuario o la contraseña es incorrecta");
+            } else {
+                loginFachada.notificarObservadores("Error: el usuario o la contraseña es incorrecta");
             }
         }
     }
-    
-    private class ActionRegistrarse implements IObserverUsuarioDto{
+
+    private class ActionRegistrarse implements IObserverUsuarioDto {
         @Override
         public void actualizar(UsuarioDto usuarioDto) {
-            cambiarPantallaRegistrio();
+            cambiarPantallaRegistro();
         }
-    
     }
     
 }

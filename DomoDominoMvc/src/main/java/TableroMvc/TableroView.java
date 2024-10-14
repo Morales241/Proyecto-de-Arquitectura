@@ -33,6 +33,7 @@ import javax.swing.TransferHandler;
 import mediador.IComponente;
 import mediador.Mediador;
 import Entidades.Ficha;
+import mediador.IMediador;
 import observers.IObservableString;
 import observers.IObserverString;
 
@@ -42,7 +43,7 @@ public class TableroView extends javax.swing.JFrame implements IObservableString
     private TableroModel tableroModel;
     private Arreglo array;
     private JugadorDto jugador;
-    private Mediador mediador;
+    private IMediador mediador;
 
     /**
      * Creates new form TableroView
@@ -313,7 +314,7 @@ public class TableroView extends javax.swing.JFrame implements IObservableString
     }
 
     @Override
-    public void setMediador(Mediador mediador) {
+    public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 
