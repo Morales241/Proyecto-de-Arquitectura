@@ -26,6 +26,7 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
     private FichaDto fichaSeleccionada = null;
     private MouseAdapter oyenteMouse;
     private TableroPanel tableroPanel;
+    private JPanel fichasJugadorPanel;
 
     /**
      * Creates new form TableroView
@@ -46,16 +47,8 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
 
         add(tableroPanel, BorderLayout.CENTER);
 
-        JPanel fichasJugadorPanel = new JPanel();
+        fichasJugadorPanel = new JPanel();
         fichasJugadorPanel.setLayout(new FlowLayout());
-
-        for (FichaDto ficha : jugador.getFichas()) {
-            String rutaImagen = String.format("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\resources\\imgPartidaFichas\\ficha%d_%d.png", ficha.getLado1(), ficha.getLado2());
-            ImageIcon icono = new ImageIcon(rutaImagen);
-            JLabel fichaLabel = new JLabel(icono);
-            fichaLabel.addMouseListener(oyenteMouse);
-            fichasJugadorPanel.add(fichaLabel);
-        }
 
         add(fichasJugadorPanel, BorderLayout.SOUTH);
         pack();
@@ -130,6 +123,18 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
 
     @Override
     public void actualizar() {
+        
+        
+        jugador.agregarFichas(tableroModel.getFichas());
+        
+        for (FichaDto ficha : jugador.getFichas()) {
+            String rutaImagen = String.format("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\resources\\imgPartidaFichas\\ficha%d_%d.png", ficha.getLado1(), ficha.getLado2());
+            ImageIcon icono = new ImageIcon(rutaImagen);
+            JLabel fichaLabel = new JLabel(icono);
+            fichaLabel.addMouseListener(oyenteMouse);
+            fichasJugadorPanel.add(fichaLabel);
+        }
+        
         this.repaint();
         this.tableroPanel.repaint();
 

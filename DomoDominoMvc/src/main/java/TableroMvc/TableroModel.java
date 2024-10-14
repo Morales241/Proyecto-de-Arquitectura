@@ -2,8 +2,6 @@ package TableroMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import Entidades.Ficha;
-import Entidades.Pozo;
 import dtos.FichaDto;
 import observers.IObservable;
 import observers.IObserver;
@@ -21,8 +19,9 @@ public class TableroModel implements IObservable {
         
     }
 
-    public void repartirFichas() {
-
+    public void repartirFichas(List<FichaDto> fichas) {
+        this.fichas = fichas;
+        
         notificarObservadores();
     }
 
