@@ -4,39 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 import Entidades.Ficha;
 import Entidades.Pozo;
+import dtos.FichaDto;
 import observers.IObservable;
 import observers.IObserver;
-import observers.IObserverString;
+import observers.IObserverFicha;
 
 public class TableroModel implements IObservable {
-    
-    private Pozo pozo;
+
     private int numeroFichas = 7;
-    private List<Ficha> fichas;
+    private List<FichaDto> fichas;
     private List<IObserver> observadores = new ArrayList<>();
+    private FichaDto fichaSeleccionada;
+    private IObserverFicha listenerFicha;
 
     public TableroModel() {
-        pozo = new Pozo(numeroFichas); 
+        
     }
 
-    public void repartirFichas(){
-        fichas = pozo.repartirFichas();
-      
+    public void repartirFichas() {
+
         notificarObservadores();
     }
-    
-    public void accion(){
-        //accion de acualizacion
-    } 
 
-    public List<Ficha> getFichas() {
+    public void agregarIObserverFicha(IObserverFicha listener) {
+        this.listenerFicha = listener;
+    }
+
+    public void ejecutarAccionPonerFicha() {
+        if (listenerFicha != null) {
+            listenerFicha.actualizar(fichaSeleccionada);
+        }
+    }
+
+    public List<FichaDto> getFichas() {
         return fichas;
     }
 
-    public void setFichas(List<Ficha> fichas) {
+    public void setFichas(List<FichaDto> fichas) {
         this.fichas = fichas;
     }
-    
+
     @Override
     public void agregarObservador(IObserver observador) {
         observadores.add(observador);
@@ -53,6 +60,8 @@ public class TableroModel implements IObservable {
             IObserver.actualizar();
         });
     }
-    
-    
+
+    public void actualizarFichaSelecionada(FichaDto fichaSelect) {
+        this.fichaSeleccionada = fichaSelect;
+    }
 }

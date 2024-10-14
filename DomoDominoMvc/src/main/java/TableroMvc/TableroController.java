@@ -1,7 +1,7 @@
 package TableroMvc;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TableroController {
     
@@ -12,18 +12,21 @@ public class TableroController {
         this.tableroModel = tableroModel;
         this.tableroView = tableroView;
 
+        this.tableroView.agregarOyenteMouse(new ponerFichaEnTablero());
+        
     }
     
-    public void accion(){
-        tableroModel.accion();
+    public void colocarFichaEnTablero(){
+        tableroView.actualizarFichaSelecionada();
+        tableroModel.ejecutarAccionPonerFicha();
     }
     
-    private class AccionTablero implements ActionListener{
+    private class ponerFichaEnTablero extends MouseAdapter{
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            accion();
+        public void mouseClicked(MouseEvent e) {
+            colocarFichaEnTablero();
         }
-    
+        
     }
 }
