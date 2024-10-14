@@ -25,6 +25,7 @@ public class TableroController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            
             colocarFichaEnTablero();
         }
         
