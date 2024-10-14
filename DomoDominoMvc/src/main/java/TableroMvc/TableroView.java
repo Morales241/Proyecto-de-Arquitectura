@@ -13,7 +13,7 @@ import observers.IObserver;
 public class TableroView extends javax.swing.JFrame implements IObserver,IComponente {
 
     private TableroModel tableroModel;
-    private Mediador mediador;
+    private IMediador mediador;
     private ActionListener oyente;
     
 
@@ -68,11 +68,14 @@ public class TableroView extends javax.swing.JFrame implements IObserver,ICompon
         this.oyente = oyente;
     }   
     
-    @Override
-
-    
-    public void setMediador(Mediador mediador) {
+    @Override   
+    public void setMediador(IMediador mediador) {
         this.mediador = mediador;
+    }
+
+    @Override
+    public void actualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

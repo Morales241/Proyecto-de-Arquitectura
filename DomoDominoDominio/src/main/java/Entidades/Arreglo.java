@@ -10,6 +10,9 @@ import Entidades.Ficha;
 public class Arreglo {
 
     private int[][] tablero;
+    private int extremoIzquierdo, extremoDerecha;
+    private int extremoIzquierdoColumna, extremoIzquierdoFila;
+    private int extremoDerechoColumna, extremoDerechoFila;
 
     public Arreglo() {
         tablero = new int[17][30];
@@ -18,26 +21,8 @@ public class Arreglo {
 
     public boolean estaVacio(int fila, int columna) {
         return tablero[fila][columna] == 0; 
-    }
-
-        public boolean colocarFichaHorizontal(Ficha ficha, int fila, int columna) {
-        if (estaVacio(fila, columna) && estaVacio(fila, columna + 1)) {
-            tablero[fila][columna] = ficha.getLado1(); 
-            tablero[fila][columna + 1] = ficha.getLado2(); 
-            return true;
-        }
-        return false;
-    }
+    }   
     
-    public boolean colocarFichaVertical(Ficha ficha, int fila, int columna) {
-        if (estaVacio(fila, columna) && estaVacio(fila, columna + 1)) {
-            tablero[fila][columna] = ficha.getLado1(); 
-            tablero[fila + 1][columna] = ficha.getLado2(); 
-            return true;
-        }
-        return false;
-    }
-
     public int obtenerFicha(int fila, int columna) {
         return tablero[fila][columna];
     }
@@ -53,4 +38,54 @@ public class Arreglo {
     public int[][] obtenerTablero() {
         return tablero;
     }
+
+    public int getExtremoIzquierdo() {
+        return extremoIzquierdo;
+    }
+
+    public void setExtremoIzquierdo(int extremoIzquierdo) {
+        this.extremoIzquierdo = extremoIzquierdo;
+    }
+
+    public int getExtremoDerecha() {
+        return extremoDerecha;
+    }
+
+    public void setExtremoDerecha(int extremoDerecha) {
+        this.extremoDerecha = extremoDerecha;
+    }
+
+    public int getExtremoIzquierdoColumna() {
+        return extremoIzquierdoColumna;
+    }
+
+    public void setExtremoIzquierdoColumna(int extremoIzquierdoColumna) {
+        this.extremoIzquierdoColumna = extremoIzquierdoColumna;
+    }
+
+    public int getExtremoIzquierdoFila() {
+        return extremoIzquierdoFila;
+    }
+
+    public void setExtremoIzquierdoFila(int extremoIzquierdoFila) {
+        this.extremoIzquierdoFila = extremoIzquierdoFila;
+    }
+
+    public int getExtremoDerechoColumna() {
+        return extremoDerechoColumna;
+    }
+
+    public void setExtremoDerechoColumna(int extremoDerechoColumna) {
+        this.extremoDerechoColumna = extremoDerechoColumna;
+    }
+
+    public int getExtremoDerechoFila() {
+        return extremoDerechoFila;
+    }
+
+    public void setExtremoDerechoFila(int extremoDerechoFila) {
+        this.extremoDerechoFila = extremoDerechoFila;
+    }
+    
+    
 }
