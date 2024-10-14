@@ -69,27 +69,10 @@ public class TableroView extends javax.swing.JFrame implements IObserver,ICompon
     }   
     
     @Override
-    public void setMediador(IMediador mediador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    public void actualizar() {
-        this.repaint();
-    }
-<<<<<<< HEAD
-    @Override
-=======
->>>>>>> a9e9bee (Revert "Merge branch 'Jesus'")
+
     
     public void setMediador(Mediador mediador) {
         this.mediador = mediador;
     }
 
-<<<<<<< HEAD
-=======
-    @Override
-    public void setMediador(IMediador mediador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
->>>>>>> a9e9bee (Revert "Merge branch 'Jesus'")
 }
