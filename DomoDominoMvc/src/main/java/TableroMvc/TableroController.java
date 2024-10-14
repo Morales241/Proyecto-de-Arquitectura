@@ -1,5 +1,8 @@
 package TableroMvc;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class TableroController {
     
     private TableroModel tableroModel;
@@ -8,13 +11,20 @@ public class TableroController {
     public TableroController(TableroModel tableroModel, TableroView tableroView) {
         this.tableroModel = tableroModel;
         this.tableroView = tableroView;
-        
-        tableroView.agregarObservador((String estado) -> {
-            if(estado.equals("inicio")) {
-                tableroModel.repartirFichas();
-            }
-        });
+            
+        tableroModel.agregarObservador(tableroView);
     }
     
+    public void accion(){
+        tableroModel.accion();
+    }
     
+    private class AccionTablero implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            accion();
+        }
+    
+    }
 }
