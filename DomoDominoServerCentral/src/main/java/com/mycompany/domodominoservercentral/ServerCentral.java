@@ -1,8 +1,9 @@
 package com.mycompany.domodominoservercentral;
 
-import java.io.File;
-import observers.IEventoAgregarJugadorAPartida;
-import serializables.Jugador;
+import enumerados.RespuestaServidor;
+import java.util.ArrayList;
+import java.util.List;
+import observers.IEventoRespuestaServidorCentral;
 
 /**
  *
@@ -16,45 +17,83 @@ public class ServerCentral {
         infoPartidas = new String[12][5];
     }
 
-    public boolean agregarPartida(String infoSocket, String codigo) {
+    public RespuestaServidor agregarPartida(String infoSocket, String codigo) {
         for (int i = 0; i < 12; i++) {
             if (infoPartidas[i][0].isEmpty()) {
                 infoPartidas[i][0] = infoSocket;
                 infoPartidas[i][4] = codigo;
-                return true;
+                return RespuestaServidor.seRegistroPartidaExitosamente;
             }
         }
 
-        return false;
+        return RespuestaServidor.noSePudoRegistrarPartida;
     }
-    
-    public void agregarJugadorAPartida(String infoSocket, String codigo){
+
+    public RespuestaServidor agregarJugadorAPartida(String infoSocket, String codigo) {
         for (int i = 0; i < 12; i++) {
-            
+
             if (infoPartidas[i][4].equals(codigo)) {
-                
-                for (int j = 0; j < 5; j++) {
-                    
+
+                for (int j = 1; j < 5; j++) {
+
                     if (infoPartidas[i][j].isEmpty()) {
-                        
+
                         infoPartidas[i][j] = infoSocket;
-                        
+
+                        return RespuestaServidor.seRegistroJugadorExitosamente;
+
                     }
                 }
-                
+                return RespuestaServidor.partidaLlena;
             }
         }
-        
+        return RespuestaServidor.partidaNoEncontrada;
     }
 
-    public class AgregarJugadorAPartida implements IEventoAgregarJugadorAPartida{
+    public List<String> informacionDePartidaPorJugador(String infoSocket) {
 
-        @Override
-        public void actualizar(Jugador jugador) {
-            
-            String info = jugador.getIp()+jugador.getPuerto();
-            
-            agregarJugadorAPartida(info, jugador.getCodigo());
+        List<String> informacionPartida = new ArrayList<>();
+
+        for (int i = 0; i < 12; i++) {
+
+            for (int j = 0; j < 4; j++) {
+
+                if (infoPartidas[i][j].equals(infoSocket)) {
+
+                    for (int k = 0; k < 5; k++) {
+                        informacionPartida.add(infoPartidas[i][k]);
+                    }
+                }
+            }
+        }
+        return informacionPartida;
+    }
+
+    public List<String> informacionDePartidaPorCodigo(String codigo) {
+        List<String> informacionPartida = new ArrayList<>();
+
+        for (int i = 0; i < 12; i++) {
+
+            if (infoPartidas[i][4].equals(codigo)) {
+
+                for (int k = 0; k < 5; k++) {
+                    informacionPartida.add(infoPartidas[i][k]);
+                }
+            }
+        }
+        return informacionPartida;
+    }
+
+    public void acabarPartida(String codigo) {
+        for (int i = 0; i < 12; i++) {
+
+            if (infoPartidas[i][4].equals(codigo)) {
+
+                for (int k = 0; k < 5; k++) {
+                    infoPartidas[i][k] = "";
+                }
+            }
         }
     }
+
 }

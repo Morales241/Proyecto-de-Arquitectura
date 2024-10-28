@@ -10,5 +10,7 @@ package enumerados;
  */
 public enum RespuestaServidor {
     seRegistroJugadorExitosamente, 
-    partidaLlena, partidaNoEncontrada
+    partidaLlena, partidaNoEncontrada, 
+    seRegistroPartidaExitosamente, 
+    noSePudoRegistrarPartida
 }
