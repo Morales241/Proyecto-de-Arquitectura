@@ -1,5 +1,6 @@
-package cliente;
+package serverInterno;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import observers.IObserverString;
 
@@ -21,7 +22,7 @@ public class GestorMensajes {
     public void notificarObservadores(String mensaje) {
         if (observerMensaje != null) {
             observerMensaje.actualizar(mensaje);
-            log.info("va a notificar esto: " + mensaje);
+            log.log(Level.INFO, "va a notificar esto: ", mensaje);
         }
     }
 }
