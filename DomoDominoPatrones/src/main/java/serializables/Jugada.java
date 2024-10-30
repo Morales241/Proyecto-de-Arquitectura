@@ -1,34 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package serializables;
 
-import java.io.Serializable;
+import dtos.FichaDto;
 
 /**
  *
  * @author tacot
  */
-public class Jugada implements Serializable{
-    
-    private static final long serialVersionUID = 1L;
-    private String jugada;
+public class Jugada {
+    private FichaDto ficha;
+    private String informacionJugador;
+    //aqui van a ir mas variables para la informacion del evento
 
     public Jugada() {
     }
 
-    public Jugada(String jugada) {
-        this.jugada = jugada;
+    public Jugada(FichaDto ficha) {
+        this.ficha = ficha;
     }
 
-    public String getJugada() {
-        return jugada;
+    public FichaDto getFicha() {
+        return ficha;
     }
 
-    public void setJugada(String jugada) {
-        this.jugada = jugada;
+    public void setFicha(FichaDto ficha) {
+        this.ficha = ficha;
     }
-    
-    
+
+    public String getInformacionJugador() {
+        return informacionJugador;
+    }
+
+    public void setInformacionJugador(String informacionJugador) {
+        this.informacionJugador = informacionJugador;
+    }
+
 }
