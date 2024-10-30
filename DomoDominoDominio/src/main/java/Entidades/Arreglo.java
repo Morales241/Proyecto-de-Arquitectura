@@ -235,12 +235,69 @@ public class Arreglo {
      }
      
      public boolean colocarFichaExtremoDerecho(Ficha ficha, String direccion) {
-
+               
+          if (ficha.esMula()) {
+          switch (direccion) {
+                    case "izquierda":
+                         colocarFichaExtremoDerechaMulaHaciaDerecha(ficha);
+                         break;
+                    case "arriba":
+                         colocarFichaExtremoDerechaMulaHaciaAbajo(ficha);
+                         break;
+                    case "derecha":
+                         colocarFichaExtremoDerechaMulaHaciaIzquierda(ficha);
+                         break;
+                    case "abajo":
+                         colocarFichaExtremoDerechaMulaHaciaArriba(ficha);
+                         break;
+               }
+          }
           return false;
      }
      
      
-
+     public boolean colocarFichaExtremoDerechaMulaHaciaDerecha(Ficha ficha){
+          if (extremo2Columna + 1 < tablero[0].length && tablero[extremo2Fila][extremo2Columna + 1] == -1) {
+                    System.out.println("Derecha: mula hacia la derecha");
+                    tablero[extremo2Fila][extremo2Columna + 1] = ficha.getLado1();
+                    extremoDerecha = ficha.getLado2();
+                    extremo2Columna += 1;
+                    return true;
+               }
+          return false;
+          
+     }
+     public boolean colocarFichaExtremoDerechaMulaHaciaAbajo(Ficha ficha){
+          if (extremo2Fila + 1 < tablero.length && tablero[extremo2Fila + 1][extremo2Columna] == -1) {
+                    System.out.println("Derecha: mula hacia abajo");
+                    tablero[extremo2Fila + 1][extremo2Columna] = ficha.getLado1();
+                    extremoDerecha = ficha.getLado2();
+                    extremo2Fila += 1;
+                    return true;
+               }
+          return false;
+     }
+     public boolean colocarFichaExtremoDerechaMulaHaciaIzquierda(Ficha ficha) {
+          if (extremo2Columna - 1 >= 0 && tablero[extremo2Fila][extremo2Columna - 1] == -1) {
+                    System.out.println("Derecha: mula hacia la izquierda");
+                    tablero[extremo2Fila][extremo2Columna - 1] = ficha.getLado1();
+                    extremoDerecha = ficha.getLado2();
+                    extremo2Columna -= 1;
+                    return true;
+               }
+          return false;
+     }
+     public boolean colocarFichaExtremoDerechaMulaHaciaArriba(Ficha ficha) {
+          if (extremo2Fila - 1 >= 0 && tablero[extremo2Fila - 1][extremo2Columna] == -1) {
+                    System.out.println("Derecha: mula hacia arriba");
+                    tablero[extremo2Fila - 1][extremo2Columna] = ficha.getLado1();
+                    extremoDerecha = ficha.getLado2();
+                    extremo2Fila -= 1;
+                    return true;
+               }
+          return false;
+     }
+     
      public int obtenerFicha(int fila, int columna) {
           return tablero[fila][columna];
      }
