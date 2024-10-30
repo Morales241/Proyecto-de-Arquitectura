@@ -3,13 +3,13 @@ package loginMvc;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
-import mediador.Mediador;
+import mediador.IMediador;
 import observers.IObserverString;
 
 public class LoginView extends javax.swing.JFrame implements IComponente, IObserverString{
 
     private final LoginModel loginModel;
-    private Mediador mediador;
+    private IMediador mediador;
     
     public LoginView(LoginModel loginModel) {
         initComponents();
@@ -106,7 +106,7 @@ public class LoginView extends javax.swing.JFrame implements IComponente, IObser
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void setMediador(Mediador mediador) {
+    public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 

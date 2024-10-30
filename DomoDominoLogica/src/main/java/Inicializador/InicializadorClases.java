@@ -15,6 +15,10 @@ import loginMvc.LoginModel;
 import loginMvc.LoginView;
 import Entidades.Pozo;
 import Inicio.LogicaInicio;
+import fachadas.IInicioFachada;
+import fachadas.InicioFachada;
+import fachadas.LoginFachada;
+import mediador.IMediador;
 import mediador.Mediador;
 import registrarUsuario.LogicaRegistrar;
 import signInMvc.SignInController;
@@ -37,7 +41,7 @@ public class InicializadorClases {
      * Inicializar clases MVC
      */
     public void InicializarClases(){
-        Mediador mediador = Mediador.getInstancia();
+        IMediador mediador = Mediador.getInstancia();
         
         LoginModel loginModel = new LoginModel();
         LoginView loginView = new LoginView(loginModel);
@@ -62,7 +66,7 @@ public class InicializadorClases {
 //        jugador.agregarFichas(pozo.repartirFichas());
          Arreglo array = new Arreglo(); 
         TableroModel tableroModel = new TableroModel();
-        TableroView tableroView = new TableroView(tableroModel,array,jugador);
+        TableroView tableroView = new TableroView(tableroModel);
         tableroView.setMediador(mediador);
         TableroController tableroController = new TableroController(tableroModel, tableroView);
         ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel,tableroView,tableroController);
@@ -73,12 +77,14 @@ public class InicializadorClases {
         mediador.registrarPantalla("signIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
         mediador.registrarPantalla("tablero", tableroContenedor);
-        
+          
         //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
-        LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion();
+        LoginFachada loginFachada = new LoginFachada(loginModel);
+        LogicaIniciarSesion logicaIniciarSesion = new LogicaIniciarSesion(loginFachada);
         
         LogicaRegistrar logicaRegistrar = new LogicaRegistrar();
         
-        LogicaInicio logicaInicio = new LogicaInicio();
+        IInicioFachada inicioFachada = new InicioFachada(inicioModel);
+        LogicaInicio logicaInicio = new LogicaInicio(inicioFachada);
     }
 }

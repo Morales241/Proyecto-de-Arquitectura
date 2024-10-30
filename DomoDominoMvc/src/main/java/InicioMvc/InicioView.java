@@ -4,13 +4,13 @@ package InicioMvc;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
-import mediador.Mediador;
+import mediador.IMediador;
 import observers.IObserverString;
 
 public class InicioView extends javax.swing.JFrame implements IObserverString, IComponente{
     
     private InicioModel inicioModel;
-    private Mediador mediador;
+    private IMediador mediador;
     
     /**
      * Creates new form InicioView
@@ -84,7 +84,7 @@ public class InicioView extends javax.swing.JFrame implements IObserverString, I
     }
     
     @Override
-    public void setMediador(Mediador mediador) {
+    public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 }

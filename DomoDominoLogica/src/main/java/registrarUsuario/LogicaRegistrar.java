@@ -5,10 +5,8 @@ import DAOs.UsuarioDAO;
 import Entidades.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import loginMvc.LoginModel;
 import mediador.IMediador;
 import mediador.Mediador;
-import observers.IObserver;
 import signInMvc.SignInModel;
 
 public class LogicaRegistrar implements ILogicaRegistrar {

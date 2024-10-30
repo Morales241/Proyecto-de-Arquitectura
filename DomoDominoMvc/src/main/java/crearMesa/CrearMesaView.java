@@ -3,8 +3,7 @@ package crearMesa;
 import java.util.ArrayList;
 import java.util.List;
 import mediador.IComponente;
-import mediador.Mediador;
-import observers.IObservable;
+import mediador.IMediador;
 import observers.IObservableString;
 import observers.IObserver;
 import observers.IObserverString;
@@ -17,7 +16,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserverString
 
         private List<IObserver> observadores = new ArrayList<>();
         private CrearMesaModel model;
-        private Mediador mediador;
+        private IMediador mediador;
         
 
     /**
@@ -121,6 +120,6 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserverString
     }
 
     @Override
-    public void setMediador(Mediador mediador) {
+    public void setMediador(IMediador mediador) {
     }
 }

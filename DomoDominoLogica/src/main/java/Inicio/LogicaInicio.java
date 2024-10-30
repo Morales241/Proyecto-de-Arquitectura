@@ -2,6 +2,8 @@ package Inicio;
 
 import Inicializador.InicializadorClases;
 import InicioMvc.InicioModel;
+import fachadas.IInicioFachada;
+import fachadas.InicioFachada;
 import mediador.IMediador;
 import mediador.Mediador;
 import observers.IObserver;
@@ -17,23 +19,21 @@ import observers.IObserver;
 public class LogicaInicio implements ILogicaInicio {
 
     private final IMediador mediador;
-    private final InicioModel inicioModel;
+    private final IInicioFachada inicioFachada;
 
-    public LogicaInicio() {
+    public LogicaInicio(IInicioFachada inicioFachada) {
         this.mediador = Mediador.getInstancia();
-        this.inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
+        this.inicioFachada = inicioFachada;
         
-        inicioModel.agregarIObserverJugar (new AccionIniciarJuego());
+        inicioFachada.agregarIObserverJugar(new AccionIniciarJuego());
     }
 
     @Override
     public void Jugar() {
         mediador.mostrarPantallaConcreta("tablero");
     }
-    
-    
 
-    private class AccionIniciarJuego implements IObserver  {
+    private class AccionIniciarJuego implements IObserver {
 
         @Override
         public void actualizar() {

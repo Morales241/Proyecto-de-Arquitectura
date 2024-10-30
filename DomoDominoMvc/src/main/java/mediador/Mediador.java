@@ -4,6 +4,7 @@ import contenedor.ContenedorMvc;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
+import mediador.IMediador;
 
 /**
  * Clase mediador, encargada del flujo de las pantallas.

@@ -23,8 +23,6 @@ public class TableroModel implements IObservableString {
       
         notificarObservadores("repartirFicha");
     }
-    
-    
 
     public List<Ficha> getFichas() {
         return fichas;
