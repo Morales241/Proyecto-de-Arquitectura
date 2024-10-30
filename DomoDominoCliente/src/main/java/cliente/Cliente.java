@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import serverInterno.Servidor;
-import utileria.Jugada;
+import serializables.Jugada;
 
 public class Cliente {
     private Socket socket;
