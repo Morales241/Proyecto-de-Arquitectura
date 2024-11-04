@@ -1,9 +1,9 @@
 package com.mycompany.domodominoservercentral;
 
+import dtos.JugadorDto;
 import enumerados.RespuestaServidor;
 import java.util.ArrayList;
 import java.util.List;
-import observers.IEventoRespuestaServidorCentral;
 
 /**
  *
@@ -11,34 +11,33 @@ import observers.IEventoRespuestaServidorCentral;
  */
 public class ServerCentral {
 
-    private final String[][] infoPartidas;
+    private final Object[][] infoPartidas;
 
     public ServerCentral() {
-        infoPartidas = new String[12][5];
+        infoPartidas = new Object[6][5];
     }
 
-    public RespuestaServidor agregarPartida(String infoSocket, String codigo) {
-        for (int i = 0; i < 12; i++) {
-            if (infoPartidas[i][0].isEmpty()) {
-                infoPartidas[i][0] = infoSocket;
+    public RespuestaServidor agregarPartida(JugadorDto jugador, String codigo) {
+        for (int i = 0; i < 6; i++) {
+            if (infoPartidas[i][0] == null) {
+                infoPartidas[i][0] = jugador;
                 infoPartidas[i][4] = codigo;
                 return RespuestaServidor.seRegistroPartidaExitosamente;
             }
         }
-
         return RespuestaServidor.noSePudoRegistrarPartida;
     }
 
-    public RespuestaServidor agregarJugadorAPartida(String infoSocket, String codigo) {
-        for (int i = 0; i < 12; i++) {
+    public RespuestaServidor agregarJugadorAPartida(JugadorDto jugador, String codigo) {
+        for (int i = 0; i < 6; i++) {
 
             if (infoPartidas[i][4].equals(codigo)) {
 
                 for (int j = 1; j < 5; j++) {
 
-                    if (infoPartidas[i][j].isEmpty()) {
+                    if (infoPartidas[i][j]== null) {
 
-                        infoPartidas[i][j] = infoSocket;
+                        infoPartidas[i][j] = jugador;
 
                         return RespuestaServidor.seRegistroJugadorExitosamente;
 
@@ -50,15 +49,15 @@ public class ServerCentral {
         return RespuestaServidor.partidaNoEncontrada;
     }
 
-    public List<String> informacionDePartidaPorJugador(String infoSocket) {
+    public List<Object> informacionDePartidaPorJugador(JugadorDto jugador) {
 
-        List<String> informacionPartida = new ArrayList<>();
+        List<Object> informacionPartida = new ArrayList<>();
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 6; i++) {
 
             for (int j = 0; j < 4; j++) {
 
-                if (infoPartidas[i][j].equals(infoSocket)) {
+                if (infoPartidas[i][j].equals(jugador)) {
 
                     for (int k = 0; k < 5; k++) {
                         informacionPartida.add(infoPartidas[i][k]);
@@ -69,10 +68,10 @@ public class ServerCentral {
         return informacionPartida;
     }
 
-    public List<String> informacionDePartidaPorCodigo(String codigo) {
-        List<String> informacionPartida = new ArrayList<>();
+    public List<Object> informacionDePartidaPorCodigo(String codigo) {
+        List<Object> informacionPartida = new ArrayList<>();
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 6; i++) {
 
             if (infoPartidas[i][4].equals(codigo)) {
 
@@ -85,7 +84,7 @@ public class ServerCentral {
     }
 
     public void acabarPartida(String codigo) {
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 6; i++) {
 
             if (infoPartidas[i][4].equals(codigo)) {
 
@@ -95,5 +94,4 @@ public class ServerCentral {
             }
         }
     }
-
 }

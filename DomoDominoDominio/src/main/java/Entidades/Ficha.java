@@ -6,7 +6,6 @@ package Entidades;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.swing.ImageIcon;
 
 public class Ficha implements Serializable {
 
@@ -37,10 +36,6 @@ public class Ficha implements Serializable {
         this.lado2 = lado2;
     }
 
-    public boolean esMula() {
-        return this.getLado1() == this.getLado2();
-    }
-    
     @Override
     public int hashCode() {
         int hash = 7;

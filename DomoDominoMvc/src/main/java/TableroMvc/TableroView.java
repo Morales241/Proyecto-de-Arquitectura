@@ -4,7 +4,16 @@
  */
 package TableroMvc;
 
-
+import dtos.FichaDto;
+import dtos.JugadorDto;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import mediador.IComponente;
 import mediador.IMediador;
 import observers.IObserver;
@@ -13,93 +22,65 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
 
     private TableroModel tableroModel;
     private IMediador mediador;
+    private JugadorDto jugador;
+    private FichaDto fichaSeleccionada = null;
+    private MouseAdapter oyenteMouse;
+    private TableroPanel tableroPanel;
+    private JPanel fichasJugadorPanel;
 
     /**
      * Creates new form TableroView
      *
      * @param tableroModel
-     * @param array
-     * @param jugador
      */
-    public TableroView(TableroModel tableroModel) {
-       initComponents();
-       this.tableroModel = tableroModel;
-    }
+    public TableroView(TableroModel tableroModel, JugadorDto jugador) {
 
-    private TableroView() {
         initComponents();
+        this.tableroModel = tableroModel;
+        this.tableroModel.agregarObservador(this);
+        this.jugador = jugador;
+        setLayout(new BorderLayout());
+
+        setLayout(new BorderLayout());
+
+        tableroPanel = new TableroPanel();
+
+        add(tableroPanel, BorderLayout.CENTER);
+
+        fichasJugadorPanel = new JPanel();
+        fichasJugadorPanel.setLayout(new FlowLayout());
+
+        add(fichasJugadorPanel, BorderLayout.SOUTH);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
-//    public class TableroPanel extends JPanel {
-//
-//        private int[][] tablero;
-//
-//        public TableroPanel(Arreglo array) {
-//            this.tablero = array.obtenerTablero();
-//            setPreferredSize(new Dimension(800, 800));
-//        }
-//
-//        @Override
-//        protected void paintComponent(Graphics g) {
-//            super.paintComponent(g);
-//            int cellSize = 40;
-//
-//            for (int i = 0; i < tablero.length; i++) {
-//                for (int j = 0; j < tablero[i].length; j++) {
-//                    g.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
-//                    if (tablero[i][j] != 0) { 
-//                        g.drawString(String.valueOf(tablero[i][j]), j * cellSize + cellSize / 4, i * cellSize + cellSize / 2);
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    class FichaTransferHandler extends TransferHandler {
-//
-//        private Ficha ficha;
-//        private JLabel fichaLabel;
-//        private JPanel fichasJugadorPanel;
-//
-//        public FichaTransferHandler(Ficha objetoFicha, JLabel objetofichaLabel, JPanel objetofichasJugadorPanel) {
-//            this.ficha = objetoFicha;
-//            this.fichaLabel = objetofichaLabel;
-//            this.fichasJugadorPanel = objetofichasJugadorPanel;
-//        }
-//
-//        @Override
-//        protected Transferable createTransferable(JComponent c) {
-//            return new Transferable() {
-//                @Override
-//                public DataFlavor[] getTransferDataFlavors() {
-//                    return new DataFlavor[]{DataFlavor.imageFlavor};
-//                }
-//
-//                @Override
-//                public boolean isDataFlavorSupported(DataFlavor flavor) {
-//                    return DataFlavor.imageFlavor.equals(flavor);
-//                }
-//
-//                @Override
-//                public Object getTransferData(DataFlavor flavor) {
-//                    if (DataFlavor.imageFlavor.equals(flavor)) {
-//                        return ficha.getIcono();
-//                    }
-//                    return null;
-//                }
-//            };
-//        }
-//
-//        @Override
-//        public int getSourceActions(JComponent c) {
-//            return MOVE;
-//        }
-//    }
+    public class TableroPanel extends JPanel {
+
+        private int[][] tablero;
+
+        public TableroPanel() {
+            setPreferredSize(new Dimension(800, 800));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            int cellSize = 40;
+
+            for (int i = 0; i < tablero.length; i++) {
+                for (int j = 0; j < tablero[i].length; j++) {
+                    g.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    g.drawString(String.valueOf(tablero[i][j]), j * cellSize + cellSize / 4, i * cellSize + cellSize / 2);
+                }
+            }
+        }
+
+    }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -126,20 +107,40 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-  
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
+
+    public void agregarOyenteMouse(MouseAdapter oyente) {
+        this.oyenteMouse = oyente;
+    }
 
     @Override
     public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
-
     @Override
     public void actualizar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        
+        jugador.agregarFichas(tableroModel.getFichas());
+        
+        for (FichaDto ficha : jugador.getFichas()) {
+            String rutaImagen = String.format("C:\\Users\\tacot\\OneDrive\\Documentos\\GitHub\\Proyecto-de-Arquitectura\\DomoDominoMvc\\src\\main\\resources\\imgPartidaFichas\\ficha%d_%d.png", ficha.getLado1(), ficha.getLado2());
+            ImageIcon icono = new ImageIcon(rutaImagen);
+            JLabel fichaLabel = new JLabel(icono);
+            fichaLabel.addMouseListener(oyenteMouse);
+            fichasJugadorPanel.add(fichaLabel);
+        }
+        
+        this.repaint();
+        this.tableroPanel.repaint();
+
+    }
+
+    public void actualizarFichaSelecionada() {
+        tableroModel.actualizarFichaSelecionada(fichaSeleccionada);
     }
 }

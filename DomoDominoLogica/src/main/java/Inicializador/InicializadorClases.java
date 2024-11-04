@@ -64,19 +64,19 @@ public class InicializadorClases {
         Pozo pozo = new Pozo(7);
         JugadorDto jugador = new JugadorDto("josue");
 //        jugador.agregarFichas(pozo.repartirFichas());
-         Arreglo array = new Arreglo(); 
-        TableroModel tableroModel = new TableroModel();
-        TableroView tableroView = new TableroView(tableroModel);
-        tableroView.setMediador(mediador);
-        TableroController tableroController = new TableroController(tableroModel, tableroView);
-        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel,tableroView,tableroController);
-        
+//         Arreglo array = new Arreglo(); 
+//        TableroModel tableroModel = new TableroModel();
+//        TableroView tableroView = new TableroView(tableroModel);
+//        tableroView.setMediador(mediador);
+//        TableroController tableroController = new TableroController(tableroModel, tableroView);
+//        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel,tableroView,tableroController);
+//        
 //        si se crean mas pantallas ponganlas aqui arriba y registrenlas abajo
         
         mediador.registrarPantalla("login", loginContenedor);
         mediador.registrarPantalla("signIn", signInContenedor);
         mediador.registrarPantalla("inicio", inicioContenedor);
-        mediador.registrarPantalla("tablero", tableroContenedor);
+//        mediador.registrarPantalla("tablero", tableroContenedor);
           
         //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
         LoginFachada loginFachada = new LoginFachada(loginModel);

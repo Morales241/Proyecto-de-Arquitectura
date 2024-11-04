@@ -13,44 +13,55 @@ import java.util.List;
  */
 public class JugadorDto {
     private String nombre;
-    private List<FichaDto> fichas; // Lista para guardar las fichas del jugador
+    private final List<FichaDto> fichas; 
+    private String ip;
+    private int puerto;
 
-    // Constructor
     public JugadorDto(String nombre) {
         this.nombre = nombre;
         this.fichas = new ArrayList<>();
     }
 
-    // Método para obtener el nombre del jugador
     public String getNombre() {
         return nombre;
     }
 
-    // Método para establecer el nombre del jugador
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    // Método para obtener la lista de fichas del jugador
     public List<FichaDto> getFichas() {
         return fichas;
     }
 
-    // Método para agregar una ficha a la lista del jugador
     public void agregarFicha(FichaDto ficha) {
         this.fichas.add(ficha);
     }
 
-    // Método para agregar varias fichas a la lista del jugador
     public void agregarFichas(List<FichaDto> fichas) {
         this.fichas.addAll(fichas);
     }
 
-    // Método para mostrar las fichas del jugador
     public void mostrarFichas() {
         for (FichaDto ficha : fichas) {
             System.out.println(ficha);
         }
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getPuerto() {
+        return puerto;
+    }
+
+    public void setPuerto(int puerto) {
+        this.puerto = puerto;
+    }
+    
 }
