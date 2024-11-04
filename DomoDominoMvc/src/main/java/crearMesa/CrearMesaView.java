@@ -55,14 +55,12 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserverString
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Numero de fichas a jugar");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, 30));
 
         cantidadFichas.setBackground(new java.awt.Color(242, 242, 242));
         cantidadFichas.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        cantidadFichas.setForeground(new java.awt.Color(0, 0, 0));
         cantidadFichas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7" }));
         jPanel2.add(cantidadFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 150, 40));
 

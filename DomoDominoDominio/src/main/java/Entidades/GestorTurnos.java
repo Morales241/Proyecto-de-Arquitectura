@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GestorTurnos {
     private static GestorTurnos instancia;
-    private List<String> ordenJugadores;
+    private List<Jugador> ordenJugadores;
     private int indiceActual;
 
     private GestorTurnos() {
@@ -18,16 +18,19 @@ public class GestorTurnos {
         return instancia;
     }
 
-    public void setOrdenJugadores(List<String> jugadores) {
+    public void setOrdenJugadores(List<Jugador> jugadores) {
         this.ordenJugadores = jugadores;
     }
 
-    public String getJugadorActual() {
+    public Jugador getJugadorActual() {
         return ordenJugadores.get(indiceActual);
     }
 
     public void cambiarTurno() {
         indiceActual = (indiceActual + 1) % ordenJugadores.size();
     }
+    
+    public int posicionJugador(Jugador jugador){
+        return ordenJugadores.indexOf(jugador);
+     }
 }
-

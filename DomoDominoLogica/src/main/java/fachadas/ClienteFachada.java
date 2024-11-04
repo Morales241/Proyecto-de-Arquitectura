@@ -9,8 +9,9 @@ public class ClienteFachada implements IClienteFachada{
         this.cliente = cliente;
     }
 
+    @Override
     public void enviarMensaje(String mensaje) {
-        cliente.enviarMensaje(mensaje);
+//        cliente.enviarMensaje(mensaje);
     }
 
     // Otros métodos que quieramos exponer de Cliente

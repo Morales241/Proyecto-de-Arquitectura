@@ -2,6 +2,7 @@ package registrarUsuario;
 
 import dtos.UsuarioDto;
 import DAOs.UsuarioDAO;
+//import com.mycompany.domodominopersistencia.Usuario;
 import Entidades.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +41,7 @@ public class LogicaRegistrar implements ILogicaRegistrar {
             
             Usuario nuevoUsuario = new Usuario(usuario.getNombre(), usuario.getCorreo(), usuario.getContraseña());
          
-            usuarioDAO.registrar(nuevoUsuario);
+//            usuarioDAO.registrar(nuevoUsuario);
             
             return true; 
         }

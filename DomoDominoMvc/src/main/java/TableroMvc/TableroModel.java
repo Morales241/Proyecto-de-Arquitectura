@@ -2,52 +2,65 @@ package TableroMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import Entidades.Ficha;
-import Entidades.Pozo;
-import observers.IObservableString;
-import observers.IObserverString;
+import dtos.FichaDto;
+import observers.IObservable;
+import observers.IObserver;
+import observers.IObserverFicha;
 
-public class TableroModel implements IObservableString {
-    
-    private Pozo pozo;
+public class TableroModel implements IObservable {
+
     private int numeroFichas = 7;
-    private List<Ficha> fichas;
-    private List<IObserverString> observadores = new ArrayList<>();
+    private List<FichaDto> fichas;
+    private List<IObserver> observadores = new ArrayList<>();
+    private FichaDto fichaSeleccionada;
+    private IObserverFicha listenerFicha;
 
     public TableroModel() {
-        pozo = new Pozo(numeroFichas); 
+        
     }
 
-    public void repartirFichas(){
-        fichas = pozo.repartirFichas();
-      
-        notificarObservadores("repartirFicha");
+    public void repartirFichas(List<FichaDto> fichas) {
+        this.fichas = fichas;
+        
+        notificarObservadores();
     }
 
-    public List<Ficha> getFichas() {
+    public void agregarIObserverFicha(IObserverFicha listener) {
+        this.listenerFicha = listener;
+    }
+
+    public void ejecutarAccionPonerFicha() {
+        if (listenerFicha != null) {
+            listenerFicha.actualizar(fichaSeleccionada);
+        }
+    }
+
+    public List<FichaDto> getFichas() {
         return fichas;
     }
 
-    public void setFichas(List<Ficha> fichas) {
+    public void setFichas(List<FichaDto> fichas) {
         this.fichas = fichas;
     }
-    
+
     @Override
-    public void agregarObservador(IObserverString observador) {
+    public void agregarObservador(IObserver observador) {
         observadores.add(observador);
     }
 
     @Override
-    public void eliminarObservador(IObserverString observador) {
+    public void eliminarObservador(IObserver observador) {
         observadores.remove(observador);
     }
 
     @Override
-    public void notificarObservadores(String mensaje) {
+    public void notificarObservadores() {
         observadores.forEach(IObserver -> {
-            IObserver.actualizar(mensaje);
+            IObserver.actualizar();
         });
     }
-    
-    
+
+    public void actualizarFichaSelecionada(FichaDto fichaSelect) {
+        this.fichaSeleccionada = fichaSelect;
+    }
 }

@@ -33,12 +33,7 @@ public class Pozo {
 private void crearFichasPozo() {
     for (int i = 0; i <= 6; i++) {
         for (int j = i; j <= 6; j++) {
-            // Crear la ruta de la imagen
-            String rutaImagen = String.format("/imgPartidaFichas/ficha%d_%d.png", i, j);
-            // Crear un ImageIcon a partir de la ruta
-            ImageIcon iconoFicha = new ImageIcon(getClass().getResource(rutaImagen));
-            // Crear la ficha usando el ImageIcon
-            Ficha ficha = new Ficha(i, j, iconoFicha);
+            Ficha ficha = new Ficha(i, j);
             System.out.println(ficha);
             fichas.add(ficha);
         }
