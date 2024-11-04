@@ -13,7 +13,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DomoDominoPatrones</artifactId>
+            <artifactId>DomoDominoUtileria</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

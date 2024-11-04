@@ -10,25 +10,26 @@ import java.util.List;
  * @author tacot
  */
 public class SetUpDto {
-    private final Object[][] fichasDeLosJugadores;
     private List<JugadorDto> ordenDeJugadoresEnPartida;
+    private final FichaDto[][] fichasDeLosJugadores;
 
     public SetUpDto() {
-        this.fichasDeLosJugadores  = new Object[3][2];
+        this.fichasDeLosJugadores  = new FichaDto[3][7];
         this.ordenDeJugadoresEnPartida = new ArrayList<>();
     }
 
     public List<FichaDto> getFichasDeJugador(JugadorDto jugador){
-        List<FichaDto> fichasDeJugador;
         
-        for (int i = 0; i < 3; i++) {
-            
+        List<FichaDto> fichasDeJugador = new ArrayList<>();
+        
+        int posicionJugador = ordenDeJugadoresEnPartida.indexOf(jugador);
+        
+        for (int i = 0; i < 7; i++) {
+            fichasDeJugador.add(fichasDeLosJugadores[posicionJugador][i]);
         }
         
-        return null;
+        return fichasDeJugador;
     }
-    
-    
     
     public List<JugadorDto> getOrdenDeJugadoresEnPartida() {
         return ordenDeJugadoresEnPartida;
@@ -37,6 +38,5 @@ public class SetUpDto {
     public void setOrdenDeJugadoresEnPartida(List<JugadorDto> ordenDeJugadoresEnPartida) {
         this.ordenDeJugadoresEnPartida = ordenDeJugadoresEnPartida;
     }
-    
     
 }
