@@ -70,7 +70,7 @@ public class Servidor {
             try {
                 Jugada judadaRecibida;
                 while ((judadaRecibida = obtenerMensaje()) != null) {
-                    gestorMensajes.notificarObservadores(judadaRecibida);
+//                    gestorMensajes.notificarObservadores(judadaRecibida);
                     log.log(Level.INFO, "Mensaje recibido: ", judadaRecibida);
                 }
             } catch (IOException ex) {

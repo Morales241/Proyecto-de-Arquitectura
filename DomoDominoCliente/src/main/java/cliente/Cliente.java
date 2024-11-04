@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import serverInterno.Servidor;
-import serializables.Jugada;
 
 public class Cliente {
     private Socket socket;
@@ -34,31 +33,31 @@ public class Cliente {
         }
     }
 
-    public void enviarMensaje(Jugada jugada) {
-        try {
-            
-            String informacionAMandar = serializarJugada(jugada);
-            
-            byte[] jsonBytes = pasarAbites(informacionAMandar);
-            
-            escritor.writeInt(jsonBytes.length);
-            
-            escritor.write(jsonBytes);
-            
-        } catch (IOException e) {
-            log.log(Level.SEVERE, "Error en la clase Cliente, metodo enviar mensaje", e.getMessage());
-        }
-    }
-    
-    public String serializarJugada(Jugada jugada){
-         
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        
-        String json = gson.toJson(jugada);
-        
-        return json;
-    }   
-    
+//    public void enviarMensaje(Jugada jugada) {
+//        try {
+//            
+//            String informacionAMandar = serializarJugada(jugada);
+//            
+//            byte[] jsonBytes = pasarAbites(informacionAMandar);
+//            
+//            escritor.writeInt(jsonBytes.length);
+//            
+//            escritor.write(jsonBytes);
+//            
+//        } catch (IOException e) {
+//            log.log(Level.SEVERE, "Error en la clase Cliente, metodo enviar mensaje", e.getMessage());
+//        }
+//    }
+//    
+//    public String serializarJugada(Jugada jugada){
+//         
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        
+//        String json = gson.toJson(jugada);
+//        
+//        return json;
+//    }   
+//    
     public byte[] pasarAbites(String json){
         
         byte[] jsonBytes = json.getBytes();
