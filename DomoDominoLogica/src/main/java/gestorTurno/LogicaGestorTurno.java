@@ -3,7 +3,7 @@ package gestorTurno;
 import fachadas.ClienteFachada;
 
 public class LogicaGestorTurno implements ILogicaGestorTurno{
-    private ClienteFachada clienteFachada;
+    private final ClienteFachada clienteFachada;
 
     public LogicaGestorTurno(ClienteFachada fachadaCliente) {
         this.clienteFachada = fachadaCliente;

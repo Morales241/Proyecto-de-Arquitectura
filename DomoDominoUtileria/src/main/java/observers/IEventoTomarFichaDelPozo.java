@@ -4,11 +4,12 @@
  */
 package observers;
 
+import dtos.FichaDto;
 
 /**
  *
  * @author tacot
  */
-public interface IEventoConectarseAlServidorCentral {
-    public void actualizar(IEventoRespuestaServidorCentral respuesta);
+public interface IEventoTomarFichaDelPozo {
+    public void tomarFichaDelPozo(FichaDto fichaSacada);
 }
