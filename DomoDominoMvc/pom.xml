@@ -13,12 +13,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DomoDominoLogica</artifactId>
+            <artifactId>DomoDominoPatrones</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DomoDominoPatrones</artifactId>
+            <artifactId>DomoDominoDominio</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
