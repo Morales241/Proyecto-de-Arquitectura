@@ -7,7 +7,7 @@ import observers.IObservable;
 import observers.IObserver;
 import observers.IObserverFicha;
 
-public class TableroModel implements IObservable {
+public class TableroModel  {
 
     private int numeroFichas = 7;
     private List<FichaDto> fichas;
@@ -21,7 +21,6 @@ public class TableroModel implements IObservable {
 
     public void repartirFichas(List<FichaDto> fichas) {
         this.fichas = fichas;
-        
         notificarObservadores();
     }
 
@@ -43,17 +42,14 @@ public class TableroModel implements IObservable {
         this.fichas = fichas;
     }
 
-    @Override
     public void agregarObservador(IObserver observador) {
         observadores.add(observador);
     }
 
-    @Override
     public void eliminarObservador(IObserver observador) {
         observadores.remove(observador);
     }
 
-    @Override
     public void notificarObservadores() {
         observadores.forEach(IObserver -> {
             IObserver.actualizar();
