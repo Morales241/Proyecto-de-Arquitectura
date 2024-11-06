@@ -18,7 +18,7 @@ public class TableroController {
     
     public void colocarFichaEnTablero(){
         tableroView.actualizarFichaSelecionada();
-        tableroModel.ejecutarAccionPonerFicha();
+//        tableroModel.ejecutarAccionPonerFicha();
     }
     
     private class ponerFichaEnTablero extends MouseAdapter{

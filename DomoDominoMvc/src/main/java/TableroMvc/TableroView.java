@@ -37,7 +37,7 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
 
         initComponents();
         this.tableroModel = tableroModel;
-        this.tableroModel.agregarObservador(this);
+//        this.tableroModel.agregarObservador(this);
         this.jugador = jugador;
         setLayout(new BorderLayout());
 

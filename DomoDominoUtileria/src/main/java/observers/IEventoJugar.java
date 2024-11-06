@@ -4,16 +4,10 @@
  */
 package observers;
 
-
 /**
  *
  * @author tacot
  */
-public interface IObservableFicha {
-    public void agregarObservador(IObserverFicha observador);
-    
-    public void eliminarObservador(IObserverFicha observador);
-    
-    public void notificarObservadores();
-    
+public interface IEventoJugar {
+    public void validarNombreParaJugar(String nombre);
 }

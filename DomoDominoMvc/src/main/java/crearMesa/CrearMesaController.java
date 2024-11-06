@@ -1,9 +1,8 @@
 package crearMesa;
 
-import observers.IObserverString;
 
 
-public class CrearMesaController implements IObserverString{
+public class CrearMesaController {
     private CrearMesaView vista;
     private CrearMesaModel modelo;
 
@@ -27,9 +26,5 @@ public class CrearMesaController implements IObserverString{
     //codigo pa crear mesa jajsaj
     }
 
-    @Override
-    public void actualizar(String estado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
 }

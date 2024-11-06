@@ -4,12 +4,10 @@
  */
 package observers;
 
-import dtos.FichaDto;
-
 /**
  *
  * @author tacot
  */
-public interface IObserverFicha {
-    public void actualizar(FichaDto fichaSeleccionada);
+public interface IEventoValidacionDeNombre {
+    public void validacionDeNombre(String mensajeDeValidacion);
 }

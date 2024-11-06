@@ -1,7 +1,7 @@
 package fachadas;
 
 import InicioMvc.InicioModel;
-import observers.IObserver;
+import observers.IEventoValidacionDeNombre;
 
 /**
  * Fachada para manejar el modelo de inicio del juego sin exponer su implementación directa.
@@ -15,7 +15,7 @@ public class InicioFachada implements IInicioFachada {
     }
 
     @Override
-    public void agregarIObserverJugar(IObserver observer) {
-        inicioModel.agregarIObserverJugar(observer);
+    public void agregarIObserverJugar(IEventoValidacionDeNombre observer) {
+        inicioModel.agregarIEventoValidacionDeNombre(observer);
     }
 }

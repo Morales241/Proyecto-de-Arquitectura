@@ -1,12 +1,9 @@
 package Inicio;
 
-import Inicializador.InicializadorClases;
-import InicioMvc.InicioModel;
 import fachadas.IInicioFachada;
-import fachadas.InicioFachada;
 import mediador.IMediador;
 import mediador.Mediador;
-import observers.IObserver;
+import observers.IEventoValidacionDeNombre;
 
 /**
  * Clase principal de Logica en la que inicia el juego
@@ -33,11 +30,13 @@ public class LogicaInicio implements ILogicaInicio {
         mediador.mostrarPantallaConcreta("tablero");
     }
 
-    private class AccionIniciarJuego implements IObserver {
+    private class AccionIniciarJuego implements IEventoValidacionDeNombre {
 
         @Override
-        public void actualizar() {
-            Jugar();
+        public void validacionDeNombre(String mensajeDeValidacion) {
+            System.out.println("llego a logica");
         }
+
+        
     }
 }

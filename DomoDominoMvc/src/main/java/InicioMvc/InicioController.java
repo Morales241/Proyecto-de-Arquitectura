@@ -2,6 +2,7 @@ package InicioMvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import observers.IEventoJugar;
 
 
 public class InicioController{
@@ -13,20 +14,20 @@ public class InicioController{
         this.inicioView = inicioView;
         this.inicioModel = inicioModel;
 
-        inicioView.btnJugar(new OyenteJugar());
-    }
-
-    public void Jugar(){
-        inicioModel.ejecutarAccionJugar();
+        inicioView.agregarIEventoJugar(new OyenteJugar());
     }
     
-    private class OyenteJugar implements ActionListener {
+    public void validarNombre(String nombre){
+        this.inicioModel.ejecutarAccionJugar(nombre);
         
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Se hizo la acction perform");
-            Jugar();
-        }
+    }
+    
+    private class OyenteJugar implements IEventoJugar {
 
+        @Override
+        public void validarNombreParaJugar(String nombre) {
+            validarNombre(nombre);
+        }
+        
     }
 }
