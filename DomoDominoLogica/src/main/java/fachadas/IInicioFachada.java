@@ -14,4 +14,5 @@ public interface IInicioFachada {
      */
     void agregarIObserverJugar(IEventoValidacionDeNombre observer);
 
+    public void mandarMensajeNombreInvalido(String mensaje);
 }

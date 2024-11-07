@@ -1,7 +1,10 @@
 package logica;
 
 import Inicializador.InicializadorClases;
+import Inicio.LogicaInicio;
+import fachadas.IInicioFachada;
 import mediador.Mediador;
+import observers.IEventoValidacionDeNombre;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -13,18 +16,38 @@ import mediador.Mediador;
  */
 public class LogicaPrincipal {
     private Mediador mediador;
+    private LogicaInicio lInicio;
+    private IInicioFachada iFachada;
 
     public LogicaPrincipal() {
-        mediador = Mediador.getInstancia();
     }
-    
-    
+
+    public LogicaPrincipal(LogicaInicio logicaInicio, 
+            IInicioFachada inicioFachada) {
+        mediador = Mediador.getInstancia();
+        lInicio = logicaInicio;
+        iFachada = inicioFachada;
+        inicioFachada.agregarIObserverJugar(new AccionIniciarJuego());
+    }
     
     public void iniciarJuego(){
         InicializadorClases inicializadorClases = new InicializadorClases();
         inicializadorClases.InicializarClases();
         
         mediador.mostrarPantallaConcreta("login");
+        
+    }
+    
+    private class AccionIniciarJuego implements IEventoValidacionDeNombre {
+
+        @Override
+        public void validacionDeNombre(String mensajeDeValidacion) {
+            if (lInicio.validarNombre(mensajeDeValidacion).equals("El nombre no es valido")) {
+                iFachada.mandarMensajeNombreInvalido(mensajeDeValidacion);
+            }
+
+        }
+
         
     }
 }

@@ -18,4 +18,9 @@ public class InicioFachada implements IInicioFachada {
     public void agregarIObserverJugar(IEventoValidacionDeNombre observer) {
         inicioModel.agregarIEventoValidacionDeNombre(observer);
     }
+    
+    @Override
+    public void mandarMensajeNombreInvalido(String mensaje){
+        inicioModel.ejecutarAccionValidar(mensaje);
+    }
 }
