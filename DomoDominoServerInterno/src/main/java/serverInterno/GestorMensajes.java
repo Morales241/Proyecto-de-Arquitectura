@@ -2,18 +2,17 @@ package serverInterno;
 
 import dtos.FichaDto;
 import dtos.JugadorDto;
+import eventos.JugadorAEliminarDto;
 import eventos.PonerFichaDto;
 import eventos.SetUpDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import observers.IEventoCrearPartida;
 import observers.IEventoIniciarPartida;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoSalirDePartida;
 
-import serializables.Jugada;
 
 public class GestorMensajes {
 
@@ -96,7 +95,7 @@ public class GestorMensajes {
           this.observerSalir = null;
      }
 
-     public void notificarObserverSalirDePartida(JugadorDto jugador) {
+     public void notificarObserverSalirDePartida(JugadorAEliminarDto jugador) {
           if (observerSalir != null) {
                observerSalir.salirDePartida(jugador);
                log.log(Level.SEVERE, "Metodo:notificarObserverSalirDePartida - Clase:GestorMensajes - Proyecto:ServerInterno");

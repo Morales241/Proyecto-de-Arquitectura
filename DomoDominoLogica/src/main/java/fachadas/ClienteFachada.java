@@ -14,5 +14,5 @@ public class ClienteFachada implements IClienteFachada{
 //        cliente.enviarMensaje(mensaje);
     }
 
-    // Otros métodos que quieramos exponer de Cliente
+    // Otros métodos que queramos exponer de Cliente
 }

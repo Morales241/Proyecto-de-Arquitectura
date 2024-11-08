@@ -8,6 +8,10 @@ package eventos;
  *
  * @author tacot
  */
-public class JugadorCrearPartidaDto {
-    
+public class JugadorCrearPartidaDto extends JugadorConsulta{
+
+    public JugadorCrearPartidaDto(String ip, String codigo, int puerto) {
+        super(ip, codigo, puerto);
+    }
+
 }

@@ -1,11 +1,11 @@
 package observers;
 
-import serializables.Jugador;
+import eventos.JugadorCrearPartidaDto;
 
 /**
  *
  * @author tacot
  */
 public interface IEventoCrearPartida {
-    public void actualizar(Jugador jugador);
+    public void crearPartida(JugadorCrearPartidaDto jugador);
 }
