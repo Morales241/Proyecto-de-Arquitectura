@@ -1,2 +1,7 @@
-com\mycompany\domodominoservercentral\main.class
-com\mycompany\domodominoservercentral\ServerCentral.class
+sereverCentral\ServerCentral$AccionAcabarParitda.class
+sereverCentral\ServerCentral.class
+sereverCentral\ServerCentral$AccionSalirDePartida.class
+sereverCentral\ServerCentral$AccionIniciarPartida.class
+sereverCentral\ServerCentral$AccionUnirseAPartida.class
+sereverCentral\ArrancarServidorCentral.class
+sereverCentral\ServerCentral$AccionCrearPartida.class
