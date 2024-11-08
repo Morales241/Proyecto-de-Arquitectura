@@ -75,7 +75,7 @@ public class ServerCentral {
 
             if (infoPartidas[i][4].equals(codigo)) {
 
-                for (int k = 0; k < 5; k++) {
+                for (int k = 0; k < 4; k++) {
                     informacionPartida.add(infoPartidas[i][k]);
                 }
             }

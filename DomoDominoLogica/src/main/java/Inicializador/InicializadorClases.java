@@ -45,6 +45,6 @@ public class InicializadorClases {
           
         //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
         IInicioFachada inicioFachada = new InicioFachada(inicioModel);
-        LogicaInicio logicaInicio = new LogicaInicio(inicioFachada);
+//        LogicaInicio logicaInicio = new LogicaInicio(inicioFachada);
     }
 }
