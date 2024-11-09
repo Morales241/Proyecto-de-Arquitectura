@@ -26,6 +26,7 @@ public class Cliente {
             escritor = new ObjectOutputStream(socket.getOutputStream());
             
             server.iniciarReceptor(socket);
+            log.log(Level.INFO, "se conecto al nodo: "+ip, ip);
             
         } catch (IOException e) {
             log.log(Level.SEVERE, "Error en la clase Cliente, metodo conectarANodo: ", e.getMessage());
