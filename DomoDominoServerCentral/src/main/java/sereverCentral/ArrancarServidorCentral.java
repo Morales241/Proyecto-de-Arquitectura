@@ -28,12 +28,8 @@ public class ArrancarServidorCentral {
         Scanner tec = new Scanner(System.in);
         boolean llave = true;
         GestorMensajes gestorMensajes = new GestorMensajes();
-        new Thread(()->{
-            Servidor server = new Servidor(8091, gestorMensajes);
-        });
-
-        
-        Cliente cliente = new Cliente();
+        Servidor server = new Servidor(8091, gestorMensajes);
+        Cliente cliente = new Cliente(server);
         ServerCentral serverCentral = new ServerCentral(cliente, gestorMensajes);
         System.out.println("192.168.100.11");
         while (llave) {
