@@ -29,7 +29,7 @@ public class ArrancarServidorCentral {
         boolean llave = true;
         GestorMensajes gestorMensajes = new GestorMensajes();
         Servidor server = new Servidor(8091, gestorMensajes);
-        Cliente cliente = new Cliente(server);
+        Cliente cliente = new Cliente();
         ServerCentral serverCentral = new ServerCentral(cliente, gestorMensajes);
         System.out.println("192.168.100.11");
         while (llave) {
@@ -37,7 +37,7 @@ public class ArrancarServidorCentral {
             System.out.println(llave);
         }
         System.out.println("se va a conectar");
-        cliente.conectarANodo("192.168.100.21", 8070);
+        cliente.conectarAServidor("192.168.100.21", 8070);
 
         while (!llave) {
             llave = tec.nextBoolean();
