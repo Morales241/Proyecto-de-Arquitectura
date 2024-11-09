@@ -31,7 +31,7 @@ public class GestorMensajes {
         this.IEventoCrearPartida = observador;
     }
 
-    public void eliminarObservadorCrearPartida(IEventoCrearPartida observador) {
+    public void eliminarObservadorCrearPartida() {
         this.IEventoCrearPartida = null;
     }
 
@@ -47,7 +47,7 @@ public class GestorMensajes {
         this.observerSalir = observador;
     }
 
-    public void eliminarObservadorSalirDePartida(IEventoSalirDePartida observador) {
+    public void eliminarObservadorSalirDePartida() {
         this.observerSalir = null;
     }
 
@@ -63,7 +63,7 @@ public class GestorMensajes {
         this.observerAgregarJugador = observador;
     }
 
-    public void eliminarObservadorAgregarJugador(IEventoTomarFichaDelPozo observador) {
+    public void eliminarObservadorAgregarJugador() {
         this.observerAgregarJugador = null;
     }
 
@@ -79,7 +79,7 @@ public class GestorMensajes {
         this.observeriniciarPartida = observador;
     }
 
-    public void eliminarObservadorIniciarPartida(IEventoIniciarPartidaServerCentral observador) {
+    public void eliminarObservadorIniciarPartida() {
         this.observeriniciarPartida = null;
     }
 
@@ -95,7 +95,7 @@ public class GestorMensajes {
         this.observeracabarPartida = observador;
     }
 
-    public void eliminarObservadorAcabarPartida(IEventoAcabarPartida observador) {
+    public void eliminarObservadorAcabarPartida() {
         this.observeracabarPartida = null;
     }
 

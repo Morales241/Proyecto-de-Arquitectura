@@ -25,19 +25,17 @@ public class ArrancarServidorCentral {
      */
     public static void main(String[] args) {
 
-        try {
-            Scanner tec= new Scanner(System.in);
-            
-            boolean llave = true;
-            GestorMensajes gestorMensajes = new GestorMensajes();
-            Servidor server = new Servidor(8091, gestorMensajes);
-            Cliente cliente = new Cliente(server);
-            ServerCentral serverCentral = new ServerCentral(cliente, gestorMensajes);
-            System.out.println(InetAddress.getLocalHost().getHostAddress());
-            while(llave){
-                llave = tec.nextBoolean();
-                System.out.println(llave);
-            }
+        Scanner tec= new Scanner(System.in);
+        boolean llave = true;
+        GestorMensajes gestorMensajes = new GestorMensajes();
+        Servidor server = new Servidor(8091, gestorMensajes);
+        Cliente cliente = new Cliente(server);
+        ServerCentral serverCentral = new ServerCentral(cliente, gestorMensajes);
+        System.out.println("192.168.100.11");
+        while(llave){
+            llave = tec.nextBoolean();
+            System.out.println(llave);
+        }
             System.out.println("se va a conectar");
             cliente.conectarANodo("192.168.100.21", 8070);
             
@@ -47,10 +45,7 @@ public class ArrancarServidorCentral {
             }
             System.out.println("va a mandar algo");
             cliente.enviarMensaje(new JugadorCrearPartidaDto("2", "3", 1));
-            
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(ArrancarServidorCentral.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         
 
     }

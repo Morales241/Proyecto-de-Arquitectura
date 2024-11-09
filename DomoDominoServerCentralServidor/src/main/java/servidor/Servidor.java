@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class Servidor {
 
     private ServerSocket serverSocket;
-    private ObjectInputStream lector;
+
     private GestorMensajes gestorMensajes;
     private static final Logger log = Logger.getLogger(Servidor.class.getName());
 
@@ -27,7 +27,7 @@ public class Servidor {
             new Thread(new Oyente()).start();
 
         } catch (IOException e) {
-            log.log(Level.SEVERE, "Error en la clase Servidor, metodo constructor: ", e.getMessage());
+            log.log(Level.SEVERE, "Error en la clase Servidor, metodo constructor: ", e);
         }
     }
 
@@ -38,11 +38,11 @@ public class Servidor {
             while (true) {
                 try {
                     Socket nodo = serverSocket.accept();
-
+                    System.out.println("Se agrego nuevo nodo: " + nodo.getInetAddress().getHostAddress());
                     iniciarReceptor(nodo);
 
                 } catch (IOException e) {
-                    log.log(Level.SEVERE, "Error en la clase Servirdor - Oyente, metodo run", e.getMessage());
+                    log.log(Level.SEVERE, "Error en la clase Servirdor - Oyente, metodo run", e);
                 }
             }
         }
@@ -54,6 +54,7 @@ public class Servidor {
 
     private class Receptor implements Runnable {
 
+        private ObjectInputStream lector;
         private Socket nodo;
 
         public Receptor(Socket nodo) {
@@ -61,29 +62,30 @@ public class Servidor {
             try {
                 lector = new ObjectInputStream(nodo.getInputStream());
             } catch (IOException e) {
-               log.log(Level.SEVERE, "Metodo:Receptor - Clase:Servidor - Proyecto:Server de Server Central");
+                log.log(Level.SEVERE, "Metodo:Receptor - Clase:Servidor - Proyecto:Server de Server Central", e);
             }
         }
 
         @Override
         public void run() {
             Object mensajeRecibido = null;
-            
+
             while ((mensajeRecibido = obtenerMensaje()) != null) {
-                
+
                 if (mensajeRecibido instanceof JugadorCrearPartidaDto jugadorCrearPartidaDto) {
                     gestorMensajes.notificarObservadoreCrearPartida(jugadorCrearPartidaDto);
-                    
+
                 }
                 if (mensajeRecibido instanceof JugadorUnirseAPartidaDto jugadorUnirseAPartidaDto) {
-                   gestorMensajes.notificarObserverAgregarJugador(jugadorUnirseAPartidaDto);
-                
-                }if (mensajeRecibido instanceof JugadorAEliminarDto jugadorAEliminarDto) {
-                   gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
-                } else {
-                    
+                    gestorMensajes.notificarObserverAgregarJugador(jugadorUnirseAPartidaDto);
+
                 }
-               log.log(Level.INFO, "Metodo:run - Clase:Servidor - Proyecto:Server de Server Central");
+                if (mensajeRecibido instanceof JugadorAEliminarDto jugadorAEliminarDto) {
+                    gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
+                } else {
+
+                }
+                log.log(Level.INFO, "Metodo:run - Clase:Servidor - Proyecto:Server de Server Central");
             }
         }
 
@@ -91,6 +93,7 @@ public class Servidor {
             Object mensaje = null;
             try {
                 mensaje = lector.readObject();
+                System.out.println("llego un mensaje");
             } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
             }
