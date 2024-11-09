@@ -13,12 +13,10 @@ public class Cliente {
 
     private Socket socket;
     private ObjectOutputStream escritor;
-    private final Servidor server;
     private static final Logger log = Logger.getLogger(Cliente.class.getName());
 
-    public Cliente(Servidor servervidor) {
+    public Cliente() {
 
-        this.server = servervidor;
     }
 
     public void conectarANodo(String ip, int puerto) {
@@ -27,9 +25,8 @@ public class Cliente {
                 socket = new Socket(ip, puerto);
 
                 escritor = new ObjectOutputStream(socket.getOutputStream());
-                server.setLector(new ObjectInputStream(socket.getInputStream()));
-                server.iniciarReceptor(socket);
 
+                
                 log.log(Level.INFO, "se conecto al nodo: " + ip, ip);
 
             } catch (IOException e) {

@@ -11,9 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Servidor {
-    private ObjectInputStream lector;
+    
     private ServerSocket serverSocket;
-
     private GestorMensajes gestorMensajes;
     private static final Logger log = Logger.getLogger(Servidor.class.getName());
 
@@ -39,7 +38,7 @@ public class Servidor {
                 try {
                     Socket nodo = serverSocket.accept();
                     System.out.println("Se agrego nuevo nodo: " + nodo.getInetAddress().getHostAddress());
-                    iniciarReceptor(nodo);
+                     new Thread(new Receptor(nodo)).start();
 
                 } catch (IOException e) {
                     log.log(Level.SEVERE, "Error en la clase Servirdor - Oyente, metodo run", e);
@@ -47,14 +46,14 @@ public class Servidor {
             }
         }
     }
-
-    public void iniciarReceptor(Socket nodo) {
-        new Thread(new Receptor(nodo)).start();
-    }
+//
+//    public void iniciarReceptor(Socket nodo) {
+//        new Thread(new Receptor(nodo)).start();
+//    }
 
     private class Receptor implements Runnable {
 
-        
+        private ObjectInputStream lector;
         private Socket nodo;
 
         public Receptor(Socket nodo) {
@@ -101,8 +100,4 @@ public class Servidor {
         }
     }
 
-    public void setLector(ObjectInputStream lector) {
-        this.lector = lector;
-    }
-    
 }
