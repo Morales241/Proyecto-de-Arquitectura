@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Servidor {
+
     private ObjectInputStream lector;
     private ServerSocket serverSocket;
 
@@ -21,13 +22,12 @@ public class Servidor {
         this.gestorMensajes = gestorMensajes;
         try {
             serverSocket = new ServerSocket(puerto);
-
-            log.log(Level.INFO, "El servidor se inicio en el puerto: " + puerto, puerto);
+            log.log(Level.INFO, "El servidor se inició en el puerto: " + puerto);
 
             new Thread(new Oyente()).start();
 
         } catch (IOException e) {
-            log.log(Level.SEVERE, "Error en la clase Servidor, metodo constructor: ", e);
+            log.log(Level.SEVERE, "Error en la clase Servidor, método constructor: ", e);
         }
     }
 
@@ -38,11 +38,11 @@ public class Servidor {
             while (true) {
                 try {
                     Socket nodo = serverSocket.accept();
-                    System.out.println("Se agrego nuevo nodo: " + nodo.getInetAddress().getHostAddress());
+                    log.log(Level.INFO, "Se agregó nuevo nodo: " + nodo.getInetAddress().getHostAddress());
                     iniciarReceptor(nodo);
 
                 } catch (IOException e) {
-                    log.log(Level.SEVERE, "Error en la clase Servirdor - Oyente, metodo run", e);
+                    log.log(Level.SEVERE, "Error en la clase Servidor - Oyente, método run", e);
                 }
             }
         }
@@ -54,16 +54,10 @@ public class Servidor {
 
     private class Receptor implements Runnable {
 
-        
         private Socket nodo;
 
         public Receptor(Socket nodo) {
             this.nodo = nodo;
-            try {
-                lector = new ObjectInputStream(nodo.getInputStream());
-            } catch (IOException e) {
-                log.log(Level.SEVERE, "Metodo:Receptor - Clase:Servidor - Proyecto:Server de Server Central", e);
-            }
         }
 
         @Override
@@ -71,39 +65,41 @@ public class Servidor {
             Object mensajeRecibido = null;
 
             while ((mensajeRecibido = obtenerMensaje()) != null) {
-
-                if (mensajeRecibido instanceof JugadorCrearPartidaDto jugadorCrearPartidaDto) {
-                    gestorMensajes.notificarObservadoreCrearPartida(jugadorCrearPartidaDto);
-
+                switch (mensajeRecibido) {
+                    
+                    case JugadorCrearPartidaDto jugadorCrearPartidaDto ->
+                        gestorMensajes.notificarObservadoreCrearPartida(jugadorCrearPartidaDto);
+                    
+                    case JugadorUnirseAPartidaDto jugadorUnirseAPartidaDto ->
+                        gestorMensajes.notificarObserverAgregarJugador(jugadorUnirseAPartidaDto);
+                    
+                    case JugadorAEliminarDto jugadorAEliminarDto ->
+                        gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
+                    
+                    default ->
+                        log.log(Level.INFO, "Tipo de mensaje no reconocido");
                 }
-                if (mensajeRecibido instanceof JugadorUnirseAPartidaDto jugadorUnirseAPartidaDto) {
-                    gestorMensajes.notificarObserverAgregarJugador(jugadorUnirseAPartidaDto);
-
-                }
-                if (mensajeRecibido instanceof JugadorAEliminarDto jugadorAEliminarDto) {
-                    gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
-                } else {
-
-                }
-                log.log(Level.INFO, "Metodo:run - Clase:Servidor - Proyecto:Server de Server Central");
+                log.log(Level.INFO, "Método: run - Clase: Servidor - Proyecto: Server de Server Central");
             }
         }
 
         public Object obtenerMensaje() {
             Object mensaje = null;
-            try {
+            try (ObjectInputStream lector = new ObjectInputStream(nodo.getInputStream())){
                 mensaje = lector.readObject();
-                
-                System.out.println("llego un mensaje");
+                log.log(Level.INFO, "Llegó un mensaje");
             } catch (IOException | ClassNotFoundException ex) {
-                Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                log.log(Level.SEVERE, "Error al leer el mensaje", ex);
             }
             return mensaje;
+            
+            
         }
     }
 
     public void setLector(ObjectInputStream lector) {
         this.lector = lector;
     }
+    
     
 }

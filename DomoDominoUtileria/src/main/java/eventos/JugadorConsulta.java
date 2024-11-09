@@ -4,12 +4,14 @@
  */
 package eventos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tacot
  */
-public class JugadorConsulta {
-
+public class JugadorConsulta implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String ip;
     private String codigo;
     private int puerto;

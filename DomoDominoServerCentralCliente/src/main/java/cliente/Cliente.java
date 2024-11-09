@@ -13,6 +13,7 @@ public class Cliente {
 
     private Socket socket;
     private ObjectOutputStream escritor;
+    private ObjectInputStream lector;
     private final Servidor server;
     private static final Logger log = Logger.getLogger(Cliente.class.getName());
 
@@ -22,21 +23,27 @@ public class Cliente {
     }
 
     public void conectarANodo(String ip, int puerto) {
-        
-            try {
-                socket = new Socket(ip, puerto);
+    try {
+        log.log(Level.INFO, "Intentando conectar al nodo: " + ip + ":" + puerto);
 
-                escritor = new ObjectOutputStream(socket.getOutputStream());
-                escritor.flush();
-                server.iniciarReceptor(socket);
-                
-                log.log(Level.INFO, "se conecto al nodo: " + ip, ip);
+        socket = new Socket(ip, puerto);
+        log.log(Level.INFO, "Socket creado");
 
-            } catch (IOException e) {
-                log.log(Level.SEVERE, "Error en la clase Cliente, metodo conectarANodo: ", e);
-            }
+        escritor = new ObjectOutputStream(socket.getOutputStream());
+        escritor.flush();
+        log.log(Level.INFO, "ObjectOutputStream creado y vaciado en el cliente");
+//
+//        lector = new ObjectInputStream(socket.getInputStream());
+//        log.log(Level.INFO, "ObjectInputStream creado en el cliente");
+//        
+//        server.iniciarReceptor(socket);
+//        log.log(Level.INFO, "Receptor iniciado");
 
+    } catch (IOException e) {
+        log.log(Level.SEVERE, "Error en la clase Cliente, método conectarANodo: ", e);
     }
+}
+
 
     public void enviarMensaje(Object mensaje) {
         try {

@@ -9,7 +9,7 @@ package eventos;
  * @author tacot
  */
 public class JugadorCrearPartidaDto extends JugadorConsulta{
-
+    private static final long serialVersionUID = 1L;
     public JugadorCrearPartidaDto(String ip, String codigo, int puerto) {
         super(ip, codigo, puerto);
     }
