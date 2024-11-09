@@ -27,13 +27,13 @@ public class Cliente {
                 socket = new Socket(ip, puerto);
 
                 escritor = new ObjectOutputStream(socket.getOutputStream());
-                server.setLector(new ObjectInputStream(socket.getInputStream()));
+                escritor.flush();
                 server.iniciarReceptor(socket);
-
+                
                 log.log(Level.INFO, "se conecto al nodo: " + ip, ip);
 
             } catch (IOException e) {
-                log.log(Level.SEVERE, "Error en la clase Cliente, metodo conectarANodo: ", e.getMessage());
+                log.log(Level.SEVERE, "Error en la clase Cliente, metodo conectarANodo: ", e);
             }
 
     }
@@ -42,7 +42,7 @@ public class Cliente {
         try {
 
             escritor.writeObject(mensaje);
-
+            escritor.flush();
         } catch (IOException e) {
             log.log(Level.SEVERE, "Error en la clase Cliente, metodo enviar mensaje", e.getMessage());
         }

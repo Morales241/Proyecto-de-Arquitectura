@@ -93,6 +93,7 @@ public class Servidor {
             Object mensaje = null;
             try {
                 mensaje = lector.readObject();
+                
                 System.out.println("llego un mensaje");
             } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
