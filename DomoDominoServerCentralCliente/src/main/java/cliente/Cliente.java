@@ -2,6 +2,7 @@ package cliente;
 
 import eventos.JugadorConsulta;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -21,12 +22,12 @@ public class Cliente {
     }
 
     public void conectarANodo(String ip, int puerto) {
-        new Thread(() -> {
+        
             try {
                 socket = new Socket(ip, puerto);
 
                 escritor = new ObjectOutputStream(socket.getOutputStream());
-
+                server.setLector(new ObjectInputStream(socket.getInputStream()));
                 server.iniciarReceptor(socket);
 
                 log.log(Level.INFO, "se conecto al nodo: " + ip, ip);
@@ -34,7 +35,6 @@ public class Cliente {
             } catch (IOException e) {
                 log.log(Level.SEVERE, "Error en la clase Cliente, metodo conectarANodo: ", e.getMessage());
             }
-        });
 
     }
 

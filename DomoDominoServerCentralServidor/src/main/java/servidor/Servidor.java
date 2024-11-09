@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Servidor {
-
+    private ObjectInputStream lector;
     private ServerSocket serverSocket;
 
     private GestorMensajes gestorMensajes;
@@ -54,7 +54,7 @@ public class Servidor {
 
     private class Receptor implements Runnable {
 
-        private ObjectInputStream lector;
+        
         private Socket nodo;
 
         public Receptor(Socket nodo) {
@@ -100,4 +100,9 @@ public class Servidor {
             return mensaje;
         }
     }
+
+    public void setLector(ObjectInputStream lector) {
+        this.lector = lector;
+    }
+    
 }
