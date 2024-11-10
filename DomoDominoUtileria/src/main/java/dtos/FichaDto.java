@@ -16,16 +16,10 @@ public class FichaDto implements Serializable {
 
     private Integer lado1;
     private Integer lado2;
-    private ImageIcon icono; // Cambiado de String a ImageIcon
 
     public FichaDto() {
     }
 
-    public FichaDto(Integer lado1, Integer lado2, ImageIcon icono) { // Constructor actualizado
-        this.lado1 = lado1;
-        this.lado2 = lado2;
-        this.icono = icono;
-    }
 
     public FichaDto(Integer lado1, Integer lado2) {
         this.lado1 = lado1;
@@ -48,16 +42,12 @@ public class FichaDto implements Serializable {
         this.lado2 = lado2;
     }
 
-    public ImageIcon getIcono() { // Método actualizado
-        return icono;
-    }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 13 * hash + Objects.hashCode(this.lado1);
         hash = 13 * hash + Objects.hashCode(this.lado2);
-        hash = 13 * hash + Objects.hashCode(this.icono); // Actualizado a icono
         return hash;
     }
 
@@ -73,9 +63,6 @@ public class FichaDto implements Serializable {
             return false;
         }
         final FichaDto other = (FichaDto) obj;
-        if (!Objects.equals(this.icono, other.icono)) { // Actualizado a icono
-            return false;
-        }
         if (!Objects.equals(this.lado1, other.lado1)) {
             return false;
         }
@@ -88,7 +75,6 @@ public class FichaDto implements Serializable {
         sb.append("Ficha{");
         sb.append("lado1=").append(lado1);
         sb.append(", lado2=").append(lado2);
-        sb.append(", icono=").append(icono); // Actualizado a icono
         sb.append('}');
         return sb.toString();
     }
