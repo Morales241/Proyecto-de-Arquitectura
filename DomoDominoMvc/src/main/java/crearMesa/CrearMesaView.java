@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IObservableString;
 import observers.IObserver;
-import observers.IObserverString;
 
 /**
  *
  * @author tacot
  */
-public class CrearMesaView extends javax.swing.JFrame implements IObserverString, IObservableString, IComponente{
+public class CrearMesaView extends javax.swing.JFrame implements IComponente{
 
         private List<IObserver> observadores = new ArrayList<>();
         private CrearMesaModel model;
@@ -97,25 +95,6 @@ public class CrearMesaView extends javax.swing.JFrame implements IObserverString
     private javax.swing.JLabel labelFondo2;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actualizar(String estado) {
-        
-    }
-
-    @Override
-    public void agregarObservador(IObserverString observador) {
-        
-    }
-
-    @Override
-    public void eliminarObservador(IObserverString observador) {
-        
-    }
-
-    @Override
-    public void notificarObservadores(String mensaje) {
-        
-    }
 
     @Override
     public void setMediador(IMediador mediador) {

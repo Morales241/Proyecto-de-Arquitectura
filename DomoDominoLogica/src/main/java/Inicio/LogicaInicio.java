@@ -1,12 +1,11 @@
 package Inicio;
 
-import Inicializador.InicializadorClases;
-import InicioMvc.InicioModel;
 import fachadas.IInicioFachada;
-import fachadas.InicioFachada;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mediador.IMediador;
 import mediador.Mediador;
-import observers.IObserver;
+import observers.IEventoValidacionDeNombre;
 
 /**
  * Clase principal de Logica en la que inicia el juego
@@ -19,25 +18,27 @@ import observers.IObserver;
 public class LogicaInicio implements ILogicaInicio {
 
     private final IMediador mediador;
-    private final IInicioFachada inicioFachada;
 
-    public LogicaInicio(IInicioFachada inicioFachada) {
+    public LogicaInicio() {
         this.mediador = Mediador.getInstancia();
-        this.inicioFachada = inicioFachada;
-        
-        inicioFachada.agregarIObserverJugar(new AccionIniciarJuego());
     }
 
     @Override
     public void Jugar() {
         mediador.mostrarPantallaConcreta("tablero");
     }
-
-    private class AccionIniciarJuego implements IObserver {
-
-        @Override
-        public void actualizar() {
+    
+    public String validarNombre(String nombre){
+        
+        
+        Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
+        
+        Matcher match =validacion.matcher(nombre);
+        if (match.matches()) {
             Jugar();
         }
+        return "El nombre no es valido";
+        
     }
+
 }
