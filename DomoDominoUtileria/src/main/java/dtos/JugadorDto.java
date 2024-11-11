@@ -14,8 +14,6 @@ import java.util.List;
 public class JugadorDto {
     private String nombre;
     private final List<FichaDto> fichas; 
-    private String ip;
-    private int puerto;
 
     public JugadorDto(String nombre) {
         this.nombre = nombre;
@@ -47,21 +45,4 @@ public class JugadorDto {
             System.out.println(ficha);
         }
     }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public int getPuerto() {
-        return puerto;
-    }
-
-    public void setPuerto(int puerto) {
-        this.puerto = puerto;
-    }
-    
 }

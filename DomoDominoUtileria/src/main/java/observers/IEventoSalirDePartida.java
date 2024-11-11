@@ -4,12 +4,12 @@
  */
 package observers;
 
-import dtos.JugadorDto;
+import eventos.JugadorAEliminarDto;
 
 /**
  *
  * @author tacot
  */
 public interface IEventoSalirDePartida {
-    public void salirDePartida(JugadorDto jugador);
+    public void salirDePartida(JugadorAEliminarDto jugador);
 }

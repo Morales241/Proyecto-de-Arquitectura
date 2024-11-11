@@ -1,12 +1,11 @@
 package observers;
 
-import java.io.File;
-import serializables.Jugador;
+import eventos.JugadorUnirseAPartidaDto;
 
 /**
  *
  * @author tacot
  */
 public interface IEventoAgregarJugadorAPartida {
-    public void actualizar(Jugador jugador);
+    public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador);
 }

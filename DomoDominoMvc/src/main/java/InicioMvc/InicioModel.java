@@ -1,46 +1,33 @@
 package InicioMvc;
 
-import java.util.ArrayList;
-import java.util.List;
-import observers.IObservableString;
-import observers.IObserver;
-import observers.IObserverString;
-
-public class InicioModel  implements IObservableString{
-    private List<IObserverString> observadores = new ArrayList<>();
-    private IObserver listenerJugar;
+import observers.IEventoJugar;
+import observers.IEventoValidacionDeNombre;
+public class InicioModel {
+    
+    private IEventoJugar listenerJugar;
+    private IEventoValidacionDeNombre listenervalidacion;
     
     public InicioModel() {
     }
 
-    public void agregarIObserverJugar(IObserver  listener) {
+    public void agregarIEventoJugar(IEventoJugar  listener) {
         this.listenerJugar = listener;
     }
     
-    public void ejecutarAccionJugar(){
-        System.out.println("entro a ejecutarAccionjuGAR");
+    public void ejecutarAccionJugar(String nombre){
         if (listenerJugar != null) {
-            
-            listenerJugar.actualizar();
+            listenerJugar.validarNombreParaJugar(nombre);
+            System.out.println("Se va a validar el nombre");
         }
     }
     
-    @Override
-    public void agregarObservador(IObserverString observador) {
-        observadores.add(observador);
+    public void agregarIEventoValidacionDeNombre(IEventoValidacionDeNombre listener){
+        this.listenervalidacion = listener;
     }
-
-    @Override
-    public void eliminarObservador(IObserverString observador) {
-        observadores.remove(observador);
+    
+    public void ejecutarAccionValidar(String mensaje){
+        if (listenervalidacion != null) {
+            listenervalidacion.validacionDeNombre(mensaje);
+        }
     }
-
-    @Override
-    public void notificarObservadores(String mensaje) {
-        observadores.forEach(IObserver -> {
-            IObserver.actualizar(mensaje);
-        });
-    }
-     
-     
 }
