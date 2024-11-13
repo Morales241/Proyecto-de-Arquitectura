@@ -8,6 +8,9 @@ import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
 import InicioMvc.InicioView;
 import contenedor.ContenedorMvc;
+import crearPartida.CrearMesaController;
+import crearPartida.CrearMesaModel;
+import crearPartida.CrearMesaView;
 import mediador.IMediador;
 import mediador.Mediador;
 
@@ -20,7 +23,7 @@ public class InicializadorMVC {
     public InicializadorMVC() {
     }
     
-    public void inicializarClase(){
+    public void inicializarClases(){
         
         //MVC Inicio
         IMediador mediador = Mediador.getInstancia();
@@ -32,7 +35,13 @@ public class InicializadorMVC {
         ContenedorMvc<InicioModel, InicioView, InicioController> inicioContenedor = new ContenedorMvc<>(inicioModel,inicioView,inicioController);
         mediador.registrarPantalla("inicio", inicioContenedor);
         
-        
+        //MVC crear partida
+        CrearMesaModel crearMesaModel = new CrearMesaModel();
+        CrearMesaView crearMesaView = new CrearMesaView(crearMesaModel);
+        crearMesaView.setMediador(mediador);
+        CrearMesaController crearMesaController = new CrearMesaController(crearMesaModel, crearMesaView);
+        ContenedorMvc<CrearMesaModel, CrearMesaView, CrearMesaController> crearPartidaContenedor = new ContenedorMvc<>(crearMesaModel, crearMesaView, crearMesaController);
+        mediador.registrarPantalla("crearPartida", crearPartidaContenedor);
         
     }
     

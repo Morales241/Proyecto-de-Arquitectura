@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package crearPartida;
+
+import observers.IEventoCrearPartidaMVC;
 
 /**
  *
@@ -10,4 +8,25 @@ package crearPartida;
  */
 public class CrearMesaController {
     
+    private final CrearMesaModel crearMesaModel;
+    private final CrearMesaView crearMesaView;
+
+    public CrearMesaController(CrearMesaModel cMesaModel, CrearMesaView crearMesaView) {
+        this.crearMesaModel = cMesaModel;
+        this.crearMesaView = crearMesaView;
+        crearMesaView.agregarIEventoCrearPartida(new accionCrearPartida());
+        
+    }
+    
+    public void validarNombre(String nombre){
+        crearMesaModel.validarNombre(nombre);
+    }
+    
+    private class accionCrearPartida implements IEventoCrearPartidaMVC{
+
+        @Override
+        public void crearPartida(String nombre) {
+            validarNombre(nombre);
+        }
+    }
 }

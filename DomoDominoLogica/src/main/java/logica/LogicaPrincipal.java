@@ -1,10 +1,14 @@
 package logica;
 
 import Inicializador.InicializadorClases;
+import Inicio.ILogicaInicio;
 import Inicio.LogicaInicio;
 import cliente.LogicaCliente;
 import dtos.FichaDto;
 import dtos.JugadorDto;
+import eventos.JugadorAEliminarDto;
+import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorUnirseAPartidaDto;
 import eventos.PonerFichaDto;
 import eventos.SetUpDto;
 import fachadas.IInicioFachada;
@@ -16,6 +20,7 @@ import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoValidacionDeNombre;
+import observers.IObserver;
 import serializables.Jugador;
 
 /**
@@ -30,65 +35,52 @@ public class LogicaPrincipal {
 
     private Mediador mediador;
     private LogicaCliente lCliente;
-    private LogicaInicio lInicio;
+    private ILogicaInicio lInicio;
     private IInicioFachada iFachada;
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
 
     public LogicaPrincipal() {
-    }
-
-    public LogicaPrincipal(LogicaInicio logicaInicio,
-            IInicioFachada inicioFachada) {
         mediador = Mediador.getInstancia();
-        lInicio = logicaInicio;
-        iFachada = inicioFachada;
-        inicioFachada.agregarIObserverJugar(new AccionIniciarJuego());
+        
+        InicializadorClases inicializadorClases = new InicializadorClases();
+        
+        inicializadorClases.InicializarClases();
+        
+        lInicio = new LogicaInicio();
+        
+        iFachada = inicializadorClases.getInicioFachada();
+        
+        iFachada.agregarIObserverCrearPartida(new AccionCambiarDePantallaCrearPartida());
+        iFachada.agregarIObserverUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
+        
     }
 
-    
     //se va a cambiar el nombre de este metodo
     public void iniciarJuego() {
-        InicializadorClases inicializadorClases = new InicializadorClases();
-        inicializadorClases.InicializarClases();
 
-        mediador.mostrarPantallaConcreta("login");
+        mediador.mostrarPantallaConcreta("inicio");
 
     }
 
-    private class AccionIniciarJuego implements IEventoValidacionDeNombre {
-
-        @Override
-        public void validacionDeNombre(String mensajeDeValidacion) {
-            if (lInicio.validarNombre(mensajeDeValidacion).equals("El nombre no es valido")) {
-                iFachada.mandarMensajeNombreInvalido(mensajeDeValidacion);
-            } else {
-                mediador.mostrarPantallaConcreta("");
-            }
-        }
-    }
-
-    
-    
     private class AccionCrearPartida implements IEventoCrearPartida {
 
         @Override
-        public void actualizar(Jugador jugador) {
-            
+        public void crearPartida(JugadorCrearPartidaDto jugador) {
+
         }
 
     }
-    
-    public void crearPartida(Jugador jugador){
-        
+
+    public void crearPartida(Jugador jugador) {
+
     }
 
     private class AccionUnirseAPartida implements IEventoAgregarJugadorAPartida {
 
         @Override
-        public void actualizar(Jugador jugador) {
+        public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
 
         }
-
     }
 
     private class AccionIniciarPartida implements IEventoIniciarPartida {
@@ -97,38 +89,51 @@ public class LogicaPrincipal {
         public void iniciarPartida(SetUpDto setUp) {
 
         }
-
     }
 
-    private class AccionSalirDePartida implements IEventoSalirDePartida{
+    private class AccionSalirDePartida implements IEventoSalirDePartida {
 
         @Override
-        public void salirDePartida(JugadorDto jugador) {
-            
+        public void salirDePartida(JugadorAEliminarDto jugador) {
         }
-
     }
 
-    private class AccionPonerFicha implements IEventoPonerFicha{
+    private class AccionPonerFicha implements IEventoPonerFicha {
 
         @Override
         public void ponerFicha(PonerFichaDto ponerFicha) {
-            
-        }
 
+        }
     }
 
-    private class AccionTomarFichaDelPozo implements IEventoTomarFichaDelPozo{
+    private class AccionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
 
         @Override
         public void tomarFichaDelPozo(FichaDto fichaSacada) {
-            
-        }
 
+        }
     }
 
     private class AccionElejirFicha {
 
     }
+
+    private class AccionCambiarDePantallaCrearPartida implements IObserver {
+
+        @Override
+        public void actualizar() {
+            lInicio.crearPartida();
+        }
+    }
+    
+    private class AccionCambiarDePantallaUnirseAPartida implements IObserver {
+
+        @Override
+        public void actualizar() {
+            lInicio.unirseAPartida();
+        }
+    }
+    
+    
 
 }

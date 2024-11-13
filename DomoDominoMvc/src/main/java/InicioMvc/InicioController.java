@@ -16,11 +16,11 @@ public class InicioController {
     }
 
     public void crearPartida() {
-        
+        inicioModel.ejecutarAccionCrearPartida();
     }
 
     public void unirseAPartida() {
-        
+        inicioModel.ejecutarAccionUnirseAPartida();
     }
 
     private class OyenteCrearPartida implements IObserver {

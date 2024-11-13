@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package crearPartida;
 
+import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.IMediador;
 import observers.IEventoCrearPartidaMVC;
+import observers.IObserver;
 
 /**
  *
@@ -26,6 +24,8 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
     public CrearMesaView(CrearMesaModel mesaModel) {
         initComponents();
         this.mesaModel = mesaModel;
+        mesaModel.agregarIEventoNombreInvalido(new accionNombreInvalido());
+        
     }
 
     /**
@@ -36,11 +36,12 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnCrearPartida = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,16 +50,12 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(174, 70, 43));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setToolTipText("Nombre del jugador");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 180, -1));
+        txtNombre.setBackground(new java.awt.Color(174, 70, 43));
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombre.setToolTipText("Nombre del jugador");
+        txtNombre.setBorder(null);
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 180, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ingreseNombre.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 20));
@@ -67,6 +64,7 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
 
         btnCrearPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida.png"))); // NOI18N
+        btnCrearPartida.setBorder(null);
         btnCrearPartida.setContentAreaFilled(false);
         btnCrearPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +77,11 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
+        jComboBox1.setBorder(null);
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 180, -1));
+
+        jButton1.setText("regresar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
         jLabel1.setForeground(new java.awt.Color(174, 70, 43));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_CrearPartida.jpg"))); // NOI18N
@@ -90,22 +92,21 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
-        // TODO add your handling code here:
+
+        ejecutarAccionCrearPartida(this.txtNombre.getText());
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
 
-    public void validarDatos(String nombre) {
-
+    public void validarDatos() {
+        JOptionPane.showMessageDialog(null, "No se permiten caracteres especiales(solo '_') ni espacios, el nombre tiene que ser mayor a 3 y menor a 15 caracteres");
     }
 
     public void agregarIEventoCrearPartida(IEventoCrearPartidaMVC listener) {
         this.observerCrearPartida = listener;
+
     }
 
     public void ejecutarAccionCrearPartida(String nombre) {
@@ -116,16 +117,25 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearPartida;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
+    
+    private class accionNombreInvalido implements IObserver{
+
+        @Override
+        public void actualizar() {
+            validarDatos();
+        }
+    } 
 }

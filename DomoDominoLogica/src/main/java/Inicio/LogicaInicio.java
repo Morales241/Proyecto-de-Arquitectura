@@ -9,7 +9,7 @@ import observers.IEventoValidacionDeNombre;
 
 /**
  * Clase principal de Logica en la que inicia el juego
- * 
+ *
  * @author Luis Roberto Favela Castro - 00000246853
  * @author Josue Gomez Garza - 00000245612
  * @author Alejandro Gomez Vega - 00000247313
@@ -24,21 +24,17 @@ public class LogicaInicio implements ILogicaInicio {
     }
 
     @Override
-    public void Jugar() {
-        mediador.mostrarPantallaConcreta("tablero");
+    public void crearPartida() {
+        mediador.mostrarPantallaConcreta("crearPartida");
     }
-    
-    public String validarNombre(String nombre){
-        
-        
-        Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
-        
-        Matcher match =validacion.matcher(nombre);
-        if (match.matches()) {
-            Jugar();
-        }
-        return "El nombre no es valido";
-        
+
+    public void cerrarPantallaInicio() {
+        mediador.cerrarPantallaConcreta("inicio");
+    }
+
+    @Override
+    public void unirseAPartida() {
+        mediador.mostrarPantallaConcreta("");
     }
 
 }

@@ -1,17 +1,8 @@
 package Inicializador;
 
-import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
-import InicioMvc.InicioView;
-import TableroMvc.TableroController;
-import TableroMvc.TableroModel;
-import TableroMvc.TableroView;
-import contenedor.ContenedorMvc;
-import Entidades.Arreglo;
-import dtos.JugadorDto;
-import Entidades.Pozo;
-import Inicio.LogicaInicio;
 import fachadas.IInicioFachada;
+import fachadas.InicializadorMVCFachada;
 import fachadas.InicioFachada;
 import mediador.IMediador;
 import mediador.Mediador;
@@ -29,9 +20,14 @@ import mediador.Mediador;
 public class InicializadorClases {
     
     private final IMediador mediador;
+    private final InicializadorMVCFachada cFachada;
+    
+    private InicioModel inicioModel;
+    private IInicioFachada inicioFachada;
     
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
+        cFachada = new InicializadorMVCFachada();
     }
     
     /**
@@ -39,10 +35,20 @@ public class InicializadorClases {
      */
     public void InicializarClases(){
         
-        //fachada inicio
-        InicioModel inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
-          
-        IInicioFachada inicioFachada = new InicioFachada(inicioModel);
+        //inicializar pantallas mvc
+        cFachada.inciializarMVC();
         
+        //fachada inicio
+        inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
+          
+        inicioFachada = new InicioFachada(inicioModel);
+
     }
+
+
+    public IInicioFachada getInicioFachada() {
+        return inicioFachada;
+    }
+
+    
 }
