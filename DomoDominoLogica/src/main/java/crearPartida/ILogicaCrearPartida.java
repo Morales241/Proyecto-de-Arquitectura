@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package crearPartida;
+
+import eventos.JugadorCrearPartidaDto;
 
 /**
  *
  * @author tacot
  */
-public interface IEventoCrearPartidaMVC {
-    public void crearPartida(String nombre);
+public interface ILogicaCrearPartida {
+    public void regresarAlInicio();
+    public void crearPartida(JugadorCrearPartidaDto jugador);
 }

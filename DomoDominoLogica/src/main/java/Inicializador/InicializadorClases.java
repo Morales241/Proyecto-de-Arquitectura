@@ -1,6 +1,9 @@
 package Inicializador;
 
 import InicioMvc.InicioModel;
+import crearPartida.CrearPartidaModel;
+import fachadas.CrearPartidaFachada;
+import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
 import fachadas.InicializadorMVCFachada;
 import fachadas.InicioFachada;
@@ -22,8 +25,10 @@ public class InicializadorClases {
     private final IMediador mediador;
     private final InicializadorMVCFachada cFachada;
     
-    private InicioModel inicioModel;
+    
     private IInicioFachada inicioFachada;
+    
+    private ICrearPartidaFachada crearPartidaFachada;
     
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
@@ -39,15 +44,22 @@ public class InicializadorClases {
         cFachada.inciializarMVC();
         
         //fachada inicio
-        inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
+        InicioModel inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
           
         inicioFachada = new InicioFachada(inicioModel);
 
+        //fachada crearPartida
+        CrearPartidaModel crearPartidaModel = (CrearPartidaModel) mediador.obtenerPantallaConcreta("crearPartida").getModelo();
+        crearPartidaFachada = new CrearPartidaFachada(crearPartidaModel);
     }
 
 
     public IInicioFachada getInicioFachada() {
         return inicioFachada;
+    }
+
+    public ICrearPartidaFachada getCrearPartidaFachada() {
+        return crearPartidaFachada;
     }
 
     

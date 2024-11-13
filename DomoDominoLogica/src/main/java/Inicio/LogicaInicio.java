@@ -28,10 +28,6 @@ public class LogicaInicio implements ILogicaInicio {
         mediador.mostrarPantallaConcreta("crearPartida");
     }
 
-    public void cerrarPantallaInicio() {
-        mediador.cerrarPantallaConcreta("inicio");
-    }
-
     @Override
     public void unirseAPartida() {
         mediador.mostrarPantallaConcreta("");

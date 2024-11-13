@@ -21,6 +21,11 @@ public class NodoDto implements Serializable{
         this.puerto = puerto;
         this.nombre = nombre;
     }
+
+    public NodoDto(String nombre) {
+        this.nombre = nombre;
+    }
+    
     
     public String getNombre() {
         return nombre;

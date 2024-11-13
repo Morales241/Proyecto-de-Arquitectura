@@ -1,27 +1,30 @@
 package crearPartida;
 
+import eventos.JugadorCrearPartidaDto;
+import eventos.NodoDto;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoCrearPartidaMVC;
+import observers.IEventoCrearPartida;
 import observers.IObserver;
 
 /**
  *
  * @author tacot
  */
-public class CrearMesaView extends javax.swing.JFrame implements IComponente {
+public class CrearPartidaView extends javax.swing.JFrame implements IComponente {
 
     private IMediador mediador;
-    private final CrearMesaModel mesaModel;
-    private IEventoCrearPartidaMVC observerCrearPartida;
+    private final CrearPartidaModel mesaModel;
+    private IEventoCrearPartida observerCrearPartida;
+    private IObserver observerRegresar;
 
     /**
      * Creates new form CrearMesaView
      *
      * @param mesaModel
      */
-    public CrearMesaView(CrearMesaModel mesaModel) {
+    public CrearPartidaView(CrearPartidaModel mesaModel) {
         initComponents();
         this.mesaModel = mesaModel;
         mesaModel.agregarIEventoNombreInvalido(new accionNombreInvalido());
@@ -40,8 +43,8 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnCrearPartida = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cbxNumeroFichas = new javax.swing.JComboBox<>();
+        btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,33 +58,43 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNombre.setToolTipText("Nombre del jugador");
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 180, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 180, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ingreseNombre.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fichasIniciales.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
 
         btnCrearPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida.png"))); // NOI18N
         btnCrearPartida.setBorder(null);
         btnCrearPartida.setContentAreaFilled(false);
+        btnCrearPartida.setFocusPainted(false);
         btnCrearPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearPartidaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 190, 70));
+        jPanel1.add(btnCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 190, 70));
 
-        jComboBox1.setBackground(new java.awt.Color(174, 70, 43));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
-        jComboBox1.setBorder(null);
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 180, -1));
+        cbxNumeroFichas.setBackground(new java.awt.Color(174, 70, 43));
+        cbxNumeroFichas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cbxNumeroFichas.setForeground(new java.awt.Color(255, 255, 255));
+        cbxNumeroFichas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
+        cbxNumeroFichas.setBorder(null);
+        jPanel1.add(cbxNumeroFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 180, -1));
 
-        jButton1.setText("regresar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
+        btnRegresar.setBorderPainted(false);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setFocusPainted(false);
+        btnRegresar.setFocusable(false);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 30));
 
         jLabel1.setForeground(new java.awt.Color(174, 70, 43));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_CrearPartida.jpg"))); // NOI18N
@@ -97,28 +110,46 @@ public class CrearMesaView extends javax.swing.JFrame implements IComponente {
 
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
 
-        ejecutarAccionCrearPartida(this.txtNombre.getText());
+        ejecutarAccionCrearPartida(this.txtNombre.getText(), Integer.parseInt(String.valueOf(this.cbxNumeroFichas.getSelectedItem())));
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        ejecutarAccionRegresar();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     public void validarDatos() {
         JOptionPane.showMessageDialog(null, "No se permiten caracteres especiales(solo '_') ni espacios, el nombre tiene que ser mayor a 3 y menor a 15 caracteres");
     }
 
-    public void agregarIEventoCrearPartida(IEventoCrearPartidaMVC listener) {
+    public void agregarIEventoCrearPartida(IEventoCrearPartida listener) {
         this.observerCrearPartida = listener;
 
     }
 
-    public void ejecutarAccionCrearPartida(String nombre) {
+    public void ejecutarAccionCrearPartida(String nombre, int numFichas) {
         if (observerCrearPartida != null) {
-            observerCrearPartida.crearPartida(nombre);
+           
+            JugadorCrearPartidaDto jugador = new JugadorCrearPartidaDto(numFichas, new NodoDto(nombre), "");
+            
+            observerCrearPartida.crearPartida(jugador);
+        }
+    }
+    
+    public void agregarIEventoRegresar(IObserver listener) {
+        this.observerRegresar = listener;
+
+    }
+
+    public void ejecutarAccionRegresar() {
+        if (observerRegresar != null) {
+            observerRegresar.actualizar();
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearPartida;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxNumeroFichas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

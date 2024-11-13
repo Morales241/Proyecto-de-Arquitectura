@@ -10,14 +10,20 @@ package eventos;
  */
 public class JugadorCrearPartidaDto extends JugadorConsulta{
     private static final long serialVersionUID = 1L;
-
+    private int cantidadFichas;
     public JugadorCrearPartidaDto() {
     }
 
-    public JugadorCrearPartidaDto(NodoDto nodo, String codigo) {
+    public JugadorCrearPartidaDto(int cantidadFichas, NodoDto nodo, String codigo) {
         super(nodo, codigo);
+        this.cantidadFichas = cantidadFichas;
     }
-    
-    
 
+    public int getCantidadFichas() {
+        return cantidadFichas;
+    }
+
+    public void setCantidadFichas(int cantidadFichas) {
+        this.cantidadFichas = cantidadFichas;
+    }
 }

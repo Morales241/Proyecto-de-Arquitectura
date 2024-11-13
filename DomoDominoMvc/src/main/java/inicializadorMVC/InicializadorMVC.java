@@ -8,9 +8,9 @@ import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
 import InicioMvc.InicioView;
 import contenedor.ContenedorMvc;
-import crearPartida.CrearMesaController;
-import crearPartida.CrearMesaModel;
-import crearPartida.CrearMesaView;
+import crearPartida.CrearPartidaController;
+import crearPartida.CrearPartidaModel;
+import crearPartida.CrearPartidaView;
 import mediador.IMediador;
 import mediador.Mediador;
 
@@ -36,11 +36,11 @@ public class InicializadorMVC {
         mediador.registrarPantalla("inicio", inicioContenedor);
         
         //MVC crear partida
-        CrearMesaModel crearMesaModel = new CrearMesaModel();
-        CrearMesaView crearMesaView = new CrearMesaView(crearMesaModel);
+        CrearPartidaModel crearMesaModel = new CrearPartidaModel();
+        CrearPartidaView crearMesaView = new CrearPartidaView(crearMesaModel);
         crearMesaView.setMediador(mediador);
-        CrearMesaController crearMesaController = new CrearMesaController(crearMesaModel, crearMesaView);
-        ContenedorMvc<CrearMesaModel, CrearMesaView, CrearMesaController> crearPartidaContenedor = new ContenedorMvc<>(crearMesaModel, crearMesaView, crearMesaController);
+        CrearPartidaController crearMesaController = new CrearPartidaController(crearMesaModel, crearMesaView);
+        ContenedorMvc<CrearPartidaModel, CrearPartidaView, CrearPartidaController> crearPartidaContenedor = new ContenedorMvc<>(crearMesaModel, crearMesaView, crearMesaController);
         mediador.registrarPantalla("crearPartida", crearPartidaContenedor);
         
     }

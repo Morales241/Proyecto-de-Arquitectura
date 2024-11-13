@@ -16,7 +16,6 @@ observers\IEventoIniciarPartida.class
 observers\IEventoPartida.class
 mediador\IComponente.class
 observers\IObserver.class
-observers\IEventoCrearPartidaMVC.class
 observers\IEventoTomarFichaDelPozo.class
 eventos\JugadorUnirseAPartidaDto.class
 enumerados\RespuestaServidor.class

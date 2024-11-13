@@ -4,13 +4,15 @@ import Inicializador.InicializadorClases;
 import Inicio.ILogicaInicio;
 import Inicio.LogicaInicio;
 import cliente.LogicaCliente;
+import crearPartida.ILogicaCrearPartida;
+import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
-import dtos.JugadorDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.PonerFichaDto;
 import eventos.SetUpDto;
+import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
 import mediador.Mediador;
 import observers.IEventoAgregarJugadorAPartida;
@@ -19,7 +21,6 @@ import observers.IEventoIniciarPartida;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observers.IEventoValidacionDeNombre;
 import observers.IObserver;
 import serializables.Jugador;
 
@@ -33,10 +34,11 @@ import serializables.Jugador;
  */
 public class LogicaPrincipal {
 
-    private Mediador mediador;
-    private LogicaCliente lCliente;
-    private ILogicaInicio lInicio;
-    private IInicioFachada iFachada;
+    private final Mediador mediador;
+    private final ILogicaInicio lInicio;
+    private final ILogicaCrearPartida lCrearPartida;
+    private final IInicioFachada iFachada;
+    private final ICrearPartidaFachada crearPartidaFachada;
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
 
     public LogicaPrincipal() {
@@ -48,10 +50,17 @@ public class LogicaPrincipal {
         
         lInicio = new LogicaInicio();
         
+        lCrearPartida = new LogicaCrearPartida();
+        
         iFachada = inicializadorClases.getInicioFachada();
         
         iFachada.agregarIObserverCrearPartida(new AccionCambiarDePantallaCrearPartida());
         iFachada.agregarIObserverUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
+        
+        crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
+        crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
+        crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
+        
         
     }
 
@@ -66,13 +75,13 @@ public class LogicaPrincipal {
 
         @Override
         public void crearPartida(JugadorCrearPartidaDto jugador) {
-
+            crearNuevaPartida(jugador);
         }
 
     }
 
-    public void crearPartida(Jugador jugador) {
-
+    public void crearNuevaPartida(JugadorCrearPartidaDto jugador) {
+        lCrearPartida.crearPartida(jugador);
     }
 
     private class AccionUnirseAPartida implements IEventoAgregarJugadorAPartida {
@@ -134,6 +143,12 @@ public class LogicaPrincipal {
         }
     }
     
-    
+    private class AccionRegresarAlInicio implements IObserver {
+
+        @Override
+        public void actualizar() {
+            lCrearPartida.regresarAlInicio();
+        }
+    }
 
 }
