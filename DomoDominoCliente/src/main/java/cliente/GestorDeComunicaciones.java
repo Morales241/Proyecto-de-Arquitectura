@@ -9,8 +9,8 @@ import observers.IEventoAgregarJugadorAPartida;
 import observers.IEventoCrearPartida;
 import observers.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
-import servidor.GestorMensajes;
-import servidor.Servidor;
+import serverInterno.GestorMensajes;
+import serverInterno.Servidor;
 
 /**
  *
