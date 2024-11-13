@@ -1,33 +1,41 @@
 package InicioMvc;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import observers.IEventoJugar;
+import observers.IObserver;
 
+public class InicioController {
 
-public class InicioController{
-    
     private InicioModel inicioModel;
     private InicioView inicioView;
 
     public InicioController(InicioModel inicioModel, InicioView inicioView) {
         this.inicioView = inicioView;
         this.inicioModel = inicioModel;
-
-        inicioView.agregarIEventoJugar(new OyenteJugar());
+        
+        inicioView.agregarIEventoCrearPartida(new OyenteCrearPartida());
+        inicioView.agregarIEventoUnirseAPartida(new OyenteUnirseAPartida());
     }
-    
-    public void validarNombre(String nombre){
-        this.inicioModel.ejecutarAccionJugar(nombre);
+
+    public void crearPartida() {
         
     }
-    
-    private class OyenteJugar implements IEventoJugar {
+
+    public void unirseAPartida() {
+        
+    }
+
+    private class OyenteCrearPartida implements IObserver {
 
         @Override
-        public void validarNombreParaJugar(String nombre) {
-            validarNombre(nombre);
+        public void actualizar() {
+            crearPartida();
         }
-        
+    }
+
+    private class OyenteUnirseAPartida implements IObserver {
+
+        @Override
+        public void actualizar() {
+            unirseAPartida();
+        }
     }
 }

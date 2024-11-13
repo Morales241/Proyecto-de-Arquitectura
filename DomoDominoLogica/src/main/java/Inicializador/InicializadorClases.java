@@ -28,23 +28,21 @@ import mediador.Mediador;
  */
 public class InicializadorClases {
     
+    private final IMediador mediador;
+    
+    public InicializadorClases() {
+        mediador = Mediador.getInstancia();
+    }
+    
     /**
      * Inicializar clases MVC
      */
     public void InicializarClases(){
-        IMediador mediador = Mediador.getInstancia();
         
-        
-        InicioModel inicioModel = new InicioModel();
-        InicioView inicioView = new InicioView(inicioModel);
-        inicioView.setMediador(mediador);
-        InicioController inicioController = new InicioController(inicioModel, inicioView);
-        ContenedorMvc<InicioModel, InicioView, InicioController> inicioContenedor = new ContenedorMvc<>(inicioModel,inicioView,inicioController);
-      
-        mediador.registrarPantalla("inicio", inicioContenedor);
+        //fachada inicio
+        InicioModel inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
           
-        //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
         IInicioFachada inicioFachada = new InicioFachada(inicioModel);
-//        LogicaInicio logicaInicio = new LogicaInicio(inicioFachada);
+        
     }
 }

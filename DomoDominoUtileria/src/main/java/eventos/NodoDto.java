@@ -14,10 +14,20 @@ public class NodoDto implements Serializable{
     private static final long serialVersionUID = 1L;
     private String ip;
     private int puerto;
+    private String nombre;
 
-    public NodoDto(String ip, int puerto) {
+    public NodoDto(String ip, int puerto, String nombre) {
         this.ip = ip;
         this.puerto = puerto;
+        this.nombre = nombre;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getIp() {

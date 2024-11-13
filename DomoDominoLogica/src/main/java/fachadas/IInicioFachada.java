@@ -1,6 +1,6 @@
 package fachadas;
 
-import observers.IEventoValidacionDeNombre;
+import observers.IObserver;
 
 /**
  * Interfaz para la Fachada del Inicio del juego.
@@ -8,11 +8,16 @@ import observers.IEventoValidacionDeNombre;
 public interface IInicioFachada {
 
     /**
-     * Método para agregar un observador al modelo de inicio del juego.
+     * Método para agregar un observador al modelo de unirse a partida.
      *
      * @param observer El observador que se agregará.
      */
-    void agregarIObserverJugar(IEventoValidacionDeNombre observer);
-
-    public void mandarMensajeNombreInvalido(String mensaje);
+    void agregarIObserverCrearPartida(IObserver observer);
+    
+    /**
+     * Método para agregar un observador al modelo de crear partida.
+     *
+     * @param observer El observador que se agregará.
+     */
+    void agregarIObserverUnirseAPartida(IObserver observer);
 }

@@ -16,12 +16,12 @@ observers\IEventoIniciarPartida.class
 observers\IEventoPartida.class
 mediador\IComponente.class
 observers\IObserver.class
+observers\IEventoCrearPartidaMVC.class
 observers\IEventoTomarFichaDelPozo.class
 eventos\JugadorUnirseAPartidaDto.class
 enumerados\RespuestaServidor.class
 contenedor\ContenedorMvc.class
 observers\IEventoCrearPartida.class
-observers\IEventoJugar.class
 mediador\IMediador.class
 observers\IEventoPonerFicha.class
 observers\IEventoValidacionDeNombre.class

@@ -53,6 +53,28 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
     }
     
     /**
+     * Metodo que cierra una Pantalla Concreta dependiendo del nombre que le
+     * recibe como parametro
+     *
+     * @param nombre Nombre a buscar dentro del mapa
+     */
+    @Override
+    public void cerrarPantallaConcreta(String nombre) {
+        //saca en pantalla concreta el nombre que encuentre
+        ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
+        if (pantallaConcreta != null) {
+            pantallas.values().forEach((otrasPantallas) -> {
+                otrasPantallas.getVista().setVisible(false);
+            });
+            pantallaConcreta.getVista().setVisible(false);
+
+        } else {
+            //Aqui tiren un log de que no se encontro la viewConcreta jejejej
+            System.out.println("No se encontro la viewConcreta " + nombre);
+        }
+    }
+    
+    /**
      * Regresa la pantalla concreta que coincida con el nombre
      * 
      * @param nombre

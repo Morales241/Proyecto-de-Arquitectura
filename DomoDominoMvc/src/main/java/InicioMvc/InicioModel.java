@@ -1,33 +1,34 @@
 package InicioMvc;
 
-import observers.IEventoJugar;
-import observers.IEventoValidacionDeNombre;
+import observers.IObserver;
+
 public class InicioModel {
-    
-    private IEventoJugar listenerJugar;
-    private IEventoValidacionDeNombre listenervalidacion;
-    
+
+    private IObserver observerCrearPartida;
+    private IObserver observerUnirsePartida;
+
     public InicioModel() {
     }
 
-    public void agregarIEventoJugar(IEventoJugar  listener) {
-        this.listenerJugar = listener;
+    public void agregarIEventoCrearPartida(IObserver listener) {
+        this.observerCrearPartida = listener;
     }
-    
-    public void ejecutarAccionJugar(String nombre){
-        if (listenerJugar != null) {
-            listenerJugar.validarNombreParaJugar(nombre);
-            System.out.println("Se va a validar el nombre");
+
+    public void ejecutarAccionCrearPartida() {
+        if (observerCrearPartida != null) {
+            observerCrearPartida.actualizar();
         }
     }
-    
-    public void agregarIEventoValidacionDeNombre(IEventoValidacionDeNombre listener){
-        this.listenervalidacion = listener;
+
+    public void agregarIEventoUnirseAPartida(IObserver listener) {
+        this.observerUnirsePartida = listener;
     }
-    
-    public void ejecutarAccionValidar(String mensaje){
-        if (listenervalidacion != null) {
-            listenervalidacion.validacionDeNombre(mensaje);
+
+    public void ejecutarAccionUnirseAPartida() {
+        if (observerUnirsePartida != null) {
+            observerUnirsePartida.actualizar();
         }
+
     }
+
 }

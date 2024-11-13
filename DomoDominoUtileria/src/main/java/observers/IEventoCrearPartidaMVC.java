@@ -8,6 +8,6 @@ package observers;
  *
  * @author tacot
  */
-public interface IEventoJugar {
-    public void validarNombreParaJugar(String nombre);
+public interface IEventoCrearPartidaMVC {
+    public void crearPartida(String nombre);
 }
