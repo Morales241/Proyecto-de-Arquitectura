@@ -10,7 +10,6 @@ import observers.IEventoCrearPartida;
 import observers.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 import serverInterno.GestorMensajes;
-import serverInterno.Servidor;
 
 /**
  *
@@ -19,23 +18,18 @@ import serverInterno.Servidor;
 public class GestorDeComunicaciones {
 
     private final Cliente cliente;
-    private Servidor servidor;
     private final GestorMensajes gestorMensajes;
 
-    public GestorDeComunicaciones() {
-        gestorMensajes = new GestorMensajes();
+    public GestorDeComunicaciones(GestorMensajes gestorM) {
         cliente = new Cliente();
-    }
-
-    public void crearServidor(int puerto) {
-        servidor = new Servidor(puerto, gestorMensajes);
+        gestorMensajes = gestorM;
     }
 
     public void conectarAServidor(String ip, int puerto) {
         cliente.conectarAServidor(ip, puerto);
     }
 
-    public void enviarMensaje(String mensaje) {
+    public void enviarMensaje(Object mensaje) {
         cliente.enviarMensaje(mensaje);
     }
 

@@ -1,6 +1,7 @@
 package sereverCentral;
 
 import cliente.Cliente;
+import cliente.GestorDeComunicaciones;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
@@ -24,12 +25,12 @@ import observers.IEventoIniciarPartidaServerCentral;
 public class ServerCentral {
 
     private final Map<String, List<NodoDto>> infoPartidas;
-    private final Cliente cliente;
+    private final GestorDeComunicaciones comunicaciones;
     private final GestorMensajes gestorMensajes;
 
-    public ServerCentral(Cliente clienteParametro, GestorMensajes gMensajes) {
+    public ServerCentral(GestorDeComunicaciones comunicacionesParametro, GestorMensajes gMensajes) {
         infoPartidas = new HashMap<>();
-        this.cliente = clienteParametro;
+        this.comunicaciones = comunicacionesParametro;
         this.gestorMensajes = gMensajes;
 
         this.gestorMensajes.agregarObservadorCrearPartida(new AccionCrearPartida());
@@ -82,13 +83,13 @@ public class ServerCentral {
 
     public void mandarMensaje(String mensaje) {
         RespuestaServidorCentral respuesta = new RespuestaServidorCentral(mensaje);
-        cliente.enviarMensaje(respuesta);
+        comunicaciones.enviarMensaje(respuesta);
     }
 
     public void mandarInfoDePartida(List<NodoDto> jugadores) {
 
         for (NodoDto jugador : jugadores) {
-            cliente.enviarMensaje(jugador);
+            comunicaciones.enviarMensaje(jugador);
         }
 
     }
@@ -97,6 +98,7 @@ public class ServerCentral {
 
         @Override
         public void crearPartida(JugadorCrearPartidaDto jugador) {
+            comunicaciones.conectarAServidor(jugador.getNodo().getIp(),jugador.getNodo().getPuerto());
             agregarPartida(jugador);
         }
 

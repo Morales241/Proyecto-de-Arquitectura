@@ -5,6 +5,7 @@
 package sereverCentral;
 
 import cliente.Cliente;
+import cliente.GestorDeComunicaciones;
 import eventos.JugadorCrearPartidaDto;
 import servidor.GestorMensajes;
 import servidor.Servidor;
@@ -25,25 +26,31 @@ public class ArrancarServidorCentral {
      */
     public static void main(String[] args) {
 
-        Scanner tec = new Scanner(System.in);
-        boolean llave = true;
-        GestorMensajes gestorMensajes = new GestorMensajes();
-        Servidor server = new Servidor(8091, gestorMensajes);
-        Cliente cliente = new Cliente();
-        ServerCentral serverCentral = new ServerCentral(cliente, gestorMensajes);
-        System.out.println("192.168.100.11");
-        while (llave) {
-            llave = tec.nextBoolean();
-            System.out.println(llave);
+        try {
+            Scanner tec = new Scanner(System.in);
+            boolean llave = true;
+            GestorMensajes gestorMensajes = new GestorMensajes();
+            Servidor server = new Servidor(8090, gestorMensajes);
+            GestorDeComunicaciones comunicaciones = new GestorDeComunicaciones(gestorMensajes);
+            ServerCentral serverCentral = new ServerCentral(comunicaciones, gestorMensajes);
+            
+            
+            System.out.println(InetAddress.getLocalHost().getHostAddress());
+            while (llave) {
+                llave = tec.nextBoolean();
+                System.out.println(llave);
+            }
+            System.out.println("se va a conectar");
+            comunicaciones.conectarAServidor("192.168.100.21", 8070);
+            
+            while (!llave) {
+                llave = tec.nextBoolean();
+                System.out.println(llave);
+            }
+            System.out.println("va a mandar algo");
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(ArrancarServidorCentral.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("se va a conectar");
-        cliente.conectarAServidor("192.168.100.21", 8070);
-
-        while (!llave) {
-            llave = tec.nextBoolean();
-            System.out.println(llave);
-        }
-        System.out.println("va a mandar algo");
 
     }
 

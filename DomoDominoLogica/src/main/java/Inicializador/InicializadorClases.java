@@ -24,7 +24,7 @@ public class InicializadorClases {
     
     private final IMediador mediador;
     private final InicializadorMVCFachada cFachada;
-    
+    private InicializadorComunicaciones comunicaciones;
     
     private IInicioFachada inicioFachada;
     
@@ -33,12 +33,16 @@ public class InicializadorClases {
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
         cFachada = new InicializadorMVCFachada();
+        
     }
     
     /**
      * Inicializar clases MVC
      */
     public void InicializarClases(){
+        
+        //inicializar las comunicaciones
+        comunicaciones = new InicializadorComunicaciones();
         
         //inicializar pantallas mvc
         cFachada.inciializarMVC();

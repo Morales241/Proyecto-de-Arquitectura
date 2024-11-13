@@ -22,8 +22,8 @@ public class GestorDeComunicaciones {
     private Servidor servidor;
     private final GestorMensajes gestorMensajes;
 
-    public GestorDeComunicaciones() {
-        gestorMensajes = new GestorMensajes();
+    public GestorDeComunicaciones(GestorMensajes gMensajes) {
+        gestorMensajes = gMensajes;
         cliente = new Cliente();
     }
 
@@ -35,7 +35,7 @@ public class GestorDeComunicaciones {
         cliente.conectarAServidor(ip, puerto);
     }
 
-    public void enviarMensaje(String mensaje) {
+    public void enviarMensaje(Object mensaje) {
         cliente.enviarMensaje(mensaje);
     }
 

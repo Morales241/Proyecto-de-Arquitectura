@@ -4,7 +4,7 @@
  */
 package crearPartida;
 
-import cliente.Cliente;
+import cliente.GestorDeComunicaciones;
 import eventos.JugadorCrearPartidaDto;
 import mediador.IMediador;
 import mediador.Mediador;
@@ -16,7 +16,7 @@ import mediador.Mediador;
 public class LogicaCrearPartida implements ILogicaCrearPartida{
 
     private final IMediador mediador;
-    private Cliente cliente; 
+    private GestorDeComunicaciones comunicaciones; 
 
     public LogicaCrearPartida() {
         this.mediador = Mediador.getInstancia();
@@ -31,8 +31,9 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
     @Override
     public void crearPartida(JugadorCrearPartidaDto jugador) {
         System.out.println("se va a crear la partida");
-        //cliente.conectarANodo("", 0);
-        //cliente.mandarMensaje();
+        //cambiar la ip por las diferentes redes
+        comunicaciones.conectarAServidor("10.202.67.164", 8090);
+        comunicaciones.enviarMensaje(jugador);
     }
     
 }
