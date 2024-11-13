@@ -1,12 +1,20 @@
 package InicioMvc;
 
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.IMediador;
 import observers.IEventoJugar;
 import observers.IEventoValidacionDeNombre;
 
+/**
+ * Vista de inicio
+ *
+ *
+ * @author Luis Roberto Favela Castro - 00000246853
+ * @author Josue Gomez Garza - 00000245612
+ * @author Alejandro Gomez Vega - 00000247313
+ * @author Jesus Alberto Morales Rojas - 00000245335
+ */
 public class InicioView extends javax.swing.JFrame implements IComponente {
 
     private final InicioModel inicioModel;
