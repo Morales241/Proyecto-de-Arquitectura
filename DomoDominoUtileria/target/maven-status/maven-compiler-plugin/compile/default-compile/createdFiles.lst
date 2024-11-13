@@ -9,7 +9,6 @@ serializables\Jugador.class
 observers\IEventoAcabarPartida.class
 dtos\UsuarioDto.class
 eventos\JugadorConsulta.class
-eventos\NodoDto.class
 serializables\Jugada.class
 observers\IEventoIniciarPartidaServerCentral.class
 observers\IEventoIniciarPartida.class

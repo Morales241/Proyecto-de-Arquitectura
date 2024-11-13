@@ -9,13 +9,9 @@ package eventos;
  * @author tacot
  */
 public class JugadorUnirseAPartidaDto extends JugadorConsulta {
-
-    public JugadorUnirseAPartidaDto() {
+    private static final long serialVersionUID = 1L;
+    public JugadorUnirseAPartidaDto(String ip, String codigo, int puerto) {
+        super(ip, codigo, puerto);
     }
-
-    public JugadorUnirseAPartidaDto(NodoDto nodo, String codigo) {
-        super(nodo, codigo);
-    }
-    
     
 }

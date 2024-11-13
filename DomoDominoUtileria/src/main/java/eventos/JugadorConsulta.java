@@ -12,23 +12,30 @@ import java.io.Serializable;
  */
 public class JugadorConsulta implements Serializable{
     private static final long serialVersionUID = 1L;
-    private NodoDto nodo;
+    private String ip;
     private String codigo;
+    private int puerto;
 
     public JugadorConsulta() {
     }
 
-    public JugadorConsulta(NodoDto nodo, String codigo) {
-        this.nodo = nodo;
+    public JugadorConsulta(String ip, int puerto) {
+        this.ip = ip;
+        this.puerto = puerto;
+    }
+
+    public JugadorConsulta(String ip, String codigo, int puerto) {
+        this.ip = ip;
         this.codigo = codigo;
+        this.puerto = puerto;
     }
 
-    public NodoDto getNodo() {
-        return nodo;
+    public String getIp() {
+        return ip;
     }
 
-    public void setNodo(NodoDto nodo) {
-        this.nodo = nodo;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getCodigo() {
@@ -38,5 +45,13 @@ public class JugadorConsulta implements Serializable{
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
+
+    public int getPuerto() {
+        return puerto;
+    }
+
+    public void setPuerto(int puerto) {
+        this.puerto = puerto;
+    }
+
 }

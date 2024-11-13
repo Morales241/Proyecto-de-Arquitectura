@@ -10,14 +10,8 @@ package eventos;
  */
 public class JugadorCrearPartidaDto extends JugadorConsulta{
     private static final long serialVersionUID = 1L;
-
-    public JugadorCrearPartidaDto() {
+    public JugadorCrearPartidaDto(String ip, String codigo, int puerto) {
+        super(ip, codigo, puerto);
     }
-
-    public JugadorCrearPartidaDto(NodoDto nodo, String codigo) {
-        super(nodo, codigo);
-    }
-    
-    
 
 }
