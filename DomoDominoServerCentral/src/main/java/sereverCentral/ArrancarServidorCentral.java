@@ -44,7 +44,6 @@ public class ArrancarServidorCentral {
             System.out.println(llave);
         }
         System.out.println("va a mandar algo");
-        cliente.enviarMensaje(new JugadorCrearPartidaDto("2", "3", 1));
 
     }
 
