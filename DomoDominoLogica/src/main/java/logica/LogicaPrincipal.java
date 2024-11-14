@@ -1,6 +1,7 @@
 package logica;
 
 import Inicializador.InicializadorClases;
+import Inicializador.InicializadorComunicaciones;
 import Inicio.ILogicaInicio;
 import Inicio.LogicaInicio;
 import cliente.LogicaCliente;
@@ -38,19 +39,25 @@ public class LogicaPrincipal {
     private final ILogicaInicio lInicio;
     private final ILogicaCrearPartida lCrearPartida;
     private final IInicioFachada iFachada;
+    private final InicializadorComunicaciones comunicaciones;
     private final ICrearPartidaFachada crearPartidaFachada;
+    private final InicializadorClases inicializadorClases;
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
 
     public LogicaPrincipal() {
         mediador = Mediador.getInstancia();
         
-        InicializadorClases inicializadorClases = new InicializadorClases();
+        inicializadorClases = new InicializadorClases();
         
         inicializadorClases.InicializarClases();
         
+        comunicaciones = new InicializadorComunicaciones();
+        
+        comunicaciones.inicializarClasesComunicaciones();
+       
         lInicio = new LogicaInicio();
         
-        lCrearPartida = new LogicaCrearPartida();
+        lCrearPartida = new LogicaCrearPartida(comunicaciones.getComunicaciones());
         
         iFachada = inicializadorClases.getInicioFachada();
         

@@ -22,7 +22,6 @@ public class InicializadorComunicaciones {
     public InicializadorComunicaciones() {
 
     }
-
     public void inicializarClasesComunicaciones() {
 
         gestorMensajes = new GestorMensajes();
@@ -30,4 +29,18 @@ public class InicializadorComunicaciones {
         comunicaciones = new GestorDeComunicaciones(gestorMensajes);
     }
 
+    public GestorMensajes getGestorMensajes() {
+        return gestorMensajes;
+    }
+
+    public GestorDeComunicaciones getComunicaciones() {
+        return comunicaciones;
+    }
+
+    public Servidor getServidor() {
+        return servidor;
+    }
+
+    
+    
 }

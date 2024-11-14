@@ -24,7 +24,6 @@ public class InicializadorClases {
     
     private final IMediador mediador;
     private final InicializadorMVCFachada cFachada;
-    private InicializadorComunicaciones comunicaciones;
     
     private IInicioFachada inicioFachada;
     
@@ -41,9 +40,6 @@ public class InicializadorClases {
      */
     public void InicializarClases(){
         
-        //inicializar las comunicaciones
-        comunicaciones = new InicializadorComunicaciones();
-        
         //inicializar pantallas mvc
         cFachada.inciializarMVC();
         
@@ -56,7 +52,6 @@ public class InicializadorClases {
         CrearPartidaModel crearPartidaModel = (CrearPartidaModel) mediador.obtenerPantallaConcreta("crearPartida").getModelo();
         crearPartidaFachada = new CrearPartidaFachada(crearPartidaModel);
     }
-
 
     public IInicioFachada getInicioFachada() {
         return inicioFachada;

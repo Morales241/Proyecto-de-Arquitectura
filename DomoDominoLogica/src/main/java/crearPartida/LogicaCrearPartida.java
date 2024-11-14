@@ -18,8 +18,9 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
     private final IMediador mediador;
     private GestorDeComunicaciones comunicaciones; 
 
-    public LogicaCrearPartida() {
+    public LogicaCrearPartida(GestorDeComunicaciones comunicacionesParametro) {
         this.mediador = Mediador.getInstancia();
+        this.comunicaciones = comunicacionesParametro;
     }
     
     @Override
@@ -32,7 +33,7 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
     public void crearPartida(JugadorCrearPartidaDto jugador) {
         System.out.println("se va a crear la partida");
         //cambiar la ip por las diferentes redes
-        comunicaciones.conectarAServidor("10.202.67.164", 8090);
+        comunicaciones.conectarAServidor("10.202.67.95", 8090);
         comunicaciones.enviarMensaje(jugador);
     }
     

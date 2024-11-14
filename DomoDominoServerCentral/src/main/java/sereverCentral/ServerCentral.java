@@ -42,9 +42,16 @@ public class ServerCentral {
     }
 
     public void agregarPartida(JugadorCrearPartidaDto jugador) {
+
         List<NodoDto> nodos = new ArrayList<>();
-        nodos.add(jugador.getNodo());
-        this.infoPartidas.put(jugador.getCodigo(), nodos);
+        try {
+            nodos.add(jugador.getNodo());
+            this.infoPartidas.put(jugador.getCodigo(), nodos);
+
+            mandarMensaje("la partida fue agregada", nodos);
+        } catch (Exception ex) {
+            mandarMensaje("la partida no fue agregada debido a un error", nodos);
+        }
     }
 
     public void agregarJugadorPartida(JugadorUnirseAPartidaDto jugador) {
@@ -54,7 +61,8 @@ public class ServerCentral {
 
             this.infoPartidas.get(jugador.getCodigo()).add(jugador.getNodo());
         } else {
-//        enviar mensaje de que la partida no se encontro
+            //enviar mensaje de que la partida no se encontro
+
         }
     }
 
@@ -64,7 +72,7 @@ public class ServerCentral {
         if (seEncontroPartida) {
 
             this.infoPartidas.get(jugador.getCodigo()).remove(jugador.getNodo());
-            
+
             //enviar mensaje
         } else {
 //        enviar mensaje de que la partida no se encontro
@@ -73,7 +81,7 @@ public class ServerCentral {
 
     public List<NodoDto> informacionDePartidaPorCodigo(String codigo) {
         boolean seEncontroPartida = infoPartidas.containsKey(codigo);
-               
+
         return seEncontroPartida ? infoPartidas.get(codigo) : new ArrayList<>();
     }
 
@@ -81,9 +89,11 @@ public class ServerCentral {
         infoPartidas.remove(codigo);
     }
 
-    public void mandarMensaje(String mensaje) {
-        RespuestaServidorCentral respuesta = new RespuestaServidorCentral(mensaje);
-        comunicaciones.enviarMensaje(respuesta);
+    public void mandarMensaje(String mensaje, List<NodoDto> jugadores) {
+        for (NodoDto jugador : jugadores) {
+            RespuestaServidorCentral respuesta = new RespuestaServidorCentral(mensaje);
+            comunicaciones.enviarMensaje(respuesta);
+        }
     }
 
     public void mandarInfoDePartida(List<NodoDto> jugadores) {
@@ -98,7 +108,7 @@ public class ServerCentral {
 
         @Override
         public void crearPartida(JugadorCrearPartidaDto jugador) {
-            comunicaciones.conectarAServidor(jugador.getNodo().getIp(),jugador.getNodo().getPuerto());
+            comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
             agregarPartida(jugador);
         }
 
