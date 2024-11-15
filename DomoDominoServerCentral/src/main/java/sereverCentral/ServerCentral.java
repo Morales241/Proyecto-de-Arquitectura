@@ -49,26 +49,41 @@ public class ServerCentral {
             this.infoPartidas.put(jugador.getCodigo(), nodos);
 
             mandarMensaje("la partida fue agregada", nodos);
+
         } catch (Exception ex) {
             mandarMensaje("la partida no fue agregada debido a un error", nodos);
         }
     }
 
     public void agregarJugadorPartida(JugadorUnirseAPartidaDto jugador) {
-
+        List<NodoDto> nodos = new ArrayList<>();
         boolean seEncontroPartida = infoPartidas.containsKey(jugador.getCodigo());
+
         if (seEncontroPartida) {
 
-            this.infoPartidas.get(jugador.getCodigo()).add(jugador.getNodo());
-        } else {
-            //enviar mensaje de que la partida no se encontro
+            nodos = infoPartidas.get(jugador.getCodigo());
 
+            if (nodos.size() < 4) {
+                infoPartidas.get(jugador.getCodigo()).add(jugador.getNodo());
+
+            } else {
+                nodos.clear();
+                nodos.add(jugador.getNodo());
+                mandarMensaje("No se encontro partida, el codigo es incorrecto", nodos);
+            }
+
+        } else {
+            nodos.add(jugador.getNodo());
+            mandarMensaje("No se encontro partida, el codigo es incorrecto", nodos);
         }
     }
 
     public void sacarJugadorDePartida(JugadorAEliminarDto jugador) {
+        
         boolean seEncontroPartida = infoPartidas.containsKey(jugador.getCodigo());
+        
         List<NodoDto> nodos = new ArrayList<>();
+        
         if (seEncontroPartida) {
 
             this.infoPartidas.get(jugador.getCodigo()).remove(jugador.getNodo());
@@ -89,9 +104,9 @@ public class ServerCentral {
         infoPartidas.remove(codigo);
     }
 
-    public void mandarMensaje(String mensaje, List<NodoDto> jugadores) {
+    public void mandarMensaje(Object mensaje, List<NodoDto> jugadores) {
         for (NodoDto jugador : jugadores) {
-            RespuestaServidorCentral respuesta = new RespuestaServidorCentral(mensaje);
+            RespuestaServidorCentral respuesta = new RespuestaServidorCentral(String.valueOf(mensaje));
             comunicaciones.enviarMensaje(respuesta);
         }
     }
