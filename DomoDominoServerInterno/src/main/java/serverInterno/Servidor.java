@@ -28,6 +28,7 @@ public class Servidor {
     private void iniciarServidor(int puerto) {
         try {
             serverSocket = new ServerSocket(puerto);
+            
             new Thread(new Oyente()).start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,11 +55,14 @@ public class Servidor {
 
         private Socket cliente;
         private ObjectInputStream lector;
+        
 
         public Receptor(Socket cliente) {
             this.cliente = cliente;
             try {
+                
                 lector = new ObjectInputStream(cliente.getInputStream());
+                
             } catch (IOException e) {
             }
         }
@@ -66,9 +70,10 @@ public class Servidor {
         @Override
         public void run() {
 
-            Object mensajeRecibido = null;
+            Object mensajeRecibido;
 
             while ((mensajeRecibido = obtenerMensaje()) != null) {
+                
                 switch (mensajeRecibido) {
 
                     case JugadorCrearPartidaDto jugadorCrearPartidaDto ->

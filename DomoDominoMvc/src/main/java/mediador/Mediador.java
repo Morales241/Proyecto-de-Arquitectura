@@ -38,7 +38,7 @@ public class Mediador<M, V extends JFrame, C> implements IMediador {
     @Override
     public void mostrarPantallaConcreta(String nombre) {
         //saca en pantalla concreta el nombre que encuentre
-        ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
+         ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
         if (pantallaConcreta != null) {
             pantallas.values().forEach((otrasPantallas) -> {
                 otrasPantallas.getVista().setVisible(false);

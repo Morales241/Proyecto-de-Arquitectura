@@ -4,7 +4,6 @@
  */
 package Inicializador;
 
-import cliente.Cliente;
 import cliente.GestorDeComunicaciones;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;

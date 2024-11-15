@@ -131,6 +131,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
     public void validarDatos() {
         JOptionPane.showMessageDialog(null, "No se permiten caracteres especiales(solo '_') ni espacios, el nombre tiene que ser mayor a 3 y menor a 15 caracteres");
+    
     }
 
     public void agregarIEventoCrearPartida(IEventoCrearPartida listener) {

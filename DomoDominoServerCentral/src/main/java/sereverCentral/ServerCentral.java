@@ -47,7 +47,7 @@ public class ServerCentral {
         try {
             nodos.add(jugador.getNodo());
             this.infoPartidas.put(jugador.getCodigo(), nodos);
-
+//            comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
             mandarMensaje("la partida fue agregada", nodos);
 
         } catch (Exception ex) {
@@ -123,7 +123,7 @@ public class ServerCentral {
 
         @Override
         public void crearPartida(JugadorCrearPartidaDto jugador) {
-            comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
+//            comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
             agregarPartida(jugador);
         }
 
