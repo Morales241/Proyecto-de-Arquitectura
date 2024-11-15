@@ -6,6 +6,7 @@ package unirseAPartida;
 
 import eventos.JugadorUnirseAPartidaDto;
 import observers.IEventoAgregarJugadorAPartida;
+import observers.IObserver;
 
 /**
  *
@@ -15,10 +16,13 @@ public class UnirseAPartidaController {
     
      private final UnirseAPartidaModel unirseAPartidaModel;
      private final UnirseAPartidaView unirseAPartidaView;
+     
 
      public UnirseAPartidaController(UnirseAPartidaModel unirseAPartidaModel, UnirseAPartidaView unirseAPartidaView) {
           this.unirseAPartidaModel = unirseAPartidaModel;
           this.unirseAPartidaView = unirseAPartidaView;
+          this.unirseAPartidaView.agregarIEventoRegresar(new accionRegresar());
+         this.unirseAPartidaView.agregarIEventoUnirseAPartida(new accionUnirseAPartida());
      }
      
      public void validarNombre(JugadorUnirseAPartidaDto jugador) {
@@ -37,4 +41,14 @@ public class UnirseAPartidaController {
           }
           
      }
+     
+     private class accionRegresar implements IObserver{
+
+        @Override
+        public void actualizar() {
+            regresar();
+        }
+    }
+     
+     
 }

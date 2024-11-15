@@ -13,6 +13,9 @@ import crearPartida.CrearPartidaModel;
 import crearPartida.CrearPartidaView;
 import mediador.IMediador;
 import mediador.Mediador;
+import unirseAPartida.UnirseAPartidaController;
+import unirseAPartida.UnirseAPartidaModel;
+import unirseAPartida.UnirseAPartidaView;
 
 /**
  *
@@ -42,6 +45,14 @@ public class InicializadorMVC {
         CrearPartidaController crearMesaController = new CrearPartidaController(crearMesaModel, crearMesaView);
         ContenedorMvc<CrearPartidaModel, CrearPartidaView, CrearPartidaController> crearPartidaContenedor = new ContenedorMvc<>(crearMesaModel, crearMesaView, crearMesaController);
         mediador.registrarPantalla("crearPartida", crearPartidaContenedor);
+        
+        //MVC unirse partida
+        UnirseAPartidaModel unirseAPartidaModel = new UnirseAPartidaModel();
+        UnirseAPartidaView unirseAPartidaView = new UnirseAPartidaView(unirseAPartidaModel);
+        unirseAPartidaView.setMediador(mediador);
+        UnirseAPartidaController unirseAPartidaController = new UnirseAPartidaController(unirseAPartidaModel, unirseAPartidaView);
+        ContenedorMvc<UnirseAPartidaModel, UnirseAPartidaView, UnirseAPartidaController> unirseAPartidaContenedor = new ContenedorMvc<>(unirseAPartidaModel, unirseAPartidaView, unirseAPartidaController);
+        mediador.registrarPantalla("unirsePartida", unirseAPartidaContenedor);
         
     }
     

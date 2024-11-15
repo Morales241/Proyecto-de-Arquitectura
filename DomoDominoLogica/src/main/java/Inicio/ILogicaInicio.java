@@ -14,5 +14,6 @@ public interface ILogicaInicio {
     
     public void unirseAPartida();
     
+    public void regresarAlInicio();
    
 }
