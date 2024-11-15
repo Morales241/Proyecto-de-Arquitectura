@@ -45,6 +45,8 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         btnCrearPartida = new javax.swing.JButton();
         cbxNumeroFichas = new javax.swing.JComboBox<>();
         btnRegresar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        cbxAvatar = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,10 +60,10 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNombre.setToolTipText("Nombre del jugador");
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 180, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 180, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ingreseNombre.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fichasIniciales.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
@@ -96,6 +98,15 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 30));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecciona avatar.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
+
+        cbxAvatar.setBackground(new java.awt.Color(174, 70, 43));
+        cbxAvatar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Avatar 1", "Avatar 2", "Avatar 3. Avatar 4" }));
+        cbxAvatar.setBorder(null);
+        cbxAvatar.setFocusable(false);
+        jPanel1.add(cbxAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 180, -1));
+
         jLabel1.setForeground(new java.awt.Color(174, 70, 43));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_CrearPartida.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -110,7 +121,8 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
 
-        ejecutarAccionCrearPartida(this.txtNombre.getText(), Integer.parseInt(String.valueOf(this.cbxNumeroFichas.getSelectedItem())));
+        int avatar = 1 + this.cbxAvatar.getSelectedIndex();
+        ejecutarAccionCrearPartida(this.txtNombre.getText(), Integer.parseInt(String.valueOf(this.cbxNumeroFichas.getSelectedItem())), avatar);
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -126,10 +138,10 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
     }
 
-    public void ejecutarAccionCrearPartida(String nombre, int numFichas) {
+    public void ejecutarAccionCrearPartida(String nombre, int numFichas, int avatar) {
         if (observerCrearPartida != null) {
            
-            JugadorCrearPartidaDto jugador = new JugadorCrearPartidaDto(numFichas, new NodoDto(nombre), "");
+            JugadorCrearPartidaDto jugador = new JugadorCrearPartidaDto(numFichas, new NodoDto(nombre, avatar), "");
             
             observerCrearPartida.crearPartida(jugador);
         }
@@ -149,10 +161,12 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearPartida;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxAvatar;
     private javax.swing.JComboBox<String> cbxNumeroFichas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
