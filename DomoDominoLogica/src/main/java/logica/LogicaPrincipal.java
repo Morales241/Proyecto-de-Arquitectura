@@ -15,6 +15,7 @@ import eventos.PonerFichaDto;
 import eventos.SetUpDto;
 import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
+import fachadas.IUnirseAPartidaFachada;
 import mediador.Mediador;
 import observers.IEventoAgregarJugadorAPartida;
 import observers.IEventoCrearPartida;
@@ -24,6 +25,8 @@ import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 import serializables.Jugador;
+import unirseAPartida.ILogicaUnirseAPartida;
+import unirseAPartida.LogicaUnirseAPartida;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -38,9 +41,11 @@ public class LogicaPrincipal {
     private final Mediador mediador;
     private final ILogicaInicio lInicio;
     private final ILogicaCrearPartida lCrearPartida;
+    private final ILogicaUnirseAPartida IUnirsePartida;
     private final IInicioFachada iFachada;
     private final InicializadorComunicaciones comunicaciones;
     private final ICrearPartidaFachada crearPartidaFachada;
+    private final IUnirseAPartidaFachada unirsePartidaFachada;
     private final InicializadorClases inicializadorClases;
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
 
@@ -58,6 +63,7 @@ public class LogicaPrincipal {
         lInicio = new LogicaInicio();
         
         lCrearPartida = new LogicaCrearPartida(comunicaciones.getComunicaciones());
+        IUnirsePartida = new LogicaUnirseAPartida(comunicaciones.getComunicaciones());
         
         iFachada = inicializadorClases.getInicioFachada();
         
@@ -68,6 +74,9 @@ public class LogicaPrincipal {
         crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
         crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
         
+        unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
+        unirsePartidaFachada.agregarIEventoUnirseAPartida(new AccionUnirseAPartida());
+        unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
         
     }
 
@@ -95,7 +104,7 @@ public class LogicaPrincipal {
 
         @Override
         public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
-
+             IUnirsePartida.unirseAPartida(jugador);
         }
     }
 
@@ -154,8 +163,8 @@ public class LogicaPrincipal {
 
         @Override
         public void actualizar() {
-            lCrearPartida.regresarAlInicio();
+           lInicio.regresarAlInicio();
         }
     }
-
+    
 }

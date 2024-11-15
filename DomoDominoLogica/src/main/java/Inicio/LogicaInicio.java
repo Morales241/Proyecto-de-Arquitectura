@@ -30,7 +30,12 @@ public class LogicaInicio implements ILogicaInicio {
 
     @Override
     public void unirseAPartida() {
-        mediador.mostrarPantallaConcreta("");
+        mediador.mostrarPantallaConcreta("unirsePartida");
     }
+
+     @Override
+     public void regresarAlInicio() {
+         mediador.mostrarPantallaConcreta("inicio");
+     }
 
 }

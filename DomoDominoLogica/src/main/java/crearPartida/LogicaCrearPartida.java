@@ -33,7 +33,8 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
     public void crearPartida(JugadorCrearPartidaDto jugador) {
         System.out.println("se va a crear la partida");
         //cambiar la ip por las diferentes redes
-        comunicaciones.conectarAServidor("10.202.67.95", 8090);
+        //comunicaciones.conectarAServidor("10.202.67.95", 8090
+         comunicaciones.conectarAServidor("192.168.100.32", 8090);
         comunicaciones.enviarMensaje(jugador);
     }
     

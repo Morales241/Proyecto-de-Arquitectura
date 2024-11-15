@@ -5,10 +5,13 @@ import crearPartida.CrearPartidaModel;
 import fachadas.CrearPartidaFachada;
 import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
+import fachadas.IUnirseAPartidaFachada;
 import fachadas.InicializadorMVCFachada;
 import fachadas.InicioFachada;
+import fachadas.UnirseAPartidaFachada;
 import mediador.IMediador;
 import mediador.Mediador;
+import unirseAPartida.UnirseAPartidaModel;
 
 /**
  * Clase que Inicializa todas las clases Mvc y clase mediador.
@@ -28,6 +31,8 @@ public class InicializadorClases {
     private IInicioFachada inicioFachada;
     
     private ICrearPartidaFachada crearPartidaFachada;
+    
+    private IUnirseAPartidaFachada unirsePartidaFachada;
     
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
@@ -51,6 +56,10 @@ public class InicializadorClases {
         //fachada crearPartida
         CrearPartidaModel crearPartidaModel = (CrearPartidaModel) mediador.obtenerPantallaConcreta("crearPartida").getModelo();
         crearPartidaFachada = new CrearPartidaFachada(crearPartidaModel);
+        
+        //fachada unirsePartida
+        UnirseAPartidaModel unirseAPartidaModel = (UnirseAPartidaModel) mediador.obtenerPantallaConcreta("unirsePartida").getModelo();
+        unirsePartidaFachada = new UnirseAPartidaFachada(unirseAPartidaModel);
     }
 
     public IInicioFachada getInicioFachada() {
@@ -61,5 +70,8 @@ public class InicializadorClases {
         return crearPartidaFachada;
     }
 
+    public IUnirseAPartidaFachada getUnirseAPartidaFachada() {
+         return unirsePartidaFachada;
+    }
     
 }
