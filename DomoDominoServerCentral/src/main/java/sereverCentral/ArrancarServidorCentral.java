@@ -29,11 +29,8 @@ public class ArrancarServidorCentral {
         try {
             Scanner tec = new Scanner(System.in);
             boolean llave = true;
-            GestorMensajes gestorMensajes = new GestorMensajes();
-            Servidor server = new Servidor(8090, gestorMensajes);
-            GestorDeComunicaciones comunicaciones = new GestorDeComunicaciones(gestorMensajes);
-            ServerCentral serverCentral = new ServerCentral(comunicaciones, gestorMensajes);
-            
+            GestorDeComunicaciones comunicaciones = new GestorDeComunicaciones();
+            comunicaciones.crearServidor(8090);
             
             System.out.println(InetAddress.getLocalHost().getHostAddress());
             while (llave) {

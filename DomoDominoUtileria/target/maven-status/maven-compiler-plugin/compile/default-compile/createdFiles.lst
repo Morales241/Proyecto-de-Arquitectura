@@ -19,6 +19,7 @@ observersLogicaAServidorCentral\IEventoAcabarPartida.class
 eventos\JugadorUnirseAPartidaDto.class
 enumerados\RespuestaServidor.class
 contenedor\ContenedorMvc.class
+eventos\PasarTurno.class
 observersServerCentralALogica\IEventoRespuestaServidorCentral.class
 mediador\IMediador.class
 observers\IEventoPonerFicha.class

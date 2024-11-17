@@ -22,8 +22,8 @@ public class GestorDeComunicaciones {
     private Servidor servidor;
     private final GestorMensajes gestorMensajes;
 
-    public GestorDeComunicaciones(GestorMensajes gMensajes) {
-        gestorMensajes = gMensajes;
+    public GestorDeComunicaciones() {
+        gestorMensajes = new GestorMensajes();
         cliente = new Cliente();
     }
 
