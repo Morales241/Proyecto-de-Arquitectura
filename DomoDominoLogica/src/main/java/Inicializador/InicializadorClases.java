@@ -1,20 +1,17 @@
 package Inicializador;
 
-import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
-import InicioMvc.InicioView;
-import TableroMvc.TableroController;
-import TableroMvc.TableroModel;
-import TableroMvc.TableroView;
-import contenedor.ContenedorMvc;
-import Entidades.Arreglo;
-import dtos.JugadorDto;
-import Entidades.Pozo;
-import Inicio.LogicaInicio;
+import crearPartida.CrearPartidaModel;
+import fachadas.CrearPartidaFachada;
+import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
+import fachadas.IUnirseAPartidaFachada;
+import fachadas.InicializadorMVCFachada;
 import fachadas.InicioFachada;
+import fachadas.UnirseAPartidaFachada;
 import mediador.IMediador;
 import mediador.Mediador;
+import unirseAPartida.UnirseAPartidaModel;
 
 /**
  * Clase que Inicializa todas las clases Mvc y clase mediador.
@@ -28,23 +25,53 @@ import mediador.Mediador;
  */
 public class InicializadorClases {
     
+    private final IMediador mediador;
+    private final InicializadorMVCFachada cFachada;
+    
+    private IInicioFachada inicioFachada;
+    
+    private ICrearPartidaFachada crearPartidaFachada;
+    
+    private IUnirseAPartidaFachada unirsePartidaFachada;
+    
+    public InicializadorClases() {
+        mediador = Mediador.getInstancia();
+        cFachada = new InicializadorMVCFachada();
+        
+    }
+    
     /**
      * Inicializar clases MVC
      */
     public void InicializarClases(){
-        IMediador mediador = Mediador.getInstancia();
         
+        //inicializar pantallas mvc
+        cFachada.inciializarMVC();
         
-        InicioModel inicioModel = new InicioModel();
-        InicioView inicioView = new InicioView(inicioModel);
-        inicioView.setMediador(mediador);
-        InicioController inicioController = new InicioController(inicioModel, inicioView);
-        ContenedorMvc<InicioModel, InicioView, InicioController> inicioContenedor = new ContenedorMvc<>(inicioModel,inicioView,inicioController);
-      
-        mediador.registrarPantalla("inicio", inicioContenedor);
+        //fachada inicio
+        InicioModel inicioModel = (InicioModel) mediador.obtenerPantallaConcreta("inicio").getModelo();
           
-        //aquí instanciamos la logica, se tienen que camiar los parametros por contenedores en vez de solo los modelos
-        IInicioFachada inicioFachada = new InicioFachada(inicioModel);
-//        LogicaInicio logicaInicio = new LogicaInicio(inicioFachada);
+        inicioFachada = new InicioFachada(inicioModel);
+
+        //fachada crearPartida
+        CrearPartidaModel crearPartidaModel = (CrearPartidaModel) mediador.obtenerPantallaConcreta("crearPartida").getModelo();
+        crearPartidaFachada = new CrearPartidaFachada(crearPartidaModel);
+        
+        //fachada unirsePartida
+        UnirseAPartidaModel unirseAPartidaModel = (UnirseAPartidaModel) mediador.obtenerPantallaConcreta("unirsePartida").getModelo();
+        unirsePartidaFachada = new UnirseAPartidaFachada(unirseAPartidaModel);
     }
+
+    public IInicioFachada getInicioFachada() {
+        return inicioFachada;
+    }
+
+    public ICrearPartidaFachada getCrearPartidaFachada() {
+        return crearPartidaFachada;
+    }
+
+    public IUnirseAPartidaFachada getUnirseAPartidaFachada() {
+         return unirsePartidaFachada;
+    }
+    
 }

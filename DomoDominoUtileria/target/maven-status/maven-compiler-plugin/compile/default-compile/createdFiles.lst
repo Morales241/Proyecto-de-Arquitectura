@@ -9,6 +9,7 @@ serializables\Jugador.class
 observers\IEventoAcabarPartida.class
 dtos\UsuarioDto.class
 eventos\JugadorConsulta.class
+eventos\NodoDto.class
 serializables\Jugada.class
 observers\IEventoIniciarPartidaServerCentral.class
 observers\IEventoIniciarPartida.class
@@ -20,7 +21,6 @@ eventos\JugadorUnirseAPartidaDto.class
 enumerados\RespuestaServidor.class
 contenedor\ContenedorMvc.class
 observers\IEventoCrearPartida.class
-observers\IEventoJugar.class
 mediador\IMediador.class
 observers\IEventoPonerFicha.class
 observers\IEventoValidacionDeNombre.class

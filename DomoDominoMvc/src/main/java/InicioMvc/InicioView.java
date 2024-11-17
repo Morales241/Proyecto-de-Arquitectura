@@ -1,25 +1,15 @@
 package InicioMvc;
 
-import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoJugar;
-import observers.IEventoValidacionDeNombre;
+import observers.IObserver;
 
-/**
- * Vista de inicio
- *
- *
- * @author Luis Roberto Favela Castro - 00000246853
- * @author Josue Gomez Garza - 00000245612
- * @author Alejandro Gomez Vega - 00000247313
- * @author Jesus Alberto Morales Rojas - 00000245335
- */
 public class InicioView extends javax.swing.JFrame implements IComponente {
 
     private final InicioModel inicioModel;
     private IMediador mediador;
-    private IEventoJugar listenerJugar;
+    private IObserver observerCrearPartida;
+    private IObserver observerUnirsePartida;
 
     /**
      * Creates new form InicioView
@@ -29,8 +19,6 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
     public InicioView(InicioModel inicioModel) {
         initComponents();
         this.inicioModel = inicioModel;
-        this.inicioModel.agregarIEventoValidacionDeNombre(new EventoModelo());
-
     }
 
     /**
@@ -42,33 +30,44 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        btnJugar = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
+        btnCrear = new javax.swing.JButton();
+        btnUnirse = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnJugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jugar - copia.png"))); // NOI18N
-        btnJugar.setBorderPainted(false);
-        btnJugar.setContentAreaFilled(false);
-        btnJugar.setFocusPainted(false);
-        btnJugar.setFocusable(false);
-        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+        btnCrear.setForeground(new java.awt.Color(255, 255, 255));
+        btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida.png"))); // NOI18N
+        btnCrear.setToolTipText("");
+        btnCrear.setBorderPainted(false);
+        btnCrear.setContentAreaFilled(false);
+        btnCrear.setFocusPainted(false);
+        btnCrear.setFocusable(false);
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJugarActionPerformed(evt);
+                btnCrearActionPerformed(evt);
             }
         });
-        jPanel1.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 260, 40));
+        jPanel1.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 270, 70));
 
-        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
-        txtNombre.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 310, 40));
+        btnUnirse.setForeground(new java.awt.Color(255, 255, 255));
+        btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unirseApartida.png"))); // NOI18N
+        btnUnirse.setToolTipText("");
+        btnUnirse.setBorderPainted(false);
+        btnUnirse.setContentAreaFilled(false);
+        btnUnirse.setFocusPainted(false);
+        btnUnirse.setFocusable(false);
+        btnUnirse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnirseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 210, 70));
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
-        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_Inicio.png"))); // NOI18N
+        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,42 +84,45 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        ejecutarAccionJugar(this.txtNombre.getText());
-    }//GEN-LAST:event_btnJugarActionPerformed
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        ejecutarAccionCrearPartida();
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirseActionPerformed
+        ejecutarAccionUnirseAPartida();
+    }//GEN-LAST:event_btnUnirseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnJugar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnUnirse;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    public void agregarIEventoJugar(IEventoJugar listener) {
-        this.listenerJugar = listener;
+    public void agregarIEventoCrearPartida(IObserver listener) {
+        this.observerCrearPartida = listener;
     }
 
-    public void ejecutarAccionJugar(String nombre) {
-        if (listenerJugar != null) {
-            listenerJugar.validarNombreParaJugar(nombre);
+    public void ejecutarAccionCrearPartida() {
+        if (observerCrearPartida != null) {
+            observerCrearPartida.actualizar();
         }
     }
 
+    public void agregarIEventoUnirseAPartida(IObserver listener) {
+        this.observerUnirsePartida = listener;
+    }
+
+    public void ejecutarAccionUnirseAPartida() {
+        if (observerUnirsePartida != null) {
+            observerUnirsePartida.actualizar();
+        }
+    }
+    
     @Override
     public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 
-    public void avisoAlJugadorDeNombreVacio(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
-
-    private class EventoModelo implements IEventoValidacionDeNombre {
-
-        @Override
-        public void validacionDeNombre(String mensajeDeValidacion) {
-            avisoAlJugadorDeNombreVacio(mensajeDeValidacion);
-        }
-    }
 }

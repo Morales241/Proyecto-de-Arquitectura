@@ -1,31 +1,36 @@
 package serverInterno;
 
-import com.google.gson.Gson;
-import java.io.DataInputStream;
+import eventos.JugadorAEliminarDto;
+import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorUnirseAPartidaDto;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import serializables.Jugada;
 
 public class Servidor {
     private ServerSocket serverSocket;
-    private DataInputStream lector;
-    private GestorMensajes gestorMensajes;
+    private final List<Socket> clientesConectados;
+    private final GestorMensajes gestorMensajes;
+
     private static final Logger log = Logger.getLogger(Servidor.class.getName());
 
     public Servidor(int puerto, GestorMensajes gestorMensajes) {
         this.gestorMensajes = gestorMensajes;
+        clientesConectados = new ArrayList<>();
+        iniciarServidor(puerto);
+    }
+
+    private void iniciarServidor(int puerto) {
         try {
             serverSocket = new ServerSocket(puerto);
-            
-            log.log(Level.INFO, "El servidor se inicio en el puerto: ", puerto);
-            
             new Thread(new Oyente()).start();
-            
         } catch (IOException e) {
-            log.log(Level.SEVERE, "Error en la clase Servidor, metodo constructor: ", e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -35,78 +40,64 @@ public class Servidor {
         public void run() {
             while (true) {
                 try {
-                    Socket nodo = serverSocket.accept();
-                    
-                    //agregar al server central
-                    
-                    iniciarReceptor(nodo); 
-                    
+                    Socket cliente = serverSocket.accept();
+                    clientesConectados.add(cliente);
+                    new Thread(new Receptor(cliente)).start();
                 } catch (IOException e) {
-                    log.log(Level.SEVERE, "Error en la clase Servirdor - Oyente, metodo run", e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }
     }
-    
-    public void iniciarReceptor(Socket nodo) {
-        new Thread(new Receptor(nodo)).start();
-    }
-    
+
     private class Receptor implements Runnable {
 
-        private Socket nodo;
+        private Socket cliente;
+        private ObjectInputStream lector;
 
-        public Receptor(Socket nodo) {
-            this.nodo = nodo;
+        public Receptor(Socket cliente) {
+            this.cliente = cliente;
             try {
-                lector = new DataInputStream (nodo.getInputStream());
+                lector = new ObjectInputStream(cliente.getInputStream());
             } catch (IOException e) {
-                log.log(Level.SEVERE, "Error en la clase Cliente - Receptor, metodo constructor", e.getMessage());
             }
         }
 
         @Override
         public void run() {
-            try {
-                Jugada judadaRecibida;
-                while ((judadaRecibida = obtenerMensaje()) != null) {
-//                    gestorMensajes.notificarObservadores(judadaRecibida);
-                    log.log(Level.INFO, "Mensaje recibido: ", judadaRecibida);
+
+            Object mensajeRecibido = null;
+
+            while ((mensajeRecibido = obtenerMensaje()) != null) {
+                switch (mensajeRecibido) {
+
+                    case JugadorCrearPartidaDto jugadorCrearPartidaDto ->
+                        gestorMensajes.notificarObservadoreCrearPartida(jugadorCrearPartidaDto);
+
+                    case JugadorUnirseAPartidaDto jugadorUnirseAPartidaDto ->
+                        gestorMensajes.notificarObserverAgregarJugador(jugadorUnirseAPartidaDto);
+
+                    case JugadorAEliminarDto jugadorAEliminarDto ->
+                        gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
+
+                    default ->
+                        log.log(Level.INFO, "Tipo de mensaje no reconocido");
                 }
-            } catch (IOException ex) {
-                log.log(Level.SEVERE, "Error en la clase Cliente - Receptor, metodo run:", ex.getMessage());
+                log.log(Level.INFO, "Método: run - Clase: Servidor - Proyecto: Server de Server Central");
             }
+
         }
-        
-        public Jugada obtenerMensaje() throws IOException {
-            
-            int tamano = lector.readInt();
-            
-            byte[] bytesJugada = new byte[tamano];
-            
-            lector.readFully(bytesJugada);
-            
-            String jsonJugada = pasarAString(bytesJugada);
-             
-            Jugada jugadaRecibida = desSerializarJugada(jsonJugada);
-            
-            return jugadaRecibida;
-        }
-        
-        public String pasarAString(byte[] bites){
-        
-            String jsonJugada = new String(bites);
-            
-            return jsonJugada;
-        }
-        
-        public Jugada desSerializarJugada(String json){
-            
-            Gson gson = new Gson();
-            
-            Jugada judadaRecibida = gson.fromJson(json, Jugada.class);
-        
-            return judadaRecibida;
+
+        public Object obtenerMensaje() {
+            Object mensaje = null;
+            try {
+                mensaje = lector.readObject();
+                log.log(Level.INFO, "Llegó un mensaje");
+            } catch (IOException | ClassNotFoundException ex) {
+                log.log(Level.SEVERE, "Error al leer el mensaje", ex);
+            }
+            return mensaje;
+
         }
     }
 }

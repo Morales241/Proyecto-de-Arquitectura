@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 public class Servidor {
 
     private ServerSocket serverSocket;
-    private List<Socket> clientesConectados;
-    private GestorMensajes gestorMensajes;
+    private final List<Socket> clientesConectados;
+    private final GestorMensajes gestorMensajes;
 
     private static final Logger log = Logger.getLogger(Servidor.class.getName());
 

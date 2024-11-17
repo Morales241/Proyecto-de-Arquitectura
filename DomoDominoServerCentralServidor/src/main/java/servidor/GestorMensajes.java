@@ -1,6 +1,5 @@
 package servidor;
 
-import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
@@ -10,7 +9,6 @@ import observers.IEventoAcabarPartida;
 import observers.IEventoAgregarJugadorAPartida;
 import observers.IEventoCrearPartida;
 import observers.IEventoIniciarPartidaServerCentral;
-import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoSalirDePartida;
 
 public class GestorMensajes {

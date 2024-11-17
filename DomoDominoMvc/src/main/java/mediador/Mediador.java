@@ -18,7 +18,7 @@ import mediador.IMediador;
  * @param <V> Clase Vista
  * @param <C> Clase Controlador
  */
-public class Mediador<M, V extends JFrame, C>  implements IMediador {
+public class Mediador<M, V extends JFrame, C> implements IMediador {
 
     private Map<String, ContenedorMvc<M, V, C>> pantallas;
     private static Mediador instancia;
@@ -29,10 +29,9 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
     private Mediador() {
         this.pantallas = new HashMap<>();
     }
-    
+
     /**
-     * Metodo que muestra una Pantalla Concreta dependiendo del nombre que le
-     * recibe como parametro
+     * Metodo que muestra una Pantalla Concreta dependiendo del nombre que le recibe como parametro
      *
      * @param nombre Nombre a buscar dentro del mapa
      */
@@ -48,15 +47,36 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
 
         } else {
             //Aqui tiren un log de que no se encontro la viewConcreta jejejej
-            System.out.println("No se encontro la viewConcreta " + nombre);
+            System.out.println("No se encontro la viewConcreta para mostrar" + nombre);
         }
     }
-    
+
+    /**
+     * Metodo que cierra una Pantalla Concreta dependiendo del nombre que le recibe como parametro
+     *
+     * @param nombre Nombre a buscar dentro del mapa
+     */
+    @Override
+    public void cerrarPantallaConcreta(String nombre) {
+        //saca en pantalla concreta el nombre que encuentre
+        ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
+        if (pantallaConcreta != null) {
+            pantallas.values().forEach((otrasPantallas) -> {
+                otrasPantallas.getVista().setVisible(false);
+            });
+            pantallaConcreta.getVista().setVisible(false);
+
+        } else {
+            //Aqui tiren un log de que no se encontro la viewConcreta jejejej
+            System.out.println("No se encontro la viewConcreta para cerrar" + nombre);
+        }
+    }
+
     /**
      * Regresa la pantalla concreta que coincida con el nombre
-     * 
+     *
      * @param nombre
-     * @return 
+     * @return
      */
     @Override
     public ContenedorMvc obtenerPantallaConcreta(String nombre) {
@@ -65,11 +85,10 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
             return pantallaConcreta;
         } else {
             //Aqui tiren un log de que no se encontro la viewConcreta jejejej
-            System.out.println("No se encontro la viewConcreta " + nombre);
+            System.out.println("No se encontro la viewConcreta para obtener" + nombre);
         }
         return null;
     }
-    
 
     /**
      * Resgistra la pantalla, se guarda el nombre y su contenedor
@@ -81,19 +100,19 @@ public class Mediador<M, V extends JFrame, C>  implements IMediador {
     public void registrarPantalla(String nombre, ContenedorMvc contenedorMvc) {
         pantallas.put(nombre, contenedorMvc);
     }
-    
+
     /**
      * Método para obtener la instancia única del Singleton.
-     * 
+     *
+     * @param <M>
      * @return La única instancia del Mediador
      */
-    public static synchronized <M, V extends JFrame, C> Mediador<M, V, C> getInstancia() {
+    public static <M, V extends JFrame, C> Mediador<M, V, C> getInstancia() {
         if (instancia == null) {
             instancia = new Mediador<>();
         }
+
         return instancia;
     }
-
-    
 
 }

@@ -18,12 +18,12 @@ import servidor.Servidor;
  */
 public class GestorDeComunicaciones {
 
-    private Cliente cliente;
+    private final Cliente cliente;
     private Servidor servidor;
-    private GestorMensajes gestorMensajes;
+    private final GestorMensajes gestorMensajes;
 
-    public GestorDeComunicaciones() {
-        gestorMensajes = new GestorMensajes();
+    public GestorDeComunicaciones(GestorMensajes gMensajes) {
+        gestorMensajes = gMensajes;
         cliente = new Cliente();
     }
 
@@ -35,7 +35,7 @@ public class GestorDeComunicaciones {
         cliente.conectarAServidor(ip, puerto);
     }
 
-    public void enviarMensaje(String mensaje) {
+    public void enviarMensaje(Object mensaje) {
         cliente.enviarMensaje(mensaje);
     }
 

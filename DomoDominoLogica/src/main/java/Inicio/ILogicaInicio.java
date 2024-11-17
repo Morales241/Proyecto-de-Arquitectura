@@ -10,7 +10,10 @@ package Inicio;
  */
 public interface ILogicaInicio {
     
-    public void Jugar();
+    public void crearPartida();
     
+    public void unirseAPartida();
+    
+    public void regresarAlInicio();
    
 }
