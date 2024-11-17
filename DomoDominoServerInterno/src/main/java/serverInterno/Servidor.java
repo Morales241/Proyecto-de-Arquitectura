@@ -1,12 +1,10 @@
 package serverInterno;
 
 import dtos.FichaDto;
-import enumerados.RespuestaServidor;
 import eventos.JugadorAEliminarDto;
-import eventos.JugadorCrearPartidaDto;
-import eventos.JugadorUnirseAPartidaDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
+import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -119,7 +117,7 @@ public class Servidor {
                 case FichaDto fichaSacada ->
                     gestorMensajes.notificarObservadorFichaTomadaDelPozo(fichaSacada);
                     
-                case RespuestaServidor respuesta ->
+                case RespuestaServidorCentral respuesta ->
                     gestorMensajes.notificarObserverRespuestaDelServidorCentral(respuesta);
 
                 default ->

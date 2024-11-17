@@ -4,18 +4,21 @@ import Inicializador.InicializadorClases;
 import Inicializador.InicializadorComunicaciones;
 import Inicio.ILogicaInicio;
 import Inicio.LogicaInicio;
-import cliente.LogicaCliente;
+import cliente.GestorDeComunicaciones;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
+import eventos.PasarTurno;
 import eventos.PonerFichaDto;
+import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
 import mediador.Mediador;
+import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observersServerCentralALogica.IEventoIniciarPartida;
@@ -23,7 +26,8 @@ import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
-import serializables.Jugador;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -39,38 +43,65 @@ public class LogicaPrincipal {
     private final ILogicaInicio lInicio;
     private final ILogicaCrearPartida lCrearPartida;
     private final IInicioFachada iFachada;
-    private final InicializadorComunicaciones comunicaciones;
+    private InicializadorComunicaciones inicalizadorComunicaciones;
+    private final GestorDeComunicaciones comunicaciones;
     private final ICrearPartidaFachada crearPartidaFachada;
-    private final InicializadorClases inicializadorClases;
+    private InicializadorClases inicializadorClases;
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
 
     public LogicaPrincipal() {
         mediador = Mediador.getInstancia();
         
-        inicializadorClases = new InicializadorClases();
+        inicializarClases();
         
-        inicializadorClases.InicializarClases();
+        comunicaciones = inicalizadorComunicaciones.getComunicaciones();
         
-        comunicaciones = new InicializadorComunicaciones();
-        
-        comunicaciones.inicializarClasesComunicaciones();
-       
         lInicio = new LogicaInicio();
         
-        lCrearPartida = new LogicaCrearPartida(comunicaciones.getComunicaciones());
+        lCrearPartida = new LogicaCrearPartida(comunicaciones);
         
         iFachada = inicializadorClases.getInicioFachada();
         
+        crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
+        
+        agregarObservers();
+        
+    }
+    
+    public void agregarObservers(){
+        //agregar observers de fachadas
         iFachada.agregarIObserverCrearPartida(new AccionCambiarDePantallaCrearPartida());
         iFachada.agregarIObserverUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
         
-        crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
+        //agregar observers de crear partida
         crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
         crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
         
-        
+        //agregar observers de comunicaciones
+        comunicaciones.agregarObservadorAcabarPartida(new AccionAcabarPartida());
+        comunicaciones.agregarObservadorFichaTomadaDelPozo(new AccionTomaronFichaDelPozo());
+        comunicaciones.agregarObservadorIniciarPartida(new AccionSeInicioPartida());
+        comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
+        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+        comunicaciones.agregarObservadorRespuestaDelServidorCentral(new AccionRespuestaDelServidorCentral());
+        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+    }
+    
+    public void inicializarClases(){
+        inicializadorClases = new InicializadorClases();
+
+        inicializadorClases.InicializarClases();
+
+        inicalizadorComunicaciones = new InicializadorComunicaciones();
+
+        inicalizadorComunicaciones.inicializarClasesComunicaciones();
     }
 
+    /*
+        LEAN ESTO!!!
+        A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
+        ENTRE LOS MVC Y LA LOGICA
+    */
     //se va a cambiar el nombre de este metodo
     public void iniciarJuego() {
 
@@ -158,4 +189,73 @@ public class LogicaPrincipal {
         }
     }
 
+    /*
+        LEAN ESTO!!!
+        A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
+        ENTRE LOS COMUNICACIONES Y LA LOGICA
+    */
+        
+    private class AccionTomaronFichaDelPozo implements IEventoTomarFichaDelPozo{
+
+        @Override
+        public void tomarFichaDelPozo(FichaDto fichaSacada) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    
+    }
+    
+    private class AccionPasaronTurno implements IEventoPasarTurno{
+
+        @Override
+        public void pasarTurno(PasarTurno pasarTurno) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    
+    }
+    
+    private class AccionPucieronFicha implements IEventoPonerFicha{
+
+        @Override
+        public void ponerFicha(PonerFichaDto ponerFicha) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+        
+    }
+    
+    private class AccionJugadorSaioDePartida implements IEventoSalirDePartida{
+
+        @Override
+        public void salirDePartida(JugadorAEliminarDto jugador) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    
+    }
+    
+    private class AccionSeInicioPartida implements IEventoIniciarPartida{
+
+        @Override
+        public void iniciarPartida(SetUpDto setUp) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    
+    }
+    
+    private class AccionAcabarPartida implements IEventoAcabarPartida{
+
+        @Override
+        public void acabarPartida(String codigo) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    
+    }
+    
+    private class AccionRespuestaDelServidorCentral implements IEventoRespuestaServidorCentral{
+
+        @Override
+        public void actualizar(RespuestaServidorCentral respuesta) {
+            
+            System.out.println(respuesta.toString());
+        }
+    
+    }
 }

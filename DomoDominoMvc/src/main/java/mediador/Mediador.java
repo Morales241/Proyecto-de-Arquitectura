@@ -115,4 +115,6 @@ public class Mediador<M, V extends JFrame, C> implements IMediador {
         return instancia;
     }
 
+    
+
 }

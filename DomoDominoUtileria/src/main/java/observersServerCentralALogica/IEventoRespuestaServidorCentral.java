@@ -1,11 +1,11 @@
 package observersServerCentralALogica;
 
-import enumerados.RespuestaServidor;
+import eventos.RespuestaServidorCentral;
 
 /**
  *
  * @author tacot
  */
 public interface IEventoRespuestaServidorCentral {
-    public void actualizar(RespuestaServidor respuesta);
+    public void actualizar(RespuestaServidorCentral respuesta);
 }
