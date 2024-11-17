@@ -1,4 +1,4 @@
-package observers;
+package observersServerCentralALogica;
 
 import enumerados.RespuestaServidor;
 

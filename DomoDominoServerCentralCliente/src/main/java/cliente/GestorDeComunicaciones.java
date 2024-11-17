@@ -4,10 +4,10 @@
  */
 package cliente;
 
-import observers.IEventoAcabarPartida;
-import observers.IEventoAgregarJugadorAPartida;
-import observers.IEventoCrearPartida;
-import observers.IEventoIniciarPartidaServerCentral;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 import servidor.GestorMensajes;
 import servidor.Servidor;

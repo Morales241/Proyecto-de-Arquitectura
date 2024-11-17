@@ -4,12 +4,13 @@
  */
 package cliente;
 
-import observers.IEventoAcabarPartida;
-import observers.IEventoAgregarJugadorAPartida;
-import observers.IEventoCrearPartida;
-import observers.IEventoIniciarPartidaServerCentral;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 import serverInterno.GestorMensajes;
+import serverInterno.Servidor;
 
 /**
  *
@@ -18,11 +19,16 @@ import serverInterno.GestorMensajes;
 public class GestorDeComunicaciones {
 
     private final Cliente cliente;
+    private Servidor servidor;
     private final GestorMensajes gestorMensajes;
 
-    public GestorDeComunicaciones(GestorMensajes gestorM) {
+    public GestorDeComunicaciones() {
         cliente = new Cliente();
-        gestorMensajes = gestorM;
+        gestorMensajes = new GestorMensajes();
+    }
+    
+    public void crearServidor(int puerto) {
+        servidor = new Servidor(puerto, gestorMensajes);
     }
 
     public void conectarAServidor(String ip, int puerto) {

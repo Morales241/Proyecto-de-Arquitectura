@@ -5,7 +5,7 @@ import eventos.NodoDto;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IObserver;
 
 /**

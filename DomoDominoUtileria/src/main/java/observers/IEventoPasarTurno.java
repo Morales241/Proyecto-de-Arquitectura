@@ -4,10 +4,12 @@
  */
 package observers;
 
+import eventos.PasarTurno;
+
 /**
  *
  * @author tacot
  */
 public interface IEventoPasarTurno {
-    public void pasarTurno();
+    public void pasarTurno(PasarTurno pasarTurno);
 }

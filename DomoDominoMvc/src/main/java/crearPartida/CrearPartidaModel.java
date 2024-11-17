@@ -4,7 +4,7 @@ import eventos.JugadorCrearPartidaDto;
 import eventos.NodoDto;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import observers.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IObserver;
 
 /**

@@ -5,7 +5,7 @@
 package fachadas;
 
 import crearPartida.CrearPartidaModel;
-import observers.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IObserver;
 
 /**

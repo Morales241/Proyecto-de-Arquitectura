@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import observers.IEventoAcabarPartida;
-import observers.IEventoAgregarJugadorAPartida;
-import observers.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IEventoSalirDePartida;
 import servidor.GestorMensajes;
-import observers.IEventoIniciarPartidaServerCentral;
+import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 
 /**
  *

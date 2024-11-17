@@ -5,10 +5,10 @@ import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import observers.IEventoAcabarPartida;
-import observers.IEventoAgregarJugadorAPartida;
-import observers.IEventoCrearPartida;
-import observers.IEventoIniciarPartidaServerCentral;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 
 public class GestorMensajes {

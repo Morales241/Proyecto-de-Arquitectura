@@ -1,4 +1,4 @@
-package observers;
+package observersLogicaAServidorCentral;
 
 import eventos.JugadorCrearPartidaDto;
 
