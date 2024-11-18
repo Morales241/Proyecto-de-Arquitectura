@@ -4,11 +4,14 @@
  */
 package eventos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tacot
  */
-public class RespuestaServidorCentral {
+public class RespuestaServidorCentral implements Serializable{
+    private static final long serialVersionUID = 1L;
     String Respuesta;
 
     public RespuestaServidorCentral(String Respuesta) {

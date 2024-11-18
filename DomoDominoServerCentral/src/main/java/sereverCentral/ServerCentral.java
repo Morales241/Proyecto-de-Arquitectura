@@ -31,10 +31,10 @@ public class ServerCentral {
     private final GestorMensajes gestorMensajes;
     private static final Logger log = Logger.getLogger(ServerCentral.class.getName());
 
-    public ServerCentral(GestorDeComunicaciones comunicacionesParametro, GestorMensajes gMensajes) {
+    public ServerCentral(GestorDeComunicaciones comunicacionesParametro) {
         infoPartidas = new HashMap<>();
         this.comunicaciones = comunicacionesParametro;
-        this.gestorMensajes = gMensajes;
+        this.gestorMensajes = comunicaciones.getGestorMensajes();
 
         this.gestorMensajes.agregarObservadorCrearPartida(new AccionCrearPartida());
         this.gestorMensajes.agregarObservadorAgregarJugador(new AccionUnirseAPartida());
@@ -52,7 +52,8 @@ public class ServerCentral {
             this.infoPartidas.put(jugador.getCodigo(), nodos);
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
-
+            comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
+            mandarMensaje("la partida fue agregada", nodos);
         } catch (Exception ex) {
             mandarMensaje("la partida no fue agregada debido a un error", nodos);
         }
@@ -112,6 +113,7 @@ public class ServerCentral {
         for (NodoDto jugador : jugadores) {
             RespuestaServidorCentral respuesta = new RespuestaServidorCentral(String.valueOf(mensaje));
             comunicaciones.enviarMensaje(respuesta);
+            log.log(Level.INFO, "Método: mandarMensaje - Clase: ServerCentral - Proyecto: Server Central");
         }
     }
 

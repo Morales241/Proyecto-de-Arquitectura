@@ -30,6 +30,7 @@ public class ArrancarServidorCentral {
             Scanner tec = new Scanner(System.in);
             boolean llave = true;
             GestorDeComunicaciones comunicaciones = new GestorDeComunicaciones();
+            ServerCentral server = new ServerCentral(comunicaciones);
             comunicaciones.crearServidor(8090);
             
             System.out.println(InetAddress.getLocalHost().getHostAddress());
@@ -38,7 +39,7 @@ public class ArrancarServidorCentral {
                 System.out.println(llave);
             }
             System.out.println("se va a conectar");
-            comunicaciones.conectarAServidor("192.168.100.21", 8070);
+            comunicaciones.conectarAServidor("192.168.100.21", 8097);
             
             while (!llave) {
                 llave = tec.nextBoolean();
