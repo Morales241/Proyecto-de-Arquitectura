@@ -1,8 +1,11 @@
 package serverInterno;
 
+import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
-import eventos.JugadorCrearPartidaDto;
-import eventos.JugadorUnirseAPartidaDto;
+import eventos.PasarTurno;
+import eventos.PonerFichaDto;
+import eventos.RespuestaServidorCentral;
+import eventos.SetUpDto;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
@@ -13,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Servidor {
+
     private ServerSocket serverSocket;
     private final List<Socket> clientesConectados;
     private final GestorMensajes gestorMensajes;
@@ -28,6 +32,7 @@ public class Servidor {
     private void iniciarServidor(int puerto) {
         try {
             serverSocket = new ServerSocket(puerto);
+
             new Thread(new Oyente()).start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +63,9 @@ public class Servidor {
         public Receptor(Socket cliente) {
             this.cliente = cliente;
             try {
+
                 lector = new ObjectInputStream(cliente.getInputStream());
+
             } catch (IOException e) {
             }
         }
@@ -66,23 +73,11 @@ public class Servidor {
         @Override
         public void run() {
 
-            Object mensajeRecibido = null;
+            Object mensajeRecibido;
 
             while ((mensajeRecibido = obtenerMensaje()) != null) {
-                switch (mensajeRecibido) {
 
-                    case JugadorCrearPartidaDto jugadorCrearPartidaDto ->
-                        gestorMensajes.notificarObservadoreCrearPartida(jugadorCrearPartidaDto);
-
-                    case JugadorUnirseAPartidaDto jugadorUnirseAPartidaDto ->
-                        gestorMensajes.notificarObserverAgregarJugador(jugadorUnirseAPartidaDto);
-
-                    case JugadorAEliminarDto jugadorAEliminarDto ->
-                        gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
-
-                    default ->
-                        log.log(Level.INFO, "Tipo de mensaje no reconocido");
-                }
+                procesarElMensajeRecibido(mensajeRecibido);
                 log.log(Level.INFO, "Método: run - Clase: Servidor - Proyecto: Server de Server Central");
             }
 
@@ -98,6 +93,36 @@ public class Servidor {
             }
             return mensaje;
 
+        }
+
+        public void procesarElMensajeRecibido(Object mensaje) {
+
+            switch (mensaje) {
+
+                case String codigo ->
+                    gestorMensajes.notificarObservadorAcabarPartida(codigo);
+                    
+                case PonerFichaDto ponerFicha ->
+                    gestorMensajes.notificarObservadorPucieronFicha(ponerFicha);
+                    
+                case SetUpDto setUp ->
+                    gestorMensajes.notificarObserverIniciarPartida(setUp);
+                    
+                case JugadorAEliminarDto jugador ->
+                    gestorMensajes.notificarObservadorSalioUnJugador(jugador);
+                    
+                case PasarTurno pasarTurno ->
+                    gestorMensajes.notificarObservadorPasaronTurno();
+                    
+                case FichaDto fichaSacada ->
+                    gestorMensajes.notificarObservadorFichaTomadaDelPozo(fichaSacada);
+                    
+                case RespuestaServidorCentral respuesta ->
+                    gestorMensajes.notificarObserverRespuestaDelServidorCentral(respuesta);
+
+                default ->
+                    log.log(Level.INFO, "Tipo de mensaje no reconocido");
+            }
         }
     }
 }

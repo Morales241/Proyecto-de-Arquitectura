@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package observersServerCentralALogica;
 
-import eventos.PasarTurno;
+import eventos.SetUpDto;
 
 /**
  *
  * @author tacot
  */
-public interface IEventoPasarTurno {
-    public void pasarTurno(PasarTurno pasarTurno);
+public interface IEventoIniciarPartida {
+    public void iniciarPartida(SetUpDto setUp);
 }

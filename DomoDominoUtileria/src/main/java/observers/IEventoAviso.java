@@ -4,12 +4,10 @@
  */
 package observers;
 
-import eventos.SetUpDto;
-
 /**
  *
  * @author tacot
  */
-public interface IEventoIniciarPartida {
-    public void iniciarPartida(SetUpDto setUp);
+public interface IEventoAviso {
+    public void notificarAlUsuario(int numAviso);
 }

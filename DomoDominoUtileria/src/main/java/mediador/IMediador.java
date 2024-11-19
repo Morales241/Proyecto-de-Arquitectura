@@ -8,5 +8,4 @@ public interface IMediador<M, V extends JFrame, C> {
     public ContenedorMvc<M, V, C> obtenerPantallaConcreta(String nombre);
     public void mostrarPantallaConcreta(String nombre);
     public void cerrarPantallaConcreta(String nombre);
-            
 }

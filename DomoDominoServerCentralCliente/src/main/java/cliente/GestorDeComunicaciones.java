@@ -4,10 +4,12 @@
  */
 package cliente;
 
-import observers.IEventoAcabarPartida;
-import observers.IEventoAgregarJugadorAPartida;
-import observers.IEventoCrearPartida;
-import observers.IEventoIniciarPartidaServerCentral;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
+import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 import servidor.GestorMensajes;
 import servidor.Servidor;
@@ -21,9 +23,11 @@ public class GestorDeComunicaciones {
     private final Cliente cliente;
     private Servidor servidor;
     private final GestorMensajes gestorMensajes;
+    private static final Logger log = Logger.getLogger(GestorDeComunicaciones.class.getName());
+    
 
-    public GestorDeComunicaciones(GestorMensajes gMensajes) {
-        gestorMensajes = gMensajes;
+    public GestorDeComunicaciones() {
+        gestorMensajes = new GestorMensajes();
         cliente = new Cliente();
     }
 
@@ -37,6 +41,7 @@ public class GestorDeComunicaciones {
 
     public void enviarMensaje(Object mensaje) {
         cliente.enviarMensaje(mensaje);
+        log.log(Level.INFO, "mensaje mandado metodo: enviarMensaje clase:GestorDeComunicaciones");
     }
 
     public void agregarObservadorCrearPartida(IEventoCrearPartida observador) {
@@ -59,4 +64,8 @@ public class GestorDeComunicaciones {
         gestorMensajes.agregarObservadorSalirDePartida(observador);
     }
 
+    public GestorMensajes getGestorMensajes() {
+        return gestorMensajes;
+    }
+    
 }

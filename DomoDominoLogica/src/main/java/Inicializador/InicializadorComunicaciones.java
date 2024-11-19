@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Inicializador;
 
-import cliente.Cliente;
 import cliente.GestorDeComunicaciones;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;
@@ -20,27 +15,15 @@ public class InicializadorComunicaciones {
     private Servidor servidor;
 
     public InicializadorComunicaciones() {
-
     }
+
     public void inicializarClasesComunicaciones() {
-
-        gestorMensajes = new GestorMensajes();
-        servidor = new Servidor(8097, gestorMensajes);
-        comunicaciones = new GestorDeComunicaciones(gestorMensajes);
+        comunicaciones = new GestorDeComunicaciones();
+        comunicaciones.crearServidor(8097);
     }
-
-    public GestorMensajes getGestorMensajes() {
-        return gestorMensajes;
-    }
-
+    
     public GestorDeComunicaciones getComunicaciones() {
         return comunicaciones;
     }
 
-    public Servidor getServidor() {
-        return servidor;
-    }
-
-    
-    
 }

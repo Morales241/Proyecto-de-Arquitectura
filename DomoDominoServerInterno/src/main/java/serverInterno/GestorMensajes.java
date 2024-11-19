@@ -1,79 +1,87 @@
 package serverInterno;
 
+import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
-import eventos.JugadorCrearPartidaDto;
-import eventos.JugadorUnirseAPartidaDto;
+import eventos.PasarTurno;
+import eventos.PonerFichaDto;
+import eventos.RespuestaServidorCentral;
+import eventos.SetUpDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import observers.IEventoAcabarPartida;
-import observers.IEventoAgregarJugadorAPartida;
-import observers.IEventoCrearPartida;
-import observers.IEventoIniciarPartidaServerCentral;
+import observers.IEventoPasarTurno;
+import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
+import observers.IEventoTomarFichaDelPozo;
+import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observersServerCentralALogica.IEventoIniciarPartida;
+import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 public class GestorMensajes {
 
     private static final Logger log = Logger.getLogger(GestorMensajes.class.getName());
 
-    private IEventoCrearPartida IEventoCrearPartida;
-    private IEventoSalirDePartida observerSalir;
-    private IEventoAgregarJugadorAPartida observerAgregarJugador;
-    private IEventoAcabarPartida observeracabarPartida;
-    private IEventoIniciarPartidaServerCentral observeriniciarPartida;
+    private IEventoTomarFichaDelPozo observerTomarFichaDelPozo;
+    private IEventoPasarTurno observerpasaronTurno;
+    private IEventoPonerFicha observerPucieronFicha;
+    private IEventoSalirDePartida observerSalioJugador;
+    private IEventoIniciarPartida observeriniciarPartida;
+    private IEventoAcabarPartida observerAcabarPartida;
+    private IEventoRespuestaServidorCentral observerCentral;
+    
 
     public GestorMensajes() {
     }
 
-    //Crear partida
-    public void agregarObservadorCrearPartida(IEventoCrearPartida observador) {
-        this.IEventoCrearPartida = observador;
+    //Tomaron ficha del pozo
+    public void agregarObservadorFichaTomadaDelPozo(IEventoTomarFichaDelPozo observador) {
+        this.observerTomarFichaDelPozo = observador;
     }
 
-    public void eliminarObservadorCrearPartida() {
-        this.IEventoCrearPartida = null;
+    public void eliminarObservadorFichaTomadaDelPozo() {
+        this.observerTomarFichaDelPozo = null;
     }
 
-    public void notificarObservadoreCrearPartida(JugadorCrearPartidaDto jugador) {
-        if (IEventoCrearPartida != null) {
-            IEventoCrearPartida.crearPartida(jugador);
-            log.log(Level.INFO, "Metodo:notificarObserverCrearPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+    public void notificarObservadorFichaTomadaDelPozo(FichaDto ficha) {
+        if (observerTomarFichaDelPozo != null) {
+            observerTomarFichaDelPozo.tomarFichaDelPozo(ficha);
+            log.log(Level.INFO, "Metodo:notificarObserverTomarFichaDelPozo - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
 
-    //Salir de partida
-    public void agregarObservadorSalirDePartida(IEventoSalirDePartida observador) {
-        this.observerSalir = observador;
+    //Pasaron turno
+    public void agregarObservadorPasaronTurno(IEventoPasarTurno observador) {
+        this.observerpasaronTurno = observador;
     }
 
-    public void eliminarObservadorSalirDePartida() {
-        this.observerSalir = null;
+    public void eliminarObservadorPasaronTurno() {
+        this.observerpasaronTurno = null;
     }
 
-    public void notificarObserverSalirDePartida(JugadorAEliminarDto jugador) {
-        if (observerSalir != null) {
-            observerSalir.salirDePartida(jugador);
-            log.log(Level.INFO, "Metodo:notificarObserverSalirDePartida - Clase:GestorMensajes - Proyecto:Proyecto:Server de Server Central");
+    public void notificarObservadorPasaronTurno() {
+        if (observerpasaronTurno != null) {
+            observerpasaronTurno.pasarTurno(new PasarTurno());
+            log.log(Level.INFO, "Metodo:notificarObserverPasaronTurno - Clase:GestorMensajes - Proyecto:Proyecto:Server de Server Central");
         }
     }
 
-    //Agregar Jugador a partida
-    public void agregarObservadorAgregarJugador(IEventoAgregarJugadorAPartida observador) {
-        this.observerAgregarJugador = observador;
+    //pucieron ficha
+    public void agregarObservadorPucieronFicha(IEventoPonerFicha observador) {
+        this.observerPucieronFicha = observador;
     }
 
-    public void eliminarObservadorAgregarJugador() {
-        this.observerAgregarJugador = null;
+    public void eliminarObservadorPucieronFicha() {
+        this.observerPucieronFicha = null;
     }
 
-    public void notificarObserverAgregarJugador(JugadorUnirseAPartidaDto jugador) {
-        if (observerAgregarJugador != null) {
-            observerAgregarJugador.agregarJugadorAPartida(jugador);
-            log.log(Level.INFO, "Metodo:notificarObserverAgregarJugador - Clase:GestorMensajes - Proyecto:Server de Server Central");
+    public void notificarObservadorPucieronFicha(PonerFichaDto jugador) {
+        if (observerPucieronFicha != null) {
+            observerPucieronFicha.ponerFicha(jugador);
+            log.log(Level.INFO, "Metodo:notificarObserverPucieronFicha - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
 
     //Iniciar partida
-    public void agregarObservadorIniciarPartida(IEventoIniciarPartidaServerCentral observador) {
+    public void agregarObservadorIniciarPartida(IEventoIniciarPartida observador) {
         this.observeriniciarPartida = observador;
     }
 
@@ -81,27 +89,59 @@ public class GestorMensajes {
         this.observeriniciarPartida = null;
     }
 
-    public void notificarObserverIniciarPartida(String codigo) {
+    public void notificarObserverIniciarPartida(SetUpDto setUp) {
         if (observeriniciarPartida != null) {
-            observeriniciarPartida.iniciarPartida(codigo);
+            observeriniciarPartida.iniciarPartida(setUp);
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
 
-    //Acabar partida
-    public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador) {
-        this.observeracabarPartida = observador;
+    //Salio un jgador de partida
+    public void agregarObservadorSalioUnJugador(IEventoSalirDePartida observador) {
+        this.observerSalioJugador = observador;
     }
 
-    public void eliminarObservadorAcabarPartida() {
-        this.observeracabarPartida = null;
+    public void eliminarObservadorSalioUnJugador() {
+        this.observerSalioJugador = null;
     }
 
-    public void notificarObserverAcabarPartida(String codigo) {
-        if (observeracabarPartida != null) {
-            observeracabarPartida.acabarPartida(codigo);
-            log.log(Level.INFO, "Metodo:notificarObserverAcabarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+    public void notificarObservadorSalioUnJugador(JugadorAEliminarDto jugador) {
+        if (observerSalioJugador != null) {
+            observerSalioJugador.salirDePartida(jugador);
+            log.log(Level.INFO, "Metodo:notificarObserverSalioUnJugador - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
 
+    
+    //Iniciar partida
+    public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador) {
+        this.observerAcabarPartida = observador;
+    }
+
+    public void eliminarObservadorAcabarPartida() {
+        this.observerAcabarPartida = null;
+    }
+
+    public void notificarObservadorAcabarPartida(String codigo) {
+        if (observerAcabarPartida != null) {
+            observerAcabarPartida.acabarPartida(codigo);
+            log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+        }
+    }
+    
+    //Iniciar partida
+    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
+        this.observerCentral = observador;
+    }
+
+    public void eliminarObservadorRespuestaDelServidorCentral() {
+        this.observerCentral = null;
+    }
+
+    public void notificarObserverRespuestaDelServidorCentral(RespuestaServidorCentral respuesta) {
+        if (observerCentral != null) {
+            observerCentral.actualizar(respuesta);
+            log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+        }
+    }
 }

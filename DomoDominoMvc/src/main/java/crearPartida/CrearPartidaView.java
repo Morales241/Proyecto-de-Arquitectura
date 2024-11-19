@@ -8,6 +8,7 @@ import mediador.IComponente;
 import mediador.IMediador;
 import observers.IEventoCrearPartida;
 import observers.IEventoSeleccion;
+import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IObserver;
 
 /**
@@ -184,6 +185,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
     public void validarDatos() {
         JOptionPane.showMessageDialog(null, "No se permiten caracteres especiales(solo '_') ni espacios, el nombre tiene que ser mayor a 3 y menor a 15 caracteres");
+    
     }
 
     public void actualizarAvatar() {
