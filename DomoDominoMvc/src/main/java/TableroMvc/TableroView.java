@@ -16,6 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mediador.IComponente;
 import mediador.IMediador;
+import observers.IEventoPasarTurno;
+import observers.IEventoPonerFicha;
+import observers.IEventoSalirDePartida;
+import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 
 public class TableroView extends javax.swing.JFrame implements IObserver, IComponente {
@@ -27,6 +31,11 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
     private MouseAdapter oyenteMouse;
     private TableroPanel tableroPanel;
     private JPanel fichasJugadorPanel;
+    
+    private IEventoTomarFichaDelPozo observerTomarDelPozo;
+    private IEventoPonerFicha observerPonerFicha;
+    private IEventoPasarTurno observerPasarTurno;
+    private IEventoSalirDePartida observerSalirDePartida;
 
     /**
      * Creates new form TableroView
@@ -54,6 +63,7 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        
     }
 
     public class TableroPanel extends JPanel {
