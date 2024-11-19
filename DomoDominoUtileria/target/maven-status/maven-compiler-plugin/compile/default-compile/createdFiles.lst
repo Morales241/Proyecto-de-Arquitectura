@@ -1,9 +1,5 @@
 dtos\JugadorDto.class
-<<<<<<< HEAD
 observers\IEventoSeleccion.class
-observers\IEventoAgregarJugadorAPartida.class
-=======
->>>>>>> Jesus
 eventos\SetUpDto.class
 dtos\FichaDto.class
 observers\IEventoSalirDePartida.class

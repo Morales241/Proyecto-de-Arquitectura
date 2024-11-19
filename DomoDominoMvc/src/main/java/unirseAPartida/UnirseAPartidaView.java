@@ -9,7 +9,7 @@ import eventos.NodoDto;
 import javax.swing.JOptionPane;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observers.IObserver;
 
 /**

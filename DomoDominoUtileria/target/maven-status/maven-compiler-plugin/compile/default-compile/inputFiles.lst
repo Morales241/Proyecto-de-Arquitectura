@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorAEliminarDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoCrearPartida.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSalirDePartida.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorCrearPartidaDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorUnirseAPartidaDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoIniciarPartida.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\UsuarioDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoIniciarPartidaServerCentral.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAcabarPartida.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaServidorCentral.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\enumerados\RespuestaServidor.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoRespuestaServidorCentral.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IComponente.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAgregarJugadorAPartida.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\contenedor\ContenedorMvc.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PonerFichaDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\NodoDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPartida.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorConsulta.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\SetUpDto.java
-C:\Users\favel\OneDrive\Documentos\ITSON\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java
-=======
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\contenedor\ContenedorMvc.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
@@ -51,6 +19,7 @@ C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSalirDePartida.java
+C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
@@ -62,4 +31,3 @@ C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaServidorCentral.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java
->>>>>>> Jesus

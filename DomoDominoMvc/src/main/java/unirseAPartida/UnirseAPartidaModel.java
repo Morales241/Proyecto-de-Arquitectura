@@ -7,7 +7,7 @@ package unirseAPartida;
 import eventos.JugadorUnirseAPartidaDto;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import observers.IEventoAgregarJugadorAPartida;
+import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observers.IObserver;
 
 /**

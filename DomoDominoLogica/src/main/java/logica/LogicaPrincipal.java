@@ -27,7 +27,6 @@ import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
-import serializables.Jugador;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
@@ -52,8 +51,8 @@ public class LogicaPrincipal {
     private final GestorDeComunicaciones comunicaciones;
     private final ICrearPartidaFachada crearPartidaFachada;
 
-    private final IUnirseAPartidaFachada unirsePartidaFachada;
-    private final InicializadorClases inicializadorClases;
+    private IUnirseAPartidaFachada unirsePartidaFachada;
+    private InicializadorClases inicializadorClases;
 
 
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
@@ -67,7 +66,7 @@ public class LogicaPrincipal {
         
         lInicio = new LogicaInicio();
 
-        IUnirsePartida = new LogicaUnirseAPartida(comunicaciones.getComunicaciones());
+        IUnirsePartida = new LogicaUnirseAPartida(inicalizadorComunicaciones.getComunicaciones());
 
         lCrearPartida = new LogicaCrearPartida(comunicaciones);
 
