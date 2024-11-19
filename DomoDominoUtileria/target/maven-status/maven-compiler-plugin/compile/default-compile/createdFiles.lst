@@ -1,4 +1,5 @@
 dtos\JugadorDto.class
+observers\IEventoSeleccion.class
 observers\IEventoAgregarJugadorAPartida.class
 eventos\SetUpDto.class
 dtos\FichaDto.class
