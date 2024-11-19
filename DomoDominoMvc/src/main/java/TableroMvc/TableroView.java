@@ -33,7 +33,7 @@ public class TableroView extends javax.swing.JFrame implements IObserver, ICompo
      *
      * @param tableroModel
      */
-    public TableroView(TableroModel tableroModel, JugadorDto jugador) {
+    public TableroView(TableroModel tableroModel) {
 
         initComponents();
         this.tableroModel = tableroModel;
