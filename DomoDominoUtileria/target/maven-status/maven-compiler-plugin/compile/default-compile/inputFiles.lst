@@ -14,6 +14,7 @@ C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\SetUpDto.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IComponente.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
+C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAviso.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPartida.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java

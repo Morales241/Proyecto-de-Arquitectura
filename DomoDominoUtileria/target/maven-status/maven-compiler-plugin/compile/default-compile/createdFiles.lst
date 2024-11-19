@@ -5,6 +5,7 @@ observers\IEventoSalirDePartida.class
 observersLogicaAServidorCentral\IEventoCrearPartida.class
 observersServerCentralALogica\IEventoIniciarPartida.class
 eventos\JugadorCrearPartidaDto.class
+observers\IEventoAviso.class
 serializables\Jugador.class
 observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.class
 dtos\UsuarioDto.class
