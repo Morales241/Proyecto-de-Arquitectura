@@ -12,18 +12,49 @@ import java.io.Serializable;
  */
 public class RespuestaServidorCentral implements Serializable{
     private static final long serialVersionUID = 1L;
-    String Respuesta;
+    private String respuesta;
+    private int opcionRespuesta;
+    private boolean llave;
+    private String codigo;
 
-    public RespuestaServidorCentral(String Respuesta) {
-        this.Respuesta = Respuesta;
+    public RespuestaServidorCentral() {
+    }
+
+    public RespuestaServidorCentral(int opcionRespuesta, boolean llave) {
+        this.opcionRespuesta = opcionRespuesta;
+        this.llave = llave;
     }
 
     public String getRespuesta() {
-        return Respuesta;
+        return respuesta;
     }
 
-    public void setRespuesta(String Respuesta) {
-        this.Respuesta = Respuesta;
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getOpcionRespuesta() {
+        return opcionRespuesta;
+    }
+
+    public void setOpcionRespuesta(int opcionRespuesta) {
+        this.opcionRespuesta = opcionRespuesta;
+    }
+
+    public boolean isLlave() {
+        return llave;
+    }
+
+    public void setLlave(boolean llave) {
+        this.llave = llave;
     }
     
     

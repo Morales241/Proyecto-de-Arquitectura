@@ -53,9 +53,10 @@ public class ServerCentral {
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
             comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
-            mandarMensaje("la partida fue agregada", nodos);
+            
+//            mandarMensaje(, nodos);
         } catch (Exception ex) {
-            mandarMensaje("la partida no fue agregada debido a un error", nodos);
+//            mandarMensaje("la partida no fue creada debido a un error", nodos);
         }
     }
 
@@ -79,7 +80,7 @@ public class ServerCentral {
 
         } else {
             nodos.add(jugador.getNodo());
-            mandarMensaje("No se encontro partida, el codigo es incorrecto", nodos);
+//            mandarMensaje("No se encontro partida, el codigo es incorrecto", nodos);
         }
     }
 
@@ -109,10 +110,9 @@ public class ServerCentral {
         infoPartidas.remove(codigo);
     }
 
-    public void mandarMensaje(Object mensaje, List<NodoDto> jugadores) {
+    public void mandarMensaje(RespuestaServidorCentral mensaje, List<NodoDto> jugadores) {
         for (NodoDto jugador : jugadores) {
-            RespuestaServidorCentral respuesta = new RespuestaServidorCentral(String.valueOf(mensaje));
-            comunicaciones.enviarMensaje(respuesta);
+            comunicaciones.enviarMensaje(mensaje);
             log.log(Level.INFO, "Método: mandarMensaje - Clase: ServerCentral - Proyecto: Server Central");
         }
     }

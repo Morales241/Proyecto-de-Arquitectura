@@ -112,8 +112,6 @@ public class GestorMensajes {
         }
     }
 
-    
-    //Iniciar partida
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador) {
         this.observerAcabarPartida = observador;
     }
@@ -129,7 +127,6 @@ public class GestorMensajes {
         }
     }
     
-    //Iniciar partida
     public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
         this.observerCentral = observador;
     }
@@ -142,6 +139,13 @@ public class GestorMensajes {
         if (observerCentral != null) {
             observerCentral.actualizar(respuesta);
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+        }
+    }
+    
+    public void procesarRespuestaDelServidorCentral(RespuestaServidorCentral respuesta){
+        if (respuesta.getRespuesta().contains("error")) {
+            
+            
         }
     }
 }
