@@ -110,7 +110,7 @@ public class ServerCentral {
         infoPartidas.remove(codigo);
     }
 
-    public void mandarMensaje(RespuestaServidorCentral mensaje, List<NodoDto> jugadores) {
+    public void mandarMensaje(Object mensaje, List<NodoDto> jugadores) {
         for (NodoDto jugador : jugadores) {
             comunicaciones.enviarMensaje(mensaje);
             log.log(Level.INFO, "Método: mandarMensaje - Clase: ServerCentral - Proyecto: Server Central");
