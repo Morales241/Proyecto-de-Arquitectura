@@ -1,33 +1,55 @@
 package TableroMvc;
 
+import dtos.FichaDto;
+import eventos.JugadorAEliminarDto;
+import eventos.PasarTurno;
+import eventos.PonerFichaDto;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import observers.IEventoPasarTurno;
+import observers.IEventoPonerFicha;
+import observers.IEventoSalirDePartida;
+import observers.IEventoTomarFichaDelPozo;
 
 public class TableroController {
-    
-    private TableroModel tableroModel;
-    private TableroView tableroView;
 
-    public TableroController(TableroModel tableroModel, TableroView tableroView) {
-        this.tableroModel = tableroModel;
-        this.tableroView = tableroView;
+     private TableroModel tableroModel;
+     private TableroView tableroView;
 
-        this.tableroView.agregarOyenteMouse(new ponerFichaEnTablero());
-        
-    }
-    
-    public void colocarFichaEnTablero(){
-        tableroView.actualizarFichaSelecionada();
-//        tableroModel.ejecutarAccionPonerFicha();
-    }
-    
-    private class ponerFichaEnTablero extends MouseAdapter{
+     public TableroController(TableroModel tableroModel, TableroView tableroView) {
+          this.tableroModel = tableroModel;
+          this.tableroView = tableroView;
+          tableroView.agregarIEventoPonerFicha(new accionPonerFicha());
+          tableroView.agregarEventoTomarFichaDelPozo(new accionTomarFichaDelPozo());
+          tableroView.agregarEventoPasarTurno(new accionPasarTurno());
+          tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
+     }
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            
-            colocarFichaEnTablero();
-        }
-        
-    }
+     private class accionPonerFicha implements IEventoPonerFicha {
+          @Override
+          public void ponerFicha(PonerFichaDto ponerFicha) {
+          
+          }
+     }
+      
+     private class accionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
+          @Override
+          public void tomarFichaDelPozo(FichaDto fichaSacada) {
+          
+          }
+     }
+     
+     private class accionPasarTurno implements IEventoPasarTurno {
+          @Override
+          public void pasarTurno(PasarTurno pasarTurno) {
+               
+          }
+     }
+     
+     private class accionSalirDePartida implements IEventoSalirDePartida {
+          @Override
+          public void salirDePartida(JugadorAEliminarDto jugador) {
+     
+          }
+     }
 }

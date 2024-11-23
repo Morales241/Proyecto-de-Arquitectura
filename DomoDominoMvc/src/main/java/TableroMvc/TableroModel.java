@@ -3,21 +3,36 @@ package TableroMvc;
 import java.util.ArrayList;
 import java.util.List;
 import dtos.FichaDto;
+import dtos.JugadorDto;
+import eventos.JugadorAEliminarDto;
+import eventos.PasarTurno;
+import eventos.PonerFichaDto;
+import observers.IEventoPasarTurno;
+import observers.IEventoPonerFicha;
+import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 
 public class TableroModel  {
 
+    
+    //Fichas
     private int numeroFichas = 7;
     private List<FichaDto> fichas;
-    private List<IObserver> observadores = new ArrayList<>();
     private FichaDto fichaSeleccionada;
-
-    private IObserver observerTomarDelPozo;
-    private IObserver observerPonerFicha;
-    private IObserver observerPasarTurno;
-    private IObserver observerSalirDePartida;
+    private PonerFichaDto ponerFicha;
     
+    //Jugadores
+    private List<IObserver> observadores = new ArrayList<>();
+    private JugadorDto jugador;
+    private JugadorAEliminarDto jugadorAeliminar; 
+    private PasarTurno pasarTurno;
+    
+    //Eventos
+    private IEventoPonerFicha observerPonerFicha;
+    private IEventoTomarFichaDelPozo observerTomarDelPozo;
+    private IEventoPasarTurno observerPasarTurno;
+    private IEventoSalirDePartida observerSalirDePartida;
     
     public TableroModel() {
         
@@ -40,43 +55,55 @@ public class TableroModel  {
         this.fichaSeleccionada = fichaSelect;
     }
     
-    public void agregarIEventoSalirDePartida(IObserver listener) {
+    /*
+    EVENTO DE PONER FICHA
+    */
+    public void agregarIEventoPonerFIcha(IEventoPonerFicha listener) {
+         this.observerPonerFicha = listener;
+    }
+    
+    public void ejecutarAccionPonerFicha(PonerFichaDto ponerFicha) {
+         if (observerPonerFicha != null) {
+              observerPonerFicha.ponerFicha(ponerFicha);
+         }
+    }
+ 
+    /*
+    EVENTO DE SACAR FICHA DEL POZO
+    */
+    public void agregarIEventoSacarFichaDelPozo(IEventoTomarFichaDelPozo listener) {
+         this.observerTomarDelPozo = listener;
+    }
+    
+    public void ejecutarAccionTomarFichaDelPozo(FichaDto ficha) {
+         if (observerTomarDelPozo != null) {
+              observerTomarDelPozo.tomarFichaDelPozo(ficha);
+         }
+    }
+    
+    
+    /*
+    EVENTO DE PASAR TURNO
+    */
+    public void agregarEventoPasarTurno(IEventoPasarTurno listener) {
+         this.observerPasarTurno = listener;
+    }
+    
+    public void ejecutarEventoPasarTurno(PasarTurno pasarTurno) {
+         if (observerPasarTurno != null) {
+              observerPasarTurno.pasarTurno(pasarTurno);
+         }
+    }
+    
+    /*
+    SEGURAMENTE ESTE ESTE MAL IMPLEMENTADO
+    */
+    public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
           this.observerSalirDePartida = listener;
     }
-    
     public void ejecutarAccionSalirDePartida() {
           if (observerSalirDePartida != null) {
-                observerSalirDePartida.actualizar();
-          }
-    }
-    
-    public void agregarIEventoPasarTurno(IObserver listener) {
-          this.observerPasarTurno = listener;
-    }
-    
-    public void ejecutarAccionPasarTurno() {
-          if (observerPasarTurno != null) {
-                observerPasarTurno.actualizar();
-          }
-    }
-    
-    public void agregarIEventoPonerFicha(IObserver listener) {
-          this.observerPonerFicha = listener;
-    }
-    
-    public void ejecutarAccionPonerFicha() {
-          if (observerPonerFicha != null) {
-                observerPonerFicha.actualizar();
-          }
-    }
-    
-    public void agregarIEventoTomarDelPozo(IObserver listener) {
-          this.observerTomarDelPozo = listener;
-    }
-    
-    public void ejecutarAccionTomarDelPozo() {
-          if (observerTomarDelPozo != null) {
-                observerTomarDelPozo.actualizar();
+                observerSalirDePartida.salirDePartida(jugadorAeliminar);
           }
     }
 }
