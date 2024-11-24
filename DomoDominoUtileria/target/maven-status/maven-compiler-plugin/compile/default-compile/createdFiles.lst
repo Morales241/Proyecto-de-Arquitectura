@@ -26,6 +26,7 @@ contenedor\ContenedorMvc.class
 eventos\RespuestaDePartidaCreada.class
 eventos\PasarTurno.class
 observersServerCentralALogica\IEventoRespuestaServidorCentral.class
+dtos\ArregloDto.class
 mediador\IMediador.class
 observers\IEventoPonerFicha.class
 observers\IEventoValidacionDeNombre.class

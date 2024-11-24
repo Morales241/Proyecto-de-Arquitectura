@@ -1,5 +1,6 @@
 package TableroMvc;
 
+import dtos.ArregloDto;
 import java.util.ArrayList;
 import java.util.List;
 import dtos.FichaDto;
@@ -15,7 +16,8 @@ import observers.IObserver;
 
 public class TableroModel  {
 
-    
+//Arreglo
+    ArregloDto arreglo = new ArregloDto();
     //Fichas
     private int numeroFichas = 7;
     private List<FichaDto> fichas;
@@ -37,7 +39,10 @@ public class TableroModel  {
     public TableroModel() {
         
     }
-
+public int[][] traerArreglo(){
+    return arreglo.getTablero();
+}
+   
     public void repartirFichas(List<FichaDto> fichas) {
         this.fichas = fichas;
         
