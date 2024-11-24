@@ -2,6 +2,7 @@ package Arreglo;
 
 import Entidades.Arreglo;
 import Entidades.Ficha;
+import dtos.FichaDto;
 import dtos.JugadorDto;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class LogicaArreglo implements ILogicaArreglo {
      }
 
      @Override
-     public boolean colocarFicha(Ficha ficha, boolean extremo, String direccion) {
+     public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion) {
           switch (direccion) {
                case "Izquierda":
                     return colocarFichaIzquierda(ficha, extremo);
@@ -62,7 +63,7 @@ public class LogicaArreglo implements ILogicaArreglo {
      }
 
      @Override
-     public boolean colocarFichaIzquierda(Ficha ficha, boolean extremo) {
+     public boolean colocarFichaIzquierda(FichaDto ficha, boolean extremo) {
           int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
           int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
           int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
@@ -91,7 +92,7 @@ public class LogicaArreglo implements ILogicaArreglo {
      }
 
      @Override
-     public boolean colocarFichaDerecha(Ficha ficha, boolean extremo) {
+     public boolean colocarFichaDerecha(FichaDto ficha, boolean extremo) {
           int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
           int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
           int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
@@ -120,7 +121,7 @@ public class LogicaArreglo implements ILogicaArreglo {
      }
 
      @Override
-     public boolean colocarFichaArriba(Ficha ficha, boolean extremo) {
+     public boolean colocarFichaArriba(FichaDto ficha, boolean extremo) {
           int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
           int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
           int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
@@ -149,7 +150,7 @@ public class LogicaArreglo implements ILogicaArreglo {
      }
 
      @Override
-     public boolean colocarFichaAbajo(Ficha ficha, boolean extremo) {
+     public boolean colocarFichaAbajo(FichaDto ficha, boolean extremo) {
           int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
           int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
           int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();

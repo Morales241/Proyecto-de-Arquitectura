@@ -20,7 +20,6 @@ public class FichaDto implements Serializable {
     public FichaDto() {
     }
 
-
     public FichaDto(Integer lado1, Integer lado2) {
         this.lado1 = lado1;
         this.lado2 = lado2;
@@ -41,6 +40,10 @@ public class FichaDto implements Serializable {
     public void setLado2(Integer lado2) {
         this.lado2 = lado2;
     }
+    
+    public boolean esMula() {
+            return this.getLado1() == this.getLado2();
+      }
 
 
     @Override
