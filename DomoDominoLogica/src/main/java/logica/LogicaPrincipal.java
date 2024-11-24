@@ -142,7 +142,7 @@ public class LogicaPrincipal {
      //se va a cambiar el nombre de este metodo
      public void iniciarJuego() {
 
-          mediador.mostrarPantallaConcreta("tablero");
+          mediador.mostrarPantallaConcreta("inicio");
 
      }
 
