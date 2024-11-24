@@ -29,7 +29,6 @@ public class SalaEsperaView extends javax.swing.JFrame implements IComponente{
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
         btnJugar = new javax.swing.JButton();
         labelJugador4 = new javax.swing.JLabel();
         labelCodigoMesa = new javax.swing.JLabel();
@@ -40,6 +39,7 @@ public class SalaEsperaView extends javax.swing.JFrame implements IComponente{
         imgJugador1 = new javax.swing.JLabel();
         imgJugador2 = new javax.swing.JLabel();
         imgJugador3 = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
         imgFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,11 +57,6 @@ public class SalaEsperaView extends javax.swing.JFrame implements IComponente{
         labelTitulo.setText("Codigo de mesa:");
         jPanel2.add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 230, 30));
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
-        btnRegresar.setContentAreaFilled(false);
-        jPanel2.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 120, 40));
-
-        btnJugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jugar - copia.png"))); // NOI18N
         btnJugar.setContentAreaFilled(false);
         jPanel2.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 150, 40));
 
@@ -94,20 +89,16 @@ public class SalaEsperaView extends javax.swing.JFrame implements IComponente{
         labelJugador2.setForeground(new java.awt.Color(255, 255, 255));
         labelJugador2.setText("Jugador 2");
         jPanel2.add(labelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
-
-        imgJugador4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domoCafe.png"))); // NOI18N
         jPanel2.add(imgJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 80, 70));
-
-        imgJugador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domoCafe.png"))); // NOI18N
         jPanel2.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 80, 70));
-
-        imgJugador2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domoCafe.png"))); // NOI18N
         jPanel2.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 80, 70));
-
-        imgJugador3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domoCafe.png"))); // NOI18N
         jPanel2.add(imgJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 80, 70));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 720, 420));
+
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
+        btnRegresar.setContentAreaFilled(false);
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 40));
 
         imgFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenFondo.png"))); // NOI18N
         imgFondo.setToolTipText("");

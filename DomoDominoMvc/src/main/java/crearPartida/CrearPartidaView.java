@@ -45,6 +45,9 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -56,7 +59,14 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         etiquetaAvatar = new javax.swing.JLabel();
         flechaSeleccionIzq = new javax.swing.JButton();
         flechaSeleccionDer = new javax.swing.JButton();
+        fondo1 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(960, 600));
@@ -69,13 +79,13 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
         txtNombre.setToolTipText("Nombre del jugador");
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 180, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 180, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ingreseNombre.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 200, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fichasIniciales.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, -1, -1));
 
         btnCrearPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida.png"))); // NOI18N
         btnCrearPartida.setBorder(null);
@@ -86,14 +96,14 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
                 btnCrearPartidaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 190, 70));
+        jPanel1.add(btnCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, 190, 70));
 
         cbxNumeroFichas.setBackground(new java.awt.Color(174, 70, 43));
         cbxNumeroFichas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cbxNumeroFichas.setForeground(new java.awt.Color(255, 255, 255));
         cbxNumeroFichas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
         cbxNumeroFichas.setBorder(null);
-        jPanel1.add(cbxNumeroFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 180, -1));
+        jPanel1.add(cbxNumeroFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, 180, -1));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -105,11 +115,11 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 30));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecciona avatar.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
-        jPanel1.add(etiquetaAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 110, 120));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, -1));
+        jPanel1.add(etiquetaAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 110, 120));
 
         flechaSeleccionIzq.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         flechaSeleccionIzq.setForeground(new java.awt.Color(255, 231, 202));
@@ -121,7 +131,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
                 flechaSeleccionIzqActionPerformed(evt);
             }
         });
-        jPanel1.add(flechaSeleccionIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 110, 110));
+        jPanel1.add(flechaSeleccionIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 110, 110));
 
         flechaSeleccionDer.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         flechaSeleccionDer.setForeground(new java.awt.Color(253, 231, 194));
@@ -133,10 +143,14 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
                 flechaSeleccionDerActionPerformed(evt);
             }
         });
-        jPanel1.add(flechaSeleccionDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 110, 110));
+        jPanel1.add(flechaSeleccionDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 110, 110));
+
+        fondo1.setForeground(new java.awt.Color(174, 70, 43));
+        fondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_CrearPartida1.png"))); // NOI18N
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         fondo.setForeground(new java.awt.Color(174, 70, 43));
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_CrearPartida.jpg"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 600));
@@ -256,9 +270,13 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
     private javax.swing.JButton flechaSeleccionDer;
     private javax.swing.JButton flechaSeleccionIzq;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel fondo1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
