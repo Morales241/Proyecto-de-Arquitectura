@@ -110,7 +110,7 @@ public class LogicaPrincipal {
           
           //agregar observer del tablero
           tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
-          tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
+          tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionSolicitudFichaPozo());
           tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
           tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
 

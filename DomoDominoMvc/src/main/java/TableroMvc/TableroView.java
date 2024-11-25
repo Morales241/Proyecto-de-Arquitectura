@@ -120,9 +120,8 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         PozoLayout.setHorizontalGroup(
             PozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PozoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(pozo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 3, Short.MAX_VALUE))
         );
         PozoLayout.setVerticalGroup(
             PozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,14 +140,14 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         Jugador4.setLayout(Jugador4Layout);
         Jugador4Layout.setHorizontalGroup(
             Jugador4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
         Jugador4Layout.setVerticalGroup(
             Jugador4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
 
-        getContentPane().add(Jugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 230, 50, 240));
+        getContentPane().add(Jugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 160, 80, 360));
 
         Jugador3.setBackground(new java.awt.Color(255, 255, 255));
         Jugador3.setEnabled(false);
@@ -157,14 +156,14 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         Jugador3.setLayout(Jugador3Layout);
         Jugador3Layout.setHorizontalGroup(
             Jugador3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
         Jugador3Layout.setVerticalGroup(
             Jugador3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        getContentPane().add(Jugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 450, 50));
+        getContentPane().add(Jugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 650, 60));
 
         Jugador2.setBackground(new java.awt.Color(255, 255, 255));
         Jugador2.setEnabled(false);
@@ -173,14 +172,14 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         Jugador2.setLayout(Jugador2Layout);
         Jugador2Layout.setHorizontalGroup(
             Jugador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
         Jugador2Layout.setVerticalGroup(
             Jugador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
 
-        getContentPane().add(Jugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 50, 240));
+        getContentPane().add(Jugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 80, 390));
 
         Jugador1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -192,10 +191,10 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         );
         Jugador1Layout.setVerticalGroup(
             Jugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
 
-        getContentPane().add(Jugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 570, 740, 120));
+        getContentPane().add(Jugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, 740, 130));
         getContentPane().add(avatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 80, 100));
 
         avatar2.setEnabled(false);

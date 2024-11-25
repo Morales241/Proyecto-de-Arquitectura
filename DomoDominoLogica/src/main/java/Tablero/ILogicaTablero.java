@@ -8,7 +8,7 @@ public interface ILogicaTablero {
   
     public void tomarFichaPozo();
     
-    public void ponerFicha
+    public void ponerFicha();
     
     
 }
