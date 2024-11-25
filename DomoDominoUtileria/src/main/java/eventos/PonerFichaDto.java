@@ -9,24 +9,33 @@ import dtos.JugadorDto;
  */
 public class PonerFichaDto {
     private FichaDto ficha;
-    private String extremo, direccion;
+    private boolean extremo;
+    private String direccion;
     private JugadorDto jugador;
 
     public PonerFichaDto() {
     }
 
-     public PonerFichaDto(FichaDto ficha, String extremo, String direccion, JugadorDto jugador) {
+     public PonerFichaDto(FichaDto ficha, boolean extremo, String direccion, JugadorDto jugador) {
           this.ficha = ficha;
           this.extremo = extremo;
           this.direccion = direccion;
           this.jugador = jugador;
      }
 
-     public String getExtremo() {
+     public PonerFichaDto(FichaDto ficha, boolean extremo, String direccion) {
+          this.ficha = ficha;
+          this.extremo = extremo;
+          this.direccion = direccion;
+     }
+     
+     
+
+     public boolean getExtremo() {
           return extremo;
      }
 
-     public void setExtremo(String extremo) {
+     public void setExtremo(boolean extremo) {
           this.extremo = extremo;
      }
 

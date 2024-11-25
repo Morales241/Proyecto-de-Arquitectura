@@ -143,9 +143,6 @@ public class GestorMensajes {
     }
     
     public void procesarRespuestaDelServidorCentral(RespuestaServidorCentral respuesta){
-        if (respuesta.getRespuesta().contains("error")) {
-            
-            
-        }
+        
     }
 }

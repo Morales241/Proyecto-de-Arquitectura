@@ -5,6 +5,7 @@
 package Arreglo;
 
 import Entidades.Ficha;
+import dtos.FichaDto;
 import java.util.List;
 
 public interface ILogicaArreglo {
@@ -15,15 +16,15 @@ public interface ILogicaArreglo {
     
     public boolean verificarPosiblesMovimientos(List<Ficha> fichasJugador);
     
-    public boolean colocarFicha(Ficha ficha, boolean extremo, String direccion);
+    public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion);
     
-    public boolean colocarFichaIzquierda(Ficha ficha, boolean extremo);
+    public boolean colocarFichaIzquierda(FichaDto ficha, boolean extremo);
     
-    public boolean colocarFichaDerecha(Ficha ficha, boolean extremo);
+    public boolean colocarFichaDerecha(FichaDto ficha, boolean extremo);
     
-    public boolean colocarFichaArriba(Ficha ficha, boolean extremo);
+    public boolean colocarFichaArriba(FichaDto ficha, boolean extremo);
     
-    public boolean colocarFichaAbajo(Ficha ficha, boolean extremo);
+    public boolean colocarFichaAbajo(FichaDto ficha, boolean extremo);
     
     public void actualizarExtremos(boolean extremo, int numExtremo, int columna, int fila);
     
