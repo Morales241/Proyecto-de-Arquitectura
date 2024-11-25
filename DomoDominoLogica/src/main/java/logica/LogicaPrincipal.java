@@ -31,6 +31,7 @@ import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observersServerCentralALogica.IEventoIniciarPartida;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
+import observers.IEventoSolicitudTomarFicha;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 import unirseAPartida.ILogicaUnirseAPartida;
@@ -238,7 +239,7 @@ public class LogicaPrincipal {
 
           @Override
           public void tomarFichaDelPozo(FichaDto fichaSacada) {
-               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+               
           }
 
      }
@@ -296,5 +297,13 @@ public class LogicaPrincipal {
                System.out.println(respuesta.toString());
           }
 
+     }
+     private class AccionSolicitudFichaPozo implements IEventoSolicitudTomarFicha{
+
+        @Override
+        public void solicitudTomarFicha() {
+           
+        }
+         
      }
 }

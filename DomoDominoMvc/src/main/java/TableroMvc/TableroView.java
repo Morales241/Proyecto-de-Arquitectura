@@ -4,6 +4,7 @@
  */
 package TableroMvc;
 
+import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.JugadorAEliminarDto;
@@ -24,9 +25,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mediador.IComponente;
 import mediador.IMediador;
+import observers.IEventoActualizarTablero;
+import observers.IEventoActualizarVista;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
+import observers.IEventoSolicitudTomarFicha;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 
@@ -36,10 +40,10 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
     private IMediador mediador;
     private final TableroModel tableroModel;
     private IEventoPonerFicha observerPonerFicha;
-    private IEventoTomarFichaDelPozo observerTomarDelPozo;
     private IEventoPasarTurno observerPasarTurno;
     private IEventoSalirDePartida observerSalirDePartida;
     private TableroPanel tableroPanel;
+    private IEventoSolicitudTomarFicha observerSolicitudTomarFicha;
 
     /**
      * Creates new form TableroView
@@ -231,13 +235,16 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         }
     }
 
-    public void agregarEventoTomarFichaDelPozo(IEventoTomarFichaDelPozo listener) {
-        this.observerTomarDelPozo = listener;
+    /*
+    EVENTO DE SOLICITUD PARA TOMAR FICHA
+     */
+    public void agregarEventoSolicitudTomarFicha(IEventoSolicitudTomarFicha listener) {
+        this.observerSolicitudTomarFicha = listener;
     }
 
-    public void ejecutarEventoTomarFichaDelPozo(FichaDto fichaSacada) {
-        if (observerTomarDelPozo != null) {
-            observerTomarDelPozo.tomarFichaDelPozo(fichaSacada);
+    public void ejecutarEventoPasarTurno(IEventoSolicitudTomarFicha listener) {
+        if (observerSolicitudTomarFicha != null) {
+            observerSolicitudTomarFicha.solicitudTomarFicha();
         }
     }
 
@@ -287,6 +294,23 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
     @Override
     public void setMediador(IMediador mediador) {
         this.mediador = mediador;
+    }
+
+    private class EventoActualizarTablero implements IEventoActualizarTablero {
+
+        @Override
+        public EventoActualizarTablero(ArregloDto array) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+    }
+    private class EventoActualizarFichasJugador implements IEventoActualizarVista {
+
+        @Override
+        public void actualizarFichasJugador(List<FichaDto> fichas) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
     }
 
 }

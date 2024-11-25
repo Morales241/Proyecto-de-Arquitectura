@@ -8,7 +8,10 @@ observersServerCentralALogica\IEventoIniciarPartida.class
 eventos\JugadorCrearPartidaDto.class
 observers\IEventoAviso.class
 serializables\Jugador.class
+observers\IEventoActualizarVista.class
 observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.class
+observers\IEventoActualizarTablero.class
+observers\IEventoSolicitudTomarFicha.class
 dtos\UsuarioDto.class
 eventos\JugadorConsulta.class
 eventos\NodoDto.class

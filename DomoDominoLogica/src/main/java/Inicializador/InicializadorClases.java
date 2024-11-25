@@ -69,7 +69,7 @@ public class InicializadorClases {
         
         //fachada tablero
         TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
-        tableroFachada = new TableroFachada(tableroModel, logicaPozo);
+        tableroFachada = new TableroFachada(tableroModel);
     }
 
     public IInicioFachada getInicioFachada() {

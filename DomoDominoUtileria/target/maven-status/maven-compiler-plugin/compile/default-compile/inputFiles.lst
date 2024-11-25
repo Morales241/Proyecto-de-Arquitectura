@@ -1,13 +1,16 @@
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorAEliminarDto.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
+C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoActualizarTablero.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PonerFichaDto.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAviso.java
+C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoActualizarVista.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaServidorCentral.java
+C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSolicitudTomarFicha.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\SetUpDto.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
 C:\Users\RAUL EDUARDO GOMEZ\Documents\NetBeansProjects\ProyectoArquitectura\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\NodoDto.java
