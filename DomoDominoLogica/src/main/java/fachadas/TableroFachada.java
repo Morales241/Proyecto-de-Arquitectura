@@ -4,6 +4,7 @@
  */
 package fachadas;
 
+import Pozo.LogicaPozo;
 import TableroMvc.TableroModel;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
@@ -15,11 +16,13 @@ import observers.IEventoTomarFichaDelPozo;
  * @author favel
  */
 public class TableroFachada implements ITableroFachada {
-
+ 
+    private LogicaPozo logicaPozo;
      private final TableroModel tableroModel;
 
-     public TableroFachada(TableroModel tableroModel) {
+     public TableroFachada(TableroModel tableroModel,LogicaPozo pozo) {
           this.tableroModel = tableroModel;
+          this.logicaPozo = pozo;
      }
      
      @Override
