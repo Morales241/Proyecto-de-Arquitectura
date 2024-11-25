@@ -27,11 +27,12 @@ observers\IObserver.class
 observers\IEventoTomarFichaDelPozo.class
 observersLogicaAServidorCentral\IEventoAcabarPartida.class
 enumerados\RespuestaServidor.class
+observersServerCentralALogica\IEventoRespuestaDeCreacionDePartida.class
 contenedor\ContenedorMvc.class
 objetosDeEventos\JugadorCrearPartidaDto.class
 objetosDeEventos\PonerFichaDto.class
 objetosDeEventos\JugadorUnirseAPartidaDto.class
-observersServerCentralALogica\IEventoRespuestaServidorCentral.class
+observersServerCentralALogica\IEventoRespuestaDeUnirseAPartida.class
 objetosDeEventos\RespuestaDePartidaCreada.class
 dtos\ArregloDto.class
 mediador\IMediador.class

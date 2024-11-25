@@ -6,7 +6,8 @@ import observersLogicaAServidorCentral.IEventoAcabarPartida;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoIniciarPartida;
-import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoRespuestaDeCreacionDePartida;
+import observersServerCentralALogica.IEventoRespuestaDeUnirseAPartida;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;
 
@@ -37,8 +38,12 @@ public class GestorDeComunicaciones {
         cliente.enviarMensaje(mensaje);
     }
     
-    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
-        gestorMensajes.agregarObservadorRespuestaDelServidorCentral(observador);
+    public void agregarObservadorRespuestaDeCrearPartida(IEventoRespuestaDeCreacionDePartida observador) {
+        gestorMensajes.agregarObservadorRespuestaDeCrearPartida(observador);
+    }
+    
+    public void agregarObservadorRespuestaDeUnirseAPartida(IEventoRespuestaDeUnirseAPartida observador) {
+        gestorMensajes.agregarObservadorRespuestaDeUnirseAPartida(observador);
     }
     
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador) {

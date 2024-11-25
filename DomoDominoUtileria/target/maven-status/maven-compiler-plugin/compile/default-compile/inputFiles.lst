@@ -37,7 +37,8 @@ C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaServidorCentral.java
+C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaDeCreacionDePartida.java
+C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaDeUnirseAPartida.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoVotarParaIniciarPartida.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java

@@ -24,6 +24,8 @@ import fachadas.ITableroFachada;
 import fachadas.IUnirseAPartidaFachada;
 import fachadas.TableroFachada;
 import mediador.Mediador;
+import objetosDeEventos.RespuestaDePartidaCreada;
+import objetosDeEventos.RespuestaDeUnirseAPartida;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
@@ -36,7 +38,8 @@ import observers.IObserver;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoRespuestaDeCreacionDePartida;
+import observersServerCentralALogica.IEventoRespuestaDeUnirseAPartida;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -52,7 +55,7 @@ public class LogicaPrincipal {
 
      private final ILogicaInicio lInicio;
      private final ILogicaCrearPartida lCrearPartida;
-     private final ILogicaUnirseAPartida IUnirsePartida;
+     private final ILogicaUnirseAPartida lUnirsePartida;
      private final ILogicaArreglo IArreglo;
      private final ILogicaPozo IPozo;
 
@@ -76,7 +79,7 @@ public class LogicaPrincipal {
 
           lInicio = new LogicaInicio();
 
-          IUnirsePartida = new LogicaUnirseAPartida(inicalizadorComunicaciones.getComunicaciones());
+          lUnirsePartida = new LogicaUnirseAPartida(inicalizadorComunicaciones.getComunicaciones());
 
           lCrearPartida = new LogicaCrearPartida(comunicaciones);
 
@@ -87,6 +90,9 @@ public class LogicaPrincipal {
           iFachada = inicializadorClases.getInicioFachada();
 
           crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
+          
+          
+          unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
           
           tableroFachada = inicializadorClases.getTableroFachada();
 
@@ -103,7 +109,6 @@ public class LogicaPrincipal {
           crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
           crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
 
-          unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
           unirsePartidaFachada.agregarIEventoUnirseAPartida(new AccionUnirseAPartida());
           unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
           
@@ -119,8 +124,9 @@ public class LogicaPrincipal {
           comunicaciones.agregarObservadorIniciarPartida(new AccionSeInicioPartida());
           comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
           comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-//          comunicaciones.agregarObservadorRespuestaDelServidorCentral(new AccionRespuestaDelServidorCentral());
           comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+          comunicaciones.agregarObservadorRespuestaDeCrearPartida(new RespuestaParaCrearPartida());
+          comunicaciones.agregarObservadorRespuestaDeUnirseAPartida(new RespuestaParaUnirseAPartida());
      }
 
      public void inicializarClases() {
@@ -163,7 +169,7 @@ public class LogicaPrincipal {
 
           @Override
           public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
-               IUnirsePartida.unirseAPartida(jugador);
+               lUnirsePartida.unirseAPartida(jugador);
           }
      }
 
@@ -296,4 +302,23 @@ public class LogicaPrincipal {
         }
          
      }
+     
+     private class RespuestaParaCrearPartida implements IEventoRespuestaDeCreacionDePartida{
+
+        @Override
+        public void respuesta(RespuestaDePartidaCreada respuestaDePartidaCreada) {
+            lCrearPartida.procesarRespuesta(respuestaDePartidaCreada);
+        }
+     
+     }
+     
+     private class RespuestaParaUnirseAPartida implements IEventoRespuestaDeUnirseAPartida{
+
+        @Override
+        public void respuesta(RespuestaDeUnirseAPartida respuestaDeUnirseAPartida) {
+            lUnirsePartida.procesarRespuesta(respuestaDeUnirseAPartida);
+        }
+     
+     }
+     
 }

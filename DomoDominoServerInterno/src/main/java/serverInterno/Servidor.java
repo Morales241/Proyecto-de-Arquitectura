@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import objetosDeEventos.RespuestaDePartidaCreada;
+import objetosDeEventos.RespuestaDeUnirseAPartida;
 
 public class Servidor {
 
@@ -115,9 +117,11 @@ public class Servidor {
                     
                 case FichaDto fichaSacada ->
                     gestorMensajes.notificarObservadorFichaTomadaDelPozo(fichaSacada);
-//                    
-//                case RespuestaServidorCentral respuesta ->
-//                    gestorMensajes.notificarObserverRespuestaDelServidorCentral(respuesta);
+                    
+                case RespuestaDePartidaCreada respuestaDePartidaCreada ->
+                    gestorMensajes.notificarObserverRespuestaDeCrearPartida(respuestaDePartidaCreada);
+                case RespuestaDeUnirseAPartida respuestaDeUnirseAPartida ->
+                    gestorMensajes.notificarObserverRespuestaDeUnirseAPartida(respuestaDeUnirseAPartida);
 
                 default ->
                     log.log(Level.INFO, "Tipo de mensaje no reconocido");

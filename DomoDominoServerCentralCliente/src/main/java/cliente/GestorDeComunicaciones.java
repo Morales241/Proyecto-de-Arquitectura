@@ -9,6 +9,7 @@ import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
+import observersServerCentralALogica.IEventoRespuestaDeCreacionDePartida;
 import servidor.GestorMensajes;
 import servidor.Servidor;
 
@@ -70,7 +71,7 @@ public class GestorDeComunicaciones {
     public void agregarObservadorSalirDePartida(IEventoSalirDePartida observador) {
         gestorMensajes.agregarObservadorSalirDePartida(observador);
     }
-
+    
     public GestorMensajes getGestorMensajes() {
         return gestorMensajes;
     }
