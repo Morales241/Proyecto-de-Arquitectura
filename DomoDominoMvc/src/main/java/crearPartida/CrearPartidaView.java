@@ -147,7 +147,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
         fondo1.setForeground(new java.awt.Color(174, 70, 43));
         fondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_CrearPartida1.png"))); // NOI18N
-        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         fondo.setForeground(new java.awt.Color(174, 70, 43));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N

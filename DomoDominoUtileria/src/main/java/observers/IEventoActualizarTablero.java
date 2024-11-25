@@ -7,8 +7,7 @@ package observers;
 import dtos.ArregloDto;
 
 public interface IEventoActualizarTablero {
-    
-    
- public void EventoActualizarTablero(ArregloDto array);
- 
+
+    public void EventoActualizarTablero(ArregloDto array);
+
 }

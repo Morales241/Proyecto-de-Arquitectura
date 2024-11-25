@@ -46,7 +46,7 @@ public class UnirseMesaView extends javax.swing.JFrame implements IComponente {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 120, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 230, 40));
 
         labelTitulo.setBackground(new java.awt.Color(102, 102, 102));
         labelTitulo.setFont(new java.awt.Font("Segoe UI Historic", 1, 48)); // NOI18N
@@ -56,7 +56,6 @@ public class UnirseMesaView extends javax.swing.JFrame implements IComponente {
         jPanel1.add(labelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 390, 70));
 
         jButton2.setBackground(new java.awt.Color(51, 255, 51));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearMesa.png"))); // NOI18N
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

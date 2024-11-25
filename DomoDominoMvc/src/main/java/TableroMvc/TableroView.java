@@ -6,22 +6,17 @@ package TableroMvc;
 
 import dtos.ArregloDto;
 import dtos.FichaDto;
-import dtos.JugadorDto;
 import eventos.JugadorAEliminarDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mediador.IComponente;
 import mediador.IMediador;
@@ -31,8 +26,6 @@ import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoSolicitudTomarFicha;
-import observers.IEventoTomarFichaDelPozo;
-import observers.IObserver;
 
 public class TableroView extends javax.swing.JFrame implements IComponente {
 
@@ -296,21 +289,22 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
         this.mediador = mediador;
     }
 
-    private class EventoActualizarTablero implements IEventoActualizarTablero {
-
-        @Override
-        public EventoActualizarTablero(ArregloDto array) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-    }
     private class EventoActualizarFichasJugador implements IEventoActualizarVista {
 
         @Override
         public void actualizarFichasJugador(List<FichaDto> fichas) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           
         }
 
+    }
+    
+    private class EventoActualizarTableroView implements IEventoActualizarTablero{
+
+        @Override
+        public void EventoActualizarTablero(ArregloDto array) {
+
+        }
+    
     }
 
 }
