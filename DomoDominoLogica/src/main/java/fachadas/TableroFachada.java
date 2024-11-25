@@ -5,9 +5,12 @@
 package fachadas;
 
 import TableroMvc.TableroModel;
+import dtos.ArregloDto;
+import dtos.FichaDto;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
+import observers.IEventoSolicitudTomarFicha;
 import observers.IEventoTomarFichaDelPozo;
 
 /**
@@ -16,30 +19,40 @@ import observers.IEventoTomarFichaDelPozo;
  */
 public class TableroFachada implements ITableroFachada {
 
-     private final TableroModel tableroModel;
+    private final TableroModel tableroModel;
 
-     public TableroFachada(TableroModel tableroModel) {
-          this.tableroModel = tableroModel;
-     }
-     
-     @Override
-     public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
-          this.tableroModel.agregarIEventoPonerFIcha(listener);
-     }
+    public TableroFachada(TableroModel tableroModel) {
+        this.tableroModel = tableroModel;
 
-     @Override
-     public void agregarIEventoTomarFIchaDelPozo(IEventoTomarFichaDelPozo listener) {
-         this.tableroModel.agregarIEventoSacarFichaDelPozo(listener);
-     }
+    }
 
-     @Override
-     public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
-         this.tableroModel.agregarEventoPasarTurno(listener);
-     }
+    @Override
+    public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
+        this.tableroModel.agregarIEventoPonerFIcha(listener);
+    }
 
-     @Override
-     public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
-         this.tableroModel.agregarIEventoSalirDePartida(listener);
-     }
-     
+    @Override
+    public void agregarIEventoTomarFIchaDelPozo(IEventoSolicitudTomarFicha listener) {
+        this.tableroModel.agregarEventoSolicitudTomarFicha(listener);
+    }
+
+    @Override
+    public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
+        this.tableroModel.agregarEventoPasarTurno(listener);
+    }
+
+    @Override
+    public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
+        this.tableroModel.agregarIEventoSalirDePartida(listener);
+    }
+
+    @Override
+    public void tomarFichaDelPozo(FichaDto ficha) {
+        this.tableroModel.actualizarFichaSelecionada(ficha);
+    }
+    
+    public void actualizarTablero(ArregloDto arreglo){
+        tableroModel.ejecutarEventoActualizarTablero(arreglo);
+    }
+
 }

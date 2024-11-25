@@ -1,11 +1,10 @@
 package serverInterno;
 
 import dtos.FichaDto;
-import eventos.JugadorAEliminarDto;
-import eventos.PasarTurno;
-import eventos.PonerFichaDto;
-import eventos.RespuestaServidorCentral;
-import eventos.SetUpDto;
+import objetosDeEventos.JugadorAEliminarDto;
+import objetosDeEventos.PasarTurno;
+import objetosDeEventos.PonerFichaDto;
+import objetosDeEventos.SetUpDto;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import objetosDeEventos.RespuestaDePartidaCreada;
+import objetosDeEventos.RespuestaDeUnirseAPartida;
 
 public class Servidor {
 
@@ -117,8 +118,10 @@ public class Servidor {
                 case FichaDto fichaSacada ->
                     gestorMensajes.notificarObservadorFichaTomadaDelPozo(fichaSacada);
                     
-                case RespuestaServidorCentral respuesta ->
-                    gestorMensajes.notificarObserverRespuestaDelServidorCentral(respuesta);
+                case RespuestaDePartidaCreada respuestaDePartidaCreada ->
+                    gestorMensajes.notificarObserverRespuestaDeCrearPartida(respuestaDePartidaCreada);
+                case RespuestaDeUnirseAPartida respuestaDeUnirseAPartida ->
+                    gestorMensajes.notificarObserverRespuestaDeUnirseAPartida(respuestaDeUnirseAPartida);
 
                 default ->
                     log.log(Level.INFO, "Tipo de mensaje no reconocido");

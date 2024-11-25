@@ -32,6 +32,7 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
         jPanel1 = new javax.swing.JPanel();
         btnCrear = new javax.swing.JButton();
         btnUnirse = new javax.swing.JButton();
+        domo = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,12 +40,13 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
-        btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida.png"))); // NOI18N
+        btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida1.png"))); // NOI18N
         btnCrear.setToolTipText("");
         btnCrear.setBorderPainted(false);
         btnCrear.setContentAreaFilled(false);
         btnCrear.setFocusPainted(false);
         btnCrear.setFocusable(false);
+        btnCrear.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/crearPartida.png"))); // NOI18N
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -53,12 +55,13 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
         jPanel1.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 270, 70));
 
         btnUnirse.setForeground(new java.awt.Color(255, 255, 255));
-        btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unirseApartida.png"))); // NOI18N
+        btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unirseApartida1.png"))); // NOI18N
         btnUnirse.setToolTipText("");
         btnUnirse.setBorderPainted(false);
         btnUnirse.setContentAreaFilled(false);
         btnUnirse.setFocusPainted(false);
         btnUnirse.setFocusable(false);
+        btnUnirse.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/unirseApartida.png"))); // NOI18N
         btnUnirse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnirseActionPerformed(evt);
@@ -66,7 +69,10 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
         });
         jPanel1.add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 210, 70));
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_Inicio.png"))); // NOI18N
+        domo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgPartidaFichas/avatar3.png"))); // NOI18N
+        jPanel1.add(domo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 100, 110));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/domodomino.png"))); // NOI18N
         jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,6 +102,7 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnUnirse;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel domo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables

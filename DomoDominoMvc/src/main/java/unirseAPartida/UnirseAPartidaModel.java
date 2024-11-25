@@ -4,7 +4,7 @@
  */
 package unirseAPartida;
 
-import eventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.JugadorUnirseAPartidaDto;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
@@ -26,7 +26,7 @@ public class UnirseAPartidaModel {
      public void validarNombre(JugadorUnirseAPartidaDto jugador) {
            Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
 
-        Matcher match = validacion.matcher(jugador.getNodo().getNombre());
+        Matcher match = validacion.matcher(jugador.getNombre());
         if (match.matches()) {
             
             ejecutarAccionUnirseAPartida(jugador);

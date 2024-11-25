@@ -4,7 +4,8 @@
  */
 package unirseAPartida;
 
-import eventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.RespuestaDeUnirseAPartida;
 
 /**
  *
@@ -13,4 +14,5 @@ import eventos.JugadorUnirseAPartidaDto;
 public interface ILogicaUnirseAPartida {
      public void regresarAInicio();
      public void unirseAPartida(JugadorUnirseAPartidaDto jugador);
+     public void procesarRespuesta(RespuestaDeUnirseAPartida respuestaDeUnirseAPartida);
 }

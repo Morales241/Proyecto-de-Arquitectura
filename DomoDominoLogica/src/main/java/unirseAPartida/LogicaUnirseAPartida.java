@@ -5,13 +5,14 @@
 package unirseAPartida;
 
 import cliente.GestorDeComunicaciones;
-import eventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.JugadorUnirseAPartidaDto;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mediador.IMediador;
 import mediador.Mediador;
+import objetosDeEventos.RespuestaDeUnirseAPartida;
 
 /**
  *
@@ -44,6 +45,17 @@ public class LogicaUnirseAPartida implements ILogicaUnirseAPartida {
           }
           
           comunicaciones.enviarMensaje(jugador);
+     }
+     
+     public void procesarRespuesta(RespuestaDeUnirseAPartida respuestaDeUnirseAPartida){
+         if (respuestaDeUnirseAPartida.isLlave()) {
+             
+             String nombrePantalla = "lobby";
+             mediador.mostrarPantallaConcreta(nombrePantalla);
+         }else{
+             // aqui va el mensaje de error
+             
+         }
      }
      
 }

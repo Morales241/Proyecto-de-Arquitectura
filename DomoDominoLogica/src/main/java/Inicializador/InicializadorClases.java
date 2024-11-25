@@ -1,6 +1,7 @@
 package Inicializador;
 
 import InicioMvc.InicioModel;
+import Pozo.LogicaPozo;
 import TableroMvc.TableroModel;
 import crearPartida.CrearPartidaModel;
 import fachadas.CrearPartidaFachada;
@@ -30,7 +31,7 @@ public class InicializadorClases {
     
     private final IMediador mediador;
     private final InicializadorMVCFachada cFachada;
-    
+    private LogicaPozo logicaPozo;
     private IInicioFachada inicioFachada;
     
     private ICrearPartidaFachada crearPartidaFachada;

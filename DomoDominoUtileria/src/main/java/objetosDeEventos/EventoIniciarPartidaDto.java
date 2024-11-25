@@ -1,4 +1,4 @@
-package eventos;
+package objetosDeEventos;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author tacot
  */
 public class EventoIniciarPartidaDto implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     private String codigo;
 
     public EventoIniciarPartidaDto(String codigo) {

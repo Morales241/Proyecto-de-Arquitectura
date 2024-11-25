@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cliente;
 
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
-import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observersServerCentralALogica.IEventoIniciarPartida;
-import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observers.IEventoIniciarPartida;
+import observersServerCentralALogica.IEventoRespuestaDeCreacionDePartida;
+import observersServerCentralALogica.IEventoRespuestaDeUnirseAPartida;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;
 
@@ -44,8 +38,12 @@ public class GestorDeComunicaciones {
         cliente.enviarMensaje(mensaje);
     }
     
-    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
-        gestorMensajes.agregarObservadorRespuestaDelServidorCentral(observador);
+    public void agregarObservadorRespuestaDeCrearPartida(IEventoRespuestaDeCreacionDePartida observador) {
+        gestorMensajes.agregarObservadorRespuestaDeCrearPartida(observador);
+    }
+    
+    public void agregarObservadorRespuestaDeUnirseAPartida(IEventoRespuestaDeUnirseAPartida observador) {
+        gestorMensajes.agregarObservadorRespuestaDeUnirseAPartida(observador);
     }
     
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador) {

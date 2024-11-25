@@ -4,7 +4,7 @@
  */
 package observers;
 
-import eventos.PonerFichaDto;
+import objetosDeEventos.PonerFichaDto;
 
 /**
  *

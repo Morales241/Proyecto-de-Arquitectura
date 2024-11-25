@@ -6,7 +6,7 @@ package sereverCentral;
 
 import cliente.Cliente;
 import cliente.GestorDeComunicaciones;
-import eventos.JugadorCrearPartidaDto;
+import objetosDeEventos.JugadorCrearPartidaDto;
 import servidor.GestorMensajes;
 import servidor.Servidor;
 import java.net.InetAddress;
@@ -39,7 +39,7 @@ public class ArrancarServidorCentral {
                 System.out.println(llave);
             }
             System.out.println("se va a conectar");
-            comunicaciones.conectarAServidor("192.168.100.21", 8097);
+//            comunicaciones.conectarAServidor("192.168.100.21", 8097);
             
             while (!llave) {
                 llave = tec.nextBoolean();

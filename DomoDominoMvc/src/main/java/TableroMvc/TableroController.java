@@ -1,14 +1,15 @@
 package TableroMvc;
 
 import dtos.FichaDto;
-import eventos.JugadorAEliminarDto;
-import eventos.PasarTurno;
-import eventos.PonerFichaDto;
+import objetosDeEventos.JugadorAEliminarDto;
+import objetosDeEventos.PasarTurno;
+import objetosDeEventos.PonerFichaDto;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
+import observers.IEventoSolicitudTomarFicha;
 import observers.IEventoTomarFichaDelPozo;
 
 public class TableroController {
@@ -20,7 +21,7 @@ public class TableroController {
           this.tableroModel = tableroModel;
           this.tableroView = tableroView;
           tableroView.agregarIEventoPonerFicha(new accionPonerFicha());
-          tableroView.agregarEventoTomarFichaDelPozo(new accionTomarFichaDelPozo());
+          tableroView.agregarEventoSolicitudTomarFicha(new accionTomarFichaDelPozo());
           tableroView.agregarEventoPasarTurno(new accionPasarTurno());
           tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
      }
@@ -32,11 +33,13 @@ public class TableroController {
           }
      }
       
-     private class accionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
-          @Override
-          public void tomarFichaDelPozo(FichaDto fichaSacada) {
-          
-          }
+     private class accionTomarFichaDelPozo implements IEventoSolicitudTomarFicha {
+
+        @Override
+        public void solicitudTomarFicha() {
+          solicitarFicha();
+        }
+         
      }
      
      private class accionPasarTurno implements IEventoPasarTurno {
@@ -51,5 +54,9 @@ public class TableroController {
           public void salirDePartida(JugadorAEliminarDto jugador) {
      
           }
+     }
+     
+     public void solicitarFicha(){
+         tableroModel.ejecutarEventoSolicitudTomarFicha();
      }
 }
