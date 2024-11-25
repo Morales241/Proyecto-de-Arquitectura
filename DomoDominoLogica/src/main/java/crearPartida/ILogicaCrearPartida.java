@@ -4,8 +4,7 @@
  */
 package crearPartida;
 
-import objetosDeEventos.JugadorCrearPartidaDto;
-import objetosDeEventos.RespuestaDePartidaCreada;
+import eventos.JugadorCrearPartidaDto;
 
 /**
  *
@@ -14,5 +13,4 @@ import objetosDeEventos.RespuestaDePartidaCreada;
 public interface ILogicaCrearPartida {
     public void regresarAlInicio();
     public void crearPartida(JugadorCrearPartidaDto jugador);
-    public void procesarRespuesta(RespuestaDePartidaCreada respuestaDePartidaCreada);
 }

@@ -1,22 +1,20 @@
 package serverInterno;
 
 import dtos.FichaDto;
-import objetosDeEventos.JugadorAEliminarDto;
-import objetosDeEventos.PasarTurno;
-import objetosDeEventos.PonerFichaDto;
-import objetosDeEventos.SetUpDto;
+import eventos.JugadorAEliminarDto;
+import eventos.PasarTurno;
+import eventos.PonerFichaDto;
+import eventos.RespuestaServidorCentral;
+import eventos.SetUpDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import objetosDeEventos.RespuestaDePartidaCreada;
-import objetosDeEventos.RespuestaDeUnirseAPartida;
-import observers.IEventoIniciarPartida;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoRespuestaDeCreacionDePartida;
-import observersServerCentralALogica.IEventoRespuestaDeUnirseAPartida;
+import observersServerCentralALogica.IEventoIniciarPartida;
+import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 public class GestorMensajes {
 
@@ -28,9 +26,7 @@ public class GestorMensajes {
     private IEventoSalirDePartida observerSalioJugador;
     private IEventoIniciarPartida observeriniciarPartida;
     private IEventoAcabarPartida observerAcabarPartida;
-    private IEventoRespuestaDeUnirseAPartida eventoRespuestaDeUnirseAPartida;
-    private IEventoRespuestaDeCreacionDePartida eventoRespuestaDeCreacionDePartida;
-    
+    private IEventoRespuestaServidorCentral observerCentral;
     
 
     public GestorMensajes() {
@@ -127,37 +123,26 @@ public class GestorMensajes {
     public void notificarObservadorAcabarPartida(String codigo) {
         if (observerAcabarPartida != null) {
             observerAcabarPartida.acabarPartida(codigo);
-            log.log(Level.INFO, "Metodo:notificarObservadorAcabarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+            log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
     
-    public void agregarObservadorRespuestaDeUnirseAPartida(IEventoRespuestaDeUnirseAPartida observador) {
-        this.eventoRespuestaDeUnirseAPartida = observador;
+    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
+        this.observerCentral = observador;
     }
 
-    public void eliminarObservadorRespuestaDeUnirseAPartida() {
-        this.eventoRespuestaDeUnirseAPartida = null;
+    public void eliminarObservadorRespuestaDelServidorCentral() {
+        this.observerCentral = null;
     }
 
-    public void notificarObserverRespuestaDeUnirseAPartida(RespuestaDeUnirseAPartida respuestaDeUnirseAPartida ) {
-        if (eventoRespuestaDeUnirseAPartida != null) {
-            eventoRespuestaDeUnirseAPartida.respuesta(respuestaDeUnirseAPartida);
-            log.log(Level.INFO, "Metodo:notificarObserverRespuestaDeUnirseAPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+    public void notificarObserverRespuestaDelServidorCentral(RespuestaServidorCentral respuesta) {
+        if (observerCentral != null) {
+            observerCentral.actualizar(respuesta);
+            log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
     
-    public void agregarObservadorRespuestaDeCrearPartida(IEventoRespuestaDeCreacionDePartida observador) {
-        this.eventoRespuestaDeCreacionDePartida = observador;
-    }
-
-    public void eliminarObservadorRespuestaDeCrearPartida() {
-        this.eventoRespuestaDeCreacionDePartida = null;
-    }
-
-    public void notificarObserverRespuestaDeCrearPartida(RespuestaDePartidaCreada respuestaDePartidaCreada ) {
-        if (eventoRespuestaDeCreacionDePartida != null) {
-            eventoRespuestaDeCreacionDePartida.respuesta(respuestaDePartidaCreada);
-            log.log(Level.INFO, "Metodo:notificarObserverRespuestaDeUnirseAPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
-        }
+    public void procesarRespuestaDelServidorCentral(RespuestaServidorCentral respuesta){
+        
     }
 }

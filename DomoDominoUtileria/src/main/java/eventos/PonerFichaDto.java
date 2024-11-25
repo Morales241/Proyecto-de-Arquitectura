@@ -1,4 +1,4 @@
-package objetosDeEventos;
+package eventos;
 
 import dtos.FichaDto;
 import dtos.JugadorDto;

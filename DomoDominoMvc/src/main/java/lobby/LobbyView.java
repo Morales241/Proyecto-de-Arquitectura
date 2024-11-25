@@ -72,19 +72,19 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
 
         nomJugador1.setText("jLabel2");
-        jPanel1.add(nomJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, -1, -1));
+        jPanel1.add(nomJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, -1, -1));
 
         nomJugador2.setText("jLabel3");
-        jPanel1.add(nomJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
+        jPanel1.add(nomJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, -1, -1));
 
         nomJugador3.setText("jLabel4");
-        jPanel1.add(nomJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 310, -1, -1));
+        jPanel1.add(nomJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, -1, -1));
 
         nomJugador4.setText("jLabel5");
-        jPanel1.add(nomJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, -1, -1));
+        jPanel1.add(nomJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 450, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoGeneral.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 600));

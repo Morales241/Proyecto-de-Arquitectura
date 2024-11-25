@@ -1,8 +1,8 @@
 package servidor;
 
-import objetosDeEventos.JugadorAEliminarDto;
-import objetosDeEventos.JugadorCrearPartidaDto;
-import objetosDeEventos.JugadorUnirseAPartidaDto;
+import eventos.JugadorAEliminarDto;
+import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorUnirseAPartidaDto;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;

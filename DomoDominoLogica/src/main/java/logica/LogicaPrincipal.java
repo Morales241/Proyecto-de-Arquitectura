@@ -12,34 +12,31 @@ import cliente.GestorDeComunicaciones;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
-import objetosDeEventos.JugadorAEliminarDto;
-import objetosDeEventos.JugadorCrearPartidaDto;
-import objetosDeEventos.JugadorUnirseAPartidaDto;
-import objetosDeEventos.PasarTurno;
-import objetosDeEventos.PonerFichaDto;
-import objetosDeEventos.SetUpDto;
+import eventos.JugadorAEliminarDto;
+import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorUnirseAPartidaDto;
+import eventos.PasarTurno;
+import eventos.PonerFichaDto;
+import eventos.RespuestaServidorCentral;
+import eventos.SetUpDto;
 import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
 import fachadas.ITableroFachada;
 import fachadas.IUnirseAPartidaFachada;
 import fachadas.TableroFachada;
 import mediador.Mediador;
-import objetosDeEventos.RespuestaDePartidaCreada;
-import objetosDeEventos.RespuestaDeUnirseAPartida;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observers.IEventoIniciarPartida;
+import observersServerCentralALogica.IEventoIniciarPartida;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
-import observers.IEventoSolicitudTomarFicha;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoRespuestaDeCreacionDePartida;
-import observersServerCentralALogica.IEventoRespuestaDeUnirseAPartida;
+import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -55,7 +52,7 @@ public class LogicaPrincipal {
 
      private final ILogicaInicio lInicio;
      private final ILogicaCrearPartida lCrearPartida;
-     private final ILogicaUnirseAPartida lUnirsePartida;
+     private final ILogicaUnirseAPartida IUnirsePartida;
      private final ILogicaArreglo IArreglo;
      private final ILogicaPozo IPozo;
 
@@ -79,7 +76,7 @@ public class LogicaPrincipal {
 
           lInicio = new LogicaInicio();
 
-          lUnirsePartida = new LogicaUnirseAPartida(inicalizadorComunicaciones.getComunicaciones());
+          IUnirsePartida = new LogicaUnirseAPartida(inicalizadorComunicaciones.getComunicaciones());
 
           lCrearPartida = new LogicaCrearPartida(comunicaciones);
 
@@ -90,9 +87,6 @@ public class LogicaPrincipal {
           iFachada = inicializadorClases.getInicioFachada();
 
           crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
-          
-          
-          unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
           
           tableroFachada = inicializadorClases.getTableroFachada();
 
@@ -109,12 +103,13 @@ public class LogicaPrincipal {
           crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
           crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
 
+          unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
           unirsePartidaFachada.agregarIEventoUnirseAPartida(new AccionUnirseAPartida());
           unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
           
           //agregar observer del tablero
           tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
-          tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionSolicitudFichaPozo());
+          tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
           tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
           tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
 
@@ -124,9 +119,8 @@ public class LogicaPrincipal {
           comunicaciones.agregarObservadorIniciarPartida(new AccionSeInicioPartida());
           comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
           comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+          comunicaciones.agregarObservadorRespuestaDelServidorCentral(new AccionRespuestaDelServidorCentral());
           comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
-          comunicaciones.agregarObservadorRespuestaDeCrearPartida(new RespuestaParaCrearPartida());
-          comunicaciones.agregarObservadorRespuestaDeUnirseAPartida(new RespuestaParaUnirseAPartida());
      }
 
      public void inicializarClases() {
@@ -169,7 +163,7 @@ public class LogicaPrincipal {
 
           @Override
           public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
-               lUnirsePartida.unirseAPartida(jugador);
+               IUnirsePartida.unirseAPartida(jugador);
           }
      }
 
@@ -244,7 +238,7 @@ public class LogicaPrincipal {
 
           @Override
           public void tomarFichaDelPozo(FichaDto fichaSacada) {
-               
+               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
           }
 
      }
@@ -294,31 +288,13 @@ public class LogicaPrincipal {
 
      }
 
-     private class AccionSolicitudFichaPozo implements IEventoSolicitudTomarFicha{
+     private class AccionRespuestaDelServidorCentral implements IEventoRespuestaServidorCentral {
 
-        @Override
-        public void solicitudTomarFicha() {
-           
-        }
-         
-     }
-     
-     private class RespuestaParaCrearPartida implements IEventoRespuestaDeCreacionDePartida{
+          @Override
+          public void actualizar(RespuestaServidorCentral respuesta) {
 
-        @Override
-        public void respuesta(RespuestaDePartidaCreada respuestaDePartidaCreada) {
-            lCrearPartida.procesarRespuesta(respuestaDePartidaCreada);
-        }
-     
-     }
-     
-     private class RespuestaParaUnirseAPartida implements IEventoRespuestaDeUnirseAPartida{
+               System.out.println(respuesta.toString());
+          }
 
-        @Override
-        public void respuesta(RespuestaDeUnirseAPartida respuestaDeUnirseAPartida) {
-            lUnirsePartida.procesarRespuesta(respuestaDeUnirseAPartida);
-        }
-     
      }
-     
 }

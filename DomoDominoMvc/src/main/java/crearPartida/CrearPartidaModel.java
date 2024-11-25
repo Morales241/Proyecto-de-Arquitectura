@@ -1,6 +1,6 @@
 package crearPartida;
 
-import objetosDeEventos.JugadorCrearPartidaDto;
+import eventos.JugadorCrearPartidaDto;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IObserver;
 import java.util.regex.Matcher;
@@ -30,7 +30,7 @@ public class CrearPartidaModel {
     // Métodos existentes para la validación de nombre y eventos
     public void validarNombre(JugadorCrearPartidaDto jugador) {
         Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
-        Matcher match = validacion.matcher(jugador.getNombre());
+        Matcher match = validacion.matcher(jugador.getNodo().getNombre());
         if (match.matches()) {
             ejecutarAccionCrearPartida(jugador);
         } else {

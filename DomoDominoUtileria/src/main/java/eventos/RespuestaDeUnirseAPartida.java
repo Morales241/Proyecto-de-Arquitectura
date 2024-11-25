@@ -2,19 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package objetosDeEventos;
+package eventos;
 
 /**
  *
  * @author tacot
  */
-public class JugadorUnirseAPartidaDto extends JugadorConsulta {
+public class RespuestaDeUnirseAPartida extends RespuestaServidorCentral{
     private static final long serialVersionUID = 1L;
-    public JugadorUnirseAPartidaDto() {
-    }
 
-    public JugadorUnirseAPartidaDto(NodoDto nodo, String codigo, int avatar, String nombre) {
-        super(nodo, codigo, avatar, nombre);
+    public RespuestaDeUnirseAPartida(int opcionRespuesta, boolean llave) {
+        super(opcionRespuesta, llave);
     }
-
+    
+    
 }

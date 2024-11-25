@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package observersServerCentralALogica;
 
-import objetosDeEventos.SetUpDto;
+import eventos.SetUpDto;
 
 /**
  *
  * @author tacot
  */
 public interface IEventoIniciarPartida {
-    public void iniciarPartida(SetUpDto SetUpDto);
+    public void iniciarPartida(SetUpDto setUp);
 }

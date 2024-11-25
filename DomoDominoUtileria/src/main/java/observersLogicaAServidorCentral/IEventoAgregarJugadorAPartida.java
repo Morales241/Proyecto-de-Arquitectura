@@ -1,6 +1,6 @@
 package observersLogicaAServidorCentral;
 
-import objetosDeEventos.JugadorUnirseAPartidaDto;
+import eventos.JugadorUnirseAPartidaDto;
 
 /**
  *

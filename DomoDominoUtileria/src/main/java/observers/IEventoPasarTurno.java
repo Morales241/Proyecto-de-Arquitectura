@@ -4,7 +4,7 @@
  */
 package observers;
 
-import objetosDeEventos.PasarTurno;
+import eventos.PasarTurno;
 
 /**
  *
