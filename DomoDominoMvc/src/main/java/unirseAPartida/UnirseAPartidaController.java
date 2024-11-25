@@ -4,7 +4,7 @@
  */
 package unirseAPartida;
 
-import eventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.JugadorUnirseAPartidaDto;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observers.IObserver;
 

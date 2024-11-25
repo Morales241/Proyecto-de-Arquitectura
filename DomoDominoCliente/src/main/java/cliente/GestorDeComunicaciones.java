@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cliente;
 
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
-import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;

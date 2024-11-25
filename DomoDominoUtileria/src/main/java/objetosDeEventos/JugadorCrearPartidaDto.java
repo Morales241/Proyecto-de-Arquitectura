@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package eventos;
+
+package objetosDeEventos;
 
 /**
  *
@@ -14,8 +11,12 @@ public class JugadorCrearPartidaDto extends JugadorConsulta{
     public JugadorCrearPartidaDto() {
     }
 
-    public JugadorCrearPartidaDto(int cantidadFichas, NodoDto nodo, String codigo) {
-        super(nodo, codigo);
+    public JugadorCrearPartidaDto(int cantidadFichas) {
+        this.cantidadFichas = cantidadFichas;
+    }
+
+    public JugadorCrearPartidaDto(int cantidadFichas, NodoDto nodo, String codigo, int avatar, String nombre) {
+        super(nodo, codigo, avatar, nombre);
         this.cantidadFichas = cantidadFichas;
     }
 

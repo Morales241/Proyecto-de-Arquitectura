@@ -6,9 +6,9 @@ package TableroMvc;
 
 import dtos.ArregloDto;
 import dtos.FichaDto;
-import eventos.JugadorAEliminarDto;
-import eventos.PasarTurno;
-import eventos.PonerFichaDto;
+import objetosDeEventos.JugadorAEliminarDto;
+import objetosDeEventos.PasarTurno;
+import objetosDeEventos.PonerFichaDto;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;

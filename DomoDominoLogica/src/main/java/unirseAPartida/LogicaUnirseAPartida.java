@@ -5,7 +5,7 @@
 package unirseAPartida;
 
 import cliente.GestorDeComunicaciones;
-import eventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.JugadorUnirseAPartidaDto;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;

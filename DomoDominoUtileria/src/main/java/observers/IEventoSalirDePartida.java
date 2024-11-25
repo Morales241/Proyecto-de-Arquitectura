@@ -4,7 +4,7 @@
  */
 package observers;
 
-import eventos.JugadorAEliminarDto;
+import objetosDeEventos.JugadorAEliminarDto;
 
 /**
  *

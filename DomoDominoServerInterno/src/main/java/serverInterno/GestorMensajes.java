@@ -1,19 +1,18 @@
 package serverInterno;
 
 import dtos.FichaDto;
-import eventos.JugadorAEliminarDto;
-import eventos.PasarTurno;
-import eventos.PonerFichaDto;
-import eventos.RespuestaServidorCentral;
-import eventos.SetUpDto;
+import objetosDeEventos.JugadorAEliminarDto;
+import objetosDeEventos.PasarTurno;
+import objetosDeEventos.PonerFichaDto;
+import objetosDeEventos.SetUpDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import observers.IEventoIniciarPartida;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 public class GestorMensajes {
@@ -135,14 +134,14 @@ public class GestorMensajes {
         this.observerCentral = null;
     }
 
-    public void notificarObserverRespuestaDelServidorCentral(RespuestaServidorCentral respuesta) {
+    public void notificarObserverRespuestaDelServidorCentral() {
         if (observerCentral != null) {
-            observerCentral.actualizar(respuesta);
+            
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
     
-    public void procesarRespuestaDelServidorCentral(RespuestaServidorCentral respuesta){
+    public void procesarRespuestaDelServidorCentral(){
         
     }
 }

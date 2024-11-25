@@ -5,7 +5,7 @@
 package crearPartida;
 
 import cliente.GestorDeComunicaciones;
-import eventos.JugadorCrearPartidaDto;
+import objetosDeEventos.JugadorCrearPartidaDto;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Random;

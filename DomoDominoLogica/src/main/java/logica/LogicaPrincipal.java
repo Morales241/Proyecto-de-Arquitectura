@@ -12,13 +12,12 @@ import cliente.GestorDeComunicaciones;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
-import eventos.JugadorAEliminarDto;
-import eventos.JugadorCrearPartidaDto;
-import eventos.JugadorUnirseAPartidaDto;
-import eventos.PasarTurno;
-import eventos.PonerFichaDto;
-import eventos.RespuestaServidorCentral;
-import eventos.SetUpDto;
+import objetosDeEventos.JugadorAEliminarDto;
+import objetosDeEventos.JugadorCrearPartidaDto;
+import objetosDeEventos.JugadorUnirseAPartidaDto;
+import objetosDeEventos.PasarTurno;
+import objetosDeEventos.PonerFichaDto;
+import objetosDeEventos.SetUpDto;
 import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
 import fachadas.ITableroFachada;
@@ -28,7 +27,7 @@ import mediador.Mediador;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoIniciarPartida;
 import observers.IEventoPonerFicha;
 import observers.IEventoSalirDePartida;
 import observers.IEventoSolicitudTomarFicha;
@@ -120,7 +119,7 @@ public class LogicaPrincipal {
           comunicaciones.agregarObservadorIniciarPartida(new AccionSeInicioPartida());
           comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
           comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-          comunicaciones.agregarObservadorRespuestaDelServidorCentral(new AccionRespuestaDelServidorCentral());
+//          comunicaciones.agregarObservadorRespuestaDelServidorCentral(new AccionRespuestaDelServidorCentral());
           comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
      }
 
@@ -289,15 +288,6 @@ public class LogicaPrincipal {
 
      }
 
-     private class AccionRespuestaDelServidorCentral implements IEventoRespuestaServidorCentral {
-
-          @Override
-          public void actualizar(RespuestaServidorCentral respuesta) {
-
-               System.out.println(respuesta.toString());
-          }
-
-     }
      private class AccionSolicitudFichaPozo implements IEventoSolicitudTomarFicha{
 
         @Override

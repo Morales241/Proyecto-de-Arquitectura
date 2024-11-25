@@ -4,7 +4,7 @@
  */
 package crearPartida;
 
-import eventos.JugadorCrearPartidaDto;
+import objetosDeEventos.JugadorCrearPartidaDto;
 
 /**
  *
