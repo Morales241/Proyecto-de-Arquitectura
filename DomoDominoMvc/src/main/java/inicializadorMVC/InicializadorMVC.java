@@ -7,6 +7,9 @@ package inicializadorMVC;
 import InicioMvc.InicioController;
 import InicioMvc.InicioModel;
 import InicioMvc.InicioView;
+import TableroMvc.TableroController;
+import TableroMvc.TableroModel;
+import TableroMvc.TableroView;
 import contenedor.ContenedorMvc;
 import crearPartida.CrearPartidaController;
 import crearPartida.CrearPartidaModel;
@@ -54,6 +57,13 @@ public class InicializadorMVC {
         ContenedorMvc<UnirseAPartidaModel, UnirseAPartidaView, UnirseAPartidaController> unirseAPartidaContenedor = new ContenedorMvc<>(unirseAPartidaModel, unirseAPartidaView, unirseAPartidaController);
         mediador.registrarPantalla("unirsePartida", unirseAPartidaContenedor);
         
+        //MVC Tablero
+        TableroModel tableroModel = new TableroModel();
+        TableroView tableroView = new TableroView(tableroModel);
+        tableroView.setMediador(mediador);
+        TableroController tableroController = new TableroController(tableroModel, tableroView);
+        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel, tableroView, tableroController);
+        mediador.registrarPantalla("tablero", tableroContenedor);
     }
     
 }

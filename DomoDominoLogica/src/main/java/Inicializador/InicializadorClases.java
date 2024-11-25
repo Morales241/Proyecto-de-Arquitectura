@@ -1,13 +1,16 @@
 package Inicializador;
 
 import InicioMvc.InicioModel;
+import TableroMvc.TableroModel;
 import crearPartida.CrearPartidaModel;
 import fachadas.CrearPartidaFachada;
 import fachadas.ICrearPartidaFachada;
 import fachadas.IInicioFachada;
+import fachadas.ITableroFachada;
 import fachadas.IUnirseAPartidaFachada;
 import fachadas.InicializadorMVCFachada;
 import fachadas.InicioFachada;
+import fachadas.TableroFachada;
 import fachadas.UnirseAPartidaFachada;
 import mediador.IMediador;
 import mediador.Mediador;
@@ -33,6 +36,8 @@ public class InicializadorClases {
     private ICrearPartidaFachada crearPartidaFachada;
     
     private IUnirseAPartidaFachada unirsePartidaFachada;
+    
+    private ITableroFachada tableroFachada;
     
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
@@ -60,6 +65,10 @@ public class InicializadorClases {
         //fachada unirsePartida
         UnirseAPartidaModel unirseAPartidaModel = (UnirseAPartidaModel) mediador.obtenerPantallaConcreta("unirsePartida").getModelo();
         unirsePartidaFachada = new UnirseAPartidaFachada(unirseAPartidaModel);
+        
+        //fachada tablero
+        TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
+        tableroFachada = new TableroFachada(tableroModel);
     }
 
     public IInicioFachada getInicioFachada() {
@@ -72,6 +81,10 @@ public class InicializadorClases {
 
     public IUnirseAPartidaFachada getUnirseAPartidaFachada() {
          return unirsePartidaFachada;
+    }
+    
+    public ITableroFachada getTableroFachada() {
+         return tableroFachada;
     }
     
 }
