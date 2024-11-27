@@ -4,6 +4,7 @@
  */
 package fachadas;
 
+import fachadasInterfaz.IUnirseAPartidaFachada;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observers.IObserver;
 import unirseAPartida.UnirseAPartidaModel;

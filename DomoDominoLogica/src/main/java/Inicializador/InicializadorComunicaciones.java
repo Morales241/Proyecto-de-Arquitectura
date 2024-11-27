@@ -1,29 +1,31 @@
 package Inicializador;
 
-import cliente.GestorDeComunicaciones;
-import serverInterno.GestorMensajes;
-import serverInterno.Servidor;
+import fachadas.GestorDeComunicacionesFachada;
+import fachadasInterfaz.IGestorDeComunicacionesFachada;
 
 /**
- *
- * @author Jesus Morales
+ * Inicializador Comunicaciones
+ * 
+ * 
+ * @author Luis Roberto Favela Castro - 00000246853
+ * @author Josue Gomez Garza - 00000245612
+ * @author Alejandro Gomez Vega - 00000247313
+ * @author Jesus Alberto Morales Rojas - 00000245335
  */
 public class InicializadorComunicaciones {
 
-    private GestorMensajes gestorMensajes;
-    private GestorDeComunicaciones comunicaciones;
-    private Servidor servidor;
+    private IGestorDeComunicacionesFachada comunicaciones;
 
     public InicializadorComunicaciones() {
     }
 
     public void inicializarClasesComunicaciones() {
-        comunicaciones = new GestorDeComunicaciones();
+        comunicaciones = new GestorDeComunicacionesFachada();
         comunicaciones.crearServidor(8097);
     }
     
-    public GestorDeComunicaciones getComunicaciones() {
-        return comunicaciones;
+    public GestorDeComunicacionesFachada getComunicaciones() {
+        return (GestorDeComunicacionesFachada) comunicaciones;
     }
 
 }

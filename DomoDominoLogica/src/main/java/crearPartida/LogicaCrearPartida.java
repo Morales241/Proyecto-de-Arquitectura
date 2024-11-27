@@ -18,6 +18,7 @@ import mediador.Mediador;
  *
  * @author tacot
  */
+
 public class LogicaCrearPartida implements ILogicaCrearPartida{
 
     private final IMediador mediador;

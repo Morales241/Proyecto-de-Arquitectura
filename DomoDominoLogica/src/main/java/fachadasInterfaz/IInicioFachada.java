@@ -1,4 +1,4 @@
-package fachadas;
+package fachadasInterfaz;
 
 import observers.IObserver;
 

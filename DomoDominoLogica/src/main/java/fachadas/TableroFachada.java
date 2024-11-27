@@ -4,6 +4,7 @@
  */
 package fachadas;
 
+import fachadasInterfaz.ITableroFachada;
 import TableroMvc.TableroModel;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;

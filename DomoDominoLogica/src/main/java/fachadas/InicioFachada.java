@@ -1,5 +1,6 @@
 package fachadas;
 
+import fachadasInterfaz.IInicioFachada;
 import InicioMvc.InicioModel;
 import observers.IEventoValidacionDeNombre;
 import observers.IObserver;

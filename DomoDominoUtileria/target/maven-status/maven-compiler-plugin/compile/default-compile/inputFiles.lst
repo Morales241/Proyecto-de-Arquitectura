@@ -1,45 +1,38 @@
-
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoActualizarVista.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\JugadorUnirseAPartidaDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\JugadorAEliminarDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoVotarParaIniciarPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\JugadorPartidaIniciada.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\PasarTurno.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IComponente.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoActualizarTablero.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAviso.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\enumerados\RespuestaServidor.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\VotoDeJugador.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAcabarPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\RespuestaDePartidaCreada.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\JugadorCrearPartidaDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaDeUnirseAPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\UsuarioDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaDeCreacionDePartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSalirDePartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\contenedor\ContenedorMvc.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\EventoIniciarPartidaDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\JugadorConsulta.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\SetUpDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSolicitudTomarFicha.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\PonerFichaDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\EventoAcabarPartidaDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\RespuestaDeUnirseAPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\ArregloDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\objetosDeEventos\NodoDto.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoIniciarPartida.java
-C:\Users\Jesus Morales\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\contenedor\ContenedorMvc.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\ArregloDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\UsuarioDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\enumerados\RespuestaServidor.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\EventoAcabarPartidaDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\EventoIniciarPartidaDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorAEliminarDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorConsulta.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorCrearPartidaDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorUnirseAPartidaDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\NodoDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PasarTurno.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PonerFichaDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaDePartidaCreada.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaDeUnirseAPartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaServidorCentral.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\SetUpDto.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IComponente.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAviso.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSalirDePartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAcabarPartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoIniciarPartida.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaServidorCentral.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
+C:\Users\Natasha Ruiz Perez\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java

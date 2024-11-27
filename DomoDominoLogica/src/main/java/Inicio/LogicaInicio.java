@@ -1,6 +1,6 @@
 package Inicio;
 
-import fachadas.IInicioFachada;
+import fachadasInterfaz.IInicioFachada;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mediador.IMediador;

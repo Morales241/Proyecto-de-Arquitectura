@@ -19,11 +19,12 @@ import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
-import fachadas.ICrearPartidaFachada;
-import fachadas.IInicioFachada;
-import fachadas.ITableroFachada;
-import fachadas.IUnirseAPartidaFachada;
+import fachadasInterfaz.ICrearPartidaFachada;
+import fachadasInterfaz.IInicioFachada;
+import fachadasInterfaz.ITableroFachada;
+import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadas.TableroFachada;
+import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import mediador.Mediador;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
@@ -57,7 +58,7 @@ public class LogicaPrincipal {
      private final ILogicaPozo IPozo;
 
      private InicializadorComunicaciones inicalizadorComunicaciones;
-     private final GestorDeComunicaciones comunicaciones;
+     private final IGestorDeComunicacionesFachada comunicaciones;
 
      private final IInicioFachada iFachada;
      private final ITableroFachada tableroFachada;

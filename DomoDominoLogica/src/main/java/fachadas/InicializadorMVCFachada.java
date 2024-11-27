@@ -4,6 +4,7 @@
  */
 package fachadas;
 
+import fachadasInterfaz.IinicializadorMVCFachada;
 import inicializadorMVC.InicializadorMVC;
 
 /**
