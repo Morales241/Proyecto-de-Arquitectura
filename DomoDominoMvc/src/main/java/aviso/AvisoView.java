@@ -4,6 +4,8 @@
  */
 package aviso;
 
+import mediador.IComponente;
+import mediador.IMediador;
 import observers.IEventoAviso;
 import observers.IObserver;
 
@@ -11,10 +13,11 @@ import observers.IObserver;
  *
  * @author tacot
  */
-public class AvisoView extends javax.swing.JFrame {
+public class AvisoView extends javax.swing.JFrame implements IComponente{
 
     private final AvisoModel avisoModel;
     private IObserver eventoCerrarPantalla;
+    private IMediador mediador;
 
     public AvisoView(AvisoModel avisoModel) {
         this.avisoModel = avisoModel;
@@ -38,7 +41,9 @@ public class AvisoView extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtAviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seCreoPartida.png"))); // NOI18N
+        txtAviso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtAviso.setForeground(new java.awt.Color(220, 179, 88));
+        txtAviso.setText("wda");
         jPanel1.add(txtAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aceptar.png"))); // NOI18N
@@ -66,19 +71,9 @@ public class AvisoView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void seleccionarAvisoAMostrar(int numero) {
+    public void mostrarAviso(String mensaje) {
 
-        switch (numero) {
-            case 1 ->
-                txtAviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seEncontroPartida.png")));
-            case 2 ->
-                txtAviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seCreoPartida.png")));
-            case 3 ->
-                txtAviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noSeEncontroPartida.png")));
-            case 4 ->
-                txtAviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/noSeCreoPartida.png")));
-                
-        }
+        this.txtAviso.setText(mensaje);
 
     }
 
@@ -97,10 +92,14 @@ public class AvisoView extends javax.swing.JFrame {
     private class AccionMostrarAviso implements IEventoAviso {
 
         @Override
-        public void notificarAlUsuario(int numAviso) {
-            seleccionarAvisoAMostrar(numAviso);
+        public void notificarAlUsuario(String mensaje) {
+            mostrarAviso(mensaje);
         }
 
+    }
+    @Override
+    public void setMediador(IMediador mediador) {
+        this.mediador = mediador;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

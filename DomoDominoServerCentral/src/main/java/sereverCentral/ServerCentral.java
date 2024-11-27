@@ -1,6 +1,5 @@
 package sereverCentral;
 
-import cliente.Cliente;
 import cliente.GestorDeComunicaciones;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
@@ -39,7 +38,7 @@ public class ServerCentral {
         this.gestorMensajes.agregarObservadorCrearPartida(new AccionCrearPartida());
         this.gestorMensajes.agregarObservadorAgregarJugador(new AccionUnirseAPartida());
         this.gestorMensajes.agregarObservadorSalirDePartida(new AccionSalirDePartida());
-        this.gestorMensajes.agregarObservadorIniciarPartida(new AccionIniciarPartida());
+        this.gestorMensajes.agregarObservadorIniciarPartida(new AccionVotarParaIniciarPartida());
         this.gestorMensajes.agregarObservadorAcabarPartida(new AccionAcabarParitda());
 
     }
@@ -152,8 +151,7 @@ public class ServerCentral {
         }
 
     }
-
-    private class AccionIniciarPartida implements IEventoIniciarPartidaServerCentral {
+    private class AccionVotarParaIniciarPartida implements IEventoVotarParaIniciarPartida {
 
         @Override
         public void iniciarPartida(String codigo) {

@@ -115,6 +115,15 @@ public class Mediador<M, V extends JFrame, C> implements IMediador {
         return instancia;
     }
 
-    
+    public void MostrarAviso(String nombre) {
+         ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
+        if (pantallaConcreta != null) {
+            pantallaConcreta.getVista().setVisible(true);
+
+        } else {
+            //Aqui tiren un log de que no se encontro la viewConcreta jejejej
+            System.out.println("No se encontro la viewConcreta para mostrar" + nombre);
+        }
+    }
 
 }

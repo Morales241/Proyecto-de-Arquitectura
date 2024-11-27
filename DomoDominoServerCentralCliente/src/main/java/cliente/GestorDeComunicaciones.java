@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
+import observersServerCentralALogica.IEventoVotarParaIniciarPartida;
 import servidor.GestorMensajes;
 import servidor.Servidor;
 
@@ -48,7 +48,7 @@ public class GestorDeComunicaciones {
         gestorMensajes.agregarObservadorAgregarJugador(observador);
     }
 
-    public void agregarObservadorIniciarPartida(IEventoIniciarPartidaServerCentral observador) {
+    public void agregarObservadorIniciarPartida(IEventoVotarParaIniciarPartida observador) {
         gestorMensajes.agregarObservadorIniciarPartida(observador);
     }
     

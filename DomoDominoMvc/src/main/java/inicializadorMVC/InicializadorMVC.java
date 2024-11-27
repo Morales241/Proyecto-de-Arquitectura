@@ -10,6 +10,9 @@ import InicioMvc.InicioView;
 import TableroMvc.TableroController;
 import TableroMvc.TableroModel;
 import TableroMvc.TableroView;
+import aviso.AvisoController;
+import aviso.AvisoModel;
+import aviso.AvisoView;
 import contenedor.ContenedorMvc;
 import crearPartida.CrearPartidaController;
 import crearPartida.CrearPartidaModel;
@@ -64,6 +67,15 @@ public class InicializadorMVC {
         TableroController tableroController = new TableroController(tableroModel, tableroView);
         ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel, tableroView, tableroController);
         mediador.registrarPantalla("tablero", tableroContenedor);
+        
+        //MVC Aviso
+        AvisoModel avisoModel = new AvisoModel();
+        AvisoView avisoView = new AvisoView(avisoModel);
+        avisoView.setMediador(mediador);
+        AvisoController avisoController = new AvisoController(avisoModel, avisoView);
+        ContenedorMvc<AvisoModel, AvisoView, AvisoController> contenedorMvc = new ContenedorMvc<>(avisoModel,avisoView,avisoController);
+        mediador.registrarPantalla("aviso", contenedorMvc);
+        
     }
-    
 }
+

@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package fachadas;
 
 /**
  *
- * @author tacot
+ * @author Jesus Morales
  */
-public interface IEventoAviso {
-    public void notificarAlUsuario(String mensaje);
+public interface IAvisoFachada {
+    
 }

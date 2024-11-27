@@ -5,11 +5,12 @@ import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import objetosDeEventos.VotoDeJugador;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 import observers.IEventoSalirDePartida;
+import observersServerCentralALogica.IEventoVotarParaIniciarPartida;
 
 public class GestorMensajes {
 
@@ -19,7 +20,7 @@ public class GestorMensajes {
     private IEventoSalirDePartida observerSalir;
     private IEventoAgregarJugadorAPartida observerAgregarJugador;
     private IEventoAcabarPartida observeracabarPartida;
-    private IEventoIniciarPartidaServerCentral observeriniciarPartida;
+    private IEventoVotarParaIniciarPartida observerVotar;
 
     public GestorMensajes() {
     }
@@ -73,17 +74,17 @@ public class GestorMensajes {
     }
 
     //Iniciar partida
-    public void agregarObservadorIniciarPartida(IEventoIniciarPartidaServerCentral observador) {
-        this.observeriniciarPartida = observador;
+    public void agregarObservadorIniciarPartida(IEventoVotarParaIniciarPartida observador) {
+        this.observerVotar = observador;
     }
 
     public void eliminarObservadorIniciarPartida() {
-        this.observeriniciarPartida = null;
+        this.observerVotar = null;
     }
 
-    public void notificarObserverIniciarPartida(String codigo) {
-        if (observeriniciarPartida != null) {
-            observeriniciarPartida.iniciarPartida(codigo);
+    public void notificarObserverIniciarPartida(VotoDeJugador votoDeJugador) {
+        if (observerVotar != null) {
+            observerVotar.iniciarPartida(votoDeJugador);
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }

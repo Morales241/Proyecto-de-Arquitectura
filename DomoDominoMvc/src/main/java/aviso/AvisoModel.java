@@ -15,6 +15,7 @@ public class AvisoModel {
     
     private IEventoAviso eventoAviso;
     private IObserver eventoCerrarPantalla;
+    private String mensaje;
 
     public AvisoModel() {
     }
@@ -23,12 +24,20 @@ public class AvisoModel {
         this.eventoAviso = eventoAviso;
     }
     
-    public void notificarEventoAviso(int numAviso){
+    public void notificarEventoAviso(String mensaje){
         if (eventoAviso != null) {
             
-            eventoAviso.notificarAlUsuario(numAviso);
+            eventoAviso.notificarAlUsuario(mensaje);
             
         }
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     public void agregarEventoCerrarPantalla(IObserver eventoCerrarPantalla) {
