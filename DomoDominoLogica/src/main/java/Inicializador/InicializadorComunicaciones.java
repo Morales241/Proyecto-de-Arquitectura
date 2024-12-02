@@ -19,7 +19,7 @@ public class InicializadorComunicaciones {
 
     public void inicializarClasesComunicaciones() {
         comunicaciones = new GestorDeComunicaciones();
-        comunicaciones.crearServidor(8097);
+        comunicaciones.crearServidor(8094);
     }
     
     public GestorDeComunicaciones getComunicaciones() {

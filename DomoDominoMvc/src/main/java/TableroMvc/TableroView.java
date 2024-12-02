@@ -46,9 +46,9 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
     public TableroView(TableroModel tableroModel) {
         initComponents();
         this.tableroModel = tableroModel;
-        tableroPanel = new TableroPanel(tableroModel);
-        add(tableroPanel, BorderLayout.CENTER);
-        traerFichasAlPanel(tableroModel.getFichas());
+//        tableroPanel = new TableroPanel(tableroModel);
+//        add(tableroPanel, BorderLayout.CENTER);
+//        traerFichasAlPanel(tableroModel.getFichas());
 
     }
 

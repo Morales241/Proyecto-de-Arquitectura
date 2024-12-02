@@ -39,7 +39,6 @@ public class GestorDeComunicaciones {
     public void enviarMensaje(Object mensaje, List<JugadorPartidaIniciada> jugadores) {
 
         jugadores.forEach(Jugador -> {
-            conectarAServidor(Jugador.getNodo().getIp(), Jugador.getNodo().getPuerto());
             cliente.enviarMensaje(mensaje);
             cerrarConexion();
         });
