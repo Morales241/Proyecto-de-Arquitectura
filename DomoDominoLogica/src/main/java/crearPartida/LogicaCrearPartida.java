@@ -38,7 +38,7 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
     public void crearPartida(JugadorCrearPartidaDto jugador) {
         System.out.println("se va a crear la partida");
         //cambiar la ip por las diferentes redes
-        comunicaciones.conectarAServidor("192.168.100.21", 8090);
+        comunicaciones.conectarAServidor("192.168.51.1", 8090);
         jugador.setCodigo(generarCodigo());
         
         String ip = "";
@@ -48,7 +48,7 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
             Logger.getLogger(LogicaCrearPartida.class.getName()).log(Level.SEVERE, null, ex);
         }
         jugador.getNodo().setIp(ip);
-        jugador.getNodo().setPuerto(8094);
+        jugador.getNodo().setPuerto(8097);
         comunicaciones.enviarMensaje(jugador);
     }
     
