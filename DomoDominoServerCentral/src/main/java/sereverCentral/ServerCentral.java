@@ -5,6 +5,8 @@ import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.NodoDto;
+import eventos.RespuestaDePartidaCreada;
+import eventos.RespuestaDeUnirseAPartida;
 import eventos.RespuestaServidorCentral;
 import eventos.VotoDeJugador;
 import java.util.ArrayList;
@@ -35,7 +37,6 @@ public class ServerCentral {
         infoPartidas = new HashMap<>();
         this.comunicaciones = comunicacionesParametro;
         this.gestorMensajes = comunicaciones.getGestorMensajes();
-
         this.gestorMensajes.agregarObservadorCrearPartida(new AccionCrearPartida());
         this.gestorMensajes.agregarObservadorAgregarJugador(new AccionUnirseAPartida());
         this.gestorMensajes.agregarObservadorSalirDePartida(new AccionSalirDePartida());
@@ -47,16 +48,19 @@ public class ServerCentral {
     public void agregarPartida(JugadorCrearPartidaDto jugador) {
 
         List<NodoDto> nodos = new ArrayList<>();
+        nodos.add(jugador.getNodo());
         try {
             nodos.add(jugador.getNodo());
             this.infoPartidas.put(jugador.getCodigo(), nodos);
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
-            comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
 
-//            mandarMensaje(, nodos);
+            nodos.forEach(nodo -> {
+                comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente"), nodo);
+
+            });
         } catch (Exception ex) {
-//            mandarMensaje("la partida no fue creada debido a un error", nodos);
+            comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("No se pudo crear la partida"), jugador.getNodo());
         }
     }
 
@@ -70,17 +74,17 @@ public class ServerCentral {
 
             if (nodos.size() < 4) {
                 infoPartidas.get(jugador.getCodigo()).add(jugador.getNodo());
-
+                comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("No se pudo crear la partida"), jugador.getNodo());
             } else {
                 nodos.clear();
                 nodos.add(jugador.getNodo());
-//                mandarMensaje("No se encontro partida, el codigo es incorrecto", nodos);
+                comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("La partida ya esta llena"), jugador.getNodo());
                 log.log(Level.INFO, "Método: agregarJugadorPartida - Clase: ServerCentral - Proyecto: Server Central");
             }
 
         } else {
             nodos.add(jugador.getNodo());
-//            mandarMensaje("No se encontro partida, el codigo es incorrecto", nodos);
+            comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("No se encontro la partida"), jugador.getNodo());
         }
     }
 
@@ -94,9 +98,9 @@ public class ServerCentral {
 
             this.infoPartidas.get(jugador.getCodigo()).remove(jugador.getNodo());
 
-            //enviar mensaje
+            comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("La partida ya esta llena"), jugador.getNodo());
         } else {
-//        enviar mensaje de que la partida no se encontro
+            comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("No se encontro la partida"), jugador.getNodo());
         }
     }
 
@@ -112,7 +116,7 @@ public class ServerCentral {
 
     public void mandarMensaje(Object mensaje, List<NodoDto> jugadores) {
         for (NodoDto jugador : jugadores) {
-            comunicaciones.enviarMensaje(mensaje);
+            comunicaciones.enviarMensaje(mensaje, jugador);
             log.log(Level.INFO, "Método: mandarMensaje - Clase: ServerCentral - Proyecto: Server Central");
         }
     }
@@ -120,7 +124,7 @@ public class ServerCentral {
     public void mandarInfoDePartida(List<NodoDto> jugadores) {
 
         for (NodoDto jugador : jugadores) {
-            comunicaciones.enviarMensaje(jugador);
+//            comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("La partida ya esta llena"), jugador);
         }
 
     }
@@ -154,7 +158,6 @@ public class ServerCentral {
     }
 
     private class AccionVotarParaIniciarPartida implements IEventoVotarParaIniciarPartida {
-
 
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {

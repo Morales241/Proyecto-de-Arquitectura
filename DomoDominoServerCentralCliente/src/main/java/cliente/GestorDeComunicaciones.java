@@ -1,5 +1,7 @@
 package cliente;
 
+import eventos.NodoDto;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
@@ -35,8 +37,10 @@ public class GestorDeComunicaciones {
         cliente.conectarAServidor(ip, puerto);
     }
 
-    public void enviarMensaje(Object mensaje) {
+    public void enviarMensaje(Object mensaje, NodoDto nodo) {
+        conectarAServidor(nodo.getIp(), nodo.getPuerto());
         cliente.enviarMensaje(mensaje);
+       cliente.cerrarConexion();
         log.log(Level.INFO, "mensaje mandado metodo: enviarMensaje clase:GestorDeComunicaciones");
     }
 
