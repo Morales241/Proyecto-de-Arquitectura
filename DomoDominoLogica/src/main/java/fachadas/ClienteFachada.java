@@ -1,6 +1,7 @@
 package fachadas;
 
 import cliente.Cliente;
+import fachadasInterfaz.IClienteFachada;
 
 public class ClienteFachada implements IClienteFachada{
     private Cliente cliente;

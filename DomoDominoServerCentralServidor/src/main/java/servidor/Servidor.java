@@ -80,7 +80,7 @@ public class Servidor {
 
                     case JugadorAEliminarDto jugadorAEliminarDto ->
                         gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
-
+                        
                         
                     default ->
                         log.log(Level.INFO, "Tipo de mensaje no reconocido");

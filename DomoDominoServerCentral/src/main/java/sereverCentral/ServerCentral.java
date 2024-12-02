@@ -6,6 +6,7 @@ import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.NodoDto;
 import eventos.RespuestaServidorCentral;
+import eventos.VotoDeJugador;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import observersLogicaAServidorCentral.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import servidor.GestorMensajes;
 
 /**
@@ -51,7 +53,7 @@ public class ServerCentral {
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
             comunicaciones.conectarAServidor(jugador.getNodo().getIp(), jugador.getNodo().getPuerto());
-            
+
 //            mandarMensaje(, nodos);
         } catch (Exception ex) {
 //            mandarMensaje("la partida no fue creada debido a un error", nodos);
@@ -150,11 +152,13 @@ public class ServerCentral {
         }
 
     }
+
     private class AccionVotarParaIniciarPartida implements IEventoVotarParaIniciarPartida {
 
+
         @Override
-        public void iniciarPartida(String codigo) {
-            List<NodoDto> jugadores = informacionDePartidaPorCodigo(codigo);
+        public void iniciarPartida(VotoDeJugador votoDeJugador) {
+            List<NodoDto> jugadores = informacionDePartidaPorCodigo(votoDeJugador.getCodigo());
             mandarInfoDePartida(jugadores);
         }
 

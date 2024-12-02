@@ -4,6 +4,7 @@ eventos\SetUpDto.class
 dtos\FichaDto.class
 observers\IEventoSalirDePartida.class
 observersLogicaAServidorCentral\IEventoCrearPartida.class
+observersLogicaAServidorCentral\IEventoVotarParaIniciarPartida.class
 observersServerCentralALogica\IEventoIniciarPartida.class
 eventos\JugadorCrearPartidaDto.class
 observers\IEventoAviso.class
@@ -12,6 +13,7 @@ observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.class
 dtos\UsuarioDto.class
 eventos\NodoDto.class
 serializables\Jugada.class
+eventos\VotoDeJugador.class
 eventos\JugadorBase.class
 observers\IEventoPartida.class
 eventos\RespuestaDeUnirseAPartida.class

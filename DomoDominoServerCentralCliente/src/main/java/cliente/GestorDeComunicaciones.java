@@ -6,7 +6,7 @@ import observersLogicaAServidorCentral.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IEventoSalirDePartida;
-import observersServerCentralALogica.IEventoVotarParaIniciarPartida;
+import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import servidor.GestorMensajes;
 import servidor.Servidor;
 

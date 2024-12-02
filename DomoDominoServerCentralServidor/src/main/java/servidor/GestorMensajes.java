@@ -3,14 +3,14 @@ package servidor;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
+import eventos.VotoDeJugador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import objetosDeEventos.VotoDeJugador;
 import observersLogicaAServidorCentral.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IEventoSalirDePartida;
-import observersServerCentralALogica.IEventoVotarParaIniciarPartida;
+import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 
 public class GestorMensajes {
 
@@ -73,7 +73,7 @@ public class GestorMensajes {
         }
     }
 
-    //Iniciar partida
+    //votar para Iniciar partida
     public void agregarObservadorIniciarPartida(IEventoVotarParaIniciarPartida observador) {
         this.observerVotar = observador;
     }
