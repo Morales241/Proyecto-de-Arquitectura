@@ -57,8 +57,9 @@ public class ServerCentral {
 
             nodos.forEach(nodo -> {
                 comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente"), nodo);
-
+                System.out.println("Se creo la partida exitosamente");
             });
+            
         } catch (Exception ex) {
             comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("No se pudo crear la partida"), jugador.getNodo());
         }

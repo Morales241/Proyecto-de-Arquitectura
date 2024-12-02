@@ -21,7 +21,7 @@ public class InicializadorComunicaciones {
 
     public void inicializarClasesComunicaciones() {
         comunicaciones = new GestorDeComunicacionesFachada();
-        comunicaciones.crearServidor(8097);
+        comunicaciones.crearServidor(8198);
     }
 
     public GestorDeComunicacionesFachada getComunicaciones() {
