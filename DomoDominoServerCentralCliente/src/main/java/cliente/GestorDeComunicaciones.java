@@ -40,7 +40,7 @@ public class GestorDeComunicaciones {
     public void enviarMensaje(Object mensaje, NodoDto nodo) {
         conectarAServidor(nodo.getIp(), nodo.getPuerto());
         cliente.enviarMensaje(mensaje);
-       cliente.cerrarConexion();
+        
         log.log(Level.INFO, "mensaje mandado metodo: enviarMensaje clase:GestorDeComunicaciones");
     }
 

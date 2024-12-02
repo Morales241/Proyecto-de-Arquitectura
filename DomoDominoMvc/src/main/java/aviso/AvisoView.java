@@ -77,7 +77,7 @@ public class AvisoView extends javax.swing.JFrame implements IComponente{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        notificarEventoCerrarPantalla();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     public void mostrarAviso(String mensaje) {

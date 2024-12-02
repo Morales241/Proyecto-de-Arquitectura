@@ -48,18 +48,14 @@ public class ServerCentral {
     public void agregarPartida(JugadorCrearPartidaDto jugador) {
 
         List<NodoDto> nodos = new ArrayList<>();
-        nodos.add(jugador.getNodo());
         try {
             nodos.add(jugador.getNodo());
             this.infoPartidas.put(jugador.getCodigo(), nodos);
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
 
-            nodos.forEach(nodo -> {
-                comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente"), nodo);
+                comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente"), jugador.getNodo());
                 System.out.println("Se creo la partida exitosamente");
-            });
-            
         } catch (Exception ex) {
             comunicaciones.enviarMensaje(new RespuestaDePartidaCreada("No se pudo crear la partida"), jugador.getNodo());
         }
@@ -75,7 +71,7 @@ public class ServerCentral {
 
             if (nodos.size() < 4) {
                 infoPartidas.get(jugador.getCodigo()).add(jugador.getNodo());
-                comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("No se pudo crear la partida"), jugador.getNodo());
+                comunicaciones.enviarMensaje(new RespuestaDeUnirseAPartida("Se ha unido a una partida"), jugador.getNodo());
             } else {
                 nodos.clear();
                 nodos.add(jugador.getNodo());
