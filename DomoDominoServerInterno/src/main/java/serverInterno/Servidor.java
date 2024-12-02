@@ -118,7 +118,7 @@ public class Servidor {
                     gestorMensajes.notificarObservadorFichaTomadaDelPozo(fichaSacada);
                     
                 case RespuestaServidorCentral respuesta ->
-                    gestorMensajes.notificarObserverRespuestaDelServidorCentral(respuesta);
+                    gestorMensajes.procesarRespuestaDelServidorCentral(respuesta);
 
                 default ->
                     log.log(Level.INFO, "Tipo de mensaje no reconocido");

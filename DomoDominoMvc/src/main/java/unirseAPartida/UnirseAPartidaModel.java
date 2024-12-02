@@ -15,56 +15,84 @@ import observers.IObserver;
  * @author tacot
  */
 public class UnirseAPartidaModel {
-    
-     private IEventoAgregarJugadorAPartida observerUniserAPartida;
-     private IObserver observerNombreInvalido;
-     private IObserver observerRegresar;
 
-     public UnirseAPartidaModel() {
-     }
-     
-     public void validarNombre(JugadorUnirseAPartidaDto jugador) {
-           Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
+    private final String[] rutasAvatares = {
+        "/imgPartidaFichas/avatar1.png",
+        "/imgPartidaFichas/avatar2.png",
+        "/imgPartidaFichas/avatar3.png",
+        "/imgPartidaFichas/avatar4.png"
+    };
+    private int indiceAvatar = 0;
+    private IObserver observadoresCambioAvatar;
+    private IEventoAgregarJugadorAPartida observerUniserAPartida;
+    private IObserver observerNombreInvalido;
+    private IObserver observerRegresar;
 
-        Matcher match = validacion.matcher(jugador.getNodo().getNombre());
+    public UnirseAPartidaModel() {
+    }
+
+    public void validarNombre(JugadorUnirseAPartidaDto jugador) {
+        Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
+
+        Matcher match = validacion.matcher(jugador.getNombre());
         if (match.matches()) {
-            
+
             ejecutarAccionUnirseAPartida(jugador);
-            
-        }else{
-        
+
+        } else {
+
             ejecutarAccionNombreInvalido();
         }
-     }
-     
-     public void agregarIEventoNombreInvalido(IObserver listener) {
-          this.observerNombreInvalido = listener;
-     }
-     
-     public void ejecutarAccionNombreInvalido() {
-          if (observerNombreInvalido != null) {
-               observerNombreInvalido.actualizar();
-          }
-     }
-     
-     public void agregarIEventoRegresar(IObserver listener) {
-          this.observerRegresar = listener;
-     }
-     
-     public void ejecutarAccionRegresar() {
-          if (observerRegresar != null) {
-               observerRegresar.actualizar();
-          }
-     }
-     
-     public void agregarIEventoUnirseAPartida(IEventoAgregarJugadorAPartida listener ) {
-          this.observerUniserAPartida = listener;
-     }
-     
-     public void ejecutarAccionUnirseAPartida (JugadorUnirseAPartidaDto jugador) {
-          if (observerUniserAPartida != null) {
-               observerUniserAPartida.agregarJugadorAPartida(jugador);
-          }
-     }
-     
+    }
+
+    public void agregarIEventoNombreInvalido(IObserver listener) {
+        this.observerNombreInvalido = listener;
+    }
+
+    public void ejecutarAccionNombreInvalido() {
+        if (observerNombreInvalido != null) {
+            observerNombreInvalido.actualizar();
+        }
+    }
+
+    public void agregarIEventoRegresar(IObserver listener) {
+        this.observerRegresar = listener;
+    }
+
+    public void ejecutarAccionRegresar() {
+        if (observerRegresar != null) {
+            observerRegresar.actualizar();
+        }
+    }
+
+    public void agregarIEventoUnirseAPartida(IEventoAgregarJugadorAPartida listener) {
+        this.observerUniserAPartida = listener;
+    }
+
+    public void ejecutarAccionUnirseAPartida(JugadorUnirseAPartidaDto jugador) {
+        if (observerUniserAPartida != null) {
+            observerUniserAPartida.agregarJugadorAPartida(jugador);
+        }
+    }
+    
+    // Métodos para la funcionalidad de cambio de avatar
+    public String getRutaAvatarActual() {
+        return rutasAvatares[indiceAvatar];
+    }
+
+    public void cambiarAvatar(int direccion) {
+        indiceAvatar = (indiceAvatar + direccion + rutasAvatares.length) % rutasAvatares.length;
+        notificarCambioAvatar();
+    }
+
+    public void agregarObservadorCambioAvatar(IObserver observador) {
+        observadoresCambioAvatar = observador;
+    }
+
+    private void notificarCambioAvatar() {
+        if(observadoresCambioAvatar != null) {
+            observadoresCambioAvatar.actualizar();
+        }
+    }
 }
+

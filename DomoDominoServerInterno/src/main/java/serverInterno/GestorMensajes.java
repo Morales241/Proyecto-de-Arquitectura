@@ -4,6 +4,8 @@ import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
+import eventos.RespuestaDePartidaCreada;
+import eventos.RespuestaDeUnirseAPartida;
 import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import java.util.logging.Level;
@@ -26,8 +28,8 @@ public class GestorMensajes {
     private IEventoSalirDePartida observerSalioJugador;
     private IEventoIniciarPartida observeriniciarPartida;
     private IEventoAcabarPartida observerAcabarPartida;
-    private IEventoRespuestaServidorCentral observerCentral;
-    
+    private IEventoRespuestaServidorCentral observerRespuestaCrearP;
+    private IEventoRespuestaServidorCentral observerRespuestaUnirseP;
 
     public GestorMensajes() {
     }
@@ -112,6 +114,7 @@ public class GestorMensajes {
         }
     }
 
+    //acabar partida
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador) {
         this.observerAcabarPartida = observador;
     }
@@ -126,23 +129,47 @@ public class GestorMensajes {
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
-    
-    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
-        this.observerCentral = observador;
+
+    //respuesta del server central crear partida
+    public void agregarObservadorRespuestaCrearPartida(IEventoRespuestaServidorCentral observador) {
+        this.observerRespuestaCrearP = observador;
     }
 
-    public void eliminarObservadorRespuestaDelServidorCentral() {
-        this.observerCentral = null;
+    public void eliminarObservadorRespuestaCrearPartida() {
+        this.observerRespuestaCrearP = null;
     }
 
-    public void notificarObserverRespuestaDelServidorCentral(RespuestaServidorCentral respuesta) {
-        if (observerCentral != null) {
-            observerCentral.actualizar(respuesta);
+    public void notificarObserverRespuestaCrearPartida(RespuestaDePartidaCreada respuesta) {
+        if (observerRespuestaCrearP != null) {
+            observerRespuestaCrearP.actualizar(respuesta);
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
-    
-    public void procesarRespuestaDelServidorCentral(RespuestaServidorCentral respuesta){
-        
+
+    //respuesta del server central unirse a partida
+    public void agregarObservadorRespuestaUnirseAPartida(IEventoRespuestaServidorCentral observador) {
+        this.observerRespuestaUnirseP = observador;
+    }
+
+    public void eliminarObservadorRespuestaUnirseAPartida() {
+        this.observerRespuestaUnirseP = null;
+    }
+
+    public void notificarObserverRespuestaUnirseAPartida(RespuestaDeUnirseAPartida respuesta) {
+        if (observerRespuestaUnirseP != null) {
+            observerRespuestaUnirseP.actualizar(respuesta);
+            log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+        }
+    }
+
+    public void procesarRespuestaDelServidorCentral(RespuestaServidorCentral respuesta) {
+
+        switch (respuesta) {
+            case RespuestaDePartidaCreada respuestaDePartidaCreada -> notificarObserverRespuestaCrearPartida(respuestaDePartidaCreada);
+            case RespuestaDeUnirseAPartida respuestaDeUnirseAPartida -> notificarObserverRespuestaUnirseAPartida(respuestaDeUnirseAPartida);
+            default -> {
+            }
+        }
+
     }
 }

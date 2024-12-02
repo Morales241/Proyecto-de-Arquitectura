@@ -4,11 +4,13 @@
  */
 package eventos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tacot
  */
-public class PasarTurno extends JugadorConsulta{
+public class PasarTurno implements Serializable{
     private static final long serialVersionUID = 1L;
 
     public PasarTurno() {

@@ -11,9 +11,12 @@ package eventos;
 public class RespuestaDeUnirseAPartida extends RespuestaServidorCentral{
     private static final long serialVersionUID = 1L;
 
-    public RespuestaDeUnirseAPartida(int opcionRespuesta, boolean llave) {
-        super(opcionRespuesta, llave);
+    public RespuestaDeUnirseAPartida(String respuesta) {
+        super(respuesta);
     }
-    
+
+    public RespuestaDeUnirseAPartida() {
+    }
+
     
 }

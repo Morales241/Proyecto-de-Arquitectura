@@ -4,10 +4,14 @@
  */
 package fachadasInterfaz;
 
+import observers.IObserver;
+
 /**
  *
  * @author Jesus Morales
  */
 public interface IAvisoFachada {
+    public void agregarEventoCerrarPantalla(IObserver eventoCerrarPantalla);
     
+    public void mostrarAviso(String aviso);
 }

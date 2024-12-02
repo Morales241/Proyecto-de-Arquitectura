@@ -61,9 +61,6 @@ public class Mediador<M, V extends JFrame, C> implements IMediador {
         //saca en pantalla concreta el nombre que encuentre
         ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
         if (pantallaConcreta != null) {
-            pantallas.values().forEach((otrasPantallas) -> {
-                otrasPantallas.getVista().setVisible(false);
-            });
             pantallaConcreta.getVista().setVisible(false);
 
         } else {
@@ -115,14 +112,15 @@ public class Mediador<M, V extends JFrame, C> implements IMediador {
         return instancia;
     }
 
-    public void MostrarAviso(String nombre) {
-         ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
+    @Override
+    public void MostrarAviso() {
+         ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get("aviso");
         if (pantallaConcreta != null) {
             pantallaConcreta.getVista().setVisible(true);
 
         } else {
             //Aqui tiren un log de que no se encontro la viewConcreta jejejej
-            System.out.println("No se encontro la viewConcreta para mostrar" + nombre);
+            System.out.println("No se encontro la viewConcreta para mostrar: aviso");
         }
     }
 

@@ -2,7 +2,9 @@ package Inicializador;
 
 import InicioMvc.InicioModel;
 import TableroMvc.TableroModel;
+import aviso.AvisoModel;
 import crearPartida.CrearPartidaModel;
+import fachadas.AvisoFachada;
 import fachadas.CrearPartidaFachada;
 import fachadasInterfaz.ICrearPartidaFachada;
 import fachadasInterfaz.IInicioFachada;
@@ -39,10 +41,11 @@ public class InicializadorClases {
     
     private ITableroFachada tableroFachada;
     
+    private AvisoFachada avisoFachada;
+    
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
         cFachada = new InicializadorMVCFachada();
-        
     }
     
     /**
@@ -69,6 +72,10 @@ public class InicializadorClases {
         //fachada tablero
         TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
         tableroFachada = new TableroFachada(tableroModel);
+        
+        //fachada aviso
+        AvisoModel avisoModel = (AvisoModel) mediador.obtenerPantallaConcreta("aviso").getModelo();
+        avisoFachada = new AvisoFachada(avisoModel);
     }
 
     public IInicioFachada getInicioFachada() {
@@ -86,5 +93,8 @@ public class InicializadorClases {
     public ITableroFachada getTableroFachada() {
          return tableroFachada;
     }
-    
+
+    public AvisoFachada getAvisoFachada() {
+        return avisoFachada;
+    }
 }

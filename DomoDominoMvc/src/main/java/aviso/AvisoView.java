@@ -51,6 +51,11 @@ public class AvisoView extends javax.swing.JFrame implements IComponente{
         btnAceptar.setContentAreaFilled(false);
         btnAceptar.setFocusPainted(false);
         btnAceptar.setFocusable(false);
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 90, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondoAviso.jpg"))); // NOI18N
@@ -70,6 +75,10 @@ public class AvisoView extends javax.swing.JFrame implements IComponente{
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     public void mostrarAviso(String mensaje) {
 

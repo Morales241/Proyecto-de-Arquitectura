@@ -9,37 +9,16 @@ import java.io.Serializable;
 public class NodoDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     private String ip;
     private int puerto;
-    private String nombre;
-    private int avatar;
 
-    public NodoDto(String ip, int puerto, String nombre, int avatar) {
+    public NodoDto() {
+    }
+
+    public NodoDto(String ip, int puerto) {
         this.ip = ip;
         this.puerto = puerto;
-        this.nombre = nombre;
-        this.avatar = avatar;
-    }
-
-    public int getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(int avatar) {
-        this.avatar = avatar;
-    }
-
-    public NodoDto(String nombre, int avatar) {
-        this.nombre = nombre;
-        this.avatar = avatar;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getIp() {
@@ -58,4 +37,5 @@ public class NodoDto implements Serializable {
         this.puerto = puerto;
     }
 
+   
 }

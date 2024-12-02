@@ -23,7 +23,7 @@ public class InicializadorComunicaciones {
         comunicaciones = new GestorDeComunicacionesFachada();
         comunicaciones.crearServidor(8097);
     }
-    
+
     public GestorDeComunicacionesFachada getComunicaciones() {
         return (GestorDeComunicacionesFachada) comunicaciones;
     }

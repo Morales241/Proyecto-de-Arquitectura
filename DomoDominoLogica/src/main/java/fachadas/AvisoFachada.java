@@ -4,10 +4,31 @@
  */
 package fachadas;
 
+import aviso.AvisoModel;
+import fachadasInterfaz.IAvisoFachada;
+import observers.IObserver;
+
 /**
  *
  * @author Jesus Morales
  */
-public class AvisoFachada {
+public class AvisoFachada implements IAvisoFachada{
+
+    private final AvisoModel avisoModel;
+
+    public AvisoFachada(AvisoModel aModel) {
+        this.avisoModel = aModel;
+    }
+    
+    @Override
+    public void agregarEventoCerrarPantalla(IObserver eventoCerrarPantalla) {
+        avisoModel.agregarEventoCerrarPantalla(eventoCerrarPantalla);
+    }
+
+    @Override
+    public void mostrarAviso(String aviso) {
+        avisoModel.notificarEventoAviso(aviso);
+        
+    }
     
 }

@@ -17,7 +17,6 @@ import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
 import observers.IEventoSalirDePartida;
 import servidor.GestorMensajes;
-import observersLogicaAServidorCentral.IEventoIniciarPartidaServerCentral;
 
 /**
  *

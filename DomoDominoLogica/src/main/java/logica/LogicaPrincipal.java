@@ -2,13 +2,14 @@ package logica;
 
 import Arreglo.ILogicaArreglo;
 import Arreglo.LogicaArreglo;
+import Aviso.ILogicaAviso;
+import Aviso.LogicaAviso;
 import Inicializador.InicializadorClases;
 import Inicializador.InicializadorComunicaciones;
 import Inicio.ILogicaInicio;
 import Inicio.LogicaInicio;
 import Pozo.ILogicaPozo;
 import Pozo.LogicaPozo;
-import cliente.GestorDeComunicaciones;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
@@ -19,11 +20,12 @@ import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
+import fachadas.AvisoFachada;
+import fachadasInterfaz.IAvisoFachada;
 import fachadasInterfaz.ICrearPartidaFachada;
 import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
-import fachadas.TableroFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import mediador.Mediador;
 import observers.IEventoPasarTurno;
@@ -49,253 +51,288 @@ import observersServerCentralALogica.IEventoRespuestaServidorCentral;
  */
 public class LogicaPrincipal {
 
-     private final Mediador mediador;
+    private final Mediador mediador;
 
-     private final ILogicaInicio lInicio;
-     private final ILogicaCrearPartida lCrearPartida;
-     private final ILogicaUnirseAPartida IUnirsePartida;
-     private final ILogicaArreglo IArreglo;
-     private final ILogicaPozo IPozo;
+    private final ILogicaInicio lInicio;
+    private final ILogicaCrearPartida lCrearPartida;
+    private final ILogicaUnirseAPartida IUnirsePartida;
+    private final ILogicaArreglo IArreglo;
+    private final ILogicaPozo IPozo;
+    private final ILogicaAviso logicaAviso;
 
-     private InicializadorComunicaciones inicalizadorComunicaciones;
-     private final IGestorDeComunicacionesFachada comunicaciones;
+    private InicializadorComunicaciones inicalizadorComunicaciones;
+    private final IGestorDeComunicacionesFachada comunicaciones;
 
-     private final IInicioFachada iFachada;
-     private final ITableroFachada tableroFachada;
-     private final ICrearPartidaFachada crearPartidaFachada;
-     private IUnirseAPartidaFachada unirsePartidaFachada;
+    private final IInicioFachada inicioFachada;
+    private final ITableroFachada tableroFachada;
+    private final ICrearPartidaFachada crearPartidaFachada;
+    private final IAvisoFachada avisoFachada;
+    private IUnirseAPartidaFachada unirsePartidaFachada;
 
-     private InicializadorClases inicializadorClases;
+    private InicializadorClases inicializadorClases;
 
-     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
-     public LogicaPrincipal() {
-          mediador = Mediador.getInstancia();
+    //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
+    public LogicaPrincipal() {
+        mediador = Mediador.getInstancia();
 
-          inicializarClases();
+        inicializarClases();
 
-          comunicaciones = inicalizadorComunicaciones.getComunicaciones();
+        comunicaciones = inicalizadorComunicaciones.getComunicaciones();
 
-          lInicio = new LogicaInicio();
+        lInicio = new LogicaInicio();
 
-          IUnirsePartida = new LogicaUnirseAPartida(inicalizadorComunicaciones.getComunicaciones());
+        IUnirsePartida = new LogicaUnirseAPartida(comunicaciones);
 
-          lCrearPartida = new LogicaCrearPartida(comunicaciones);
+        lCrearPartida = new LogicaCrearPartida(comunicaciones);
 
-          IArreglo = new LogicaArreglo();
-          
-          IPozo = new LogicaPozo();
+        IArreglo = new LogicaArreglo();
 
-          iFachada = inicializadorClases.getInicioFachada();
+        IPozo = new LogicaPozo();
 
-          crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
-          
-          tableroFachada = inicializadorClases.getTableroFachada();
+        inicioFachada = inicializadorClases.getInicioFachada();
 
-          agregarObservers();
+        crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
 
-     }
+        tableroFachada = inicializadorClases.getTableroFachada();
+        
+        avisoFachada = inicializadorClases.getAvisoFachada();
+        
+        logicaAviso = new LogicaAviso((AvisoFachada) avisoFachada);
 
-     public void agregarObservers() {
-          //agregar observers de fachadas
-          iFachada.agregarIObserverCrearPartida(new AccionCambiarDePantallaCrearPartida());
-          iFachada.agregarIObserverUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
+        agregarObservers();
 
-          //agregar observers de crear partida
-          crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
-          crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
+    }
 
-          unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
-          unirsePartidaFachada.agregarIEventoUnirseAPartida(new AccionUnirseAPartida());
-          unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
-          
-          //agregar observer del tablero
-          tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
-          tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
-          tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
-          tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
+    public void inicializarClases() {
+        inicializadorClases = new InicializadorClases();
+        
+        inicializadorClases.InicializarClases();
 
-          //agregar observers de comunicaciones
-          comunicaciones.agregarObservadorAcabarPartida(new AccionAcabarPartida());
-          comunicaciones.agregarObservadorFichaTomadaDelPozo(new AccionTomaronFichaDelPozo());
-          comunicaciones.agregarObservadorIniciarPartida(new AccionSeInicioPartida());
-          comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
-          comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-          comunicaciones.agregarObservadorRespuestaDelServidorCentral(new AccionRespuestaDelServidorCentral());
-          comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
-     }
+        inicalizadorComunicaciones = new InicializadorComunicaciones();
 
-     public void inicializarClases() {
-          inicializadorClases = new InicializadorClases();
+        inicalizadorComunicaciones.inicializarClasesComunicaciones();
+    }
 
-          inicializadorClases.InicializarClases();
+    public void agregarObservers() {
+        //agregar observers de fachadas
+        inicioFachada.agregarIObserverCrearPartida(new AccionCambiarDePantallaCrearPartida());
+        inicioFachada.agregarIObserverUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
 
-          inicalizadorComunicaciones = new InicializadorComunicaciones();
+        //agregar observers de aviso
+        avisoFachada.agregarEventoCerrarPantalla(new AccionCerrarAviso());
+        
+        //agregar observers de crear partida
+        crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
+        crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
 
-          inicalizadorComunicaciones.inicializarClasesComunicaciones();
+        unirsePartidaFachada = inicializadorClases.getUnirseAPartidaFachada();
+        unirsePartidaFachada.agregarIEventoUnirseAPartida(new AccionUnirseAPartida());
+        unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
 
-     }
+        //agregar observer del tablero
+        tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
+        tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
+        tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
+        tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
 
-     /*
+        //agregar observers de comunicaciones
+        comunicaciones.agregarObservadorAcabarPartida(new AccionAcabarPartida());
+        comunicaciones.agregarObservadorFichaTomadaDelPozo(new AccionTomaronFichaDelPozo());
+        comunicaciones.agregarObservadorIniciarPartida(new AccionSeInicioPartida());
+        comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
+        comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
+        comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
+        
+//        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+        
+        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+    }
+
+    /*
         LEAN ESTO!!!
         A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
         ENTRE LOS MVC Y LA LOGICA
-      */
-     //se va a cambiar el nombre de este metodo
-     public void iniciarJuego() {
+     */
+    //LISTAS
+    public void iniciarJuego() {
 
-          mediador.mostrarPantallaConcreta("inicio");
+        mediador.mostrarPantallaConcreta("inicio");
 
-     }
+    }
 
-     private class AccionCrearPartida implements IEventoCrearPartida {
+    private class AccionRegresarAlInicio implements IObserver {
 
-          @Override
-          public void crearPartida(JugadorCrearPartidaDto jugador) {
-               crearNuevaPartida(jugador);
-          }
+        @Override
+        public void actualizar() {
+            lInicio.regresarAlInicio();
+        }
+    }
+    
+    private class AccionCambiarDePantallaCrearPartida implements IObserver {
 
-     }
+        @Override
+        public void actualizar() {
+            lInicio.crearPartida();
+        }
+    }
 
-     public void crearNuevaPartida(JugadorCrearPartidaDto jugador) {
-          lCrearPartida.crearPartida(jugador);
-     }
+    private class AccionCambiarDePantallaUnirseAPartida implements IObserver {
 
-     private class AccionUnirseAPartida implements IEventoAgregarJugadorAPartida {
+        @Override
+        public void actualizar() {
+            lInicio.unirseAPartida();
+        }
+    }
 
-          @Override
-          public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
-               IUnirsePartida.unirseAPartida(jugador);
-          }
-     }
+    private class AccionCrearPartida implements IEventoCrearPartida {
 
-     private class AccionIniciarPartida implements IEventoIniciarPartida {
+        @Override
+        public void crearPartida(JugadorCrearPartidaDto jugador) {
+            lCrearPartida.crearPartida(jugador);
+        }
 
-          @Override
-          public void iniciarPartida(SetUpDto setUp) {
+    }
 
-          }
-     }
+    private class AccionUnirseAPartida implements IEventoAgregarJugadorAPartida {
 
-     private class AccionSalirDePartida implements IEventoSalirDePartida {
+        @Override
+        public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
+            IUnirsePartida.unirseAPartida(jugador);
+        }
+    }
 
-          @Override
-          public void salirDePartida(JugadorAEliminarDto jugador) {
-               
-          }
-     }
-     
+    //EN ESPERA
+    private class AccionIniciarPartida implements IEventoIniciarPartida {
 
-     private class AccionPonerFicha implements IEventoPonerFicha {
+        @Override
+        public void iniciarPartida(SetUpDto setUp) {
 
-          @Override
-          public void ponerFicha(PonerFichaDto ponerFicha) {
-               IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
-          }
-     }
+        }
+    }
 
-     private class AccionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
+    private class AccionSalirDePartida implements IEventoSalirDePartida {
 
-          @Override
-          public void tomarFichaDelPozo(FichaDto fichaSacada) {
-               IPozo.sacarFicha();
-          }
-     }
+        @Override
+        public void salirDePartida(JugadorAEliminarDto jugador) {
 
-     private class AccionElejirFicha {
+        }
+    }
 
-     }
+    private class AccionPonerFicha implements IEventoPonerFicha {
 
-     private class AccionCambiarDePantallaCrearPartida implements IObserver {
+        @Override
+        public void ponerFicha(PonerFichaDto ponerFicha) {
+            IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
+        }
+    }
 
-          @Override
-          public void actualizar() {
-               lInicio.crearPartida();
-          }
-     }
+    private class AccionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
 
-     private class AccionCambiarDePantallaUnirseAPartida implements IObserver {
+        @Override
+        public void tomarFichaDelPozo(FichaDto fichaSacada) {
+            IPozo.sacarFicha();
+        }
+    }
 
-          @Override
-          public void actualizar() {
-               lInicio.unirseAPartida();
-          }
-     }
+    private class AccionElejirFicha {
 
-     private class AccionRegresarAlInicio implements IObserver {
+    }
+    
+    private class AccionCerrarAviso implements IObserver {
 
-          @Override
-          public void actualizar() {
-               lInicio.regresarAlInicio();
-          }
-     }
+        @Override
+        public void actualizar() {
+            logicaAviso.cerrarAviso();
+        }
 
+    }
 
-     /*
+    
+    
+    /*
         LEAN ESTO!!!
         A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
         ENTRE LOS COMUNICACIONES Y LA LOGICA
-      */
-     private class AccionTomaronFichaDelPozo implements IEventoTomarFichaDelPozo {
+     */
+    //EN ESPERA
+    private class AccionTomaronFichaDelPozo implements IEventoTomarFichaDelPozo {
 
-          @Override
-          public void tomarFichaDelPozo(FichaDto fichaSacada) {
-               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          }
+        @Override
+        public void tomarFichaDelPozo(FichaDto fichaSacada) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
 
-     }
+    }
 
-     private class AccionPasaronTurno implements IEventoPasarTurno {
+    private class AccionPasaronTurno implements IEventoPasarTurno {
 
-          @Override
-          public void pasarTurno(PasarTurno pasarTurno) {
-               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          }
+        @Override
+        public void pasarTurno(PasarTurno pasarTurno) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
 
-     }
+    }
 
-     private class AccionPucieronFicha implements IEventoPonerFicha {
+    private class AccionPucieronFicha implements IEventoPonerFicha {
 
-          @Override
-          public void ponerFicha(PonerFichaDto ponerFicha) {
-               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          }
+        @Override
+        public void ponerFicha(PonerFichaDto ponerFicha) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
 
-     }
+    }
 
-     private class AccionJugadorSaioDePartida implements IEventoSalirDePartida {
+    private class AccionJugadorSaioDePartida implements IEventoSalirDePartida {
 
-          @Override
-          public void salirDePartida(JugadorAEliminarDto jugador) {
-               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          }
+        @Override
+        public void salirDePartida(JugadorAEliminarDto jugador) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
 
-     }
+    }
 
-     private class AccionSeInicioPartida implements IEventoIniciarPartida {
+    private class AccionSeInicioPartida implements IEventoIniciarPartida {
 
-          @Override
-          public void iniciarPartida(SetUpDto setUp) {
-               throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-          }
+        @Override
+        public void iniciarPartida(SetUpDto setUp) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
 
-     }
+    }
 
-     private class AccionAcabarPartida implements IEventoAcabarPartida {
+    private class AccionAcabarPartida implements IEventoAcabarPartida {
 
-          @Override
-          public void acabarPartida(String codigo) {
-               System.out.println(codigo);
-          }
+        @Override
+        public void acabarPartida(String codigo) {
+            System.out.println(codigo);
+        }
 
-     }
+    }
 
-     private class AccionRespuestaDelServidorCentral implements IEventoRespuestaServidorCentral {
+  
 
-          @Override
-          public void actualizar(RespuestaServidorCentral respuesta) {
+    /*
+        LEAN ESTO!!!
+        A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
+        ENTRE EL SERVER CENTRAL Y LA LOGICA
+     */
+    private class AccionRecibirRespuestaCrearPartida implements IEventoRespuestaServidorCentral{
 
-               System.out.println(respuesta.toString());
-          }
+        @Override
+        public void actualizar(RespuestaServidorCentral respuesta) {
+            
+            logicaAviso.mostrarAviso(respuesta.getRespuesta());
+            mediador.mostrarPantallaConcreta("lobby");
+        }
+    }
+    
+    private class AccionRecibirRespuestaUnirseAPartida implements IEventoRespuestaServidorCentral{
 
-     }
+        @Override
+        public void actualizar(RespuestaServidorCentral respuesta) {
+            
+            logicaAviso.mostrarAviso(respuesta.getRespuesta());
+            mediador.mostrarPantallaConcreta("lobby");
+        }
+    }
 }

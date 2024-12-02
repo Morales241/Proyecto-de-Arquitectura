@@ -183,7 +183,7 @@ public class TableroView extends javax.swing.JFrame implements IComponente {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pozoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pozoActionPerformed
-    ejecutarEventoTomarFichaDelPozo();
+//    ejecutarEventoTomarFichaDelPozo();
     }//GEN-LAST:event_pozoActionPerformed
 
      public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {

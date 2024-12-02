@@ -4,8 +4,8 @@
  */
 package unirseAPartida;
 
-import cliente.GestorDeComunicaciones;
 import eventos.JugadorUnirseAPartidaDto;
+import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -20,9 +20,9 @@ import mediador.Mediador;
 public class LogicaUnirseAPartida implements ILogicaUnirseAPartida {
 
      private final IMediador mediador;
-     private GestorDeComunicaciones comunicaciones;
+     private IGestorDeComunicacionesFachada comunicaciones;
 
-     public LogicaUnirseAPartida(GestorDeComunicaciones comunicaciones) {
+     public LogicaUnirseAPartida(IGestorDeComunicacionesFachada comunicaciones) {
           this.mediador = Mediador.getInstancia();
           this.comunicaciones = comunicaciones;
      }

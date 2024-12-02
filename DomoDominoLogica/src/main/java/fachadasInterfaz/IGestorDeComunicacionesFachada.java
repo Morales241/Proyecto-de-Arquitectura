@@ -24,11 +24,12 @@ public interface IGestorDeComunicacionesFachada {
     public GestorDeComunicacionesFachada getInstancia();
     public void conectarAServidor(String ip, int puerto);
     public void enviarMensaje(Object mensaje);
-    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador);
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador);
     public void agregarObservadorSalioUnJugador(IEventoSalirDePartida observador);
     public void agregarObservadorIniciarPartida(IEventoIniciarPartida observador);
     public void agregarObservadorPusieronFicha(IEventoPonerFicha observador);
     public void agregarObservadorPasaronTurno(IEventoPasarTurno observador);
     public void agregarObservadorFichaTomadaDelPozo(IEventoTomarFichaDelPozo observador);
+    public void agregarObservadorRespuestaCrearPartida(IEventoRespuestaServidorCentral observador);
+    public void agregarObservadorRespuestaUnirseAPartida(IEventoRespuestaServidorCentral observador);
 }

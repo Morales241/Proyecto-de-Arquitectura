@@ -7,9 +7,12 @@ package eventos;
 public class RespuestaDePartidaCreada extends RespuestaServidorCentral{
     private static final long serialVersionUID = 1L;
 
-    public RespuestaDePartidaCreada(int opcionRespuesta, boolean llave) {
-        super(opcionRespuesta, llave);
+    public RespuestaDePartidaCreada(String respuesta) {
+        super(respuesta);
     }
-    
+
+    public RespuestaDePartidaCreada() {
+    }
+
     
 }

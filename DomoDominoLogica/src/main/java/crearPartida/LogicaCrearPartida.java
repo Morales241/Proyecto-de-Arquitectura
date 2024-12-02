@@ -4,8 +4,8 @@
  */
 package crearPartida;
 
-import cliente.GestorDeComunicaciones;
 import eventos.JugadorCrearPartidaDto;
+import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Random;
@@ -22,9 +22,9 @@ import mediador.Mediador;
 public class LogicaCrearPartida implements ILogicaCrearPartida{
 
     private final IMediador mediador;
-    private final GestorDeComunicaciones comunicaciones; 
+    private final IGestorDeComunicacionesFachada comunicaciones; 
 
-    public LogicaCrearPartida(GestorDeComunicaciones comunicacionesParametro) {
+    public LogicaCrearPartida(IGestorDeComunicacionesFachada comunicacionesParametro) {
         this.mediador = Mediador.getInstancia();
         this.comunicaciones = comunicacionesParametro;
     }

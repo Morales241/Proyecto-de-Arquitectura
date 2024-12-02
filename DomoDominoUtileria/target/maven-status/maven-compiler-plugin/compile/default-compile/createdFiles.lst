@@ -10,9 +10,9 @@ observers\IEventoAviso.class
 serializables\Jugador.class
 observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.class
 dtos\UsuarioDto.class
-eventos\JugadorConsulta.class
 eventos\NodoDto.class
 serializables\Jugada.class
+eventos\JugadorBase.class
 observers\IEventoPartida.class
 eventos\RespuestaDeUnirseAPartida.class
 mediador\IComponente.class
@@ -30,7 +30,6 @@ dtos\ArregloDto.class
 mediador\IMediador.class
 observers\IEventoPonerFicha.class
 observers\IEventoValidacionDeNombre.class
-eventos\EventoIniciarPartidaDto.class
 eventos\JugadorAEliminarDto.class
 observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.class
 eventos\RespuestaServidorCentral.class

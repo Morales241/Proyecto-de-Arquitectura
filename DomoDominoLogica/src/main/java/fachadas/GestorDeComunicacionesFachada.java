@@ -21,12 +21,13 @@ import observersServerCentralALogica.IEventoRespuestaServidorCentral;
  */
 public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFachada{
     private static GestorDeComunicacionesFachada instancia;
-    private GestorDeComunicaciones comunicaciones;
+    private final GestorDeComunicaciones comunicaciones;
 
     public GestorDeComunicacionesFachada() {
         this.comunicaciones = new GestorDeComunicaciones();
     }
 
+    @Override
     public GestorDeComunicacionesFachada getInstancia() {
         if (instancia == null) {
             synchronized (GestorDeComunicacionesFachada.class) {
@@ -54,8 +55,13 @@ public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFac
     }
 
     @Override
-    public void agregarObservadorRespuestaDelServidorCentral(IEventoRespuestaServidorCentral observador) {
-        comunicaciones.agregarObservadorRespuestaDelServidorCentral(observador);
+    public void agregarObservadorRespuestaCrearPartida(IEventoRespuestaServidorCentral observador) {
+        comunicaciones.agregarObservadorRespuestaCrearPartida(observador);
+    }
+    
+    @Override
+    public void agregarObservadorRespuestaUnirseAPartida(IEventoRespuestaServidorCentral observador) {
+        comunicaciones.agregarObservadorRespuestaUnirseAPartida(observador);
     }
 
     @Override

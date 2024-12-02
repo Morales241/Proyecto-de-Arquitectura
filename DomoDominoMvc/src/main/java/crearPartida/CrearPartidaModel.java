@@ -30,7 +30,7 @@ public class CrearPartidaModel {
     // Métodos existentes para la validación de nombre y eventos
     public void validarNombre(JugadorCrearPartidaDto jugador) {
         Pattern validacion = Pattern.compile("^[A-Za-z0-9_]{3,15}$");
-        Matcher match = validacion.matcher(jugador.getNodo().getNombre());
+        Matcher match = validacion.matcher(jugador.getNombre());
         if (match.matches()) {
             ejecutarAccionCrearPartida(jugador);
         } else {
