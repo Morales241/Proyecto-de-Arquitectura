@@ -195,7 +195,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
     public void ejecutarAccionCrearPartida(String nombre, int numFichas, int avatar) {
         if (observerCrearPartida != null) {
-
+            
             JugadorCrearPartidaDto jugador = new JugadorCrearPartidaDto(numFichas, new NodoDto(), "", nombre, avatar);
 
             observerCrearPartida.crearPartida(jugador);
