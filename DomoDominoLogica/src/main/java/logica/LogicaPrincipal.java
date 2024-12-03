@@ -322,7 +322,10 @@ public class LogicaPrincipal {
         public void actualizar(RespuestaServidorCentral respuesta) {
             
             logicaAviso.mostrarAviso(respuesta.getRespuesta());
-            mediador.mostrarPantallaConcreta("lobby");
+            if(respuesta.getKey()){
+                mediador.mostrarPantallaConcreta("lobby");
+            }
+            
         }
     }
     
@@ -332,7 +335,9 @@ public class LogicaPrincipal {
         public void actualizar(RespuestaServidorCentral respuesta) {
             
             logicaAviso.mostrarAviso(respuesta.getRespuesta());
-            mediador.mostrarPantallaConcreta("lobby");
+            if(respuesta.getKey()){
+                mediador.mostrarPantallaConcreta("lobby");
+            }
         }
     }
 }
