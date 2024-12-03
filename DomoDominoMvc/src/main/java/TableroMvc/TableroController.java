@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 
 public class TableroController {

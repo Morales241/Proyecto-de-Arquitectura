@@ -16,6 +16,7 @@ public class AvisoModel {
     private IEventoAviso eventoAviso;
     private IObserver eventoCerrarPantalla;
     private String mensaje;
+    private int jugadores;
 
     public AvisoModel() {
     }
@@ -28,7 +29,6 @@ public class AvisoModel {
         if (eventoAviso != null) {
             
             eventoAviso.notificarAlUsuario(mensaje);
-            
         }
     }
 

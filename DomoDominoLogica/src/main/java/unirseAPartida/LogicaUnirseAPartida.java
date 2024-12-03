@@ -5,6 +5,7 @@
 package unirseAPartida;
 
 import eventos.JugadorUnirseAPartidaDto;
+import eventos.NodoDto;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,31 +20,34 @@ import mediador.Mediador;
  */
 public class LogicaUnirseAPartida implements ILogicaUnirseAPartida {
 
-     private final IMediador mediador;
-     private IGestorDeComunicacionesFachada comunicaciones;
+    private final IMediador mediador;
+    private IGestorDeComunicacionesFachada comunicaciones;
 
-     public LogicaUnirseAPartida(IGestorDeComunicacionesFachada comunicaciones) {
-          this.mediador = Mediador.getInstancia();
-          this.comunicaciones = comunicaciones;
-     }
-     
-     @Override
-     public void regresarAInicio() {
-         String nombrePantalla = "inicio";
-         mediador.mostrarPantallaConcreta(nombrePantalla);
-     }
+    public LogicaUnirseAPartida(IGestorDeComunicacionesFachada comunicaciones) {
+        this.mediador = Mediador.getInstancia();
+        this.comunicaciones = comunicaciones;
+    }
 
-     @Override
-     public void unirseAPartida(JugadorUnirseAPartidaDto jugador) {
-          System.out.println("se va a unir a la partida");
-          
-          try {
-               comunicaciones.conectarAServidor(InetAddress.getLocalHost().getHostAddress(), 8090);
-          } catch (UnknownHostException ex) {
-               Logger.getLogger(LogicaUnirseAPartida.class.getName()).log(Level.SEVERE, null, ex);
-          }
-          
-          comunicaciones.enviarMensaje(jugador);
-     }
-     
+    @Override
+    public void regresarAInicio() {
+        String nombrePantalla = "inicio";
+        mediador.mostrarPantallaConcreta(nombrePantalla);
+    }
+
+    @Override
+    public void unirseAPartida(JugadorUnirseAPartidaDto jugador) {
+        System.out.println("se va a unir a la partida");
+        try {
+
+            String ip = InetAddress.getLocalHost().getHostAddress();
+            jugador.setNodo(new NodoDto(ip, 8198));
+
+            comunicaciones.conectarAServidorCentral("192.168.56.1", 8190);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(LogicaUnirseAPartida.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        comunicaciones.enviarMensaje(jugador, "serverCentral");
+    }
+
 }

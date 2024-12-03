@@ -5,6 +5,7 @@
 package crearPartida;
 
 import eventos.JugadorCrearPartidaDto;
+import eventos.NodoDto;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -38,19 +39,17 @@ public class LogicaCrearPartida implements ILogicaCrearPartida{
     @Override
     public void crearPartida(JugadorCrearPartidaDto jugador) {
         System.out.println("se va a crear la partida");
-        //cambiar la ip por las diferentes redes
-        comunicaciones.conectarAServidor("192.168.100.11", 8090);
-        jugador.setCodigo(generarCodigo());
-        
-        String ip = "";
         try {
-            ip = InetAddress.getLocalHost().getHostAddress();
+
+            String ip = InetAddress.getLocalHost().getHostAddress();
+            jugador.setNodo(new NodoDto(ip, 8198));
+
+            comunicaciones.conectarAServidorCentral("192.168.56.1", 8190);
         } catch (UnknownHostException ex) {
             Logger.getLogger(LogicaCrearPartida.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jugador.getNodo().setIp(ip);
-        jugador.getNodo().setPuerto(8198);
-        comunicaciones.enviarMensaje(jugador);
+
+        comunicaciones.enviarMensaje(jugador, "serverCentral");
     }
     
     public String generarCodigo(){

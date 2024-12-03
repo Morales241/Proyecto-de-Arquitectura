@@ -4,12 +4,14 @@
  */
 package cliente;
 
+import eventos.JugadorBase;
+import eventos.NodoDto;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observers.IEventoSalirDePartida;
+import observers.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;
@@ -33,12 +35,16 @@ public class GestorDeComunicaciones {
         servidor = new Servidor(puerto, gestorMensajes);
     }
     
-    public void conectarAServidor(String ip, int puerto) {
-        cliente.conectarAServidor(ip, puerto);
+    public void conectarAServidor(JugadorBase jugadorBase) {
+        cliente.conectarAServidor(jugadorBase.getNombre(), jugadorBase.getNodo());
     }
     
-    public void enviarMensaje(Object mensaje) {
-        cliente.enviarMensaje(mensaje);
+    public void conectarAServidorCentral(String ip, int puerto) {
+        cliente.conectarAServidor("serverCentral", new NodoDto(ip, puerto));
+    }
+    
+    public void enviarMensaje(Object mensaje, String nombre) {
+        cliente.enviarMensaje(mensaje, nombre);
     }
     
     public void agregarObservadorRespuestaCrearPartida(IEventoRespuestaServidorCentral observador) {

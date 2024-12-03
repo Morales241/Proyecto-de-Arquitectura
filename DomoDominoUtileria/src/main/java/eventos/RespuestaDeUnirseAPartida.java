@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package eventos;
 
 /**
@@ -11,10 +7,20 @@ package eventos;
 public class RespuestaDeUnirseAPartida extends RespuestaServidorCentral{
     private static final long serialVersionUID = 1L;
 
+    private String nombre;
+    private int avatar;
+    
     public RespuestaDeUnirseAPartida() {
     }
 
-    public RespuestaDeUnirseAPartida(String respuesta, Boolean key) {
+    public RespuestaDeUnirseAPartida(String nombre, int avatar, String respuesta, Boolean key) {
         super(respuesta, key);
+        this.nombre = nombre;
+        this.avatar = avatar;
+    }
+
+    public RespuestaDeUnirseAPartida(String nombre, int avatar) {
+        this.nombre = nombre;
+        this.avatar = avatar;
     }
 }

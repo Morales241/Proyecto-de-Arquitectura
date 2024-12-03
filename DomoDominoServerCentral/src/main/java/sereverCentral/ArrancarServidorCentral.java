@@ -31,7 +31,7 @@ public class ArrancarServidorCentral {
             boolean llave = true;
             GestorDeComunicaciones comunicaciones = new GestorDeComunicaciones();
             ServerCentral server = new ServerCentral(comunicaciones);
-            comunicaciones.crearServidor(8090);
+            comunicaciones.crearServidor(8190);
             
             System.out.println(InetAddress.getLocalHost().getHostAddress());
             while (llave) {

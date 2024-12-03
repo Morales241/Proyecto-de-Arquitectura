@@ -1,6 +1,8 @@
 package serverInterno;
 
 import dtos.FichaDto;
+import eventos.EventoAcabarPartidaDto;
+import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
@@ -12,10 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoAcabarPartida;
+import observers.IEventoIniciarPartida;
+import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 public class GestorMensajes {
@@ -30,6 +33,7 @@ public class GestorMensajes {
     private IEventoAcabarPartida observerAcabarPartida;
     private IEventoRespuestaServidorCentral observerRespuestaCrearP;
     private IEventoRespuestaServidorCentral observerRespuestaUnirseP;
+    private IEventoIniciarPartidaAdmin observerIniciarPartidaAdmin;
 
     public GestorMensajes() {
     }
@@ -123,9 +127,9 @@ public class GestorMensajes {
         this.observerAcabarPartida = null;
     }
 
-    public void notificarObservadorAcabarPartida(String codigo) {
+    public void notificarObservadorAcabarPartida(EventoAcabarPartidaDto acabarPartidaDto) {
         if (observerAcabarPartida != null) {
-            observerAcabarPartida.acabarPartida(codigo);
+            observerAcabarPartida.acabarPartida(acabarPartidaDto);
             log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }
@@ -172,4 +176,21 @@ public class GestorMensajes {
         }
 
     }
+
+    //Iniciar Partida (solo el admin de la partida hace esto)
+    public void agregarObservadorIniciarPartidaAdmin(IEventoIniciarPartidaAdmin observador) {
+        this.observerIniciarPartidaAdmin = observador;
+    }
+
+    public void eliminarObservadorIniciarPartidaAdmin() {
+        this.observerIniciarPartidaAdmin = null;
+    }
+
+    public void notificarObserverIniciarPartidaAdmin(IniciarPartidaAdmin partidaAdmin) {
+        if (observerIniciarPartidaAdmin != null) {
+            observerIniciarPartidaAdmin.iniciarPartida(partidaAdmin);
+            log.log(Level.INFO, "Metodo:notificarObserverIniciarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
+        }
+    }
+    
 }

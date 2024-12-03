@@ -13,6 +13,7 @@ import Pozo.LogicaPozo;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
+import eventos.EventoAcabarPartidaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
@@ -31,14 +32,14 @@ import mediador.Mediador;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoIniciarPartida;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
-import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observers.IEventoAcabarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 /**
@@ -142,6 +143,8 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
+//        comunicaciones.agregarObservadorPusieronFicha(observador);
+//        comunicaciones.agregarObservadorSalioUnJugador(observador);
         
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
         
@@ -303,8 +306,8 @@ public class LogicaPrincipal {
     private class AccionAcabarPartida implements IEventoAcabarPartida {
 
         @Override
-        public void acabarPartida(String codigo) {
-            System.out.println(codigo);
+        public void acabarPartida(EventoAcabarPartidaDto codigo) {
+            
         }
 
     }

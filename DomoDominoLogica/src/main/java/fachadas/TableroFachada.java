@@ -8,7 +8,7 @@ import fachadasInterfaz.ITableroFachada;
 import TableroMvc.TableroModel;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 
 /**

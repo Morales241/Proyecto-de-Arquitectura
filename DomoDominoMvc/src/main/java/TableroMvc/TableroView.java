@@ -22,7 +22,7 @@ import mediador.IComponente;
 import mediador.IMediador;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 

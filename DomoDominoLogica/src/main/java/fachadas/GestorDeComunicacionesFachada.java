@@ -1,13 +1,15 @@
 package fachadas;
 
 import cliente.GestorDeComunicaciones;
+import eventos.JugadorBase;
+import eventos.NodoDto;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoAcabarPartida;
+import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 /**
@@ -45,13 +47,13 @@ public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFac
     }
 
     @Override
-    public void conectarAServidor(String ip, int puerto) {
-        comunicaciones.conectarAServidor(ip, puerto);
+    public void conectarAServidor(JugadorBase jugadorBase) {
+        comunicaciones.conectarAServidor(jugadorBase);
     }
 
     @Override
-    public void enviarMensaje(Object mensaje) {
-        comunicaciones.enviarMensaje(mensaje);
+    public void enviarMensaje(Object mensaje, String nombre) {
+        comunicaciones.enviarMensaje(mensaje, nombre);
     }
 
     @Override
@@ -92,6 +94,11 @@ public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFac
     @Override
     public void agregarObservadorFichaTomadaDelPozo(IEventoTomarFichaDelPozo observador) {
         comunicaciones.agregarObservadorFichaTomadaDelPozo(observador);
+    }
+
+    @Override
+    public void conectarAServidorCentral(String ip, int puerto) {
+        comunicaciones.conectarAServidorCentral(ip, puerto);
     }
  
 }

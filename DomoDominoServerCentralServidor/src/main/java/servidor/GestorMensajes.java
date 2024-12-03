@@ -1,15 +1,16 @@
 package servidor;
 
+import eventos.EventoAcabarPartidaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.VotoDeJugador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import observersLogicaAServidorCentral.IEventoAcabarPartida;
+import observers.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 
 public class GestorMensajes {
@@ -98,9 +99,9 @@ public class GestorMensajes {
         this.observeracabarPartida = null;
     }
 
-    public void notificarObserverAcabarPartida(String codigo) {
+    public void notificarObserverAcabarPartida(EventoAcabarPartidaDto acabarPartidaDto) {
         if (observeracabarPartida != null) {
-            observeracabarPartida.acabarPartida(codigo);
+            observeracabarPartida.acabarPartida(acabarPartidaDto);
             log.log(Level.INFO, "Metodo:notificarObserverAcabarPartida - Clase:GestorMensajes - Proyecto:Server de Server Central");
         }
     }

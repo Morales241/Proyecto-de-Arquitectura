@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package aviso;
 
 import mediador.IComponente;
@@ -43,8 +39,8 @@ public class AvisoView extends javax.swing.JFrame implements IComponente{
 
         txtAviso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         txtAviso.setForeground(new java.awt.Color(220, 179, 88));
-        txtAviso.setText("wda");
-        jPanel1.add(txtAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+        txtAviso.setText("s");
+        jPanel1.add(txtAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 20, 70));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aceptar.png"))); // NOI18N
         btnAceptar.setBorderPainted(false);

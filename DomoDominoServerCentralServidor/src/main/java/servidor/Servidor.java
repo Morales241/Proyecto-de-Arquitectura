@@ -1,8 +1,10 @@
 package servidor;
 
+import eventos.EventoAcabarPartidaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
+import eventos.VotoDeJugador;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
@@ -80,8 +82,12 @@ public class Servidor {
 
                     case JugadorAEliminarDto jugadorAEliminarDto ->
                         gestorMensajes.notificarObserverSalirDePartida(jugadorAEliminarDto);
+                    
+                    case VotoDeJugador votoDeJugador ->
+                        gestorMensajes.notificarObserverIniciarPartida(votoDeJugador);
                         
-                        
+                    case EventoAcabarPartidaDto acabarPartidaDto ->
+                        gestorMensajes.notificarObserverAcabarPartida(acabarPartidaDto);
                     default ->
                         log.log(Level.INFO, "Tipo de mensaje no reconocido");
                 }

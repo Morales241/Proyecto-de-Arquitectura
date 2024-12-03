@@ -1,12 +1,13 @@
 package fachadasInterfaz;
 
+import eventos.JugadorBase;
 import fachadas.GestorDeComunicacionesFachada;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
-import observers.IEventoSalirDePartida;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
-import observersLogicaAServidorCentral.IEventoAcabarPartida;
-import observersServerCentralALogica.IEventoIniciarPartida;
+import observers.IEventoAcabarPartida;
+import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 /**
@@ -22,8 +23,8 @@ public interface IGestorDeComunicacionesFachada {
     
     public void crearServidor(int puerto);
     public GestorDeComunicacionesFachada getInstancia();
-    public void conectarAServidor(String ip, int puerto);
-    public void enviarMensaje(Object mensaje);
+    public void conectarAServidor(JugadorBase jugadorBase);
+    public void enviarMensaje(Object mensaje, String nombre);
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador);
     public void agregarObservadorSalioUnJugador(IEventoSalirDePartida observador);
     public void agregarObservadorIniciarPartida(IEventoIniciarPartida observador);
@@ -32,4 +33,5 @@ public interface IGestorDeComunicacionesFachada {
     public void agregarObservadorFichaTomadaDelPozo(IEventoTomarFichaDelPozo observador);
     public void agregarObservadorRespuestaCrearPartida(IEventoRespuestaServidorCentral observador);
     public void agregarObservadorRespuestaUnirseAPartida(IEventoRespuestaServidorCentral observador);
+    public void conectarAServidorCentral(String ip, int puerto);
 }

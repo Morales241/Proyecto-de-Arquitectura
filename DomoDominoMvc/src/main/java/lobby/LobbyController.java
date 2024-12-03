@@ -1,8 +1,12 @@
 package lobby;
 
 import dtos.JugadorDto;
+import eventos.JugadorAEliminarDto;
+import eventos.VotoDeJugador;
 import java.util.List;
 import observers.IObserver;
+import observersLogicaAServidorCentral.IEventoSalirDeLobby;
+import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 
 /**
  * Controlador del lobby
@@ -14,35 +18,43 @@ import observers.IObserver;
  * @author Jesus Alberto Morales Rojas - 00000245335
  */
 public class LobbyController {
- 
+    
     private final LobbyModel lobbyModel;
     private final LobbyView lobbyView;
-
+    
     public LobbyController(LobbyModel lobbyModel, LobbyView lobbyView) {
         this.lobbyModel = lobbyModel;
         this.lobbyView = lobbyView;
-
-        lobbyModel.agregarIEventoActualizarLista(new ActualizarLista());
-        lobbyView.agregarIEventoIniciarPartida(new IniciarPartida());
+        
+        lobbyView.agregarIEventoSalirDeLobby(new AccionRegresar());
+        lobbyView.agregarIEventoVotarParaIniciarPartida(new AccionVotar());
+        
     }
-
-    public void agregarJugador(JugadorDto jugador) {
-        lobbyModel.agregarJugador(jugador);
+    
+    public void regresarAlInicio(JugadorAEliminarDto jugador) {
+        
     }
-
-    private class ActualizarLista implements IObserver {
+    
+    public void votar(VotoDeJugador votoDeJugador) {
+        
+    }
+    
+    private class AccionRegresar implements IEventoSalirDeLobby {
+        
         @Override
-        public void actualizar() {
-            List<JugadorDto> jugadores = lobbyModel.getJugadores();
-            lobbyView.mostrarJugadores(jugadores);
+        public void salirDeLobby(JugadorAEliminarDto jugador) {
+            
+            regresarAlInicio(jugador);
         }
+        
     }
-
-    private class IniciarPartida implements IObserver {
+    
+    private class AccionVotar implements IEventoVotarParaIniciarPartida {
+        
         @Override
-        public void actualizar() {
-            lobbyModel.iniciarPartida();
-            System.out.println("Partida iniciada");
+        public void iniciarPartida(VotoDeJugador votoDeJugador) {
+            
+            votar(votoDeJugador);
         }
     }
 }

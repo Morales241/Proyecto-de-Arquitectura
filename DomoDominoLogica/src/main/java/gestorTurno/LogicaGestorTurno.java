@@ -1,16 +1,18 @@
 package gestorTurno;
 
-import fachadas.ClienteFachada;
+import fachadas.GestorDeComunicacionesFachada;
+import fachadasInterfaz.IGestorDeComunicacionesFachada;
+
 
 public class LogicaGestorTurno implements ILogicaGestorTurno{
-    private final ClienteFachada clienteFachada;
+    private final IGestorDeComunicacionesFachada comunicaciones;
 
-    public LogicaGestorTurno(ClienteFachada fachadaCliente) {
-        this.clienteFachada = fachadaCliente;
+    public LogicaGestorTurno(GestorDeComunicacionesFachada comunicacionesP) {
+        this.comunicaciones = comunicacionesP;
     }
 
     @Override
     public void gestionarTurno() {
-        clienteFachada.enviarMensaje("Turno cambiado");
+        
     }
 }

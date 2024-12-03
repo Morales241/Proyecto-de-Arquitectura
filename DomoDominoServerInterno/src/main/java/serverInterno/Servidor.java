@@ -1,6 +1,8 @@
 package serverInterno;
 
 import dtos.FichaDto;
+import eventos.EventoAcabarPartidaDto;
+import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//server interno
 public class Servidor {
 
     private ServerSocket serverSocket;
@@ -98,8 +100,8 @@ public class Servidor {
 
             switch (mensaje) {
 
-                case String codigo ->
-                    gestorMensajes.notificarObservadorAcabarPartida(codigo);
+                case EventoAcabarPartidaDto acabarPartidaDto->
+                    gestorMensajes.notificarObservadorAcabarPartida(acabarPartidaDto);
                     
                 case PonerFichaDto ponerFicha ->
                     gestorMensajes.notificarObservadorPucieronFicha(ponerFicha);
@@ -119,6 +121,9 @@ public class Servidor {
                 case RespuestaServidorCentral respuesta ->
                     gestorMensajes.procesarRespuestaDelServidorCentral(respuesta);
 
+                case IniciarPartidaAdmin partidaAdmin ->
+                    gestorMensajes.notificarObserverIniciarPartidaAdmin(partidaAdmin);
+                 
                 default ->
                     log.log(Level.INFO, "Tipo de mensaje no reconocido");
             }
