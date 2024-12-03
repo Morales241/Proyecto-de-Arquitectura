@@ -1,5 +1,6 @@
 package cliente;
 
+import eventos.JugadorBase;
 import eventos.NodoDto;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,13 +34,12 @@ public class GestorDeComunicaciones {
         servidor = new Servidor(puerto, gestorMensajes);
     }
 
-    public void conectarAServidor(String ip, int puerto) {
-        cliente.conectarAServidor(ip, puerto);
+    public void conectarAServidor(JugadorBase jugador) {
+        cliente.conectarAServidor(jugador.getNombre(), jugador.getNodo());
     }
 
-    public void enviarMensaje(Object mensaje, NodoDto nodo) {
-        conectarAServidor(nodo.getIp(), nodo.getPuerto());
-        cliente.enviarMensaje(mensaje);
+    public void enviarMensaje(Object mensaje, String nombre) {
+        cliente.enviarMensaje(mensaje, nombre);
         
         log.log(Level.INFO, "mensaje mandado metodo: enviarMensaje clase:GestorDeComunicaciones");
     }
@@ -68,4 +68,7 @@ public class GestorDeComunicaciones {
         return gestorMensajes;
     }
     
+    public void cerrarConexionConNodo(String nombre){
+        cliente.cerrarConexion(nombre);
+    }
 }

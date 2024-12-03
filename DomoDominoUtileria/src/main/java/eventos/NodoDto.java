@@ -1,6 +1,7 @@
 package eventos;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 /**
  *
@@ -9,12 +10,14 @@ import java.io.Serializable;
 public class NodoDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger LOG = Logger.getLogger(NodoDto.class.getName());
     
     private String ip;
     private int puerto;
 
     public NodoDto() {
     }
+    
 
     public NodoDto(String ip, int puerto) {
         this.ip = ip;

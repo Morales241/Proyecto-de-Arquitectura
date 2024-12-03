@@ -2,6 +2,7 @@ package eventos;
 
 import dtos.FichaDto;
 import dtos.JugadorDto;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import java.util.List;
  *
  * @author tacot
  */
-public class SetUpDto {
+public class SetUpDto implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
     private List<JugadorDto> ordenDeJugadoresEnPartida;
     private final FichaDto[][] fichasDeLosJugadores;
 

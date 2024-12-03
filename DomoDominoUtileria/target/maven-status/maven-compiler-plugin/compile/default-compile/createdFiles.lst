@@ -24,6 +24,7 @@ observersLogicaAServidorCentral\IEventoAcabarPartida.class
 eventos\EventoAcabarPartidaDto.class
 eventos\JugadorUnirseAPartidaDto.class
 enumerados\RespuestaServidor.class
+eventos\IniciarPartidaAdmin.class
 contenedor\ContenedorMvc.class
 eventos\RespuestaDePartidaCreada.class
 eventos\PasarTurno.class

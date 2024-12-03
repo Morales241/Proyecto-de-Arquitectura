@@ -1,33 +1,39 @@
 package cliente;
 
+import eventos.NodoDto;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//server central
 public class Cliente {
 
     private Socket socket;
-    private ObjectOutputStream escritor;
-    private ObjectInputStream lector;
     private static final Logger log = Logger.getLogger(Cliente.class.getName());
+    private final Map<String, ObjectOutputStream> nodosConectados;
 
     public Cliente() {
-
+        nodosConectados = new HashMap<>();
     }
 
-    public void conectarAServidor(String ip, int puerto) {
+    public void conectarAServidor(String nombre, NodoDto nodo) {
         try {
-            socket = new Socket(ip, puerto);
+            ObjectOutputStream escritor;
+            socket = new Socket(nodo.getIp(), nodo.getPuerto());
             escritor = new ObjectOutputStream(socket.getOutputStream());
+            nodosConectados.put(nombre, escritor);
+
         } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void enviarMensaje(Object mensaje) {
+    public void enviarMensaje(Object mensaje, String nombreNodo) {
+
+        ObjectOutputStream escritor = nodosConectados.get(nombreNodo);
         if (escritor != null) {
             try {
                 escritor.writeObject(mensaje);
@@ -38,13 +44,7 @@ public class Cliente {
         }
     }
 
-    public void cerrarConexion() {
-        try {
-            if (socket != null) {
-                socket.close();
-            }
-        } catch (IOException e) {
-        }
+    public void cerrarConexion(String nombre) {
+        nodosConectados.remove(nombre);
     }
-
 }

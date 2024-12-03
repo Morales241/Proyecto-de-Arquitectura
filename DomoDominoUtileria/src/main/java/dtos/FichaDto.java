@@ -42,7 +42,7 @@ public class FichaDto implements Serializable {
     }
     
     public boolean esMula() {
-            return this.getLado1() == this.getLado2();
+            return Objects.equals(this.getLado1(), this.getLado2());
       }
 
 

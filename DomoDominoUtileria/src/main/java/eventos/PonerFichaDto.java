@@ -2,12 +2,15 @@ package eventos;
 
 import dtos.FichaDto;
 import dtos.JugadorDto;
+import java.io.Serializable;
 
 /**
  *
  * @author tacot
  */
-public class PonerFichaDto {
+public class PonerFichaDto implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
     private FichaDto ficha;
     private boolean extremo;
     private String direccion;

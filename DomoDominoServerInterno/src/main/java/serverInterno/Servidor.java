@@ -92,7 +92,6 @@ public class Servidor {
                 log.log(Level.SEVERE, "Error al leer el mensaje", ex);
             }
             return mensaje;
-
         }
 
         public void procesarElMensajeRecibido(Object mensaje) {
