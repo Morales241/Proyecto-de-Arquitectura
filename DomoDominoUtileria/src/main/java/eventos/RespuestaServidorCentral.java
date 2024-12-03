@@ -9,9 +9,11 @@ import java.io.Serializable;
 public class RespuestaServidorCentral implements Serializable{
     private static final long serialVersionUID = 1L;
     private String respuesta;
+    private Boolean key;
 
-    public RespuestaServidorCentral(String respuesta) {
+    public RespuestaServidorCentral(String respuesta, Boolean key) {
         this.respuesta = respuesta;
+        this.key = key;
     }
 
     public RespuestaServidorCentral() {
@@ -23,5 +25,13 @@ public class RespuestaServidorCentral implements Serializable{
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
+    }
+
+    public Boolean getKey() {
+        return key;
+    }
+
+    public void setKey(Boolean key) {
+        this.key = key;
     }
 }
