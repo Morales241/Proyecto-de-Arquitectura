@@ -17,6 +17,9 @@ import contenedor.ContenedorMvc;
 import crearPartida.CrearPartidaController;
 import crearPartida.CrearPartidaModel;
 import crearPartida.CrearPartidaView;
+import lobby.LobbyController;
+import lobby.LobbyModel;
+import lobby.LobbyView;
 import mediador.IMediador;
 import mediador.Mediador;
 import unirseAPartida.UnirseAPartidaController;
@@ -76,6 +79,13 @@ public class InicializadorMVC {
         ContenedorMvc<AvisoModel, AvisoView, AvisoController> contenedorMvc = new ContenedorMvc<>(avisoModel,avisoView,avisoController);
         mediador.registrarPantalla("aviso", contenedorMvc);
         
+        //MVC Lobby
+        LobbyModel lobbyModel = new LobbyModel();
+        LobbyView lobbyView = new LobbyView(lobbyModel);
+        lobbyView.setMediador(mediador);
+        LobbyController lobbyController = new LobbyController(lobbyModel, lobbyView);
+        ContenedorMvc<LobbyModel, LobbyView, LobbyController> lobbyContenedor = new ContenedorMvc<>(lobbyModel, lobbyView, lobbyController);
+        mediador.registrarPantalla("lobby", lobbyContenedor);
     }
 }
 
