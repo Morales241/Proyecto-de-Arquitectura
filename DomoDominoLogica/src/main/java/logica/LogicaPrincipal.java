@@ -382,7 +382,7 @@ public class LogicaPrincipal {
             
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada());
             
-        
+            mediador.cerrarPantallaConcreta("tablero");
         }
 
     }
@@ -518,6 +518,9 @@ public class LogicaPrincipal {
             jugadores.forEach((nombre, setUp) -> {
                 comunicaciones.enviarMensaje(setUp, nombre);
             });
+            
+            mediador.cerrarPantallaConcreta("tablero");
+            
         }
     }
 
