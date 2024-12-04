@@ -90,38 +90,42 @@ public static void main(String[] args) {
 }
    
 
-   public class TableroPanel extends JPanel {
+ public class TableroPanel extends JPanel {
     private final int[][] tablero;
+    private final ImageIcon fondoImagen; // Imagen de fondo
 
     public TableroPanel(Array array) {
         this.tablero = array.obtenerTablero();
+        this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png")); // Ruta de la imagen
         setPreferredSize(new Dimension(800, 800)); // Tamaño del panel
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+  @Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
 
-        int cellSize = 50; // Tamaño de cada celda
-        int rows = tablero.length;
-        int cols = tablero[0].length;
+    int cellSize = 50; 
+    int rows = tablero.length;
+    int cols = tablero[0].length;
 
-        // Calcular el desplazamiento para centrar el tablero
-        int panelWidth = getWidth();
-        int panelHeight = getHeight();
-        int tableroWidth = cols * cellSize;
-        int tableroHeight = rows * cellSize;
+  
+    int panelWidth = getWidth();
+    int panelHeight = getHeight();
+    int tableroWidth = cols * cellSize;
+    int tableroHeight = rows * cellSize;
 
-        int offsetX = (panelWidth - tableroWidth) / 2; // Desplazamiento horizontal
-        int offsetY = (panelHeight - tableroHeight) / 2; // Desplazamiento vertical
+    int offsetX = (panelWidth - tableroWidth) / 2; 
+    int offsetY = (panelHeight - tableroHeight) / 2; 
 
-        // Dibujar el tablero centrado
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (tablero[i][j] != -1) {
-                    g.setColor(Color.GRAY);
-                    g.fillRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
-                }
+   
+    g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+
+ 
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (tablero[i][j] != -1) { 
+                g.setColor(Color.GRAY); 
+                g.fillRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
                 g.drawRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
                 g.drawString(String.valueOf(tablero[i][j]), 
@@ -132,3 +136,4 @@ public static void main(String[] args) {
     }
 }
    }
+    }
