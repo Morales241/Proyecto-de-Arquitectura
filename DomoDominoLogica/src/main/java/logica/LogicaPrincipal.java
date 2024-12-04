@@ -16,7 +16,6 @@ import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.EventoAcabarPartidaDto;
-import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
@@ -60,7 +59,6 @@ import observers.IEventoAcabarPartida;
 import observers.IEventoPedirFichaAlPozo;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
-import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 import tablero.ILogicaTablero;
@@ -183,12 +181,18 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
+<<<<<<< HEAD
 //      comunicaciones.agregarObservadorSalioUnJugador(observador);
         comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
 //      comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+=======
+//        comunicaciones.agregarObservadorSalioUnJugador(observador);
+
+//        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+>>>>>>> parent of 970378a (smn)
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
         comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
-
+        
         //agregar obserevers de lobby
         lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
         lobbyLogica.agregarObservadorVotar(new AccionVotarParaIniciarPartida());
@@ -461,6 +465,7 @@ public class LogicaPrincipal {
         }
     }
 
+<<<<<<< HEAD
     private class AccionComenzarPartidaAdministrador implements IEventoIniciarPartidaAdmin {
 
         @Override
@@ -537,6 +542,8 @@ public class LogicaPrincipal {
         }
     }
 
+=======
+>>>>>>> parent of 970378a (smn)
     public String getNombre() {
         return nombre;
     }

@@ -5,7 +5,6 @@
 package Pozo;
 
 import Entidades.Ficha;
-import dtos.FichaDto;
 import java.util.List;
 
 public interface ILogicaPozo {

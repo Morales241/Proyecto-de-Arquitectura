@@ -14,20 +14,11 @@ import java.util.List;
 public class IniciarPartidaAdmin implements Serializable{
     
     private static final long serialVersionUID = 1L;
-    private int fichasDePartida;
-    private List<JugadorBase> listaJugadores;
+    
+    List<JugadorBase> listaJugadores;
 
-    public IniciarPartidaAdmin(int fichasDePartida, List<JugadorBase> listaJugadores) {
-        this.fichasDePartida = fichasDePartida;
+    public IniciarPartidaAdmin(List<JugadorBase> listaJugadores) {
         this.listaJugadores = listaJugadores;
-    }
-
-    public int getFichasDePartida() {
-        return fichasDePartida;
-    }
-
-    public void setFichasDePartida(int fichasDePartida) {
-        this.fichasDePartida = fichasDePartida;
     }
 
     public List<JugadorBase> getListaJugadores() {
@@ -38,5 +29,7 @@ public class IniciarPartidaAdmin implements Serializable{
         this.listaJugadores = listaJugadores;
     }
 
+    
+    
     
 }
