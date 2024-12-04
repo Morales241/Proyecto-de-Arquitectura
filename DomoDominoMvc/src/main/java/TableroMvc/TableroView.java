@@ -252,14 +252,14 @@ JLabel avatarJugador = new JLabel();
         } else {
             System.err.println("Imagen no encontrada para: " + rutaImagen2);
         }
-        avatarJugador.setBounds(0, 550, 110, 110);
+         avatarJugador.setBounds(0, 250, 110, 110);
         layeredPane.add(avatarJugador, JLayeredPane.PALETTE_LAYER);
         
          JLabel nombreJugador = new JLabel();
        
            nombreJugador.setText(model.getJugador().getNombre());
         
-        avatarJugador.setBounds(0, 250, 110, 110);
+        nombreJugador.setBounds(0, 110, 110, 110);
         layeredPane.add(nombreJugador, JLayeredPane.PALETTE_LAYER);
         
          JLabel avatarJugadorContrincante = new JLabel();
