@@ -164,6 +164,12 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
             }
         }
         ejecutarAccionCrearPartida(this.txtNombre.getText(), Integer.parseInt(String.valueOf(this.cbxNumeroFichas.getSelectedItem())), avatar);
+        
+      
+    txtNombre.setText(""); 
+    cbxNumeroFichas.setSelectedIndex(0); 
+        actualizarAvatar();
+
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
