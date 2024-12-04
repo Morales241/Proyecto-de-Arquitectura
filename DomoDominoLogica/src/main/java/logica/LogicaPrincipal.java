@@ -17,6 +17,7 @@ import eventos.EventoAcabarPartidaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorSeUnioAPartida;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
@@ -49,6 +50,7 @@ import observers.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -160,7 +162,8 @@ public class LogicaPrincipal {
 
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
-
+        comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
+        
         //agregar obserevers de lobby
         lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
         lobbyLogica.agregarObservadorVotar(new AccionVotarParaIniciarPartida());
@@ -275,11 +278,12 @@ public class LogicaPrincipal {
 
     }
 
-    public void limpiarCampos(){
+    public void limpiarCampos() {
         this.avatar = 1;
-        this.codigo ="";
-        this.nombre ="";
+        this.codigo = "";
+        this.nombre = "";
     }
+
     private class AccionCerrarLobby implements IEventoSalirDeLobby {
 
         @Override
@@ -288,7 +292,7 @@ public class LogicaPrincipal {
             lobbyLogica.salirDeLobby(jugador);
             limpiarCampos();
             mediador.mostrarPantallaConcreta("inicio");
-            
+
         }
     }
 
@@ -388,6 +392,14 @@ public class LogicaPrincipal {
         }
     }
 
+    private class AccionSeUnioJugadorAlaPartida implements IEventoSeUnieronAtuPartida {
+
+        @Override
+        public void avisarAJugadores(JugadorSeUnioAPartida jugadorSeUnioAPartida) {
+            lobbyLogica.actualizarLobby(new JugadorBase(jugadorSeUnioAPartida.getNombre(), jugadorSeUnioAPartida.getAvatar()));
+        }
+    }
+
     private class AccionRecibirRespuestaUnirseAPartida implements IEventoRespuestaServidorCentral {
 
         @Override
@@ -403,7 +415,10 @@ public class LogicaPrincipal {
                 lobbyLogica.actualizarLobby(Yo);
 
                 jugadorAux.getJugadores().forEach(jugador -> {
-                    lobbyLogica.actualizarLobby(jugador);
+
+                    if (!getNombre().equals(jugador.getNombre())) {
+                        lobbyLogica.actualizarLobby(jugador);
+                    }
                 });
 
                 mediador.mostrarPantallaConcreta("lobby");
@@ -413,6 +428,10 @@ public class LogicaPrincipal {
                 logicaAviso.mostrarAviso(respuesta.getRespuesta());
             }
         }
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
 }

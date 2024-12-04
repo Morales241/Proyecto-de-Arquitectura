@@ -9,6 +9,7 @@ import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoAcabarPartida;
 import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 
 /**
  * Fachada
@@ -34,4 +35,5 @@ public interface IGestorDeComunicacionesFachada {
     public void agregarObservadorRespuestaCrearPartida(IEventoRespuestaServidorCentral observador);
     public void agregarObservadorRespuestaUnirseAPartida(IEventoRespuestaServidorCentral observador);
     public void conectarAServidorCentral(String ip, int puerto);
+    public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador);
 }

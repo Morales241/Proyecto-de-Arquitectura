@@ -6,6 +6,7 @@ import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorSeUnioAPartida;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.NodoDto;
 import eventos.RespuestaDePartidaCreada;
@@ -55,9 +56,13 @@ public class ServerCentral {
         conectarJugadorAlServer(jugador);
         try {
             nodos.add(jugador);
+
             this.infoPartidas.put(jugador.getCodigo(), nodos);
+
             this.VotosParaInciarPartidas.put(jugador.getCodigo(), 1);
+
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
+
             mandarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente", true), jugador.getNombre());
 
         } catch (Exception ex) {
@@ -94,7 +99,24 @@ public class ServerCentral {
 
                 respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "Se ha unido a una partida", true);
 
-                mandarMensaje(respuesta, jugador.getNombre());
+                List<JugadorBase> jugadores = informacionDePartidaPorCodigo(jugador.getCodigo());
+
+                respuesta.setJugadores(jugadores);
+              
+                jugadores.forEach(jugadorMensaje -> {
+                    
+                    if (jugador.getNombre().equals(jugadorMensaje.getNombre())) {
+                        
+                        mandarMensaje(respuesta, jugadorMensaje.getNombre());
+                        
+                    }else{
+                        JugadorSeUnioAPartida jugadorSeUnioAPartida = new JugadorSeUnioAPartida(jugadorMensaje.getNombre(), jugadorMensaje.getAvatar()); 
+                        
+                        mandarMensaje(jugadorSeUnioAPartida, jugadorMensaje.getNombre());
+                    }
+                    
+                });
+
             } else {
                 nodos.clear();
 
@@ -211,7 +233,7 @@ public class ServerCentral {
 
         VotosParaInciarPartidas.replace(codigo, numeroVotos);
 
-        if (numeroJugadores == numeroVotos && numeroVotos != 1 && numeroJugadores != 1) {
+        if (numeroJugadores >= numeroVotos && numeroVotos != 1 && numeroJugadores != 1) {
             mandarInfoParaIniciarPartida(codigo);
         }
     }

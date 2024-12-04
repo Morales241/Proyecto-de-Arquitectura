@@ -4,6 +4,7 @@ import dtos.FichaDto;
 import eventos.EventoAcabarPartidaDto;
 import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
+import eventos.JugadorSeUnioAPartida;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import eventos.RespuestaServidorCentral;
@@ -123,7 +124,9 @@ public class Servidor {
 
                 case IniciarPartidaAdmin partidaAdmin ->
                     gestorMensajes.notificarObserverIniciarPartidaAdmin(partidaAdmin);
-                 
+                    
+                case JugadorSeUnioAPartida jugadorSeUnioAPartida ->
+                    gestorMensajes.notificarObservadorSeUnieronAtuPartida(jugadorSeUnioAPartida);
                 default ->
                     log.log(Level.INFO, "Tipo de mensaje no reconocido");
             }

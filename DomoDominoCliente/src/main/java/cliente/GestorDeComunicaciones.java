@@ -13,6 +13,7 @@ import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 import serverInterno.GestorMensajes;
 import serverInterno.Servidor;
 
@@ -77,6 +78,10 @@ public class GestorDeComunicaciones {
     
     public void agregarObservadorFichaTomadaDelPozo(IEventoTomarFichaDelPozo observador) {
         gestorMensajes.agregarObservadorFichaTomadaDelPozo(observador);
+    }
+    
+    public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador) {
+        gestorMensajes.agregarObservadorSeUnieronAtuPartida(observador);
     }
     
 }
