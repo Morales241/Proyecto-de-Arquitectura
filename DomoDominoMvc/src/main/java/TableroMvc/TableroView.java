@@ -44,10 +44,25 @@ public class TableroView extends JFrame implements IComponente {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        inicializarPaneles();
+
+        if (model.getJugador() != null && model.getJugador().getFichas() != null) {
+            for (FichaDto ficha : model.getJugador().getFichas()) {
+                if (ficha != null) {
+                    agregarFichaAlPanel(ficha);
+                }
+            }
+        }
+
+        setLocationRelativeTo(null);
+       
+    }
+
+    private void inicializarPaneles() {
         layeredPane = new JLayeredPane();
         setContentPane(layeredPane);
 
-        tableroPanel = new TableroPanel((ArregloDto) model.getArray());
+        tableroPanel = new TableroPanel(null);
         tableroPanel.setBounds(0, 0, 1200, 700);
         layeredPane.add(tableroPanel, JLayeredPane.DEFAULT_LAYER);
 
@@ -80,24 +95,14 @@ public class TableroView extends JFrame implements IComponente {
         JLabel avatarJugador = new JLabel();
         String rutaImagen2 = "/imgPartidaFichas/avatar1.png";
         URL recurso2 = getClass().getResource(rutaImagen2);
-        if (recurso != null) {
+        if (recurso2 != null) {
             ImageIcon icono2 = new ImageIcon(recurso2);
             avatarJugador.setIcon(icono2);
-
         } else {
-            System.err.println("Imagen no encontrada para: " + rutaImagen);
+            System.err.println("Imagen no encontrada para: " + rutaImagen2);
         }
         avatarJugador.setBounds(0, 550, 110, 110);
         layeredPane.add(avatarJugador, JLayeredPane.PALETTE_LAYER);
-
-        for (FichaDto ficha : model.getJugador().getFichas()) {
-            if (ficha != null) {
-                agregarFichaAlPanel(ficha);
-            }
-        }
-
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private void agregarFichaAlPanel(FichaDto ficha) {
@@ -147,7 +152,7 @@ public class TableroView extends JFrame implements IComponente {
         String[] direcciones = {"Arriba", "Abajo", "Izquierda", "Derecha"};
         for (String direccion : direcciones) {
             JButton botonDireccion = new JButton(direccion);
-        botonDireccion.addActionListener(e -> ejectutarPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, direccion)));
+            botonDireccion.addActionListener(e -> ejectutarPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, direccion)));
             botonesPanel.add(botonDireccion);
         }
         botonesPanel.setVisible(true);
@@ -155,6 +160,7 @@ public class TableroView extends JFrame implements IComponente {
 
         botonesPanel.repaint();
     }
+
     @Override
     public void setMediador(IMediador mediadorp) {
         mediador = mediadorp;
@@ -176,17 +182,22 @@ public class TableroView extends JFrame implements IComponente {
         }
     }
 
-    // Clase TableroPanel restaurada
+  
     public class TableroPanel extends JPanel {
 
         private final int[][] tablero;
         private final ImageIcon fondoImagen;
 
-        public TableroPanel(ArregloDto array) {
-            this.tablero = array.getTablero();
-            this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
-            setPreferredSize(new Dimension(1200, 700));
-        }
+      public TableroPanel(ArregloDto array) {
+    if (array == null || array.getTablero() == null) {
+        this.tablero = new int[10][10];
+    } else {
+        this.tablero = array.getTablero();
+    }
+    this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
+    setPreferredSize(new Dimension(1200, 700));
+}
+
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -238,12 +249,12 @@ public class TableroView extends JFrame implements IComponente {
 
     }
 
-    public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha){
+    public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
         this.eventoPonerFicha = eventoPonerFicha;
-        
+
     }
-    
-    public void ejectutarPonerFicha(PonerFichaDto ponerFicha){
+
+    public void ejectutarPonerFicha(PonerFichaDto ponerFicha) {
         if (this.eventoPonerFicha != null) {
             eventoPonerFicha.ponerFicha(ponerFicha);
         }

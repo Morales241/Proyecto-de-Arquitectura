@@ -4,8 +4,10 @@
  */
 package fachadas;
 
+import Arreglo.ILogicaArreglo;
 import Entidades.Arreglo;
 import Entidades.Ficha;
+import dtos.ArregloDto;
 import dtos.FichaDto;
 import fachadasInterfaz.IArregloFachada;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
  *
  * @author tacot
  */
-public class ArregloFachada implements IArregloFachada{
+public class ArregloFachada implements ILogicaArreglo{
     private Arreglo arreglo;
 
     public ArregloFachada() {
@@ -211,6 +213,11 @@ public class ArregloFachada implements IArregloFachada{
         arreglo.setExtremo2(numExtremo);
         arreglo.setExtremo2Columna(columna);
         arreglo.setExtremo2Fila(fila);
+    }
+
+    @Override
+    public ArregloDto convertirEntidad(Arreglo arreglo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -101,7 +101,7 @@ public class InicializadorClases {
         turnosFachada = new GestorDeTurnosFachada(gestorTurnos);
         
         //Array 
-        arregloFachada = new ArregloFachada();
+      ArregloFachada arregloFachada = new ArregloFachada();
         
     }
 
