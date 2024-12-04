@@ -1,6 +1,6 @@
 package TableroMvc;
 
-import dtos.ArrayDto;
+import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
 import java.awt.BorderLayout;
@@ -18,7 +18,7 @@ import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-public class TableroView extends JFrame implements TableroModel.Observer {
+public class TableroView extends JFrame {
 
     private TableroModel model;
     private JPanel fichasJugadorPanel;
@@ -29,7 +29,7 @@ public class TableroView extends JFrame implements TableroModel.Observer {
 
     public TableroView(TableroModel model) {
         this.model = model;
-        this.model.agregarObserver(this);
+//        this.model.agregarObserver(this);
 
         this.setSize(1210, 730);
         setTitle("Tablero de Dominó");
@@ -39,7 +39,7 @@ public class TableroView extends JFrame implements TableroModel.Observer {
         layeredPane = new JLayeredPane();
         setContentPane(layeredPane);
 
-        tableroPanel = new TableroPanel((ArrayDto) model.getArray());
+        tableroPanel = new TableroPanel((ArregloDto) model.getArray());
         tableroPanel.setBounds(0, 0, 1200, 700);
         layeredPane.add(tableroPanel, JLayeredPane.DEFAULT_LAYER);
 
@@ -116,7 +116,6 @@ public class TableroView extends JFrame implements TableroModel.Observer {
         }
     }
 
-    @Override
     public void update() {
         // Aquí puedes actualizar la vista cuando se notifique un cambio en el modelo
         fichasJugadorPanel.removeAll(); // Limpiar el panel
@@ -132,13 +131,13 @@ public class TableroView extends JFrame implements TableroModel.Observer {
         botonesPanel.removeAll();
         JButton botonExtremo1 = new JButton("Extremo 1");
         botonExtremo1.addActionListener(e -> {
-            model.colocarFicha(true, fichaSeleccionada);
+//            model.colocarFicha(true, fichaSeleccionada);
         });
         botonesPanel.add(botonExtremo1);
 
         JButton botonExtremo2 = new JButton("Extremo 2");
         botonExtremo2.addActionListener(e -> {
-            model.colocarFicha(false, fichaSeleccionada);
+//            model.colocarFicha(false, fichaSeleccionada);
         });
         botonesPanel.add(botonExtremo2);
 
@@ -169,8 +168,8 @@ public class TableroView extends JFrame implements TableroModel.Observer {
         private final int[][] tablero;
         private final ImageIcon fondoImagen;
 
-        public TableroPanel(ArrayDto array) {
-            this.tablero = array.obtenerTablero();
+        public TableroPanel(ArregloDto array) {
+            this.tablero = array.getTablero();
             this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
             setPreferredSize(new Dimension(1200, 700));
         }
@@ -208,20 +207,23 @@ public class TableroView extends JFrame implements TableroModel.Observer {
             }
         }
     }
-
-    public static void main(String[] args) {
-
-        ArrayDto array = new ArrayDto();
-        JugadorDto jugador = new JugadorDto("Favela");
-
-//        jugador.agregarFichas(jugador.repartirFichas());
-
-        TableroModel modelo = new TableroModel(array, jugador);
-
-        TableroView vista = new TableroView(modelo);
-
-        java.awt.EventQueue.invokeLater(() -> {
-            vista.setVisible(true);
-        });
-    }
+//
+//    public static void main(String[] args) {
+//
+////        ArregloDto array = new ArregloDto();
+//        JugadorDto jugador = new JugadorDto("Favela");
+//
+////        jugador.agregarFichas(jugador.repartirFichas());
+//
+////        TableroModel modelo = new TableroModel(array, jugador);
+//
+////        TableroView vista = new TableroView(modelo);
+//
+//        java.awt.EventQueue.invokeLater(() -> {
+//            vista.setVisible(true);
+//        });
+//    }
+//    
+    
+    
 }

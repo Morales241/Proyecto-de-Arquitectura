@@ -5,6 +5,7 @@ import InicioMvc.InicioModel;
 import TableroMvc.TableroModel;
 import aviso.AvisoModel;
 import crearPartida.CrearPartidaModel;
+import fachadas.ArregloFachada;
 import fachadas.AvisoFachada;
 import fachadas.CrearPartidaFachada;
 import fachadas.GestorDeTurnosFachada;
@@ -17,6 +18,7 @@ import fachadas.InicioFachada;
 import fachadas.LobbyFachada;
 import fachadas.TableroFachada;
 import fachadas.UnirseAPartidaFachada;
+import fachadasInterfaz.IArregloFachada;
 import fachadasInterfaz.IGestorDeTurnosFachada;
 import fachadasInterfaz.ILobbyFachada;
 import lobby.LobbyModel;
@@ -52,6 +54,9 @@ public class InicializadorClases {
     private ILobbyFachada lobbyFachada;
     
     private IGestorDeTurnosFachada turnosFachada;
+    
+    private IArregloFachada arregloFachada;
+
      
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
@@ -80,8 +85,8 @@ public class InicializadorClases {
         unirsePartidaFachada = new UnirseAPartidaFachada(unirseAPartidaModel);
         
         //fachada tablero
-//        TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
-//        tableroFachada = new TableroFachada(tableroModel);
+        TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
+        tableroFachada = new TableroFachada(tableroModel);
         
         //fachada aviso
         AvisoModel avisoModel = (AvisoModel) mediador.obtenerPantallaConcreta("aviso").getModelo();
@@ -91,9 +96,17 @@ public class InicializadorClases {
         LobbyModel lobbyModel = (LobbyModel) mediador.obtenerPantallaConcreta("lobby").getModelo();
         lobbyFachada = new LobbyFachada(lobbyModel);
         
+        //Gestor de turnos
         GestorTurnos gestorTurnos = new GestorTurnos();
         turnosFachada = new GestorDeTurnosFachada(gestorTurnos);
         
+        //Array 
+        arregloFachada = new ArregloFachada();
+        
+    }
+
+    public IArregloFachada getArregloFachada() {
+        return arregloFachada;
     }
 
     public IInicioFachada getInicioFachada() {

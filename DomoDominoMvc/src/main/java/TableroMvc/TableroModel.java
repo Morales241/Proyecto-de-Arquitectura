@@ -4,12 +4,18 @@
  */
 package TableroMvc;
 
-import dtos.ArrayDto;
+import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
-import java.util.ArrayList;
+import eventos.JugadorAEliminarDto;
+import eventos.JugadorBase;
+import eventos.PonerFichaDto;
 import java.util.List;
-import serializables.Jugador;
+import observers.IEventoPedirFichaAlPozo;
+import observers.IEventoPonerFicha;
+import observers.IEventoTomarFichaDelPozo;
+import observers.IObserver;
+import observersLogicaAServidorCentral.IEventoSalirDePartida;
 
 /**
  *
@@ -17,42 +23,68 @@ import serializables.Jugador;
  */
 public class TableroModel {
 
-    private final ArrayDto array;
+    private ArregloDto array;
     private JugadorDto jugador;
-    private List<Observer> observers;
+    List<JugadorBase> compañeros;
+    private IEventoPonerFicha eventoPonerFicha;
+    private IEventoPedirFichaAlPozo eventoTomarFichaDelPozo;
+    private IEventoSalirDePartida eventoSalirDePartida;
+    private IObserver actualizar;
 
-    public TableroModel(ArrayDto array, JugadorDto jugador) {
-        this.array = array;
-        this.jugador = jugador;
-        this.observers = new ArrayList<>();
+    public TableroModel() {
     }
 
-    public void agregarObserver(Observer observer) {
-        observers.add(observer);
+    public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
+        this.eventoPonerFicha = eventoPonerFicha;
     }
 
-    public void eliminarObserver(Observer observer) {
-        observers.remove(observer);
+    public void agregarObserverTomarFichaDelPozo(IEventoPedirFichaAlPozo eventoTomarFichaDelPozo) {
+        this.eventoTomarFichaDelPozo = eventoTomarFichaDelPozo;
     }
 
-    private void notificarObservers() {
-        for (Observer observer : observers) {
-            observer.update();
+    public void agregarObserverSalirDePartida(IEventoSalirDePartida eventoSalirDePartida) {
+        this.eventoSalirDePartida = eventoSalirDePartida;
+    }
+
+    public void ejecutarObserverPonerFicha(PonerFichaDto ponerFicha) {
+        if (eventoPonerFicha != null) {
+            eventoPonerFicha.ponerFicha(ponerFicha);
+        }
+    }
+
+    public void ejecutarObserverTomarFichaDelPozo() {
+        if (eventoTomarFichaDelPozo != null) {
+            eventoTomarFichaDelPozo.pedirFicha();
+        }
+    }
+
+    public void ejecutarObserverSalirDePartida(JugadorAEliminarDto jugador) {
+        if (eventoSalirDePartida != null) {
+            eventoSalirDePartida.salirDePartida(jugador);
+        }
+    }
+
+    public void agregarObserverActualizar(IObserver actualizar) {
+        this.actualizar = actualizar;
+    }
+
+    public void ejecutarObserverActualizar() {
+        if (actualizar != null) {
+            actualizar.actualizar();
         }
     }
 
     public void agregarFicha(FichaDto ficha) {
-        jugador.agregarFicha(ficha);
-        notificarObservers();
+        jugador.getFichas().add(ficha);
+        ejecutarObserverActualizar();
     }
 
-    public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada) {
-        boolean colocada = extremoIzquierdo ? array.colocarFichaExtremoIzquierdo(fichaSeleccionada)
-                : array.colocarFichaExtremoDerecho(fichaSeleccionada);
-        if (colocada) {
-            jugador.eliminarFicha(fichaSeleccionada);
-            notificarObservers();
-        }
+    public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada, String Direccion) {
+//        boolean colocada = extremoIzquierdo ? array.colocarFichaExtremoIzquierdo(fichaSeleccionada)
+//                : array.colocarFichaExtremoDerecho(fichaSeleccionada);
+//        if (colocada) {
+//            ejecutarObserverPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, Direccion));
+//        }
     }
 
     public JugadorDto getJugador() {
@@ -63,16 +95,32 @@ public class TableroModel {
         this.jugador = jugador;
     }
 
-    public ArrayDto getArray() {
+    public ArregloDto getArray() {
         return array;
     }
 
-    public boolean verificarMovimientosPosibles() {
-        return array.verificarPosiblesMovimientos(jugador.getFichas());
+    public void setArray(ArregloDto array) {
+        this.array = array;
     }
 
-    public interface Observer {
+    public boolean verificarMovimientosPosibles() {
+//        return array.verificarPosiblesMovimientos(jugador.getFichas());
+        return false;
+    }
 
-        void update();
+    public List<JugadorBase> getCompañeros() {
+        return compañeros;
+    }
+
+    public void setCompañeros(List<JugadorBase> compañeros) {
+        this.compañeros = compañeros;
+    }
+
+    public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
+        setJugador(jugadorDto);
+        setCompañeros(jugadorBases);
+        setArray(arrayDto);
+
+        ejecutarObserverActualizar();
     }
 }

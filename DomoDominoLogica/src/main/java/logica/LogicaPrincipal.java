@@ -12,6 +12,7 @@ import Pozo.ILogicaPozo;
 import Pozo.LogicaPozo;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
+import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.EventoAcabarPartidaDto;
@@ -56,11 +57,14 @@ import observers.IObserver;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import observers.IEventoAcabarPartida;
+import observers.IEventoPedirFichaAlPozo;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
+import tablero.ILogicaTablero;
+import tablero.LogicaTablero;
 import terminarPartida.ILogicaTerminarPartida;
 import terminarPartida.LogicaTerminarPartida;
 
@@ -82,11 +86,12 @@ public class LogicaPrincipal {
     private final ILogicaArreglo IArreglo;
     private final ILogicaPozo IPozo;
     private final ILogicaAviso logicaAviso;
-    private final ILogicaGestorTurno turnosFachada;
+    private final ILogicaGestorTurno logicaTurnos;
     private final ILogicaTerminarPartida logicaTerminarPartida;
     private String nombre;
     private int avatar;
     private String codigo;
+    private final ILogicaTablero logicaTablero;
 
     private InicializadorComunicaciones inicalizadorComunicaciones;
     private final IGestorDeComunicacionesFachada comunicaciones;
@@ -108,13 +113,13 @@ public class LogicaPrincipal {
 
         comunicaciones = inicalizadorComunicaciones.getComunicaciones();
 
+        IArreglo = (ILogicaArreglo) inicializadorClases.getArregloFachada();
+        
         lInicio = new LogicaInicio();
 
         IUnirsePartida = new LogicaUnirseAPartida(comunicaciones);
 
         lCrearPartida = new LogicaCrearPartida(comunicaciones);
-
-        IArreglo = new LogicaArreglo();
 
         IPozo = new LogicaPozo();
 
@@ -130,9 +135,11 @@ public class LogicaPrincipal {
 
         lobbyLogica = new LobbyLogica((LobbyFachada) inicializadorClases.getLobbyFachada(), comunicaciones);
 
-        turnosFachada = new LogicaGestorTurno(comunicaciones, inicializadorClases.getTurnosFachada());
+        logicaTurnos = new LogicaGestorTurno(comunicaciones, inicializadorClases.getTurnosFachada());
 
         logicaTerminarPartida = new LogicaTerminarPartida(comunicaciones);
+        
+        logicaTablero = new LogicaTablero(tableroFachada);
         
         agregarObservers();
 
@@ -165,10 +172,11 @@ public class LogicaPrincipal {
         unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
 
         //agregar observer del tablero
-//        tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
-//        tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
-//        tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
-//        tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
+        
+        logicaTablero.agregarIEventoPonerFicha(new AccionPonerFicha());
+        logicaTablero.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
+        logicaTablero.agregarIEventoSalirDePartida(new AccionSalirDePartida());
+        
         //agregar observers de comunicaciones
         comunicaciones.agregarObservadorAcabarPartida(new AccionAcabarPartida());
         comunicaciones.agregarObservadorFichaTomadaDelPozo(new AccionTomaronFichaDelPozo());
@@ -251,13 +259,6 @@ public class LogicaPrincipal {
     }
 
     //EN ESPERA
-    private class AccionIniciarPartida implements IEventoIniciarPartida {
-
-        @Override
-        public void iniciarPartida(SetUpDto setUp) {
-
-        }
-    }
 
     private class AccionSalirDePartida implements IEventoSalirDePartida {
 
@@ -275,12 +276,14 @@ public class LogicaPrincipal {
         }
     }
 
-    private class AccionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
+    private class AccionTomarFichaDelPozo implements IEventoPedirFichaAlPozo {
 
         @Override
-        public void tomarFichaDelPozo(FichaDto fichaSacada) {
-            IPozo.sacarFicha();
+        public void pedirFicha() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
+
+        
     }
 
     private class AccionElejirFicha {
@@ -368,7 +371,18 @@ public class LogicaPrincipal {
 
         @Override
         public void iniciarPartida(SetUpDto setUp) {
-
+            
+            logicaTurnos.sincronizarTurnosConClaseExterna(setUp.getTurnos());
+            
+            IPozo.sacarFichasEspecificasPozo(setUp.getFichasSacadasDelPozo());
+            
+            ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+            
+            JugadorDto jugadorDto = new JugadorDto(setUp.getNombre(), setUp.getAvatar(), setUp.getFichasDelJugador());
+            
+            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada());
+            
+        
         }
 
     }
@@ -487,9 +501,9 @@ public class LogicaPrincipal {
                 });
             });
 
-            turnosFachada.inicializarTurnos(jugadorDtos);
+            logicaTurnos.inicializarTurnos(jugadorDtos);
 
-            List<JugadorDto> ordenTurnos = turnosFachada.obtenerOrdenDeTurnos();
+            List<JugadorDto> ordenTurnos = logicaTurnos.obtenerOrdenDeTurnos();
             List<String> nombresEnOrden = new ArrayList<>();
 
             for (JugadorDto jugador : ordenTurnos) {

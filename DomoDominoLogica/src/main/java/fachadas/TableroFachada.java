@@ -6,10 +6,13 @@ package fachadas;
 
 import fachadasInterfaz.ITableroFachada;
 import TableroMvc.TableroModel;
-import observers.IEventoPasarTurno;
+import dtos.ArregloDto;
+import dtos.JugadorDto;
+import eventos.JugadorBase;
+import java.util.List;
+import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
-import observers.IEventoTomarFichaDelPozo;
 
 /**
  *
@@ -23,44 +26,24 @@ public class TableroFachada implements ITableroFachada {
           this.tableroModel = tableroModel;
      }
      
-//     @Override
-//     public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
-//          this.tableroModel.agregarIEventoPonerFIcha(listener);
-//     }
-//
-//     @Override
-//     public void agregarIEventoTomarFIchaDelPozo(IEventoTomarFichaDelPozo listener) {
-//         this.tableroModel.agregarIEventoSacarFichaDelPozo(listener);
-//     }
-//
-//     @Override
-//     public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
-//         this.tableroModel.agregarEventoPasarTurno(listener);
-//     }
-//
-//     @Override
-//     public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
-//         this.tableroModel.agregarIEventoSalirDePartida(listener);
-//     }
-
     @Override
     public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        tableroModel.agregarObserverPonerFicha(listener);
     }
 
     @Override
-    public void agregarIEventoTomarFIchaDelPozo(IEventoTomarFichaDelPozo listener) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agregarIEventoTomarFIchaDelPozo(IEventoPedirFichaAlPozo listener) {
+        tableroModel.agregarObserverTomarFichaDelPozo(listener);
     }
 
     @Override
     public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        tableroModel.agregarObserverSalirDePartida(listener);
+    }
+    
+    
+    public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases){
+        tableroModel.iniciarPartida(jugadorDto, arrayDto, jugadorBases);
     }
      
 }

@@ -2,8 +2,10 @@ package Arreglo;
 
 import Entidades.Arreglo;
 import Entidades.Ficha;
+import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
+import fachadas.ArregloFachada;
 import java.util.List;
 
 /**
@@ -16,189 +18,82 @@ import java.util.List;
  */
 public class LogicaArreglo implements ILogicaArreglo {
 
-     private Arreglo arreglo;
+    private final ArregloFachada arregloFachada;
 
-     public LogicaArreglo() {
-          this.arreglo = Arreglo.getInstance();
-     }
+    public LogicaArreglo(ArregloFachada arregloFachada) {
+        this.arregloFachada = arregloFachada;
+    }
 
-     @Override
-     public int[][] obtenerTablero() {
-          return arreglo.getTablero();
-     }
+    @Override
+    public int[][] obtenerTablero() {
+        return arregloFachada.obtenerTablero();
+    }
 
-     @Override
-     public boolean estaVacio(int fila, int columna) {
-          return obtenerTablero()[fila][columna] == -1;
-     }
+    @Override
+    public boolean estaVacio(int fila, int columna) {
+        return arregloFachada.estaVacio(fila, columna);
+    }
 
-     @Override
-     public boolean verificarPosiblesMovimientos(List<Ficha> fichasJugador) {
-          int extremoIzquierdo = arreglo.getExtremo1();
-          int extremoDerecho = arreglo.getExtremo2();
-          for (Ficha ficha : fichasJugador) {
-               if (ficha.getLado1() == extremoIzquierdo || ficha.getLado2() == extremoIzquierdo
-                       || ficha.getLado1() == extremoDerecho || ficha.getLado2() == extremoDerecho) {
-                    System.out.println("Extremo 1: " + arreglo.getExtremo1());
-                    System.out.println("Extremo 2: " + arreglo.getExtremo2());
-                    return true;
-               }
-          }
-          return false;
-     }
+    @Override
+    public boolean verificarPosiblesMovimientos(List<Ficha> fichasJugador) {
+        return arregloFachada.verificarPosiblesMovimientos(fichasJugador);
+    }
 
-     @Override
-     public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion) {
-          switch (direccion) {
-               case "Izquierda":
-                    return colocarFichaIzquierda(ficha, extremo);
-               case "Arriba":
-                    return colocarFichaArriba(ficha, extremo);
-               case "Derecha":
-                    return colocarFichaDerecha(ficha, extremo);
-               case "Abajo":
-                    return colocarFichaAbajo(ficha, extremo);
-          }
-          return false;
-     }
+    @Override
+    public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion) {
+        return arregloFachada.colocarFicha(ficha, extremo, direccion);
+    }
 
-     @Override
-     public boolean colocarFichaIzquierda(FichaDto ficha, boolean extremo) {
-          int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
-          int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
-          int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+    @Override
+    public boolean colocarFichaIzquierda(FichaDto ficha, boolean extremo) {
+        return arregloFachada.colocarFichaIzquierda(ficha, extremo);
+    }
 
-          if (ficha.esMula() && ficha.getLado1() == lado && columna - 1 >= 0 && estaVacio(fila, columna - 1)) {
-               obtenerTablero()[fila][columna - 1] = ficha.getLado1();
-               actualizarExtremos(extremo, ficha.getLado1(), columna - 1, fila);
-               return true;
-          }
+    @Override
+    public boolean colocarFichaDerecha(FichaDto ficha, boolean extremo) {
+        return arregloFachada.colocarFichaDerecha(ficha, extremo);
+    }
 
-          if (columna - 2 >= 0 && estaVacio(fila, columna - 1) && estaVacio(fila, columna - 2)) {
-               if (ficha.getLado1() == lado) {
-                    obtenerTablero()[fila][columna - 1] = ficha.getLado1();
-                    obtenerTablero()[fila][columna - 2] = ficha.getLado2();
-                    actualizarExtremos(extremo, ficha.getLado2(), columna - 2, fila);
-                    return true;
-               }
-               if (ficha.getLado2() == lado) {
-                    obtenerTablero()[fila][columna - 1] = ficha.getLado2();
-                    obtenerTablero()[fila][columna - 2] = ficha.getLado1();
-                    actualizarExtremos(extremo, ficha.getLado1(), columna - 2, fila);
-                    return true;
-               }
-          }
-          return false;
-     }
+    @Override
+    public boolean colocarFichaArriba(FichaDto ficha, boolean extremo) {
+        return arregloFachada.colocarFichaArriba(ficha, extremo);
+    }
 
-     @Override
-     public boolean colocarFichaDerecha(FichaDto ficha, boolean extremo) {
-          int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
-          int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
-          int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+    @Override
+    public boolean colocarFichaAbajo(FichaDto ficha, boolean extremo) {
+        return arregloFachada.colocarFichaAbajo(ficha, extremo);
+    }
 
-          if (ficha.esMula() && ficha.getLado1() == lado && columna + 1 < obtenerTablero()[0].length && estaVacio(fila, columna + 1)) {
-               obtenerTablero()[fila][columna + 1] = ficha.getLado1();
-               actualizarExtremos(extremo, ficha.getLado1(), columna + 1, fila);
-               return true;
-          }
+    @Override
+    public void actualizarExtremos(boolean extremo, int numExtremo, int columna, int fila) {
+        arregloFachada.actualizarExtremoDerecho(numExtremo, columna, fila);
+    }
 
-          if (columna + 2 < obtenerTablero()[0].length && estaVacio(fila, columna + 1) && estaVacio(fila, columna + 2)) {
-               if (ficha.getLado1() == lado) {
-                    obtenerTablero()[fila][columna + 1] = ficha.getLado1();
-                    obtenerTablero()[fila][columna + 2] = ficha.getLado2();
-                    actualizarExtremos(extremo, ficha.getLado2(), columna + 2, fila);
-                    return true;
-               }
-               if (ficha.getLado2() == lado) {
-                    obtenerTablero()[fila][columna + 1] = ficha.getLado2();
-                    obtenerTablero()[fila][columna + 2] = ficha.getLado1();
-                    actualizarExtremos(extremo, ficha.getLado1(), columna + 2, fila);
-                    return true;
-               }
-          }
-          return false;
-     }
+    @Override
+    public void actualizarExtremoIzquierdo(int numExtremo, int columna, int fila) {
+        arregloFachada.actualizarExtremoIzquierdo(numExtremo, columna, fila);
+    }
 
-     @Override
-     public boolean colocarFichaArriba(FichaDto ficha, boolean extremo) {
-          int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
-          int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
-          int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+    @Override
+    public void actualizarExtremoDerecho(int numExtremo, int columna, int fila) {
+        arregloFachada.actualizarExtremoDerecho(numExtremo, columna, fila);
+    }
 
-          if (ficha.esMula() && ficha.getLado1() == lado && fila - 1 >= 0 && estaVacio(fila - 1, columna)) {
-               obtenerTablero()[fila - 1][columna] = ficha.getLado1();
-               actualizarExtremos(extremo, ficha.getLado1(), columna, fila - 1);
-               return true;
-          }
+    @Override
+    public ArregloDto convertirEntidad(Arreglo arreglo) {
+        return new ArregloDto(
+            arreglo.getTablero(),
+            arreglo.getExtremoIzquierdo(),
+            arreglo.getExtremoDerecha(),
+            arreglo.getExtremo1Columna(),
+            arreglo.getExtremo1Fila(),
+            arreglo.getExtremo2Columna(),
+            arreglo.getExtremo2Fila()
+        );
+    }
 
-          if (fila - 2 >= 0 && estaVacio(fila - 1, columna) && estaVacio(fila - 2, columna)) {
-               if (ficha.getLado1() == lado) {
-                    obtenerTablero()[fila - 1][columna] = ficha.getLado1();
-                    obtenerTablero()[fila - 2][columna] = ficha.getLado2();
-                    actualizarExtremos(extremo, ficha.getLado2(), columna, fila - 2);
-                    return true;
-               }
-               if (ficha.getLado2() == lado) {
-                    obtenerTablero()[fila - 1][columna] = ficha.getLado2();
-                    obtenerTablero()[fila - 2][columna] = ficha.getLado1();
-                    actualizarExtremos(extremo, ficha.getLado1(), columna, fila - 2);
-                    return true;
-               }
-          }
-          return false;
-     }
-
-     @Override
-     public boolean colocarFichaAbajo(FichaDto ficha, boolean extremo) {
-          int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
-          int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
-          int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
-
-          if (ficha.esMula() && ficha.getLado1() == lado && fila + 1 < obtenerTablero().length && estaVacio(fila + 1, columna)) {
-               obtenerTablero()[fila + 1][columna] = ficha.getLado1();
-               actualizarExtremos(extremo, ficha.getLado1(), columna, fila + 1);
-               return true;
-          }
-
-          if (fila + 2 < obtenerTablero().length && estaVacio(fila + 1, columna) && estaVacio(fila + 2, columna)) {
-               if (ficha.getLado1() == lado) {
-                    obtenerTablero()[fila + 1][columna] = ficha.getLado1();
-                    obtenerTablero()[fila + 2][columna] = ficha.getLado2();
-                    actualizarExtremos(extremo, ficha.getLado2(), columna, fila + 2);
-                    return true;
-               }
-               if (ficha.getLado2() == lado) {
-                    obtenerTablero()[fila + 1][columna] = ficha.getLado2();
-                    obtenerTablero()[fila + 2][columna] = ficha.getLado1();
-                    actualizarExtremos(extremo, ficha.getLado1(), columna, fila + 2);
-                    return true;
-               }
-          }
-          return false;
-     }
-
-     @Override
-     public void actualizarExtremos(boolean extremo, int numExtremo, int columna, int fila) {
-      if (extremo) {
-               actualizarExtremoIzquierdo(numExtremo, columna, fila);
-          } else {
-               actualizarExtremoDerecho(numExtremo, columna, fila);
-          }
-     }
-
-     @Override
-     public void actualizarExtremoIzquierdo(int numExtremo, int columna, int fila) {
-          arreglo.setExtremo1(numExtremo);
-          arreglo.setExtremo1Columna(columna);
-          arreglo.setExtremo1Fila(fila);
-     }
-
-     @Override
-     public void actualizarExtremoDerecho(int numExtremo, int columna, int fila) {
-          arreglo.setExtremo2(numExtremo);
-          arreglo.setExtremo2Columna(columna);
-          arreglo.setExtremo2Fila(fila);
-     }
-
+    @Override
+    public Arreglo obtenerArreglo() {
+        return arregloFachada.obtenerArreglo();
+    }
 }

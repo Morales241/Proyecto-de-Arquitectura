@@ -8,4 +8,5 @@ public interface IGestorDeTurnosFachada {
     String obtenerTurnoActual();
     void pasarTurno();
     List<JugadorDto> obtenerOrdenDeTurnos();
+    public void sincronizarTurnosConClaseExterna(List<String> turnosExterna);
 }

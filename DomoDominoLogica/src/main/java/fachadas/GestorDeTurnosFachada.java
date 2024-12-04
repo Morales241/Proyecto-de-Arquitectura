@@ -59,4 +59,9 @@ public class GestorDeTurnosFachada implements IGestorDeTurnosFachada {
         }
         return turnosDTO;
     }
+    
+    public void sincronizarTurnosConClaseExterna(List<String> turnosExterna) {
+        List<String> turnosList = new ArrayList<>(turnosExterna);
+        GestorTurno.setTurnos(turnosList); 
+    }
 }

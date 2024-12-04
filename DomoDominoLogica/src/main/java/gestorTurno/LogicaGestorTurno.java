@@ -36,4 +36,8 @@ public class LogicaGestorTurno implements ILogicaGestorTurno {
         return turnosFachada.obtenerOrdenDeTurnos();
     }
 
+    @Override
+    public void sincronizarTurnosConClaseExterna(List<String> turnosExterna) {
+        turnosFachada.sincronizarTurnosConClaseExterna(turnosExterna);
+    }
 }
