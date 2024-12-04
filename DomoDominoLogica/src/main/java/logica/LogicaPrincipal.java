@@ -70,6 +70,7 @@ public class LogicaPrincipal {
     private final ILogicaAviso logicaAviso;
     private String nombre;
     private int avatar;
+    private String codigo;
 
     private InicializadorComunicaciones inicalizadorComunicaciones;
     private final IGestorDeComunicacionesFachada comunicaciones;
@@ -158,16 +159,17 @@ public class LogicaPrincipal {
 //        comunicaciones.agregarObservadorSalioUnJugador(observador);
 
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
 
         //agregar obserevers de lobby
         lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
         lobbyLogica.agregarObservadorVotar(new AccionVotarParaIniciarPartida());
     }
 
-    public void inicializarnos(String nombre, int avatar) {
+    public void inicializarnos(String nombre, int avatar, String codigo) {
         this.nombre = nombre;
         this.avatar = avatar;
+        this.codigo = codigo;
     }
 
     /*
@@ -210,8 +212,9 @@ public class LogicaPrincipal {
 
         @Override
         public void crearPartida(JugadorCrearPartidaDto jugador) {
-            inicializarnos(jugador.getNombre(), jugador.getAvatar());
-            lCrearPartida.crearPartida(jugador);
+
+            String codigo = lCrearPartida.crearPartida(jugador);
+            inicializarnos(jugador.getNombre(), jugador.getAvatar(), jugador.getCodigo());
         }
 
     }
@@ -221,7 +224,7 @@ public class LogicaPrincipal {
         @Override
         public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
 
-            inicializarnos(jugador.getNombre(), jugador.getAvatar());
+            inicializarnos(jugador.getNombre(), jugador.getAvatar(), jugador.getCodigo());
             IUnirsePartida.unirseAPartida(jugador);
         }
     }
@@ -272,12 +275,20 @@ public class LogicaPrincipal {
 
     }
 
+    public void limpiarCampos(){
+        this.avatar = 1;
+        this.codigo ="";
+        this.nombre ="";
+    }
     private class AccionCerrarLobby implements IEventoSalirDeLobby {
 
         @Override
         public void salirDeLobby(JugadorAEliminarDto jugador) {
             lobbyLogica.inicializarnos(nombre, avatar);
             lobbyLogica.salirDeLobby(jugador);
+            limpiarCampos();
+            mediador.mostrarPantallaConcreta("inicio");
+            
         }
     }
 
@@ -323,7 +334,7 @@ public class LogicaPrincipal {
 
     }
 
-    private class AccionJugadorSaioDePartida implements IEventoSalirDePartida {
+    private class AccionJugadorSalioDePartida implements IEventoSalirDePartida {
 
         @Override
         public void salirDePartida(JugadorAEliminarDto jugador) {
@@ -361,14 +372,15 @@ public class LogicaPrincipal {
         @Override
         public void actualizar(RespuestaServidorCentral respuesta) {
 
-            logicaAviso.mostrarAviso(respuesta.getRespuesta());
-
             JugadorBase Yo = new JugadorBase(nombre, avatar);
+            Yo.setCodigo(codigo);
 
             lobbyLogica.actualizarLobby(Yo);
 
-            if (respuesta.getKey()) {
+            if (!respuesta.getKey()) {
                 mediador.MostrarAviso();
+
+            } else {
 
                 mediador.mostrarPantallaConcreta("lobby");
             }
@@ -383,10 +395,10 @@ public class LogicaPrincipal {
 
             RespuestaDeUnirseAPartida jugadorAux = (RespuestaDeUnirseAPartida) respuesta;
 
-            logicaAviso.mostrarAviso(respuesta.getRespuesta());
             if (respuesta.getKey()) {
 
                 JugadorBase Yo = new JugadorBase(nombre, avatar);
+                Yo.setCodigo(codigo);
 
                 lobbyLogica.actualizarLobby(Yo);
 
@@ -396,9 +408,11 @@ public class LogicaPrincipal {
 
                 mediador.mostrarPantallaConcreta("lobby");
 
+            } else {
+
+                logicaAviso.mostrarAviso(respuesta.getRespuesta());
             }
         }
     }
-    
-    
+
 }

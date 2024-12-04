@@ -37,10 +37,10 @@ public class AvisoView extends javax.swing.JFrame implements IComponente{
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtAviso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtAviso.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         txtAviso.setForeground(new java.awt.Color(220, 179, 88));
         txtAviso.setText("s");
-        jPanel1.add(txtAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 20, 70));
+        jPanel1.add(txtAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 480, 70));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aceptar.png"))); // NOI18N
         btnAceptar.setBorderPainted(false);

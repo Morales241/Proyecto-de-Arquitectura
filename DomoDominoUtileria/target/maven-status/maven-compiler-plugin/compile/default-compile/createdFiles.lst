@@ -10,8 +10,8 @@ observers\IEventoAviso.class
 observersLogicaAServidorCentral\IEventoSalirDePartida.class
 serializables\Jugador.class
 observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.class
-dtos\Array.class
 observers\IEventoAcabarPartida.class
+dtos\ArrayDto.class
 dtos\UsuarioDto.class
 eventos\NodoDto.class
 serializables\Jugada.class
@@ -33,7 +33,6 @@ eventos\RespuestaDePartidaCreada.class
 eventos\PasarTurno.class
 observersLogicaAServidorCentral\IEventoSalirDeLobby.class
 observersServerCentralALogica\IEventoRespuestaServidorCentral.class
-dtos\ArregloDto.class
 mediador\IMediador.class
 observers\IEventoPonerFicha.class
 observers\IEventoValidacionDeNombre.class

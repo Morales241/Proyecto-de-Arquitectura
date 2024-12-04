@@ -5,8 +5,9 @@
 package TableroMvc;
 
 
-import dtos.Array;
+import dtos.ArrayDto;
 import dtos.FichaDto;
+import dtos.JugadorDto;
 import java.util.ArrayList;
 import java.util.List;
 import serializables.Jugador;
@@ -16,12 +17,13 @@ import serializables.Jugador;
  * @author JOSUE GOMEZ
  */
 public class TableroModel {
-      private Array array;
-
+      private ArrayDto array;
+private JugadorDto jugador;
     private List<Observer> observers;
 
-    public TableroModel(Array array) {
+    public TableroModel(ArrayDto array, JugadorDto jugador) {
         this.array = array;
+        this.jugador = jugador;
         this.observers = new ArrayList<>();
     }
 
@@ -39,9 +41,17 @@ public class TableroModel {
         }
     }
 
+    public JugadorDto getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(JugadorDto jugador) {
+        this.jugador = jugador;
+    }
+
   
 
-    public Array getArray() {
+    public ArrayDto getArray() {
         return array;
     }
 

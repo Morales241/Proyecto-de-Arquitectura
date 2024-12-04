@@ -36,22 +36,30 @@ public class LogicaCrearPartida implements ILogicaCrearPartida {
     }
 
     @Override
-    public void crearPartida(JugadorCrearPartidaDto jugador) {
+    public String crearPartida(JugadorCrearPartidaDto jugador) {
         System.out.println("se va a crear la partida");
+        String codigo = "";
         try {
 
             String ip = InetAddress.getLocalHost().getHostAddress();
             ip = "192.168.100.11";
             jugador.setNodo(new NodoDto(ip, 8198));
-
+            codigo = generarCodigo();
+            jugador.setCodigo(codigo);
             comunicaciones.conectarAServidorCentral("192.168.100.21", 8190);
         } catch (UnknownHostException ex) {
             Logger.getLogger(LogicaCrearPartida.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         comunicaciones.enviarMensaje(jugador, "serverCentral");
+        
+        return codigo;
     }
 
+    public void limpiarCampos(){
+        
+    }
+    
     public String generarCodigo() {
 
         String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
