@@ -8,11 +8,6 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DomoDominoMvc</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>DomoDominoDominio</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -24,6 +19,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DomoDominoUtileria</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DomoDominoMvc</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
