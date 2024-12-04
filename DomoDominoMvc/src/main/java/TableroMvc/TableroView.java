@@ -8,25 +8,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.util.List;
-
-import java.awt.GridLayout;
 import java.net.URL;
-import java.util.ArrayList;
-import javax.swing.BoxLayout;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 public class TableroView extends JFrame implements TableroModel.Observer {
 
@@ -49,7 +39,7 @@ public class TableroView extends JFrame implements TableroModel.Observer {
         layeredPane = new JLayeredPane();
         setContentPane(layeredPane);
 
-        tableroPanel = new TableroPanel(model.getArray());
+        tableroPanel = new TableroPanel((ArrayDto) model.getArray());
         tableroPanel.setBounds(0, 0, 1200, 700);
         layeredPane.add(tableroPanel, JLayeredPane.DEFAULT_LAYER);
 

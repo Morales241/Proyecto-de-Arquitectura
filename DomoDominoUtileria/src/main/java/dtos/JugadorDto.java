@@ -18,6 +18,12 @@ public class JugadorDto {
         this.fichas = fichas;
     }
 
+    public JugadorDto(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }

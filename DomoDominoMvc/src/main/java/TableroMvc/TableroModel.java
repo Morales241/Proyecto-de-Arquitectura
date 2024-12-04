@@ -4,7 +4,6 @@
  */
 package TableroMvc;
 
-
 import dtos.ArrayDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
@@ -17,8 +16,9 @@ import serializables.Jugador;
  * @author JOSUE GOMEZ
  */
 public class TableroModel {
-      private ArrayDto array;
-private JugadorDto jugador;
+
+    private final ArrayDto array;
+    private JugadorDto jugador;
     private List<Observer> observers;
 
     public TableroModel(ArrayDto array, JugadorDto jugador) {
@@ -40,14 +40,15 @@ private JugadorDto jugador;
             observer.update();
         }
     }
-     public void agregarFicha(FichaDto ficha) {
+
+    public void agregarFicha(FichaDto ficha) {
         jugador.agregarFicha(ficha);
         notificarObservers();
     }
 
     public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada) {
         boolean colocada = extremoIzquierdo ? array.colocarFichaExtremoIzquierdo(fichaSeleccionada)
-                                             : array.colocarFichaExtremoDerecho(fichaSeleccionada);
+                : array.colocarFichaExtremoDerecho(fichaSeleccionada);
         if (colocada) {
             jugador.eliminarFicha(fichaSeleccionada);
             notificarObservers();
@@ -62,19 +63,16 @@ private JugadorDto jugador;
         this.jugador = jugador;
     }
 
-  
-
     public ArrayDto getArray() {
         return array;
     }
 
- public boolean verificarMovimientosPosibles() {
+    public boolean verificarMovimientosPosibles() {
         return array.verificarPosiblesMovimientos(jugador.getFichas());
     }
- 
 
     public interface Observer {
+
         void update();
     }
 }
-

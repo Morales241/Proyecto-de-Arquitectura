@@ -176,9 +176,9 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
-//        comunicaciones.agregarObservadorSalioUnJugador(observador);
+//      comunicaciones.agregarObservadorSalioUnJugador(observador);
         comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
-//        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+//      comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
         comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
 
