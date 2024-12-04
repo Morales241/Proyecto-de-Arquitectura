@@ -5,15 +5,16 @@
 package Pozo;
 
 import Entidades.Ficha;
+import dtos.FichaDto;
 import java.util.List;
 
 public interface ILogicaPozo {
      
     public void crearFichasPozo();
     
-    public Ficha sacarFicha();
+    public FichaDto sacarFicha();
     
-    public List<Ficha> repartirFichas(int numeroFichas);
+    public List<FichaDto> repartirFichas(int numeroFichas);
     
     public void recibirFichas(List<Ficha> fichasJugador);
     

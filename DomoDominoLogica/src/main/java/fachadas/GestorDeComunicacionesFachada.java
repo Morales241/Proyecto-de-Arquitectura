@@ -10,6 +10,7 @@ import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoAcabarPartida;
 import observers.IEventoIniciarPartida;
+import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 
@@ -106,6 +107,11 @@ public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFac
     @Override
     public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador) {
         comunicaciones.agregarObservadorSeUnieronAtuPartida(observador);
+    }
+
+    @Override
+    public void agregarObservadorIniciarPartidaAdmin(IEventoIniciarPartidaAdmin observador) {
+        comunicaciones.agregarObservadorIniciarPartidaAdmin(observador);
     }
     
 }

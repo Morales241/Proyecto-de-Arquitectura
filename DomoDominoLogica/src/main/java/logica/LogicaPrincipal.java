@@ -14,6 +14,7 @@ import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
 import eventos.EventoAcabarPartidaDto;
+import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
@@ -33,6 +34,10 @@ import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lobby.ILobbyLogica;
 import lobby.LobbyLogica;
 import mediador.Mediador;
@@ -49,6 +54,7 @@ import unirseAPartida.LogicaUnirseAPartida;
 import observers.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 
@@ -159,11 +165,11 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
 //        comunicaciones.agregarObservadorSalioUnJugador(observador);
-
+        comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
         comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
-        
+
         //agregar obserevers de lobby
         lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
         lobbyLogica.agregarObservadorVotar(new AccionVotarParaIniciarPartida());
@@ -426,6 +432,54 @@ public class LogicaPrincipal {
 
                 logicaAviso.mostrarAviso(respuesta.getRespuesta());
             }
+        }
+    }
+
+    private class AccionComenzarPartidaAdministrador implements IEventoIniciarPartidaAdmin {
+
+        @Override
+        public void iniciarPartida(IniciarPartidaAdmin partidaAdmin) {
+            Map<String, SetUpDto> jugadores = new HashMap<>();
+            List<FichaDto> fichasSacasDelPozo = new ArrayList<>();
+            int fichasDePartida = partidaAdmin.getFichasDePartida();
+
+            List<JugadorBase> jugadoresPartida = partidaAdmin.getListaJugadores();
+
+            jugadoresPartida.forEach(jugadorAux -> {
+                comunicaciones.conectarAServidor(jugadorAux);
+            });
+
+            jugadoresPartida.forEach( jugadorAux -> {
+
+                List<FichaDto> fichasDeJugador = new ArrayList<>();
+
+                fichasDeJugador = IPozo.repartirFichas(fichasDePartida);
+                
+                SetUpDto setUpDto = null;
+                setUpDto.setFichasDelJugador(fichasDeJugador);
+                setUpDto.setAvatar(avatar);
+                setUpDto.setNombre(nombre);
+                List<JugadorBase> compañeros = new ArrayList<>(); 
+                
+                jugadoresPartida.forEach(jugadorAux2 -> {
+                    if (!nombre.equals(jugadorAux.getNombre())) {
+                        compañeros.add(jugadorAux);
+                    }
+                });
+                
+                setUpDto.setJugadoresDePartiada(compañeros);
+                fichasSacasDelPozo.addAll(fichasDeJugador);
+                
+                jugadores.put(nombre, setUpDto);
+            });
+
+            jugadores.forEach((nombre, setUp) -> {
+                setUp.setFichasSacadasDelPozo(fichasSacasDelPozo);
+                
+                comunicaciones.enviarMensaje(setUp,nombre);
+            });
+            
+            
         }
     }
 

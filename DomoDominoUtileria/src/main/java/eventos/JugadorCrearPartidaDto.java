@@ -14,4 +14,8 @@ public class JugadorCrearPartidaDto extends JugadorBase {
         this.fichasIniciales = fichasIniciales;
     }
 
+    public int getFichasIniciales() {
+        return fichasIniciales;
+    }
+
 }

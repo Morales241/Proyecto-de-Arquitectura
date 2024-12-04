@@ -32,6 +32,7 @@ import servidor.GestorMensajes;
 public class ServerCentral {
 
     private final Map<String, List<JugadorBase>> infoPartidas;
+    private final Map<String, Integer> fichasDePartida;
     private final Map<String, Integer> VotosParaInciarPartidas;
     private final GestorDeComunicaciones comunicaciones;
     private final GestorMensajes gestorMensajes;
@@ -40,6 +41,7 @@ public class ServerCentral {
     public ServerCentral(GestorDeComunicaciones comunicacionesParametro) {
         this.infoPartidas = new HashMap<>();
         this.VotosParaInciarPartidas = new HashMap<>();
+        this.fichasDePartida = new HashMap<>();
         this.comunicaciones = comunicacionesParametro;
         this.gestorMensajes = comunicaciones.getGestorMensajes();
         this.gestorMensajes.agregarObservadorCrearPartida(new AccionCrearPartida());
@@ -53,13 +55,16 @@ public class ServerCentral {
     public void agregarPartida(JugadorCrearPartidaDto jugador) {
 
         List<JugadorBase> nodos = new ArrayList<>();
+        String codigo= jugador.getCodigo();
         conectarJugadorAlServer(jugador);
         try {
             nodos.add(jugador);
 
-            this.infoPartidas.put(jugador.getCodigo(), nodos);
+            this.infoPartidas.put(codigo, nodos);
 
-            this.VotosParaInciarPartidas.put(jugador.getCodigo(), 0);
+            this.VotosParaInciarPartidas.put(codigo, 0);
+            
+            this.fichasDePartida.put(codigo, jugador.getFichasIniciales());
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
 
@@ -212,7 +217,9 @@ public class ServerCentral {
 
         log.log(Level.INFO, "Método: mandarInfoDePartida - Clase: ServerCentral - Proyecto: Server Central");
 
-        IniciarPartidaAdmin infoAdmin = new IniciarPartidaAdmin(infoPartidas.get(codigo));
+        int numeroDeFichas = fichasDePartida.get(codigo);
+        
+        IniciarPartidaAdmin infoAdmin = new IniciarPartidaAdmin(numeroDeFichas, infoPartidas.get(codigo));
 
         String nombreAdmin = infoPartidas.get(codigo).get(0).getNombre();
 
