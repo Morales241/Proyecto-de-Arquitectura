@@ -25,4 +25,10 @@ public class Pozo {
     public ArrayList<Ficha> obtenerFichas() {
           return fichas;
      }
+    
+    public void sacarFichasEspecificasPozo(List<Ficha> fichas){
+            for (Ficha ficha : fichas) {
+        fichas.removeIf(f -> f.equals(ficha)); // Elimina fichas que coincidan
+    }
+    }
 }
