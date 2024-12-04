@@ -356,7 +356,7 @@ public class LogicaPrincipal {
 
         @Override
         public void iniciarPartida(SetUpDto setUp) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
         }
 
     }
@@ -449,37 +449,60 @@ public class LogicaPrincipal {
                 comunicaciones.conectarAServidor(jugadorAux);
             });
 
-            jugadoresPartida.forEach( jugadorAux -> {
+            jugadoresPartida.forEach(jugadorAux -> {
 
                 List<FichaDto> fichasDeJugador = new ArrayList<>();
 
                 fichasDeJugador = IPozo.repartirFichas(fichasDePartida);
-                
+
                 SetUpDto setUpDto = null;
                 setUpDto.setFichasDelJugador(fichasDeJugador);
                 setUpDto.setAvatar(avatar);
                 setUpDto.setNombre(nombre);
-                List<JugadorBase> compañeros = new ArrayList<>(); 
-                
+                List<JugadorBase> compañeros = new ArrayList<>();
+
                 jugadoresPartida.forEach(jugadorAux2 -> {
                     if (!nombre.equals(jugadorAux.getNombre())) {
                         compañeros.add(jugadorAux);
                     }
                 });
-                
+
                 setUpDto.setJugadoresDePartiada(compañeros);
+
                 fichasSacasDelPozo.addAll(fichasDeJugador);
-                
+
                 jugadores.put(nombre, setUpDto);
             });
 
+            List<String> turnosPorNombre = new ArrayList<>();
+
             jugadores.forEach((nombre, setUp) -> {
                 setUp.setFichasSacadasDelPozo(fichasSacasDelPozo);
-                
-                comunicaciones.enviarMensaje(setUp,nombre);
+
+                setUp.getFichasDelJugador().forEach(ficha -> {
+                    if (ficha.getLado1() == 6 && ficha.getLado2() == 6) {
+                        if (!turnosPorNombre.isEmpty()) {
+                            turnosPorNombre.add(nombre);
+                            String aux = turnosPorNombre.get(0);
+                            String aux2 = turnosPorNombre.getLast();
+                            int posicion = turnosPorNombre.indexOf(nombre);
+                            turnosPorNombre.set(0, aux2);
+                            turnosPorNombre.set(posicion, aux);
+                        } else {
+                            turnosPorNombre.add(nombre);
+                        }
+                    } else {
+                        turnosPorNombre.add(nombre);
+                    }
+                });
+                setUp.setTurnos(turnosPorNombre);
             });
-            
-            
+
+            jugadores.forEach((nombre, setUp) -> {
+
+                comunicaciones.enviarMensaje(setUp, nombre);
+            });
+
         }
     }
 
