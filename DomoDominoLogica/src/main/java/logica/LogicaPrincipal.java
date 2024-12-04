@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import lobby.ILobbyLogica;
 import lobby.LobbyLogica;
 import mediador.Mediador;
@@ -114,7 +115,6 @@ public class LogicaPrincipal {
 
         comunicaciones = inicalizadorComunicaciones.getComunicaciones();
 
-
         lInicio = new LogicaInicio();
 
         IUnirsePartida = new LogicaUnirseAPartida(comunicaciones);
@@ -140,9 +140,9 @@ public class LogicaPrincipal {
         logicaTerminarPartida = new LogicaTerminarPartida(comunicaciones);
 
         logicaTablero = new LogicaTablero(tableroFachada);
-        
-        IArreglo =  new LogicaArreglo((ArregloFachada) inicializadorClases.getArregloFachada());
-        
+
+        IArreglo = new LogicaArreglo((ArregloFachada) inicializadorClases.getArregloFachada());
+
         agregarObservers();
 
     }
@@ -353,8 +353,7 @@ public class LogicaPrincipal {
 
         @Override
         public void ponerFicha(PonerFichaDto ponerFicha) {
-            
-             
+
         }
 
     }
@@ -382,8 +381,6 @@ public class LogicaPrincipal {
             JugadorDto jugadorDto = new JugadorDto(setUp.getNombre(), setUp.getAvatar(), setUp.getFichasDelJugador());
 
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada());
-            
-            
 
             mediador.cerrarPantallaConcreta("tablero");
         }
@@ -516,6 +513,8 @@ public class LogicaPrincipal {
             for (String nombre : jugadores.keySet()) {
                 SetUpDto setUpDto = jugadores.get(nombre);
                 setUpDto.setTurnos(new ArrayList<>(nombresEnOrden));
+                setUpDto.setFichasSacadasDelPozo(fichasSacasDelPozo);
+
             }
 
             jugadores.forEach((nombre, setUp) -> {
@@ -527,15 +526,13 @@ public class LogicaPrincipal {
             SetUpDto yo = jugadores.get(miNombre);
             logicaTurnos.sincronizarTurnosConClaseExterna(yo.getTurnos());
 
-            IPozo.sacarFichasEspecificasPozo(yo.getFichasSacadasDelPozo());
-
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
             JugadorDto jugadorDto = new JugadorDto(yo.getNombre(), yo.getAvatar(), yo.getFichasDelJugador());
 
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, yo.getJugadoresDePartiada());
-            
-            mediador.cerrarPantallaConcreta("tablero");
+
+            mediador.mostrarPantallaConcreta("tablero");
 
         }
     }
