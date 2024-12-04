@@ -1,5 +1,6 @@
 package dtos;
 
+import eventos.JugadorBase;
 import java.util.List;
 
 /**
@@ -21,9 +22,7 @@ public class JugadorDto {
     public JugadorDto(String nombre) {
         this.nombre = nombre;
     }
-    
-    
-
+   
     public String getNombre() {
         return nombre;
     }

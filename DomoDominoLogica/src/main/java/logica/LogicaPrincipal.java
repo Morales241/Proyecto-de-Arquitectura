@@ -274,6 +274,7 @@ public class LogicaPrincipal {
         public void ponerFicha(PonerFichaDto ponerFicha) {
             IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+            
             logicaTablero.mandarArregloActualizado(arreglo);
         }
     }

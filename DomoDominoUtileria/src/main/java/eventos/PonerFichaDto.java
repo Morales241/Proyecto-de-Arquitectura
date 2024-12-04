@@ -3,6 +3,7 @@ package eventos;
 import dtos.FichaDto;
 import dtos.JugadorDto;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -15,6 +16,7 @@ public class PonerFichaDto implements Serializable{
     private boolean extremo;
     private String direccion;
     private JugadorDto jugador;
+    private List<JugadorBase> compañeros;
 
     public PonerFichaDto() {
     }
@@ -31,6 +33,14 @@ public class PonerFichaDto implements Serializable{
           this.extremo = extremo;
           this.direccion = direccion;
      }
+
+    public List<JugadorBase> getCompañeros() {
+        return compañeros;
+    }
+
+    public void setCompañeros(List<JugadorBase> compañeros) {
+        this.compañeros = compañeros;
+    }
      
      
 
