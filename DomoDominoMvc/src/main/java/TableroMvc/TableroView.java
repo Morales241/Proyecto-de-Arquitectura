@@ -24,9 +24,9 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+public class TableroView extends JFrame implements TableroModel.Observer {
 
-public class TableroView extends JFrame implements TableroModel.Observer{
-   private TableroModel model;
+    private TableroModel model;
     private JPanel botonesPanel;
     private JPanel fichasJugadorPanel;
     private TableroPanel tableroPanel;
@@ -34,7 +34,7 @@ public class TableroView extends JFrame implements TableroModel.Observer{
     public TableroView(TableroModel model) {
         this.model = model;
         this.model.agregarObserver(this);
-        
+
         setSize(1200, 850);
         setTitle("Tablero de Dominó");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,6 +47,7 @@ public class TableroView extends JFrame implements TableroModel.Observer{
         // Panel contenedor para los botones y las fichas (orientación vertical)
         JPanel panelInferior = new JPanel();
         panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.Y_AXIS));
+
         add(panelInferior, BorderLayout.SOUTH);
 
         // Panel para los botones de extremos (inicialmente oculto)
@@ -54,18 +55,15 @@ public class TableroView extends JFrame implements TableroModel.Observer{
         botonesPanel.setVisible(false);
         panelInferior.add(botonesPanel);
 
-        // Panel para las fichas del jugador
-        fichasJugadorPanel = new JPanel(new FlowLayout());
+        // Panel para las fichas del jugador con imagen de fondo
+        fichasJugadorPanel = new JPanelWithBackground();
         panelInferior.add(fichasJugadorPanel);
-
-        
 
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
- 
     @Override
     public void update() {
         // Aquí puedes actualizar la vista cuando se notifique un cambio en el modelo
@@ -74,66 +72,84 @@ public class TableroView extends JFrame implements TableroModel.Observer{
         fichasJugadorPanel.repaint();
         tableroPanel.repaint();
     }
-public static void main(String[] args) {
-    // Crear el modelo (TableroModel) que será pasado al JFrame.
-    // Asegúrate de tener una implementación válida para TableroModel.
-    Array array = new Array();
-    TableroModel modelo = new TableroModel(array);
 
-    // Crear la vista (el JFrame)
-    TableroView vista = new TableroView(modelo);
+    // Clase para el panel con fondo de imagen
+    public class JPanelWithBackground extends JPanel {
 
-    // Configurar la visibilidad y operaciones básicas del JFrame
-    java.awt.EventQueue.invokeLater(() -> {
-        vista.setVisible(true);
-    });
-}
-   
+        private ImageIcon fondoImagen;
 
- public class TableroPanel extends JPanel {
-    private final int[][] tablero;
-    private final ImageIcon fondoImagen; // Imagen de fondo
+        public JPanelWithBackground() {
+            this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/FondoGeneral.png"));
+            setPreferredSize(new Dimension(500, 200)); // Ajusta el tamaño del panel según sea necesario
+        }
 
-    public TableroPanel(Array array) {
-        this.tablero = array.obtenerTablero();
-        this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png")); // Ruta de la imagen
-        setPreferredSize(new Dimension(800, 800)); // Tamaño del panel
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // Dibujar la imagen de fondo en el panel
+            g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
-  @Override
-protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
+    // Clase TableroPanel restaurada
+    public class TableroPanel extends JPanel {
 
-    int cellSize = 50; 
-    int rows = tablero.length;
-    int cols = tablero[0].length;
+        private final int[][] tablero;
+        private final ImageIcon fondoImagen; // Imagen de fondo
 
-  
-    int panelWidth = getWidth();
-    int panelHeight = getHeight();
-    int tableroWidth = cols * cellSize;
-    int tableroHeight = rows * cellSize;
+        public TableroPanel(Array array) {
+            this.tablero = array.obtenerTablero();
+            this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png")); // Ruta de la imagen
+            setPreferredSize(new Dimension(800, 800)); // Tamaño del panel
+        }
 
-    int offsetX = (panelWidth - tableroWidth) / 2; 
-    int offsetY = (panelHeight - tableroHeight) / 2; 
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
 
-   
-    g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+            int cellSize = 50;
+            int rows = tablero.length;
+            int cols = tablero[0].length;
 
- 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (tablero[i][j] != -1) { 
-                g.setColor(Color.GRAY); 
-                g.fillRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
-                g.setColor(Color.BLACK);
-                g.drawRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
-                g.drawString(String.valueOf(tablero[i][j]), 
-                             offsetX + j * cellSize + cellSize / 4, 
-                             offsetY + i * cellSize + cellSize / 2);
+            int panelWidth = getWidth();
+            int panelHeight = getHeight();
+            int tableroWidth = cols * cellSize;
+            int tableroHeight = rows * cellSize;
+
+            int offsetX = (panelWidth - tableroWidth) / 2;
+            int offsetY = (panelHeight - tableroHeight) / 2;
+
+            // Dibujar la imagen de fondo en el panel
+            g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    if (tablero[i][j] != -1) {
+                        g.setColor(Color.GRAY);
+                        g.fillRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
+                        g.setColor(Color.BLACK);
+                        g.drawRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
+                        g.drawString(String.valueOf(tablero[i][j]),
+                                offsetX + j * cellSize + cellSize / 4,
+                                offsetY + i * cellSize + cellSize / 2);
+                    }
+                }
             }
         }
     }
-}
-   }
+
+    public static void main(String[] args) {
+        // Crear el modelo (TableroModel) que será pasado al JFrame.
+        Array array = new Array();
+        TableroModel modelo = new TableroModel(array);
+
+        // Crear la vista (el JFrame)
+        TableroView vista = new TableroView(modelo);
+
+        // Configurar la visibilidad y operaciones básicas del JFrame
+        java.awt.EventQueue.invokeLater(() -> {
+            vista.setVisible(true);
+        });
     }
+}
