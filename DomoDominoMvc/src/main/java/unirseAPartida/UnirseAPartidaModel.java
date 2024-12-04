@@ -94,5 +94,7 @@ public class UnirseAPartidaModel {
             observadoresCambioAvatar.actualizar();
         }
     }
+    
+    
 }
 
