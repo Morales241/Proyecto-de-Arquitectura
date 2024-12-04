@@ -38,7 +38,7 @@ public class TableroView extends JFrame implements IComponente {
     public TableroView(TableroModel model) {
         this.model = model;
         this.model.agregarObserverActualizar(new Actualizar());
-        
+
         this.setSize(1210, 730);
         setTitle("Tablero de Dominó");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +55,7 @@ public class TableroView extends JFrame implements IComponente {
         }
 
         setLocationRelativeTo(null);
-       
+
     }
 
     private void inicializarPaneles() {
@@ -68,7 +68,7 @@ public class TableroView extends JFrame implements IComponente {
 
         botonesPanel = new JPanel(new FlowLayout());
         botonesPanel.setVisible(false);
-        layeredPane.add(botonesPanel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(botonesPanel, JLayeredPane.POPUP_LAYER);
 
         fichasJugadorPanel = new JPanelWithBackground();
         fichasJugadorPanel.setBounds(100, 550, 960, 120);
@@ -132,6 +132,11 @@ public class TableroView extends JFrame implements IComponente {
     private void mostrarBotonesSeleccion(JButton fichaLabel) {
         botonesPanel.removeAll();
 
+        botonesPanel.setBounds(fichaLabel.getX(), fichaLabel.getY() + 20, 200, 50);
+        botonesPanel.setBackground(Color.LIGHT_GRAY);
+
+        botonesPanel.setLayout(new FlowLayout());
+
         // Botones para los extremos
         JButton botonExtremo1 = new JButton("Extremo 1");
         botonExtremo1.addActionListener(e -> mostrarBotonesDireccion(true));
@@ -144,6 +149,7 @@ public class TableroView extends JFrame implements IComponente {
         botonesPanel.setVisible(true);
         botonesPanel.revalidate();
         botonesPanel.repaint();
+        layeredPane.moveToFront(botonesPanel);
     }
 
     private void mostrarBotonesDireccion(boolean extremoIzquierdo) {
@@ -180,24 +186,23 @@ public class TableroView extends JFrame implements IComponente {
             super.paintComponent(g);
             g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
         }
+
     }
 
-  
     public class TableroPanel extends JPanel {
 
-        private final int[][] tablero;
+        private int[][] tablero;
         private final ImageIcon fondoImagen;
 
-      public TableroPanel(ArregloDto array) {
-    if (array == null || array.getTablero() == null) {
-        this.tablero = new int[10][10];
-    } else {
-        this.tablero = array.getTablero();
-    }
-    this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
-    setPreferredSize(new Dimension(1200, 700));
-}
-
+        public TableroPanel(ArregloDto array) {
+            if (array == null || array.getTablero() == null) {
+                this.tablero = new int[10][10];
+            } else {
+                this.tablero = array.getTablero();
+            }
+            this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
+            setPreferredSize(new Dimension(1200, 700));
+        }
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -237,14 +242,22 @@ public class TableroView extends JFrame implements IComponente {
 
         @Override
         public void actualizar() {
-            // Aquí puedes actualizar la vista cuando se notifique un cambio en el modelo
-            fichasJugadorPanel.removeAll(); // Limpiar el panel
-            for (FichaDto ficha : model.getJugador().getFichas()) {
-                agregarFichaAlPanel(ficha); // Volver a agregar las fichas
+            
+            ArregloDto nuevoArray = model.getArray(); 
+            if (nuevoArray != null) {
+                tableroPanel.tablero = nuevoArray.getTablero();
             }
+            tableroPanel.repaint();
+            
+            fichasJugadorPanel.removeAll();
+            for (FichaDto ficha : model.getJugador().getFichas()) {
+                agregarFichaAlPanel(ficha);
+            }
+
             fichasJugadorPanel.revalidate();
             fichasJugadorPanel.repaint();
-            tableroPanel.repaint();
+            
+            
         }
 
     }
