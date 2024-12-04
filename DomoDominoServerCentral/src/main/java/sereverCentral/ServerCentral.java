@@ -6,6 +6,7 @@ import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorSeUnioAPartida;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.NodoDto;
 import eventos.RespuestaDePartidaCreada;
@@ -31,6 +32,7 @@ import servidor.GestorMensajes;
 public class ServerCentral {
 
     private final Map<String, List<JugadorBase>> infoPartidas;
+    private final Map<String, Integer> fichasDePartida;
     private final Map<String, Integer> VotosParaInciarPartidas;
     private final GestorDeComunicaciones comunicaciones;
     private final GestorMensajes gestorMensajes;
@@ -39,6 +41,7 @@ public class ServerCentral {
     public ServerCentral(GestorDeComunicaciones comunicacionesParametro) {
         this.infoPartidas = new HashMap<>();
         this.VotosParaInciarPartidas = new HashMap<>();
+        this.fichasDePartida = new HashMap<>();
         this.comunicaciones = comunicacionesParametro;
         this.gestorMensajes = comunicaciones.getGestorMensajes();
         this.gestorMensajes.agregarObservadorCrearPartida(new AccionCrearPartida());
@@ -52,12 +55,19 @@ public class ServerCentral {
     public void agregarPartida(JugadorCrearPartidaDto jugador) {
 
         List<JugadorBase> nodos = new ArrayList<>();
+        String codigo= jugador.getCodigo();
         conectarJugadorAlServer(jugador);
         try {
             nodos.add(jugador);
-            this.infoPartidas.put(jugador.getCodigo(), nodos);
+
+            this.infoPartidas.put(codigo, nodos);
+
+            this.VotosParaInciarPartidas.put(codigo, 0);
+            
+            this.fichasDePartida.put(codigo, jugador.getFichasIniciales());
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
+
             mandarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente", true), jugador.getNombre());
 
         } catch (Exception ex) {
@@ -84,13 +94,36 @@ public class ServerCentral {
             if (nodos.size() < 4) {
                 infoPartidas.get(jugador.getCodigo()).add(jugador);
 
-                respuesta = new RespuestaDeUnirseAPartida(jugador.getNombre(), jugador.getAvatar(), "Se ha unido a una partida", true);
+                JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
 
-                mandarMensaje(respuesta, jugador.getNombre());
+                jugadorBase.setCodigo(jugador.getCodigo());
+
+                respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "Se ha unido a una partida", true);
+
+                List<JugadorBase> jugadores = informacionDePartidaPorCodigo(jugador.getCodigo());
+
+                respuesta.setJugadores(jugadores);
+              
+                jugadores.forEach(jugadorMensaje -> {
+                    
+                    if (jugador.getNombre().equals(jugadorMensaje.getNombre())) {
+                        
+                        mandarMensaje(respuesta, jugadorMensaje.getNombre());
+                        
+                    }else{
+                        JugadorSeUnioAPartida jugadorSeUnioAPartida = new JugadorSeUnioAPartida(jugadorMensaje.getNombre(), jugadorMensaje.getAvatar()); 
+                        
+                        mandarMensaje(jugadorSeUnioAPartida, jugadorMensaje.getNombre());
+                    }
+                    
+                });
+
             } else {
                 nodos.clear();
 
-                respuesta = new RespuestaDeUnirseAPartida("", 0, "La partida ya esta llena", false);
+                JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+                respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "La partida ya esta llena", false);
 
                 mandarMensaje(respuesta, jugador.getNombre());
 
@@ -98,7 +131,10 @@ public class ServerCentral {
             }
 
         } else {
-            respuesta = new RespuestaDeUnirseAPartida("", 0, "No se encontro la partida", false);
+
+            JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+            respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "No se encontro la partida", false);
 
             mandarMensaje(respuesta, jugador.getNombre());
 
@@ -113,22 +149,31 @@ public class ServerCentral {
         List<NodoDto> nodos = new ArrayList<>();
 
         RespuestaDeUnirseAPartida respuesta;
-        
+
         if (seEncontroPartida) {
 
             this.infoPartidas.get(jugador.getCodigo()).remove(jugador.getNodo());
 
-            respuesta = new RespuestaDeUnirseAPartida("", 0,"Saliste de la partida exitosamente", true);
-            
+            if (infoPartidas.get(jugador.getCodigo()).size() == 1) {
+                acabarPartidaPorCodigo(jugador.getCodigo());
+            }
+
+            JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+            jugadorBase.setCodigo(jugador.getCodigo());
+
+            respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "Saliste de la partida exitosamente", true);
+
             mandarMensaje(respuesta, jugador.getNombre());
-            
+
             cerrarConexionConNodo(jugador.getNombre());
         } else {
-            
-            respuesta =  new RespuestaDeUnirseAPartida("", 0,"No se encontro la partida", false);
-            
+            JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+            respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "No se encontro la partida", false);
+
             mandarMensaje(respuesta, jugador.getNombre());
-            
+
             cerrarConexionConNodo(jugador.getNombre());
         }
     }
@@ -172,7 +217,9 @@ public class ServerCentral {
 
         log.log(Level.INFO, "Método: mandarInfoDePartida - Clase: ServerCentral - Proyecto: Server Central");
 
-        IniciarPartidaAdmin infoAdmin = new IniciarPartidaAdmin(infoPartidas.get(codigo));
+        int numeroDeFichas = fichasDePartida.get(codigo);
+        
+        IniciarPartidaAdmin infoAdmin = new IniciarPartidaAdmin(numeroDeFichas, infoPartidas.get(codigo));
 
         String nombreAdmin = infoPartidas.get(codigo).get(0).getNombre();
 
@@ -189,7 +236,7 @@ public class ServerCentral {
 
         VotosParaInciarPartidas.replace(codigo, numeroVotos);
 
-        if (numeroJugadores == numeroVotos && numeroVotos != 1 && numeroJugadores != 1) {
+        if (numeroJugadores >= numeroVotos && numeroVotos != 1 && numeroJugadores != 1) {
             mandarInfoParaIniciarPartida(codigo);
         }
     }

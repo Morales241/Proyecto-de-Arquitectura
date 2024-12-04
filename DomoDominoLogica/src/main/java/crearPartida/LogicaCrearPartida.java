@@ -43,7 +43,7 @@ public class LogicaCrearPartida implements ILogicaCrearPartida {
 
             String ip = InetAddress.getLocalHost().getHostAddress();
             ip = "192.168.100.11";
-            jugador.setNodo(new NodoDto(ip, 8198));
+            jugador.setNodo(new NodoDto(ip, 8199));
             codigo = generarCodigo();
             jugador.setCodigo(codigo);
             comunicaciones.conectarAServidorCentral("192.168.100.21", 8190);

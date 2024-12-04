@@ -1,5 +1,6 @@
 dtos\JugadorDto.class
 observers\IEventoSeleccion.class
+observersServerCentralALogica\IEventoSeUnieronAtuPartida.class
 eventos\SetUpDto.class
 observers\IEventoActualizarLobby.class
 dtos\FichaDto.class
@@ -39,5 +40,6 @@ observers\IEventoValidacionDeNombre.class
 eventos\JugadorAEliminarDto.class
 observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.class
 eventos\RespuestaServidorCentral.class
+eventos\JugadorSeUnioAPartida.class
 observers\IEventoPasarTurno.class
 eventos\PonerFichaDto.class

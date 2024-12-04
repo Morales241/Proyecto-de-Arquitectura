@@ -4,6 +4,7 @@ import dtos.FichaDto;
 import eventos.EventoAcabarPartidaDto;
 import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
+import eventos.JugadorSeUnioAPartida;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import eventos.RespuestaDePartidaCreada;
@@ -20,6 +21,7 @@ import observers.IEventoAcabarPartida;
 import observers.IEventoIniciarPartida;
 import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 
 public class GestorMensajes {
 
@@ -34,10 +36,27 @@ public class GestorMensajes {
     private IEventoRespuestaServidorCentral observerRespuestaCrearP;
     private IEventoRespuestaServidorCentral observerRespuestaUnirseP;
     private IEventoIniciarPartidaAdmin observerIniciarPartidaAdmin;
+    private IEventoSeUnieronAtuPartida observerSeUnieronAtuPartida;
 
     public GestorMensajes() {
     }
 
+    //Se unio alguien
+    public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador) {
+        this.observerSeUnieronAtuPartida = observador;
+    }
+
+    public void eliminarObservadorSeUnieronAtuPartida() {
+        this.observerSeUnieronAtuPartida = null;
+    }
+
+    public void notificarObservadorSeUnieronAtuPartida(JugadorSeUnioAPartida jugadorSeUnioAPartida) {
+        if (observerSeUnieronAtuPartida != null) {
+            observerSeUnieronAtuPartida.avisarAJugadores(jugadorSeUnioAPartida);
+            log.log(Level.INFO, "Metodo:notificarObserverTomarFichaDelPozo - Clase:GestorMensajes - Proyecto:Server de Server Central");
+        }
+    }
+    
     //Tomaron ficha del pozo
     public void agregarObservadorFichaTomadaDelPozo(IEventoTomarFichaDelPozo observador) {
         this.observerTomarFichaDelPozo = observador;

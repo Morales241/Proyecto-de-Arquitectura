@@ -26,6 +26,7 @@ import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
  */
 public class LobbyView extends javax.swing.JFrame implements IComponente {
 
+    private boolean llave = true;
     private final LobbyModel lobbyModel;
     private IMediador mediador;
     private IEventoSalirDeLobby observerRegresar;
@@ -58,8 +59,8 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        txt = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JLabel();
-        txtCodigo1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnVotar = new javax.swing.JButton();
         nomJugador1 = new javax.swing.JLabel();
@@ -78,14 +79,14 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txt.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txt.setForeground(new java.awt.Color(232, 209, 172));
+        txt.setText(" Codigo: ");
+        jPanel1.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 100, -1));
+
         txtCodigo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(232, 209, 172));
-        txtCodigo.setText(" Codigo: ");
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 100, -1));
-
-        txtCodigo1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        txtCodigo1.setForeground(new java.awt.Color(232, 209, 172));
-        jPanel1.add(txtCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 190, 30));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 310, 50));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -122,10 +123,10 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
 
         nomJugador4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(nomJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, -1, -1));
-        jPanel1.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 100, 110));
-        jPanel1.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 80, 130));
-        jPanel1.add(imgJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 100, 140));
-        jPanel1.add(imgJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, 80, 170));
+        jPanel1.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 100, 110));
+        jPanel1.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 110, 130));
+        jPanel1.add(imgJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, 120, 140));
+        jPanel1.add(imgJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, 120, 170));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoGeneral.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 600));
@@ -142,16 +143,22 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotarActionPerformed
         this.ejecutarVotarParaIniciarPartida(new VotoDeJugador(this.txtCodigo.getText()));
+        btnVotar.setEnabled(false);
     }//GEN-LAST:event_btnVotarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         String nombre = lobbyModel.getJugadores().get(0).getNombre();
         int avatar = lobbyModel.getJugadores().get(0).getAvatar();
-        this.ejecutarSalirDeLobby(new JugadorAEliminarDto(nombre, avatar));
+        JugadorAEliminarDto jugadorAEliminarDto = new JugadorAEliminarDto(nombre, avatar);
+        jugadorAEliminarDto.setCodigo(this.txtCodigo.getText());
+        
+        this.ejecutarSalirDeLobby(jugadorAEliminarDto);
+        
 
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -168,8 +175,8 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
     private javax.swing.JLabel nomJugador2;
     private javax.swing.JLabel nomJugador3;
     private javax.swing.JLabel nomJugador4;
+    private javax.swing.JLabel txt;
     private javax.swing.JLabel txtCodigo;
-    private javax.swing.JLabel txtCodigo1;
     // End of variables declaration//GEN-END:variables
 
     public void mostrarJugadores(List<JugadorBase> jugadores) {
@@ -180,7 +187,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
             int avatar = jugadores.get(i).getAvatar();
             String rutaImagen = obtenerRutaImagen(avatar);
 
-            ImageIcon icon = new ImageIcon(rutaImagen);
+            ImageIcon icon = new ImageIcon(getClass().getResource(rutaImagen));
             etiquetasImagenes.get(i).setIcon(icon);
             etiquetasImagenes.get(i).revalidate();
             etiquetasImagenes.get(i).repaint();
@@ -228,7 +235,11 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
     }
 
     public void ponerCodigo(String codigo){
-        this.txtCodigo.setText(codigo);
+        if (llave) {
+            this.txtCodigo.setText(codigo);
+            llave = false;
+        }
+        
     }
     private class ActualizarLobby implements IEventoActualizarLobby {
 
@@ -236,7 +247,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         public void actualizar(JugadorBase jugadorBase) {
 
             lobbyModel.getJugadores().add(jugadorBase);
-            ponerCodigo("Codigo: "+jugadorBase.getCodigo());
+            ponerCodigo(jugadorBase.getCodigo());
             mostrarJugadores(lobbyModel.getJugadores());
 
         }

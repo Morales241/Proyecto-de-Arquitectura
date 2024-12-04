@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import Entidades.Pozo;
 import Entidades.Ficha;
+import dtos.FichaDto;
 
 public class LogicaPozo implements ILogicaPozo {
      private final Pozo pozo;
@@ -29,22 +30,25 @@ public class LogicaPozo implements ILogicaPozo {
     }
 
     @Override
-    public Ficha sacarFicha() {
+    public FichaDto sacarFicha() {
         Random random = new Random();
         if (!pozoVacio()) {
             int posicion = random.nextInt(pozo.obtenerFichas().size());
-            Ficha ficha = pozo.obtenerFichas().get(posicion);
+            FichaDto fichadto;
+            
+            fichadto = new FichaDto(pozo.obtenerFichas().get(posicion).getLado1(), pozo.obtenerFichas().get(posicion).getLado2());
+            
             pozo.obtenerFichas().remove(posicion);
-            return ficha;
+            return fichadto;
         }
         return null;
     }
 
     @Override
-    public List<Ficha> repartirFichas(int numeroFichas) {
-        List<Ficha> fichasARepartir = new ArrayList<>();
+    public List<FichaDto> repartirFichas(int numeroFichas) {
+        List<FichaDto> fichasARepartir = new ArrayList<>();
         for (int i = 0; i < numeroFichas; i++) {
-            Ficha ficha = sacarFicha();
+            FichaDto ficha = sacarFicha();
             if (ficha != null) {
                 fichasARepartir.add(ficha);
             }

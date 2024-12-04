@@ -14,9 +14,11 @@ import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
 import eventos.EventoAcabarPartidaDto;
+import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
+import eventos.JugadorSeUnioAPartida;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
@@ -32,6 +34,10 @@ import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lobby.ILobbyLogica;
 import lobby.LobbyLogica;
 import mediador.Mediador;
@@ -48,7 +54,9 @@ import unirseAPartida.LogicaUnirseAPartida;
 import observers.IEventoAcabarPartida;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
+import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -157,9 +165,10 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
 //        comunicaciones.agregarObservadorSalioUnJugador(observador);
-
+        comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
+        comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
 
         //agregar obserevers de lobby
         lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
@@ -275,12 +284,21 @@ public class LogicaPrincipal {
 
     }
 
+    public void limpiarCampos() {
+        this.avatar = 1;
+        this.codigo = "";
+        this.nombre = "";
+    }
+
     private class AccionCerrarLobby implements IEventoSalirDeLobby {
 
         @Override
         public void salirDeLobby(JugadorAEliminarDto jugador) {
             lobbyLogica.inicializarnos(nombre, avatar);
             lobbyLogica.salirDeLobby(jugador);
+            limpiarCampos();
+            mediador.mostrarPantallaConcreta("inicio");
+
         }
     }
 
@@ -288,7 +306,6 @@ public class LogicaPrincipal {
 
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {
-            lobbyLogica.inicializarnos(nombre, avatar);
             lobbyLogica.votarParaIniciarPartida(votoDeJugador);
         }
     }
@@ -326,7 +343,7 @@ public class LogicaPrincipal {
 
     }
 
-    private class AccionJugadorSaioDePartida implements IEventoSalirDePartida {
+    private class AccionJugadorSalioDePartida implements IEventoSalirDePartida {
 
         @Override
         public void salirDePartida(JugadorAEliminarDto jugador) {
@@ -380,6 +397,14 @@ public class LogicaPrincipal {
         }
     }
 
+    private class AccionSeUnioJugadorAlaPartida implements IEventoSeUnieronAtuPartida {
+
+        @Override
+        public void avisarAJugadores(JugadorSeUnioAPartida jugadorSeUnioAPartida) {
+            lobbyLogica.actualizarLobby(new JugadorBase(jugadorSeUnioAPartida.getNombre(), jugadorSeUnioAPartida.getAvatar()));
+        }
+    }
+
     private class AccionRecibirRespuestaUnirseAPartida implements IEventoRespuestaServidorCentral {
 
         @Override
@@ -395,7 +420,10 @@ public class LogicaPrincipal {
                 lobbyLogica.actualizarLobby(Yo);
 
                 jugadorAux.getJugadores().forEach(jugador -> {
-                    lobbyLogica.actualizarLobby(jugador);
+
+                    if (!getNombre().equals(jugador.getNombre())) {
+                        lobbyLogica.actualizarLobby(jugador);
+                    }
                 });
 
                 mediador.mostrarPantallaConcreta("lobby");
@@ -405,6 +433,58 @@ public class LogicaPrincipal {
                 logicaAviso.mostrarAviso(respuesta.getRespuesta());
             }
         }
+    }
+
+    private class AccionComenzarPartidaAdministrador implements IEventoIniciarPartidaAdmin {
+
+        @Override
+        public void iniciarPartida(IniciarPartidaAdmin partidaAdmin) {
+            Map<String, SetUpDto> jugadores = new HashMap<>();
+            List<FichaDto> fichasSacasDelPozo = new ArrayList<>();
+            int fichasDePartida = partidaAdmin.getFichasDePartida();
+
+            List<JugadorBase> jugadoresPartida = partidaAdmin.getListaJugadores();
+
+            jugadoresPartida.forEach(jugadorAux -> {
+                comunicaciones.conectarAServidor(jugadorAux);
+            });
+
+            jugadoresPartida.forEach( jugadorAux -> {
+
+                List<FichaDto> fichasDeJugador = new ArrayList<>();
+
+                fichasDeJugador = IPozo.repartirFichas(fichasDePartida);
+                
+                SetUpDto setUpDto = null;
+                setUpDto.setFichasDelJugador(fichasDeJugador);
+                setUpDto.setAvatar(avatar);
+                setUpDto.setNombre(nombre);
+                List<JugadorBase> compañeros = new ArrayList<>(); 
+                
+                jugadoresPartida.forEach(jugadorAux2 -> {
+                    if (!nombre.equals(jugadorAux.getNombre())) {
+                        compañeros.add(jugadorAux);
+                    }
+                });
+                
+                setUpDto.setJugadoresDePartiada(compañeros);
+                fichasSacasDelPozo.addAll(fichasDeJugador);
+                
+                jugadores.put(nombre, setUpDto);
+            });
+
+            jugadores.forEach((nombre, setUp) -> {
+                setUp.setFichasSacadasDelPozo(fichasSacasDelPozo);
+                
+                comunicaciones.enviarMensaje(setUp,nombre);
+            });
+            
+            
+        }
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
 }
