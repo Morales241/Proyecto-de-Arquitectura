@@ -57,7 +57,8 @@ public class ArregloFachada implements ILogicaArreglo{
          
          if (this.estaVacio(15, 15)) {
               if (ficha.esMula()) {
-                   
+                   arreglo.setExtremo1(ficha.getLado1());
+                   arreglo.setExtremo2(ficha.getLado1());
               } else {
                    return false;
               }

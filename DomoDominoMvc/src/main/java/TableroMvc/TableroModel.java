@@ -23,15 +23,18 @@ import observersLogicaAServidorCentral.IEventoSalirDePartida;
  */
 public class TableroModel {
 
-    private ArregloDto array;
+//    private ArregloDto array  = new ArregloDto(new int[30][30], 0, 0, 15, 15, 15, 15);
+     private ArregloDto array;
+    private boolean turno;
     private JugadorDto jugador;
-    List<JugadorBase> compañeros;
+    private List<JugadorBase> compañeros;
     private IEventoPonerFicha eventoPonerFicha;
     private IEventoPedirFichaAlPozo eventoTomarFichaDelPozo;
     private IEventoSalirDePartida eventoSalirDePartida;
     private IObserver actualizar;
 
     public TableroModel() {
+         
     }
 
     public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
@@ -80,11 +83,9 @@ public class TableroModel {
     }
 
     public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada, String Direccion) {
-//        boolean colocada = extremoIzquierdo ? array.colocarFichaExtremoIzquierdo(fichaSeleccionada)
-//                : array.colocarFichaExtremoDerecho(fichaSeleccionada);
-//        if (colocada) {
-//            ejecutarObserverPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, Direccion));
-//        }
+
+        ejecutarObserverPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, Direccion));
+
     }
 
     public JugadorDto getJugador() {
@@ -104,8 +105,6 @@ public class TableroModel {
         ejecutarObserverActualizar();
     }
 
-    
-
     public List<JugadorBase> getCompañeros() {
         return compañeros;
     }
@@ -115,10 +114,23 @@ public class TableroModel {
     }
 
     public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
+         
+         
+         
         setJugador(jugadorDto);
         setCompañeros(jugadorBases);
         setArray(arrayDto);
 
         ejecutarObserverActualizar();
     }
+
+    public boolean isTurno() {
+        return turno;
+    }
+
+    public void setTurno(boolean turno) {
+        this.turno = turno;
+    }
+    
+    
 }
