@@ -40,6 +40,19 @@ private JugadorDto jugador;
             observer.update();
         }
     }
+     public void agregarFicha(FichaDto ficha) {
+        jugador.agregarFicha(ficha);
+        notificarObservers();
+    }
+
+    public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada) {
+        boolean colocada = extremoIzquierdo ? array.colocarFichaExtremoIzquierdo(fichaSeleccionada)
+                                             : array.colocarFichaExtremoDerecho(fichaSeleccionada);
+        if (colocada) {
+            jugador.eliminarFicha(fichaSeleccionada);
+            notificarObservers();
+        }
+    }
 
     public JugadorDto getJugador() {
         return jugador;
@@ -55,7 +68,9 @@ private JugadorDto jugador;
         return array;
     }
 
-
+ public boolean verificarMovimientosPosibles() {
+        return array.verificarPosiblesMovimientos(jugador.getFichas());
+    }
  
 
     public interface Observer {

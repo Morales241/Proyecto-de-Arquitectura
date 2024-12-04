@@ -12,7 +12,8 @@ import Entidades.Ficha;
 import dtos.FichaDto;
 
 public class LogicaPozo implements ILogicaPozo {
-     private final Pozo pozo;
+
+    private final Pozo pozo;
 
     public LogicaPozo() {
         this.pozo = Pozo.obtenerInstancia();
@@ -35,9 +36,9 @@ public class LogicaPozo implements ILogicaPozo {
         if (!pozoVacio()) {
             int posicion = random.nextInt(pozo.obtenerFichas().size());
             FichaDto fichadto;
-            
+
             fichadto = new FichaDto(pozo.obtenerFichas().get(posicion).getLado1(), pozo.obtenerFichas().get(posicion).getLado2());
-            
+
             pozo.obtenerFichas().remove(posicion);
             return fichadto;
         }
@@ -64,5 +65,12 @@ public class LogicaPozo implements ILogicaPozo {
     @Override
     public boolean pozoVacio() {
         return pozo.obtenerFichas().isEmpty();
+    }
+
+    @Override
+    public void sacarFichasEspecificasPozo(List<Ficha> fichas) {
+        for (Ficha ficha : fichas) {
+            fichas.removeIf(f -> f.equals(ficha)); 
+        }
     }
 }

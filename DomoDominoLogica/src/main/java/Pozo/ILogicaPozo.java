@@ -19,4 +19,8 @@ public interface ILogicaPozo {
     public void recibirFichas(List<Ficha> fichasJugador);
     
     public boolean pozoVacio();
+    
+       public void sacarFichasEspecificasPozo(List<Ficha> fichas);
+           
+    
 }

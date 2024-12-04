@@ -84,17 +84,16 @@ public class JugadorDto {
   public List<FichaDto> repartirFichas(){
     List<FichaDto> fichasARepartir = new ArrayList<>();
 
-    // Repartir primero la ficha mula
+
     fichasARepartir.add(sacarFichaMula());
 
-    // Repartir las 6 fichas restantes
-    for (int i = 0; i < numeroFichasIniciales - 1; i++) {  // Restar 1 porque ya se repartió la mula
+    for (int i = 0; i < numeroFichasIniciales - 1; i++) { 
         fichasARepartir.add(sacarFicha());
     }
 
-    // Verificar las fichas repartidas
+
     for (FichaDto ficha : fichasARepartir) {
-        System.out.println(ficha); // Esto debería mostrar información sobre cada ficha
+        System.out.println(ficha); 
     }
 
     return fichasARepartir;
@@ -124,6 +123,15 @@ public class JugadorDto {
      */
     public boolean pozoVacío() {
         return fichas.isEmpty();
+    }
+
+    public boolean eliminarFicha(FichaDto ficha) {
+        if (this.fichas.contains(ficha)) {
+            this.fichas.remove(ficha);
+            return true;
+        } else {
+            return false; 
+        }
     }
    
 }
