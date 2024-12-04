@@ -23,10 +23,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-
 
 public class TableroView extends JFrame implements TableroModel.Observer {
 
@@ -34,53 +34,63 @@ public class TableroView extends JFrame implements TableroModel.Observer {
     private JPanel fichasJugadorPanel;
     private TableroPanel tableroPanel;
     private FichaDto fichaSeleccionada = null;
-
+    private JPanel botonesPanel;
     private JLayeredPane layeredPane;
 
     public TableroView(TableroModel model) {
         this.model = model;
         this.model.agregarObserver(this);
 
-        setSize(960, 600);
+        this.setSize(1210, 730);
         setTitle("Tablero de Dominó");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Crear el JLayeredPane
         layeredPane = new JLayeredPane();
         setContentPane(layeredPane);
 
-        // Crear y agregar el panel del tablero
         tableroPanel = new TableroPanel(model.getArray());
-        tableroPanel.setBounds(0, 0, 1200, 700); // Establecer tamaño y posición
+        tableroPanel.setBounds(0, 0, 1200, 700);
         layeredPane.add(tableroPanel, JLayeredPane.DEFAULT_LAYER);
 
-        // Crear y agregar el panel para las fichas del jugador
+        botonesPanel = new JPanel(new FlowLayout());
+        botonesPanel.setVisible(false);
+        layeredPane.add(botonesPanel, JLayeredPane.DEFAULT_LAYER);
+
         fichasJugadorPanel = new JPanelWithBackground();
-        fichasJugadorPanel.setBounds(0, 550, 960, 100); // Ajustar tamaño y posición
+        fichasJugadorPanel.setBounds(100, 550, 960, 120);
         layeredPane.add(fichasJugadorPanel, JLayeredPane.PALETTE_LAYER);
 
-        // Crear y agregar el botón Pozo
         JButton botonPozo = new JButton();
+        botonPozo.setEnabled(false);
+        
         String rutaImagen = "/imgPartidaFichas/Pozo.png";
         URL recurso = getClass().getResource(rutaImagen);
         if (recurso != null) {
             ImageIcon icono = new ImageIcon(recurso);
             botonPozo.setIcon(icono);
+
             botonPozo.setContentAreaFilled(false);
             botonPozo.setBorderPainted(false);
             botonPozo.setPreferredSize(new Dimension(110, 110));
         } else {
             System.err.println("Imagen no encontrada para: " + rutaImagen);
         }
-        botonPozo.setBounds(850, 10, 110, 110); // Posición y tamaño
+        botonPozo.setBounds(1080, 550, 110, 110);
         layeredPane.add(botonPozo, JLayeredPane.PALETTE_LAYER);
 
-        // Crear un panel para los botones (si es necesario)
-        JPanel botonesPanel = new JPanel(new FlowLayout());
-        botonesPanel.setBounds(500, 10, 200, 50); // Ajusta la posición y el tamaño
-        botonesPanel.setVisible(true);
-        layeredPane.add(botonesPanel, JLayeredPane.MODAL_LAYER);
+        JLabel avatarJugador = new JLabel();
+        String rutaImagen2 = "/imgPartidaFichas/avatar1.png";
+        URL recurso2 = getClass().getResource(rutaImagen2);
+        if (recurso != null) {
+            ImageIcon icono2 = new ImageIcon(recurso2);
+            avatarJugador.setIcon(icono2);
+
+        } else {
+            System.err.println("Imagen no encontrada para: " + rutaImagen);
+        }
+        avatarJugador.setBounds(0, 550, 110, 110);
+        layeredPane.add(avatarJugador, JLayeredPane.PALETTE_LAYER);
 
         for (FichaDto ficha : model.getJugador().getFichas()) {
             if (ficha != null) {
@@ -88,8 +98,6 @@ public class TableroView extends JFrame implements TableroModel.Observer {
             }
         }
 
-        // Configurar JFrame
-        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -103,21 +111,50 @@ public class TableroView extends JFrame implements TableroModel.Observer {
             JButton fichaLabel = new JButton(icono);
             fichaLabel.setContentAreaFilled(false);
             fichaLabel.setBorderPainted(false);
+
+            fichaLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    fichaSeleccionada = ficha;
+                    mostrarBotonesSeleccion(fichaLabel);
+                }
+            });
+
             fichasJugadorPanel.add(fichaLabel);
         } else {
             System.err.println("Imagen no encontrada para: " + rutaImagen);
         }
     }
 
+    @Override
     public void update() {
-        System.out.println("Fichas actuales: " + model.getJugador().getFichas().size());
-        fichasJugadorPanel.removeAll();
+        // Aquí puedes actualizar la vista cuando se notifique un cambio en el modelo
+        fichasJugadorPanel.removeAll(); // Limpiar el panel
         for (FichaDto ficha : model.getJugador().getFichas()) {
-            agregarFichaAlPanel(ficha);
+            agregarFichaAlPanel(ficha); // Volver a agregar las fichas
         }
         fichasJugadorPanel.revalidate();
         fichasJugadorPanel.repaint();
         tableroPanel.repaint();
+    }
+
+    private void mostrarBotonesSeleccion(JButton fichaLabel) {
+        botonesPanel.removeAll();
+        JButton botonExtremo1 = new JButton("Extremo 1");
+        botonExtremo1.addActionListener(e -> {
+            model.colocarFicha(true, fichaSeleccionada);
+        });
+        botonesPanel.add(botonExtremo1);
+
+        JButton botonExtremo2 = new JButton("Extremo 2");
+        botonExtremo2.addActionListener(e -> {
+            model.colocarFicha(false, fichaSeleccionada);
+        });
+        botonesPanel.add(botonExtremo2);
+
+        botonesPanel.setVisible(true);
+        botonesPanel.revalidate();
+        botonesPanel.repaint();
     }
 
     public class JPanelWithBackground extends JPanel {
@@ -145,7 +182,7 @@ public class TableroView extends JFrame implements TableroModel.Observer {
         public TableroPanel(ArrayDto array) {
             this.tablero = array.obtenerTablero();
             this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
-            setPreferredSize(new Dimension(1200, 700)); // Tamaño del panel
+            setPreferredSize(new Dimension(1200, 700));
         }
 
         @Override
@@ -164,7 +201,6 @@ public class TableroView extends JFrame implements TableroModel.Observer {
             int offsetX = (panelWidth - tableroWidth) / 2;
             int offsetY = (panelHeight - tableroHeight) / 2;
 
-            // Dibujar la imagen de fondo en el panel
             g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
 
             for (int i = 0; i < rows; i++) {
@@ -184,18 +220,16 @@ public class TableroView extends JFrame implements TableroModel.Observer {
     }
 
     public static void main(String[] args) {
-        // Crear el modelo (TableroModel) que será pasado al JFrame.
+
         ArrayDto array = new ArrayDto();
         JugadorDto jugador = new JugadorDto("Favela");
 
-        jugador.agregarFichas(jugador.repartirFichas());
+//        jugador.agregarFichas(jugador.repartirFichas());
 
         TableroModel modelo = new TableroModel(array, jugador);
 
-        // Crear la vista (el JFrame)
         TableroView vista = new TableroView(modelo);
 
-        // Configurar la visibilidad y operaciones básicas del JFrame
         java.awt.EventQueue.invokeLater(() -> {
             vista.setVisible(true);
         });

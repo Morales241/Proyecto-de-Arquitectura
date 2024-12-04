@@ -38,6 +38,16 @@ public class ArrayDto {
     public boolean estaVacio(int fila, int columna) {
         return tablero[fila][columna] == -1;
     }
+      public boolean verificarPosiblesMovimientos(List<FichaDto> fichasJugador) {
+        for (FichaDto ficha : fichasJugador) {
+            
+            if (ficha.getLado1() == extremoIzquierdo || ficha.getLado2() == extremoIzquierdo ||
+                ficha.getLado1() == extremoDerecha || ficha.getLado2() == extremoDerecha) {
+                return true;
+            }
+        }
+        return false;
+    }
   
     public boolean colocarFichaExtremoIzquierdo(FichaDto ficha) {
         //Colocar la ficha si es mula
