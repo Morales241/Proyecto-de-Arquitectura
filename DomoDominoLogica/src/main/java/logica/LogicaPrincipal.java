@@ -15,19 +15,24 @@ import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
 import eventos.EventoAcabarPartidaDto;
 import eventos.JugadorAEliminarDto;
+import eventos.JugadorBase;
 import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
+import eventos.VotoDeJugador;
 import fachadas.AvisoFachada;
+import fachadas.LobbyFachada;
 import fachadasInterfaz.IAvisoFachada;
 import fachadasInterfaz.ICrearPartidaFachada;
 import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
+import lobby.ILobbyLogica;
+import lobby.LobbyLogica;
 import mediador.Mediador;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
@@ -40,6 +45,8 @@ import observers.IObserver;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import observers.IEventoAcabarPartida;
+import observersLogicaAServidorCentral.IEventoSalirDeLobby;
+import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 
 /**
@@ -60,6 +67,8 @@ public class LogicaPrincipal {
     private final ILogicaArreglo IArreglo;
     private final ILogicaPozo IPozo;
     private final ILogicaAviso logicaAviso;
+    private String nombre;
+    private int avatar;
 
     private InicializadorComunicaciones inicalizadorComunicaciones;
     private final IGestorDeComunicacionesFachada comunicaciones;
@@ -69,6 +78,7 @@ public class LogicaPrincipal {
     private final ICrearPartidaFachada crearPartidaFachada;
     private final IAvisoFachada avisoFachada;
     private IUnirseAPartidaFachada unirsePartidaFachada;
+    private final ILobbyLogica lobbyLogica;
 
     private InicializadorClases inicializadorClases;
 
@@ -95,10 +105,12 @@ public class LogicaPrincipal {
         crearPartidaFachada = inicializadorClases.getCrearPartidaFachada();
 
         tableroFachada = inicializadorClases.getTableroFachada();
-        
+
         avisoFachada = inicializadorClases.getAvisoFachada();
-        
+
         logicaAviso = new LogicaAviso((AvisoFachada) avisoFachada);
+
+        lobbyLogica = new LobbyLogica((LobbyFachada) inicializadorClases.getLobbyFachada(), comunicaciones);
 
         agregarObservers();
 
@@ -106,7 +118,7 @@ public class LogicaPrincipal {
 
     public void inicializarClases() {
         inicializadorClases = new InicializadorClases();
-        
+
         inicializadorClases.InicializarClases();
 
         inicalizadorComunicaciones = new InicializadorComunicaciones();
@@ -121,7 +133,7 @@ public class LogicaPrincipal {
 
         //agregar observers de aviso
         avisoFachada.agregarEventoCerrarPantalla(new AccionCerrarAviso());
-        
+
         //agregar observers de crear partida
         crearPartidaFachada.agregarIEventoCrearPartida(new AccionCrearPartida());
         crearPartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
@@ -143,12 +155,19 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
-//        comunicaciones.agregarObservadorPusieronFicha(observador);
 //        comunicaciones.agregarObservadorSalioUnJugador(observador);
-        
+
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-        
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+
+        //agregar obserevers de lobby
+        lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
+        lobbyLogica.agregarObservadorVotar(new AccionVotarParaIniciarPartida());
+    }
+
+    public void inicializarnos(String nombre, int avatar) {
+        this.nombre = nombre;
+        this.avatar = avatar;
     }
 
     /*
@@ -170,7 +189,7 @@ public class LogicaPrincipal {
             lInicio.regresarAlInicio();
         }
     }
-    
+
     private class AccionCambiarDePantallaCrearPartida implements IObserver {
 
         @Override
@@ -191,6 +210,7 @@ public class LogicaPrincipal {
 
         @Override
         public void crearPartida(JugadorCrearPartidaDto jugador) {
+            inicializarnos(jugador.getNombre(), jugador.getAvatar());
             lCrearPartida.crearPartida(jugador);
         }
 
@@ -200,6 +220,8 @@ public class LogicaPrincipal {
 
         @Override
         public void agregarJugadorAPartida(JugadorUnirseAPartidaDto jugador) {
+
+            inicializarnos(jugador.getNombre(), jugador.getAvatar());
             IUnirsePartida.unirseAPartida(jugador);
         }
     }
@@ -240,7 +262,7 @@ public class LogicaPrincipal {
     private class AccionElejirFicha {
 
     }
-    
+
     private class AccionCerrarAviso implements IObserver {
 
         @Override
@@ -250,8 +272,24 @@ public class LogicaPrincipal {
 
     }
 
-    
-    
+    private class AccionCerrarLobby implements IEventoSalirDeLobby {
+
+        @Override
+        public void salirDeLobby(JugadorAEliminarDto jugador) {
+            lobbyLogica.inicializarnos(nombre, avatar);
+            lobbyLogica.salirDeLobby(jugador);
+        }
+    }
+
+    private class AccionVotarParaIniciarPartida implements IEventoVotarParaIniciarPartida {
+
+        @Override
+        public void iniciarPartida(VotoDeJugador votoDeJugador) {
+            lobbyLogica.inicializarnos(nombre, avatar);
+            lobbyLogica.votarParaIniciarPartida(votoDeJugador);
+        }
+    }
+
     /*
         LEAN ESTO!!!
         A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
@@ -307,39 +345,53 @@ public class LogicaPrincipal {
 
         @Override
         public void acabarPartida(EventoAcabarPartidaDto codigo) {
-            
+
         }
 
     }
 
-  
 
     /*
         LEAN ESTO!!!
         A PARTIR DE AQUI CREEN CLASES PRIVADAS PARA QUE SE PROCECEN LOS EVENTOS 
         ENTRE EL SERVER CENTRAL Y LA LOGICA
      */
-    private class AccionRecibirRespuestaCrearPartida implements IEventoRespuestaServidorCentral{
+    private class AccionRecibirRespuestaCrearPartida implements IEventoRespuestaServidorCentral {
 
         @Override
         public void actualizar(RespuestaServidorCentral respuesta) {
-            
+
             logicaAviso.mostrarAviso(respuesta.getRespuesta());
-            if(respuesta.getKey()){
+            
+            JugadorBase Yo = new JugadorBase(nombre, avatar);
+
+                lobbyLogica.actualizarLobby(Yo);
+            
+            if (respuesta.getKey()) {
                 mediador.mostrarPantallaConcreta("lobby");
             }
-            
+
         }
     }
-    
-    private class AccionRecibirRespuestaUnirseAPartida implements IEventoRespuestaServidorCentral{
+
+    private class AccionRecibirRespuestaUnirseAPartida implements IEventoRespuestaServidorCentral {
 
         @Override
         public void actualizar(RespuestaServidorCentral respuesta) {
-            
+
             logicaAviso.mostrarAviso(respuesta.getRespuesta());
-            if(respuesta.getKey()){
+            if (respuesta.getKey()) {
+
+                JugadorBase Yo = new JugadorBase(nombre, avatar);
+
+                lobbyLogica.actualizarLobby(Yo);
+
+                respuesta.getJugadores().forEach(jugador -> {
+                    lobbyLogica.actualizarLobby(jugador);
+                });
+
                 mediador.mostrarPantallaConcreta("lobby");
+
             }
         }
     }

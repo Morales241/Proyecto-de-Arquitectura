@@ -1,9 +1,14 @@
 package lobby;
 
-import dtos.JugadorDto;
+import eventos.JugadorAEliminarDto;
+import eventos.JugadorBase;
+import eventos.VotoDeJugador;
 import java.util.ArrayList;
 import java.util.List;
+import observers.IEventoActualizarLobby;
 import observers.IObserver;
+import observersLogicaAServidorCentral.IEventoSalirDeLobby;
+import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 
 /**
  * Modelo del lobby
@@ -15,47 +20,59 @@ import observers.IObserver;
  * @author Jesus Alberto Morales Rojas - 00000245335
  */
 public class LobbyModel {
+
     private final String[] rutasAvatares = {
         "/imgPartidaFichas/avatar1.png",
         "/imgPartidaFichas/avatar2.png",
         "/imgPartidaFichas/avatar3.png",
         "/imgPartidaFichas/avatar4.png"
     };
-    
-    private final List<JugadorDto> jugadores;
-    private IObserver observerActualizarLista;
-    private IObserver observerIniciarPartida;
+
+    private final List<JugadorBase> jugadores;
+    private IEventoSalirDeLobby observerSalirLobby;
+    private IEventoVotarParaIniciarPartida observerVotar;
+    private IEventoActualizarLobby observerActualizarLobby;
 
     public LobbyModel() {
         this.jugadores = new ArrayList<>();
     }
 
-    public void agregarJugador(JugadorDto jugador) {
+    public void agregarJugador(JugadorBase jugador) {
         jugadores.add(jugador);
-        notificarActualizarLista();
+        ejecutarAccionObserverActualizarLobby(jugador);
     }
 
-    public void iniciarPartida() {
-        if (observerIniciarPartida != null) {
-            observerIniciarPartida.actualizar();
+    public void agregarIEventoObserverSalirLobby(IEventoSalirDeLobby listener) {
+        this.observerSalirLobby = listener;
+    }
+
+    public void ejecutarAccionObserverSalirLobby(JugadorAEliminarDto jugador) {
+        if (observerSalirLobby != null) {
+            observerSalirLobby.salirDeLobby(jugador);
         }
     }
 
-    public void agregarIEventoActualizarLista(IObserver listener) {
-        this.observerActualizarLista = listener;
+    public void agregarIEventoObserverVotar(IEventoVotarParaIniciarPartida listener) {
+        this.observerVotar = listener;
     }
 
-    public void agregarIEventoIniciarPartida(IObserver listener) {
-        this.observerIniciarPartida = listener;
-    }
-
-    private void notificarActualizarLista() {
-        if (observerActualizarLista != null) {
-            observerActualizarLista.actualizar();
+    public void ejecutarAccionObserverVotar(VotoDeJugador votoDeJugador) {
+        if (observerVotar != null) {
+            observerVotar.iniciarPartida(votoDeJugador);
         }
     }
 
-    public List<JugadorDto> getJugadores() {
+    public void agregarIEventoObserverActualizarLobby(IEventoActualizarLobby listener) {
+        this.observerActualizarLobby = listener;
+    }
+
+    public void ejecutarAccionObserverActualizarLobby(JugadorBase jugadorBase) {
+        if (observerActualizarLobby != null) {
+            observerActualizarLobby.actualizar(jugadorBase);
+        }
+    }
+
+    public List<JugadorBase> getJugadores() {
         return jugadores;
     }
 }

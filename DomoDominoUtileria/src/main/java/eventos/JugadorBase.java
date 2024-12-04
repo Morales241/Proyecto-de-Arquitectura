@@ -14,6 +14,11 @@ public class JugadorBase implements Serializable {
     private String nombre;
     private int avatar;
 
+    public JugadorBase(String nombre, int avatar) {
+        this.nombre = nombre;
+        this.avatar = avatar;
+    }
+
     public JugadorBase(NodoDto nodo, String codigo, String nombre, int avatar) {
         this.nodo = nodo;
         this.codigo = codigo;

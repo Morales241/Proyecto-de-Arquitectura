@@ -32,11 +32,11 @@ public class LobbyController {
     }
     
     public void regresarAlInicio(JugadorAEliminarDto jugador) {
-        
+        lobbyModel.ejecutarAccionObserverSalirLobby(jugador);
     }
     
     public void votar(VotoDeJugador votoDeJugador) {
-        
+        lobbyModel.ejecutarAccionObserverVotar(votoDeJugador);
     }
     
     private class AccionRegresar implements IEventoSalirDeLobby {

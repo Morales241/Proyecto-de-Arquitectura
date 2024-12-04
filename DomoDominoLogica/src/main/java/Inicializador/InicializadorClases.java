@@ -12,8 +12,11 @@ import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadas.InicializadorMVCFachada;
 import fachadas.InicioFachada;
+import fachadas.LobbyFachada;
 import fachadas.TableroFachada;
 import fachadas.UnirseAPartidaFachada;
+import fachadasInterfaz.ILobbyFachada;
+import lobby.LobbyModel;
 import mediador.IMediador;
 import mediador.Mediador;
 import unirseAPartida.UnirseAPartidaModel;
@@ -42,6 +45,8 @@ public class InicializadorClases {
     private ITableroFachada tableroFachada;
     
     private AvisoFachada avisoFachada;
+    
+    private ILobbyFachada lobbyFachada;
     
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
@@ -76,6 +81,11 @@ public class InicializadorClases {
         //fachada aviso
         AvisoModel avisoModel = (AvisoModel) mediador.obtenerPantallaConcreta("aviso").getModelo();
         avisoFachada = new AvisoFachada(avisoModel);
+        
+        //fachada lobby lobby
+        LobbyModel lobbyModel = (LobbyModel) mediador.obtenerPantallaConcreta("lobby").getModelo();
+        LobbyFachada lobbyFachada = new LobbyFachada(lobbyModel);
+        
     }
 
     public IInicioFachada getInicioFachada() {
@@ -97,4 +107,9 @@ public class InicializadorClases {
     public AvisoFachada getAvisoFachada() {
         return avisoFachada;
     }
+
+    public ILobbyFachada getLobbyFachada() {
+        return lobbyFachada;
+    }
+   
 }

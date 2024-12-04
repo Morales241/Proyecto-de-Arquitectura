@@ -2,12 +2,15 @@ package lobby;
 
 import dtos.JugadorDto;
 import eventos.JugadorAEliminarDto;
+import eventos.JugadorBase;
 import eventos.VotoDeJugador;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import mediador.IComponente;
 import mediador.IMediador;
+import observers.IEventoActualizarLobby;
 import observers.IObserver;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
@@ -21,33 +24,43 @@ import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
  * @author Alejandro Gomez Vega - 00000247313
  * @author Jesus Alberto Morales Rojas - 00000245335
  */
-public class LobbyView extends javax.swing.JFrame implements IComponente{
-    
+public class LobbyView extends javax.swing.JFrame implements IComponente {
+
     private final LobbyModel lobbyModel;
     private IMediador mediador;
     private IEventoSalirDeLobby observerRegresar;
     private IEventoVotarParaIniciarPartida observerVotar;
-    private List<JLabel> etiquetasJugadores;
-    
+
+    private final List<JLabel> etiquetasNombres;
+    private final List<JLabel> etiquetasImagenes;
+
     public LobbyView(LobbyModel lobbyModel) {
         initComponents();
         this.lobbyModel = lobbyModel;
-        
-        etiquetasJugadores = new ArrayList<>();
-        etiquetasJugadores.add(nomJugador1);
-        etiquetasJugadores.add(nomJugador2);
-        etiquetasJugadores.add(nomJugador3);
-        etiquetasJugadores.add(nomJugador4);
-        
-        
+
+        etiquetasNombres = new ArrayList<>();
+        etiquetasNombres.add(nomJugador1);
+        etiquetasNombres.add(nomJugador2);
+        etiquetasNombres.add(nomJugador3);
+        etiquetasNombres.add(nomJugador4);
+
+        etiquetasImagenes = new ArrayList<>();
+        etiquetasImagenes.add(imgJugador1);
+        etiquetasImagenes.add(imgJugador2);
+        etiquetasImagenes.add(imgJugador3);
+        etiquetasImagenes.add(imgJugador4);
+
+        lobbyModel.agregarIEventoObserverActualizarLobby(new ActualizarLobby());
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtAviso = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnVotar = new javax.swing.JButton();
         nomJugador1 = new javax.swing.JLabel();
@@ -66,10 +79,10 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtAviso.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        txtAviso.setForeground(new java.awt.Color(232, 209, 172));
-        txtAviso.setText(" Codigo: ");
-        jPanel1.add(txtAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 270, -1));
+        txtCodigo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtCodigo.setForeground(new java.awt.Color(232, 209, 172));
+        txtCodigo.setText(" Codigo: ");
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 270, -1));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -94,17 +107,9 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
             }
         });
         jPanel1.add(btnVotar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, -1, -1));
-
-        nomJugador1.setText("jLabel2");
         jPanel1.add(nomJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
-
-        nomJugador2.setText("jLabel3");
         jPanel1.add(nomJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
-
-        nomJugador3.setText("jLabel4");
         jPanel1.add(nomJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
-
-        nomJugador4.setText("jLabel5");
         jPanel1.add(nomJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, -1, -1));
         jPanel1.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
         jPanel1.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
@@ -129,11 +134,14 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotarActionPerformed
-        // TODO add your handling code here:
+        this.ejecutarVotarParaIniciarPartida(new VotoDeJugador(this.txtCodigo.getText()));
     }//GEN-LAST:event_btnVotarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        String nombre = lobbyModel.getJugadores().get(0).getNombre();
+        int avatar = lobbyModel.getJugadores().get(0).getAvatar();
+        this.ejecutarSalirDeLobby(new JugadorAEliminarDto(nombre, avatar));
+        
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -149,14 +157,32 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
     private javax.swing.JLabel nomJugador2;
     private javax.swing.JLabel nomJugador3;
     private javax.swing.JLabel nomJugador4;
-    private javax.swing.JLabel txtAviso;
+    private javax.swing.JLabel txtCodigo;
     // End of variables declaration//GEN-END:variables
-    
-      public void mostrarJugadores(List<JugadorDto> jugadores) {
-        for (int i = 0; i < jugadores.size() && i < etiquetasJugadores.size(); i++) {
-            etiquetasJugadores.get(i).setText(jugadores.get(i).getNombre());
-        }
+
+    public void mostrarJugadores(List<JugadorBase> jugadores) {
+        
+    for (int i = 0; i < jugadores.size() && i < etiquetasNombres.size(); i++) {
+        etiquetasNombres.get(i).setText(jugadores.get(i).getNombre());
+
+        int avatar = jugadores.get(i).getAvatar();
+        String rutaImagen = obtenerRutaImagen(avatar);
+
+        ImageIcon icon = new ImageIcon(rutaImagen);
+        etiquetasImagenes.get(i).setIcon(icon);
     }
+}
+
+private String obtenerRutaImagen(int avatar) {
+        return switch (avatar) {
+            case 1 -> "/imgPartidaFichas/avatar1.png";
+            case 2 -> "/imgPartidaFichas/avatar2.png";
+            case 3 -> "/imgPartidaFichas/avatar3.png";
+            case 4 -> "/imgPartidaFichas/avatar4.png";
+            default -> "";
+        }; 
+}
+    
 
     public void agregarIEventoSalirDeLobby(IEventoSalirDeLobby listener) {
         this.observerRegresar = listener;
@@ -167,7 +193,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
             observerRegresar.salirDeLobby(jugador);
         }
     }
-    
+
     public void agregarIEventoVotarParaIniciarPartida(IEventoVotarParaIniciarPartida listener) {
         this.observerVotar = listener;
     }
@@ -177,19 +203,20 @@ public class LobbyView extends javax.swing.JFrame implements IComponente{
             observerVotar.iniciarPartida(votoDeJugador);
         }
     }
-    
-    
-    
+
     @Override
     public void setMediador(IMediador mediador) {
         this.mediador = mediador;
     }
 
+    private class ActualizarLobby implements IEventoActualizarLobby {
 
-    private class IniciarPartida implements IObserver {
         @Override
-        public void actualizar() {
-//            ejecutarIniciarPartida();
+        public void actualizar(JugadorBase jugadorBase) {
+
+            lobbyModel.getJugadores().add(jugadorBase);
+            lobbyModel.getJugadores();
+
         }
     }
 }
