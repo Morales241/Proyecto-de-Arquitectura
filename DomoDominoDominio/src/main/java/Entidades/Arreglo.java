@@ -16,15 +16,12 @@ public class Arreglo {
     private static Arreglo instanciaUnica;
 
     public Arreglo() {
-        tablero = new int[15][30];
+        tablero = new int[30][30];
         reiniciarTablero();
-        tablero[7][7] = 6;
-        extremoIzquierdo = 6;
-        extremoDerecha = 6;
-        extremo1Columna = 7;
-        extremo1Fila = 7;
-        extremo2Columna = 7;
-        extremo2Fila = 7;
+        extremo1Columna = 15;
+        extremo1Fila = 15;
+        extremo2Columna = 15;
+        extremo2Fila = 15;
     }
 
     public static Arreglo getInstance() {

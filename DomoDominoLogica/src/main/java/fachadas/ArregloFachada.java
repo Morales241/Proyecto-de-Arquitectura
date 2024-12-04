@@ -52,6 +52,15 @@ public class ArregloFachada implements IArregloFachada{
 
     @Override
     public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion) {
+         
+         if (this.estaVacio(15, 15)) {
+              if (ficha.esMula()) {
+                   
+              } else {
+                   return false;
+              }
+         }
+         
         switch (direccion) {
             case "Izquierda":
                 return colocarFichaIzquierda(ficha, extremo);
