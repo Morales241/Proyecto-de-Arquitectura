@@ -68,9 +68,14 @@ public class LogicaPozo implements ILogicaPozo {
     }
 
     @Override
-    public void sacarFichasEspecificasPozo(List<Ficha> fichas) {
-        for (Ficha ficha : fichas) {
-            fichas.removeIf(f -> f.equals(ficha)); 
+    public void sacarFichasEspecificasPozo(List<FichaDto> fichas) {
+        
+        List<Ficha> fichasEntidad = new ArrayList<>();
+        
+        for (FichaDto ficha : fichas) {
+            fichasEntidad.add(new Ficha(ficha.getLado1(), ficha.getLado2()));
         }
+        
+        pozo.sacarFichasEspecificasPozo(fichasEntidad);
     }
 }

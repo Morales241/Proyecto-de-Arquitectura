@@ -63,13 +63,13 @@ public class InicializadorMVC {
         ContenedorMvc<UnirseAPartidaModel, UnirseAPartidaView, UnirseAPartidaController> unirseAPartidaContenedor = new ContenedorMvc<>(unirseAPartidaModel, unirseAPartidaView, unirseAPartidaController);
         mediador.registrarPantalla("unirsePartida", unirseAPartidaContenedor);
         
-        //MVC Tablero
-//        TableroModel tableroModel = new TableroModel();
-//        TableroView tableroView = new TableroView(tableroModel);
-//        tableroView.setMediador(mediador);
-//        TableroController tableroController = new TableroController(tableroModel, tableroView);
-//        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel, tableroView, tableroController);
-//        mediador.registrarPantalla("tablero", tableroContenedor);
+//        MVC Tablero
+        TableroModel tableroModel = new TableroModel();
+        TableroView tableroView = new TableroView(tableroModel);
+        tableroView.setMediador(mediador);
+        TableroController tableroController = new TableroController(tableroModel, tableroView);
+        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel, tableroView, tableroController);
+        mediador.registrarPantalla("tablero", tableroContenedor);
         
         //MVC Aviso
         AvisoModel avisoModel = new AvisoModel();

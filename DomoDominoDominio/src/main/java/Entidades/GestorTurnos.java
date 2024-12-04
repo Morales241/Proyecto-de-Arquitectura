@@ -2,37 +2,46 @@ package Entidades;
 
 import java.util.List;
 import java.util.Map;
-
 import java.util.ArrayList;
 
 public class GestorTurnos {
+
     private final List<Jugador> turnos;
     private int indiceActual;
+    private List<String> turnosSincronizados;
 
+    // Constructor
     public GestorTurnos() {
         this.turnos = new ArrayList<>();
         this.indiceActual = 0;
+        this.turnosSincronizados = new ArrayList<>();
     }
 
     public void inicializarTurnos(Map<String, Jugador> jugadores) {
         turnos.clear();
-        Jugador jugadorConDobleSeis = null;
+        Jugador jugadorConMulaMasAlta = null;
+        int valorMulaMasAlta = -1;
 
         for (Map.Entry<String, Jugador> entry : jugadores.entrySet()) {
             Jugador jugador = entry.getValue();
 
-            boolean tieneDobleSeis = jugador.getFichas().stream()
-                .anyMatch(ficha -> ficha.getLado1() == 6 && ficha.getLado2() == 6);
+            int valorMulaDelJugador = jugador.getFichas().stream()
+                    .filter(ficha -> ficha.getLado1() == ficha.getLado2()) 
+                    .mapToInt(Ficha::getLado1) 
+                    .max()
+                    .orElse(-1);
 
-            if (tieneDobleSeis && jugadorConDobleSeis == null) {
-                jugadorConDobleSeis = jugador;
-            } else {
-                turnos.add(jugador);
+            if (valorMulaDelJugador > valorMulaMasAlta) {
+                valorMulaMasAlta = valorMulaDelJugador;
+                jugadorConMulaMasAlta = jugador;
             }
+
+            turnos.add(jugador);
         }
 
-        if (jugadorConDobleSeis != null) {
-            turnos.add(0, jugadorConDobleSeis);
+        if (jugadorConMulaMasAlta != null) {
+            turnos.remove(jugadorConMulaMasAlta);
+            turnos.add(0, jugadorConMulaMasAlta); 
         }
 
         indiceActual = 0;
@@ -57,5 +66,13 @@ public class GestorTurnos {
 
     public List<Jugador> obtenerOrdenDeTurnos() {
         return new ArrayList<>(turnos);
+    }
+
+    public void setTurnos(List<String> turnos) {
+        this.turnosSincronizados = new ArrayList<>(turnos);
+    }
+
+    public List<String> getTurnosSincronizados() {
+        return turnosSincronizados;
     }
 }

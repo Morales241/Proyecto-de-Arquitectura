@@ -9,18 +9,17 @@ import dtos.FichaDto;
 import java.util.List;
 
 public interface ILogicaPozo {
-     
+
     public void crearFichasPozo();
-    
+
     public FichaDto sacarFicha();
-    
+
     public List<FichaDto> repartirFichas(int numeroFichas);
-    
+
     public void recibirFichas(List<Ficha> fichasJugador);
-    
+
     public boolean pozoVacio();
-    
-       public void sacarFichasEspecificasPozo(List<Ficha> fichas);
-           
-    
+
+    public void sacarFichasEspecificasPozo(List<FichaDto> fichas);
+
 }

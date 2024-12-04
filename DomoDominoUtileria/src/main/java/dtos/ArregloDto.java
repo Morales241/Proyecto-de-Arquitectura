@@ -1,60 +1,27 @@
-package Entidades;
+package dtos;
 
-import Entidades.Ficha;
-
-/**
- *
- * @author favel
- */
-public class Arreglo {
+public class ArregloDto {
 
     private int[][] tablero;
-    private int extremoIzquierdo, extremoDerecha;
-    private int extremo1Columna, extremo1Fila;
-    private int extremo2Columna, extremo2Fila;
+    private int extremoIzquierdo;
+    private int extremoDerecha;
+    private int extremo1Columna;
+    private int extremo1Fila;
+    private int extremo2Columna;
+    private int extremo2Fila;
 
-    private static Arreglo instanciaUnica;
-
-    public Arreglo() {
-        tablero = new int[30][30];
-        reiniciarTablero();
-        extremo1Columna = 15;
-        extremo1Fila = 15;
-        extremo2Columna = 15;
-        extremo2Fila = 15;
-    }
-
-    public static Arreglo getInstance() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new Arreglo();
-        }
-        return instanciaUnica;
-    }
-
-    public void reiniciarTablero() {
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++) {
-                tablero[i][j] = -1;
-            }
-        }
-    }
-
-    public int getExtremo1() {
-        return extremoIzquierdo;
-    }
-
-    public void setExtremo1(int extremoIzquierdo) {
+    public ArregloDto(int[][] tablero, int extremoIzquierdo, int extremoDerecha,int extremo1Columna, int extremo1Fila,int extremo2Columna, int extremo2Fila) {
+        this.tablero = tablero;
         this.extremoIzquierdo = extremoIzquierdo;
-    }
-
-    public int getExtremo2() {
-        return extremoDerecha;
-    }
-
-    public void setExtremo2(int extremoDerecha) {
         this.extremoDerecha = extremoDerecha;
+        this.extremo1Columna = extremo1Columna;
+        this.extremo1Fila = extremo1Fila;
+        this.extremo2Columna = extremo2Columna;
+        this.extremo2Fila = extremo2Fila;
     }
 
+    
+    
     public int[][] getTablero() {
         return tablero;
     }

@@ -4,8 +4,6 @@ import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
@@ -19,7 +17,7 @@ public class TableroController {
      public TableroController(TableroModel tableroModel, TableroView tableroView) {
           this.tableroModel = tableroModel;
           this.tableroView = tableroView;
-//          tableroView.agregarIEventoPonerFicha(new accionPonerFicha());
+          tableroView.agregarObserverPonerFicha(new accionPonerFicha());
 //          tableroView.agregarEventoTomarFichaDelPozo(new accionTomarFichaDelPozo());
 //          tableroView.agregarEventoPasarTurno(new accionPasarTurno());
 //          tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
@@ -28,7 +26,7 @@ public class TableroController {
      private class accionPonerFicha implements IEventoPonerFicha {
           @Override
           public void ponerFicha(PonerFichaDto ponerFicha) {
-          
+              tableroModel.ejecutarObserverPonerFicha(ponerFicha);
           }
      }
       
