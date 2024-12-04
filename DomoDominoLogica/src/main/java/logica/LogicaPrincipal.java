@@ -273,6 +273,8 @@ public class LogicaPrincipal {
         @Override
         public void ponerFicha(PonerFichaDto ponerFicha) {
             IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
+            ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+            logicaTablero.mandarArregloActualizado(arreglo);
         }
     }
 
@@ -282,8 +284,6 @@ public class LogicaPrincipal {
         public void pedirFicha() {
             throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
-
-        
     }
 
     private class AccionElejirFicha {

@@ -3,6 +3,7 @@ package TableroMvc;
 import dtos.ArregloDto;
 import dtos.FichaDto;
 import dtos.JugadorDto;
+import eventos.PonerFichaDto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,7 +33,6 @@ public class TableroView extends JFrame implements IComponente {
     private JPanel botonesPanel;
     private JLayeredPane layeredPane;
     private IObserver actualizar;
-    private IEventoPonerFicha validarFicha;
     private IEventoPonerFicha eventoPonerFicha;
 
     public TableroView(TableroModel model) {
@@ -126,16 +126,14 @@ public class TableroView extends JFrame implements IComponente {
 
     private void mostrarBotonesSeleccion(JButton fichaLabel) {
         botonesPanel.removeAll();
+
+        // Botones para los extremos
         JButton botonExtremo1 = new JButton("Extremo 1");
-        botonExtremo1.addActionListener(e -> {
-//            model.colocarFicha(true, fichaSeleccionada);
-        });
+        botonExtremo1.addActionListener(e -> mostrarBotonesDireccion(true));
         botonesPanel.add(botonExtremo1);
 
         JButton botonExtremo2 = new JButton("Extremo 2");
-        botonExtremo2.addActionListener(e -> {
-//            model.colocarFicha(false, fichaSeleccionada);
-        });
+        botonExtremo2.addActionListener(e -> mostrarBotonesDireccion(false));
         botonesPanel.add(botonExtremo2);
 
         botonesPanel.setVisible(true);
@@ -143,6 +141,20 @@ public class TableroView extends JFrame implements IComponente {
         botonesPanel.repaint();
     }
 
+    private void mostrarBotonesDireccion(boolean extremoIzquierdo) {
+        botonesPanel.removeAll();
+        // Botones para seleccionar dirección
+        String[] direcciones = {"Arriba", "Abajo", "Izquierda", "Derecha"};
+        for (String direccion : direcciones) {
+            JButton botonDireccion = new JButton(direccion);
+        botonDireccion.addActionListener(e -> ejectutarPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, direccion)));
+            botonesPanel.add(botonDireccion);
+        }
+        botonesPanel.setVisible(true);
+        botonesPanel.revalidate();
+
+        botonesPanel.repaint();
+    }
     @Override
     public void setMediador(IMediador mediadorp) {
         mediador = mediadorp;
@@ -226,4 +238,14 @@ public class TableroView extends JFrame implements IComponente {
 
     }
 
+    public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha){
+        this.eventoPonerFicha = eventoPonerFicha;
+        
+    }
+    
+    public void ejectutarPonerFicha(PonerFichaDto ponerFicha){
+        if (this.eventoPonerFicha != null) {
+            eventoPonerFicha.ponerFicha(ponerFicha);
+        }
+    }
 }

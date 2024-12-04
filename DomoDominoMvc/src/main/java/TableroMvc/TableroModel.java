@@ -101,12 +101,10 @@ public class TableroModel {
 
     public void setArray(ArregloDto array) {
         this.array = array;
+        ejecutarObserverActualizar();
     }
 
-    public boolean verificarMovimientosPosibles() {
-//        return array.verificarPosiblesMovimientos(jugador.getFichas());
-        return false;
-    }
+    
 
     public List<JugadorBase> getCompañeros() {
         return compañeros;

@@ -26,4 +26,6 @@ public interface ITableroFachada {
      public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener);
      
      public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases);
+     
+     public void mandarArregloActualizado(ArregloDto arrayDto);
 }
