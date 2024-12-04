@@ -10,6 +10,7 @@ import java.util.List;
 public class Jugador {
 
      private String nombre;
+     private int avatar;
      private List<Ficha> fichas;
 
      public Jugador(String nombre) {
@@ -51,4 +52,14 @@ public class Jugador {
                System.out.println(ficha);
           }
      }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
+     
+     
 }

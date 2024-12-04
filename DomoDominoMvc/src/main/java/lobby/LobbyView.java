@@ -241,6 +241,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         }
         
     }
+    
     private class ActualizarLobby implements IEventoActualizarLobby {
 
         @Override

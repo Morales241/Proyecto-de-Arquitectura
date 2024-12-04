@@ -1,11 +1,13 @@
 package Inicializador;
 
+import Entidades.GestorTurnos;
 import InicioMvc.InicioModel;
 import TableroMvc.TableroModel;
 import aviso.AvisoModel;
 import crearPartida.CrearPartidaModel;
 import fachadas.AvisoFachada;
 import fachadas.CrearPartidaFachada;
+import fachadas.GestorDeTurnosFachada;
 import fachadasInterfaz.ICrearPartidaFachada;
 import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
@@ -15,6 +17,7 @@ import fachadas.InicioFachada;
 import fachadas.LobbyFachada;
 import fachadas.TableroFachada;
 import fachadas.UnirseAPartidaFachada;
+import fachadasInterfaz.IGestorDeTurnosFachada;
 import fachadasInterfaz.ILobbyFachada;
 import lobby.LobbyModel;
 import mediador.IMediador;
@@ -48,6 +51,8 @@ public class InicializadorClases {
     
     private ILobbyFachada lobbyFachada;
     
+    private IGestorDeTurnosFachada turnosFachada;
+     
     public InicializadorClases() {
         mediador = Mediador.getInstancia();
         cFachada = new InicializadorMVCFachada();
@@ -86,10 +91,17 @@ public class InicializadorClases {
         LobbyModel lobbyModel = (LobbyModel) mediador.obtenerPantallaConcreta("lobby").getModelo();
         lobbyFachada = new LobbyFachada(lobbyModel);
         
+        GestorTurnos gestorTurnos = new GestorTurnos();
+        turnosFachada = new GestorDeTurnosFachada(gestorTurnos);
+        
     }
 
     public IInicioFachada getInicioFachada() {
         return inicioFachada;
+    }
+
+    public IGestorDeTurnosFachada getTurnosFachada() {
+        return turnosFachada;
     }
 
     public ICrearPartidaFachada getCrearPartidaFachada() {

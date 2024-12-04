@@ -76,5 +76,4 @@ public class SetUpDto implements Serializable {
         this.fichasSacadasDelPozo = fichasSacadasDelPozo;
     }
     
-    
 }

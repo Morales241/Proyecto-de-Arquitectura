@@ -13,6 +13,7 @@ import Pozo.LogicaPozo;
 import crearPartida.ILogicaCrearPartida;
 import crearPartida.LogicaCrearPartida;
 import dtos.FichaDto;
+import dtos.JugadorDto;
 import eventos.EventoAcabarPartidaDto;
 import eventos.IniciarPartidaAdmin;
 import eventos.JugadorAEliminarDto;
@@ -34,6 +35,9 @@ import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
+import fachadasInterfaz.IGestorDeTurnosFachada;
+import gestorTurno.ILogicaGestorTurno;
+import gestorTurno.LogicaGestorTurno;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +61,8 @@ import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
+import terminarPartida.ILogicaTerminarPartida;
+import terminarPartida.LogicaTerminarPartida;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -76,6 +82,8 @@ public class LogicaPrincipal {
     private final ILogicaArreglo IArreglo;
     private final ILogicaPozo IPozo;
     private final ILogicaAviso logicaAviso;
+    private final ILogicaGestorTurno turnosFachada;
+    private final ILogicaTerminarPartida logicaTerminarPartida;
     private String nombre;
     private int avatar;
     private String codigo;
@@ -122,6 +130,10 @@ public class LogicaPrincipal {
 
         lobbyLogica = new LobbyLogica((LobbyFachada) inicializadorClases.getLobbyFachada(), comunicaciones);
 
+        turnosFachada = new LogicaGestorTurno(comunicaciones, inicializadorClases.getTurnosFachada());
+
+        logicaTerminarPartida = new LogicaTerminarPartida(comunicaciones);
+        
         agregarObservers();
 
     }
@@ -164,9 +176,9 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorPasaronTurno(new AccionPasaronTurno());
         comunicaciones.agregarObservadorRespuestaCrearPartida(new AccionRecibirRespuestaCrearPartida());
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
-//        comunicaciones.agregarObservadorSalioUnJugador(observador);
+//      comunicaciones.agregarObservadorSalioUnJugador(observador);
         comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
-//        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+//      comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
         comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
 
@@ -365,7 +377,7 @@ public class LogicaPrincipal {
 
         @Override
         public void acabarPartida(EventoAcabarPartidaDto codigo) {
-
+            logicaTerminarPartida.acabarPartida(codigo);
         }
 
     }
@@ -442,7 +454,7 @@ public class LogicaPrincipal {
             Map<String, SetUpDto> jugadores = new HashMap<>();
             List<FichaDto> fichasSacasDelPozo = new ArrayList<>();
             int fichasDePartida = partidaAdmin.getFichasDePartida();
-
+            List<JugadorDto> jugadorDtos = new ArrayList<>();
             List<JugadorBase> jugadoresPartida = partidaAdmin.getListaJugadores();
 
             jugadoresPartida.forEach(jugadorAux -> {
@@ -450,59 +462,48 @@ public class LogicaPrincipal {
             });
 
             jugadoresPartida.forEach(jugadorAux -> {
+                String nombre = jugadorAux.getNombre();
+                int avatar = jugadorAux.getAvatar();
 
-                List<FichaDto> fichasDeJugador = new ArrayList<>();
+                List<FichaDto> fichasDeJugador = IPozo.repartirFichas(fichasDePartida);
 
-                fichasDeJugador = IPozo.repartirFichas(fichasDePartida);
-
-                SetUpDto setUpDto = null;
+                SetUpDto setUpDto = new SetUpDto(nombre, avatar, new ArrayList<>(), fichasDeJugador, new ArrayList<>());
                 setUpDto.setFichasDelJugador(fichasDeJugador);
-                setUpDto.setAvatar(avatar);
-                setUpDto.setNombre(nombre);
-                List<JugadorBase> compañeros = new ArrayList<>();
 
+                List<JugadorBase> compañeros = new ArrayList<>();
                 jugadoresPartida.forEach(jugadorAux2 -> {
-                    if (!nombre.equals(jugadorAux.getNombre())) {
-                        compañeros.add(jugadorAux);
+                    if (!nombre.equals(jugadorAux2.getNombre())) {
+                        compañeros.add(jugadorAux2);
                     }
                 });
-
                 setUpDto.setJugadoresDePartiada(compañeros);
 
                 fichasSacasDelPozo.addAll(fichasDeJugador);
 
                 jugadores.put(nombre, setUpDto);
-            });
 
-            List<String> turnosPorNombre = new ArrayList<>();
-
-            jugadores.forEach((nombre, setUp) -> {
-                setUp.setFichasSacadasDelPozo(fichasSacasDelPozo);
-
-                setUp.getFichasDelJugador().forEach(ficha -> {
-                    if (ficha.getLado1() == 6 && ficha.getLado2() == 6) {
-                        if (!turnosPorNombre.isEmpty()) {
-                            turnosPorNombre.add(nombre);
-                            String aux = turnosPorNombre.get(0);
-                            String aux2 = turnosPorNombre.getLast();
-                            int posicion = turnosPorNombre.indexOf(nombre);
-                            turnosPorNombre.set(0, aux2);
-                            turnosPorNombre.set(posicion, aux);
-                        } else {
-                            turnosPorNombre.add(nombre);
-                        }
-                    } else {
-                        turnosPorNombre.add(nombre);
-                    }
+                jugadoresPartida.forEach(jugadorAux2 -> {
+                    jugadorDtos.add(new JugadorDto(jugadorAux2.getNombre(), jugadorAux2.getAvatar(), fichasDeJugador));
                 });
-                setUp.setTurnos(turnosPorNombre);
             });
 
-            jugadores.forEach((nombre, setUp) -> {
+            turnosFachada.inicializarTurnos(jugadorDtos);
 
+            List<JugadorDto> ordenTurnos = turnosFachada.obtenerOrdenDeTurnos();
+            List<String> nombresEnOrden = new ArrayList<>();
+
+            for (JugadorDto jugador : ordenTurnos) {
+                nombresEnOrden.add(jugador.getNombre());
+            }
+
+            for (String nombre : jugadores.keySet()) {
+                SetUpDto setUpDto = jugadores.get(nombre);
+                setUpDto.setTurnos(new ArrayList<>(nombresEnOrden));
+            }
+
+            jugadores.forEach((nombre, setUp) -> {
                 comunicaciones.enviarMensaje(setUp, nombre);
             });
-
         }
     }
 
