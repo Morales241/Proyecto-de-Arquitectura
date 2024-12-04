@@ -56,6 +56,10 @@ public class LogicaCrearPartida implements ILogicaCrearPartida {
         return codigo;
     }
 
+    public void limpiarCampos(){
+        
+    }
+    
     public String generarCodigo() {
 
         String abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

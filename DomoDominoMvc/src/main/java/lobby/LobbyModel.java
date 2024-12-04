@@ -28,7 +28,7 @@ public class LobbyModel {
         "/imgPartidaFichas/avatar4.png"
     };
 
-    private final List<JugadorBase> jugadores;
+    private List<JugadorBase> jugadores;
     private IEventoSalirDeLobby observerSalirLobby;
     private IEventoVotarParaIniciarPartida observerVotar;
     private IEventoActualizarLobby observerActualizarLobby;
@@ -48,6 +48,7 @@ public class LobbyModel {
 
     public void ejecutarAccionObserverSalirLobby(JugadorAEliminarDto jugador) {
         if (observerSalirLobby != null) {
+            this.jugadores = new ArrayList<>();
             observerSalirLobby.salirDeLobby(jugador);
         }
     }

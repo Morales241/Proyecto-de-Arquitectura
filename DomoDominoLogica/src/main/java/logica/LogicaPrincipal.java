@@ -159,7 +159,7 @@ public class LogicaPrincipal {
 //        comunicaciones.agregarObservadorSalioUnJugador(observador);
 
 //        comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
-        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSaioDePartida());
+        comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
 
         //agregar obserevers de lobby
         lobbyLogica.agregarObservadorSalir(new AccionCerrarLobby());
@@ -275,12 +275,20 @@ public class LogicaPrincipal {
 
     }
 
+    public void limpiarCampos(){
+        this.avatar = 1;
+        this.codigo ="";
+        this.nombre ="";
+    }
     private class AccionCerrarLobby implements IEventoSalirDeLobby {
 
         @Override
         public void salirDeLobby(JugadorAEliminarDto jugador) {
             lobbyLogica.inicializarnos(nombre, avatar);
             lobbyLogica.salirDeLobby(jugador);
+            limpiarCampos();
+            mediador.mostrarPantallaConcreta("inicio");
+            
         }
     }
 
@@ -326,7 +334,7 @@ public class LogicaPrincipal {
 
     }
 
-    private class AccionJugadorSaioDePartida implements IEventoSalirDePartida {
+    private class AccionJugadorSalioDePartida implements IEventoSalirDePartida {
 
         @Override
         public void salirDePartida(JugadorAEliminarDto jugador) {
