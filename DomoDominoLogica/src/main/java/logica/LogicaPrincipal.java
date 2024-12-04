@@ -28,6 +28,7 @@ import eventos.RespuestaDeUnirseAPartida;
 import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import eventos.VotoDeJugador;
+import fachadas.ArregloFachada;
 import fachadas.AvisoFachada;
 import fachadas.LobbyFachada;
 import fachadasInterfaz.IAvisoFachada;
@@ -113,7 +114,6 @@ public class LogicaPrincipal {
 
         comunicaciones = inicalizadorComunicaciones.getComunicaciones();
 
-        IArreglo = (ILogicaArreglo) inicializadorClases.getArregloFachada();
 
         lInicio = new LogicaInicio();
 
@@ -140,7 +140,9 @@ public class LogicaPrincipal {
         logicaTerminarPartida = new LogicaTerminarPartida(comunicaciones);
 
         logicaTablero = new LogicaTablero(tableroFachada);
-
+        
+        IArreglo =  new LogicaArreglo((ArregloFachada) inicializadorClases.getArregloFachada());
+        
         agregarObservers();
 
     }
