@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import observers.IObserver;
 
 public class TableroView extends JFrame {
 
@@ -26,10 +27,11 @@ public class TableroView extends JFrame {
     private FichaDto fichaSeleccionada = null;
     private JPanel botonesPanel;
     private JLayeredPane layeredPane;
+    private IObserver actualizar;
 
     public TableroView(TableroModel model) {
         this.model = model;
-//        this.model.agregarObserver(this);
+        this.model.agregarObserverActualizar(new Actualizar());
 
         this.setSize(1210, 730);
         setTitle("Tablero de Dominó");
@@ -53,7 +55,7 @@ public class TableroView extends JFrame {
 
         JButton botonPozo = new JButton();
         botonPozo.setEnabled(false);
-        
+
         String rutaImagen = "/imgPartidaFichas/Pozo.png";
         URL recurso = getClass().getResource(rutaImagen);
         if (recurso != null) {
@@ -114,17 +116,6 @@ public class TableroView extends JFrame {
         } else {
             System.err.println("Imagen no encontrada para: " + rutaImagen);
         }
-    }
-
-    public void update() {
-        // Aquí puedes actualizar la vista cuando se notifique un cambio en el modelo
-        fichasJugadorPanel.removeAll(); // Limpiar el panel
-        for (FichaDto ficha : model.getJugador().getFichas()) {
-            agregarFichaAlPanel(ficha); // Volver a agregar las fichas
-        }
-        fichasJugadorPanel.revalidate();
-        fichasJugadorPanel.repaint();
-        tableroPanel.repaint();
     }
 
     private void mostrarBotonesSeleccion(JButton fichaLabel) {
@@ -207,23 +198,21 @@ public class TableroView extends JFrame {
             }
         }
     }
-//
-//    public static void main(String[] args) {
-//
-////        ArregloDto array = new ArregloDto();
-//        JugadorDto jugador = new JugadorDto("Favela");
-//
-////        jugador.agregarFichas(jugador.repartirFichas());
-//
-////        TableroModel modelo = new TableroModel(array, jugador);
-//
-////        TableroView vista = new TableroView(modelo);
-//
-//        java.awt.EventQueue.invokeLater(() -> {
-//            vista.setVisible(true);
-//        });
-//    }
-//    
     
-    
+    private class Actualizar implements IObserver {
+
+        @Override
+        public void actualizar() {
+            // Aquí puedes actualizar la vista cuando se notifique un cambio en el modelo
+            fichasJugadorPanel.removeAll(); // Limpiar el panel
+            for (FichaDto ficha : model.getJugador().getFichas()) {
+                agregarFichaAlPanel(ficha); // Volver a agregar las fichas
+            }
+            fichasJugadorPanel.revalidate();
+            fichasJugadorPanel.repaint();
+            tableroPanel.repaint();
+        }
+
+    }
+
 }
