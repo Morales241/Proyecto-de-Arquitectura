@@ -59,6 +59,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
 
         jPanel1 = new javax.swing.JPanel();
         txtCodigo = new javax.swing.JLabel();
+        txtCodigo1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnVotar = new javax.swing.JButton();
         nomJugador1 = new javax.swing.JLabel();
@@ -80,7 +81,11 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         txtCodigo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(232, 209, 172));
         txtCodigo.setText(" Codigo: ");
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 360, -1));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 100, -1));
+
+        txtCodigo1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtCodigo1.setForeground(new java.awt.Color(232, 209, 172));
+        jPanel1.add(txtCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 190, 30));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -117,10 +122,10 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
 
         nomJugador4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(nomJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, -1, -1));
-        jPanel1.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
-        jPanel1.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
-        jPanel1.add(imgJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, -1, -1));
-        jPanel1.add(imgJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, -1));
+        jPanel1.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 100, 110));
+        jPanel1.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 80, 130));
+        jPanel1.add(imgJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 100, 140));
+        jPanel1.add(imgJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, 80, 170));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoGeneral.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 600));
@@ -164,6 +169,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
     private javax.swing.JLabel nomJugador3;
     private javax.swing.JLabel nomJugador4;
     private javax.swing.JLabel txtCodigo;
+    private javax.swing.JLabel txtCodigo1;
     // End of variables declaration//GEN-END:variables
 
     public void mostrarJugadores(List<JugadorBase> jugadores) {
