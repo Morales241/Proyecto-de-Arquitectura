@@ -38,7 +38,7 @@ public class TableroView extends JFrame implements IComponente {
     public TableroView(TableroModel model) {
         this.model = model;
         this.model.agregarObserverActualizar(new Actualizar());
-
+        
         this.setSize(1210, 730);
         setTitle("Tablero de Dominó");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

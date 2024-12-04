@@ -23,7 +23,8 @@ import observersLogicaAServidorCentral.IEventoSalirDePartida;
  */
 public class TableroModel {
 
-    private ArregloDto array;
+//    private ArregloDto array  = new ArregloDto(new int[30][30], 0, 0, 15, 15, 15, 15);
+     private ArregloDto array;
     private boolean turno;
     private JugadorDto jugador;
     private List<JugadorBase> compañeros;
@@ -33,6 +34,7 @@ public class TableroModel {
     private IObserver actualizar;
 
     public TableroModel() {
+         
     }
 
     public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
@@ -112,6 +114,9 @@ public class TableroModel {
     }
 
     public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
+         
+         
+         
         setJugador(jugadorDto);
         setCompañeros(jugadorBases);
         setArray(arrayDto);
