@@ -56,7 +56,7 @@ public class ServerCentral {
         try {
             nodos.add(jugador);
             this.infoPartidas.put(jugador.getCodigo(), nodos);
-
+            this.VotosParaInciarPartidas.put(jugador.getCodigo(), 1);
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
             mandarMensaje(new RespuestaDePartidaCreada("Se creo la partida exitosamente", true), jugador.getNombre());
 
@@ -84,13 +84,23 @@ public class ServerCentral {
             if (nodos.size() < 4) {
                 infoPartidas.get(jugador.getCodigo()).add(jugador);
 
-                respuesta = new RespuestaDeUnirseAPartida(jugador.getNombre(), jugador.getAvatar(), "Se ha unido a una partida", true);
+                int numJugadores = VotosParaInciarPartidas.get(jugador.getCodigo());
+
+                this.VotosParaInciarPartidas.replace(jugador.getCodigo(), numJugadores++);
+
+                JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+                jugadorBase.setCodigo(jugador.getCodigo());
+
+                respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "Se ha unido a una partida", true);
 
                 mandarMensaje(respuesta, jugador.getNombre());
             } else {
                 nodos.clear();
 
-                respuesta = new RespuestaDeUnirseAPartida("", 0, "La partida ya esta llena", false);
+                JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+                respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "La partida ya esta llena", false);
 
                 mandarMensaje(respuesta, jugador.getNombre());
 
@@ -98,7 +108,10 @@ public class ServerCentral {
             }
 
         } else {
-            respuesta = new RespuestaDeUnirseAPartida("", 0, "No se encontro la partida", false);
+
+            JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+            respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "No se encontro la partida", false);
 
             mandarMensaje(respuesta, jugador.getNombre());
 
@@ -113,22 +126,31 @@ public class ServerCentral {
         List<NodoDto> nodos = new ArrayList<>();
 
         RespuestaDeUnirseAPartida respuesta;
-        
+
         if (seEncontroPartida) {
 
             this.infoPartidas.get(jugador.getCodigo()).remove(jugador.getNodo());
 
-            respuesta = new RespuestaDeUnirseAPartida("", 0,"Saliste de la partida exitosamente", true);
-            
+            if (infoPartidas.get(jugador.getCodigo()).size() == 1) {
+                acabarPartidaPorCodigo(jugador.getCodigo());
+            }
+
+            JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+            jugadorBase.setCodigo(jugador.getCodigo());
+
+            respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "Saliste de la partida exitosamente", true);
+
             mandarMensaje(respuesta, jugador.getNombre());
-            
+
             cerrarConexionConNodo(jugador.getNombre());
         } else {
-            
-            respuesta =  new RespuestaDeUnirseAPartida("", 0,"No se encontro la partida", false);
-            
+            JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
+
+            respuesta = new RespuestaDeUnirseAPartida(jugadorBase, "No se encontro la partida", false);
+
             mandarMensaje(respuesta, jugador.getNombre());
-            
+
             cerrarConexionConNodo(jugador.getNombre());
         }
     }
