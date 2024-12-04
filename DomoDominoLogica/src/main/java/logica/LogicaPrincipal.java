@@ -57,6 +57,8 @@ import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
 import observersServerCentralALogica.IEventoRespuestaServidorCentral;
 import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
+import terminarPartida.ILogicaTerminarPartida;
+import terminarPartida.LogicaTerminarPartida;
 
 /**
  * Clase de logica principal que se encarga el flujo
@@ -76,6 +78,7 @@ public class LogicaPrincipal {
     private final ILogicaArreglo IArreglo;
     private final ILogicaPozo IPozo;
     private final ILogicaAviso logicaAviso;
+    private final ILogicaTerminarPartida logicaTerminarPartida;
     private String nombre;
     private int avatar;
     private String codigo;
@@ -122,6 +125,8 @@ public class LogicaPrincipal {
 
         lobbyLogica = new LobbyLogica((LobbyFachada) inicializadorClases.getLobbyFachada(), comunicaciones);
 
+        logicaTerminarPartida = new LogicaTerminarPartida(comunicaciones);
+        
         agregarObservers();
 
     }
@@ -365,7 +370,7 @@ public class LogicaPrincipal {
 
         @Override
         public void acabarPartida(EventoAcabarPartidaDto codigo) {
-
+            logicaTerminarPartida.acabarPartida(codigo);
         }
 
     }
