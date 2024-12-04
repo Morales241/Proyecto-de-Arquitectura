@@ -25,6 +25,7 @@ private JugadorDto jugador;
         this.array = array;
         this.jugador = jugador;
         this.observers = new ArrayList<>();
+       
     }
 
     public void agregarObserver(Observer observer) {

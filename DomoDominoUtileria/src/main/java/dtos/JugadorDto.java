@@ -15,11 +15,11 @@ public class JugadorDto {
     private String nombre;
     private final List<FichaDto> fichas; 
    private int numeroFichasIniciales = 7;
+   
     public JugadorDto(String nombre) {
         this.nombre = nombre;
         this.fichas = new ArrayList<>();
         crearFichasPozo();
-        System.out.println(fichas);
     }
 
     public String getNombre() {
