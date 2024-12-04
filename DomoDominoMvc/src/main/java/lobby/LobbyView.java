@@ -128,7 +128,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         jPanel1.add(imgJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, 120, 140));
         jPanel1.add(imgJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, 120, 170));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoGeneral.png"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgPartidaFichas/FondoGeneral.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

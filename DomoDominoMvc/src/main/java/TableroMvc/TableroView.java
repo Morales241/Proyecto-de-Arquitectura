@@ -17,17 +17,23 @@ import javax.swing.JPanel;
 import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import mediador.IComponente;
+import mediador.IMediador;
+import observers.IEventoPonerFicha;
 import observers.IObserver;
 
-public class TableroView extends JFrame {
+public class TableroView extends JFrame implements IComponente {
 
     private TableroModel model;
     private JPanel fichasJugadorPanel;
+    private IMediador mediador;
     private TableroPanel tableroPanel;
     private FichaDto fichaSeleccionada = null;
     private JPanel botonesPanel;
     private JLayeredPane layeredPane;
     private IObserver actualizar;
+    private IEventoPonerFicha validarFicha;
+    private IEventoPonerFicha eventoPonerFicha;
 
     public TableroView(TableroModel model) {
         this.model = model;
@@ -137,6 +143,11 @@ public class TableroView extends JFrame {
         botonesPanel.repaint();
     }
 
+    @Override
+    public void setMediador(IMediador mediadorp) {
+        mediador = mediadorp;
+    }
+
     public class JPanelWithBackground extends JPanel {
 
         private ImageIcon fondoImagen;
@@ -198,7 +209,7 @@ public class TableroView extends JFrame {
             }
         }
     }
-    
+
     private class Actualizar implements IObserver {
 
         @Override
