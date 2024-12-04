@@ -299,3 +299,4 @@ JLabel avatarJugador = new JLabel();
         }
     }
 }
+

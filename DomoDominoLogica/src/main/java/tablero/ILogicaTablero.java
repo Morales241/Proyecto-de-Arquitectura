@@ -17,14 +17,17 @@ import observersLogicaAServidorCentral.IEventoSalirDePartida;
  * @author tacot
  */
 public interface ILogicaTablero {
-     public void agregarIEventoPonerFicha(IEventoPonerFicha listener);
-     
-     public void agregarIEventoTomarFIchaDelPozo(IEventoPedirFichaAlPozo listener);
-     
-     public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener);
-     
-     public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases);
-     
-     public void mandarArregloActualizado(ArregloDto arrayDto);
+
+    public void agregarIEventoPonerFicha(IEventoPonerFicha listener);
+
+    public void agregarIEventoTomarFIchaDelPozo(IEventoPedirFichaAlPozo listener);
+
+    public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener);
+
+    public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases);
+
+    public void mandarArregloActualizado(ArregloDto arrayDto);
+
+    public void mandarJugadoroActualizado(JugadorDto jugadorDto);
 
 }

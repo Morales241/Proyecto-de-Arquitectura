@@ -41,12 +41,20 @@ public class TableroFachada implements ITableroFachada {
         tableroModel.agregarObserverSalirDePartida(listener);
     }
     
+     @Override
     public void mandarArregloActualizado(ArregloDto arrayDto){
         tableroModel.setArray(arrayDto);
     }
     
+     @Override
     public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases){
         tableroModel.iniciarPartida(jugadorDto, arrayDto, jugadorBases);
+    }
+
+    @Override
+    public void mandarJugadoroActualizado(JugadorDto jugadorDto) {
+        tableroModel.setJugador(jugadorDto);
+        
     }
      
 }

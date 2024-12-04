@@ -187,7 +187,7 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
 //      comunicaciones.agregarObservadorSalioUnJugador(observador);
         comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
-//      comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+      comunicaciones.agregarObservadorPusieronFicha(new AccionPucieronFicha());
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
         comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
 
@@ -274,8 +274,12 @@ public class LogicaPrincipal {
         public void ponerFicha(PonerFichaDto ponerFicha) {
             IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+            JugadorDto jugadorDto = ponerFicha.getJugador();
+            jugadorDto.getFichas().remove(ponerFicha.getFicha());
             
             logicaTablero.mandarArregloActualizado(arreglo);
+            logicaTablero.mandarJugadoroActualizado(jugadorDto);
+            
         }
     }
 
@@ -383,7 +387,7 @@ public class LogicaPrincipal {
 
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada());
 
-            mediador.cerrarPantallaConcreta("tablero");
+            mediador.mostrarPantallaConcreta("tablero");
         }
 
     }

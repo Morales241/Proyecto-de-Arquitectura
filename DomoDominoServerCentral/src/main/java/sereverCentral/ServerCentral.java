@@ -111,7 +111,7 @@ public class ServerCentral {
                         mandarMensaje(respuesta, jugadorMensaje.getNombre());
                         
                     }else{
-                        JugadorSeUnioAPartida jugadorSeUnioAPartida = new JugadorSeUnioAPartida(jugadorMensaje.getNombre(), jugadorMensaje.getAvatar()); 
+                        JugadorSeUnioAPartida jugadorSeUnioAPartida = new JugadorSeUnioAPartida(jugador.getNombre(), jugador.getAvatar()); 
                         
                         mandarMensaje(jugadorSeUnioAPartida, jugadorMensaje.getNombre());
                     }
