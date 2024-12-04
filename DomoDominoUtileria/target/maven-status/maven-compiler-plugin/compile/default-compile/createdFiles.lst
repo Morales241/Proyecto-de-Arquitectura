@@ -1,6 +1,7 @@
 dtos\JugadorDto.class
 observers\IEventoSeleccion.class
 eventos\SetUpDto.class
+observers\IEventoActualizarLobby.class
 dtos\FichaDto.class
 observersLogicaAServidorCentral\IEventoCrearPartida.class
 observersLogicaAServidorCentral\IEventoVotarParaIniciarPartida.class

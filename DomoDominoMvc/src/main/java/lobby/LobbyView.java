@@ -52,8 +52,6 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
 
         lobbyModel.agregarIEventoObserverActualizarLobby(new ActualizarLobby());
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,7 +80,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         txtCodigo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(232, 209, 172));
         txtCodigo.setText(" Codigo: ");
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 270, -1));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 270, -1));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -107,9 +105,17 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
             }
         });
         jPanel1.add(btnVotar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, -1, -1));
+
+        nomJugador1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(nomJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
+
+        nomJugador2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(nomJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
+
+        nomJugador3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(nomJugador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+
+        nomJugador4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(nomJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 220, -1, -1));
         jPanel1.add(imgJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
         jPanel1.add(imgJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
@@ -141,7 +147,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         String nombre = lobbyModel.getJugadores().get(0).getNombre();
         int avatar = lobbyModel.getJugadores().get(0).getAvatar();
         this.ejecutarSalirDeLobby(new JugadorAEliminarDto(nombre, avatar));
-        
+
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -161,28 +167,34 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
     // End of variables declaration//GEN-END:variables
 
     public void mostrarJugadores(List<JugadorBase> jugadores) {
-        
-    for (int i = 0; i < jugadores.size() && i < etiquetasNombres.size(); i++) {
-        etiquetasNombres.get(i).setText(jugadores.get(i).getNombre());
 
-        int avatar = jugadores.get(i).getAvatar();
-        String rutaImagen = obtenerRutaImagen(avatar);
+        for (int i = 0; i < jugadores.size() && i < etiquetasNombres.size(); i++) {
+            etiquetasNombres.get(i).setText(jugadores.get(i).getNombre());
 
-        ImageIcon icon = new ImageIcon(rutaImagen);
-        etiquetasImagenes.get(i).setIcon(icon);
+            int avatar = jugadores.get(i).getAvatar();
+            String rutaImagen = obtenerRutaImagen(avatar);
+
+            ImageIcon icon = new ImageIcon(rutaImagen);
+            etiquetasImagenes.get(i).setIcon(icon);
+            etiquetasImagenes.get(i).revalidate();
+            etiquetasImagenes.get(i).repaint();
+        }
     }
-}
 
-private String obtenerRutaImagen(int avatar) {
+    private String obtenerRutaImagen(int avatar) {
         return switch (avatar) {
-            case 1 -> "/imgPartidaFichas/avatar1.png";
-            case 2 -> "/imgPartidaFichas/avatar2.png";
-            case 3 -> "/imgPartidaFichas/avatar3.png";
-            case 4 -> "/imgPartidaFichas/avatar4.png";
-            default -> "";
-        }; 
-}
-    
+            case 1 ->
+                "/imgPartidaFichas/avatar1.png";
+            case 2 ->
+                "/imgPartidaFichas/avatar2.png";
+            case 3 ->
+                "/imgPartidaFichas/avatar3.png";
+            case 4 ->
+                "/imgPartidaFichas/avatar4.png";
+            default ->
+                "";
+        };
+    }
 
     public void agregarIEventoSalirDeLobby(IEventoSalirDeLobby listener) {
         this.observerRegresar = listener;
@@ -209,13 +221,17 @@ private String obtenerRutaImagen(int avatar) {
         this.mediador = mediador;
     }
 
+    public void ponerCodigo(String codigo){
+        this.txtCodigo.setText(codigo);
+    }
     private class ActualizarLobby implements IEventoActualizarLobby {
 
         @Override
         public void actualizar(JugadorBase jugadorBase) {
 
             lobbyModel.getJugadores().add(jugadorBase);
-            lobbyModel.getJugadores();
+            ponerCodigo(jugadorBase.getCodigo());
+            mostrarJugadores(lobbyModel.getJugadores());
 
         }
     }

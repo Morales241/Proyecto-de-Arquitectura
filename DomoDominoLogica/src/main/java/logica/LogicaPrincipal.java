@@ -20,6 +20,7 @@ import eventos.JugadorCrearPartidaDto;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.PasarTurno;
 import eventos.PonerFichaDto;
+import eventos.RespuestaDeUnirseAPartida;
 import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import eventos.VotoDeJugador;
@@ -143,11 +144,10 @@ public class LogicaPrincipal {
         unirsePartidaFachada.agregarIEventoRegresar(new AccionRegresarAlInicio());
 
         //agregar observer del tablero
-        tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
-        tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
-        tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
-        tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
-
+//        tableroFachada.agregarIEventoPonerFicha(new AccionPonerFicha());
+//        tableroFachada.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
+//        tableroFachada.agregarIEventoPasarTurno(new AccionPasaronTurno());
+//        tableroFachada.agregarIEventoSalirDePartida(new AccionSalirDePartida());
         //agregar observers de comunicaciones
         comunicaciones.agregarObservadorAcabarPartida(new AccionAcabarPartida());
         comunicaciones.agregarObservadorFichaTomadaDelPozo(new AccionTomaronFichaDelPozo());
@@ -362,12 +362,14 @@ public class LogicaPrincipal {
         public void actualizar(RespuestaServidorCentral respuesta) {
 
             logicaAviso.mostrarAviso(respuesta.getRespuesta());
-            
+
             JugadorBase Yo = new JugadorBase(nombre, avatar);
 
-                lobbyLogica.actualizarLobby(Yo);
-            
+            lobbyLogica.actualizarLobby(Yo);
+
             if (respuesta.getKey()) {
+                mediador.MostrarAviso();
+
                 mediador.mostrarPantallaConcreta("lobby");
             }
 
@@ -379,6 +381,8 @@ public class LogicaPrincipal {
         @Override
         public void actualizar(RespuestaServidorCentral respuesta) {
 
+            RespuestaDeUnirseAPartida jugadorAux = (RespuestaDeUnirseAPartida) respuesta;
+
             logicaAviso.mostrarAviso(respuesta.getRespuesta());
             if (respuesta.getKey()) {
 
@@ -386,7 +390,7 @@ public class LogicaPrincipal {
 
                 lobbyLogica.actualizarLobby(Yo);
 
-                respuesta.getJugadores().forEach(jugador -> {
+                jugadorAux.getJugadores().forEach(jugador -> {
                     lobbyLogica.actualizarLobby(jugador);
                 });
 
@@ -395,4 +399,6 @@ public class LogicaPrincipal {
             }
         }
     }
+    
+    
 }

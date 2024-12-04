@@ -75,8 +75,8 @@ public class InicializadorClases {
         unirsePartidaFachada = new UnirseAPartidaFachada(unirseAPartidaModel);
         
         //fachada tablero
-        TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
-        tableroFachada = new TableroFachada(tableroModel);
+//        TableroModel tableroModel = (TableroModel) mediador.obtenerPantallaConcreta("tablero").getModelo();
+//        tableroFachada = new TableroFachada(tableroModel);
         
         //fachada aviso
         AvisoModel avisoModel = (AvisoModel) mediador.obtenerPantallaConcreta("aviso").getModelo();
@@ -84,7 +84,7 @@ public class InicializadorClases {
         
         //fachada lobby lobby
         LobbyModel lobbyModel = (LobbyModel) mediador.obtenerPantallaConcreta("lobby").getModelo();
-        LobbyFachada lobbyFachada = new LobbyFachada(lobbyModel);
+        lobbyFachada = new LobbyFachada(lobbyModel);
         
     }
 

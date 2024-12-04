@@ -24,7 +24,7 @@ public class LobbyFachada implements ILobbyFachada {
     
     @Override
     public void agregarObservadorSalir(IEventoSalirDeLobby listener){
-    lobbyModel.agregarIEventoObserverSalirLobby(listener);
+        lobbyModel.agregarIEventoObserverSalirLobby(listener);
     }
     
     @Override

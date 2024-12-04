@@ -41,7 +41,10 @@ public class Mediador<M, V extends JFrame, C> implements IMediador {
          ContenedorMvc<M, V, C> pantallaConcreta = pantallas.get(nombre);
         if (pantallaConcreta != null) {
             pantallas.values().forEach((otrasPantallas) -> {
-                otrasPantallas.getVista().setVisible(false);
+                if (!pantallas.get("aviso").equals(otrasPantallas)) {
+                    otrasPantallas.getVista().setVisible(false);
+                }
+                
             });
             pantallaConcreta.getVista().setVisible(true);
 
