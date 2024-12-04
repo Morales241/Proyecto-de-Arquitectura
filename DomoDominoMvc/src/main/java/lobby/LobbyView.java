@@ -80,7 +80,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         txtCodigo.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(232, 209, 172));
         txtCodigo.setText(" Codigo: ");
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 270, -1));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 360, -1));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regresar.png"))); // NOI18N
         btnRegresar.setBorderPainted(false);
@@ -230,7 +230,7 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
         public void actualizar(JugadorBase jugadorBase) {
 
             lobbyModel.getJugadores().add(jugadorBase);
-            ponerCodigo(jugadorBase.getCodigo());
+            ponerCodigo("Codigo: "+jugadorBase.getCodigo());
             mostrarJugadores(lobbyModel.getJugadores());
 
         }

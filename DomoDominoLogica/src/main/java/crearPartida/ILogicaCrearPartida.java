@@ -12,5 +12,5 @@ import eventos.JugadorCrearPartidaDto;
  */
 public interface ILogicaCrearPartida {
     public void regresarAlInicio();
-    public void crearPartida(JugadorCrearPartidaDto jugador);
+    public String crearPartida(JugadorCrearPartidaDto jugador);
 }
