@@ -271,14 +271,14 @@ JLabel avatarJugador = new JLabel();
         } else {
             System.err.println("Imagen no encontrada para: " + rutaImagen2);
         }
-        avatarJugador.setBounds(550, 50, 110, 110);
+        avatarJugadorContrincante.setBounds(550, 50, 110, 110);
         layeredPane.add(avatarJugadorContrincante, JLayeredPane.PALETTE_LAYER);
         
          JLabel nombreJugadorContrincante = new JLabel();
        
            nombreJugadorContrincante.setText(model.getCompañeros().get(0).getNombre());
         
-        avatarJugador.setBounds(550, 0, 110, 110);
+        nombreJugador.setBounds(550, 20, 110, 110);
         layeredPane.add(nombreJugador, JLayeredPane.PALETTE_LAYER);
             fichasJugadorPanel.revalidate();
             fichasJugadorPanel.repaint();
