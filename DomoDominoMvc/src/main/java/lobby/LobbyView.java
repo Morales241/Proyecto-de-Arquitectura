@@ -26,6 +26,7 @@ import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
  */
 public class LobbyView extends javax.swing.JFrame implements IComponente {
 
+    private boolean llave = true;
     private final LobbyModel lobbyModel;
     private IMediador mediador;
     private IEventoSalirDeLobby observerRegresar;
@@ -234,7 +235,11 @@ public class LobbyView extends javax.swing.JFrame implements IComponente {
     }
 
     public void ponerCodigo(String codigo){
-        this.txtCodigo.setText(codigo);
+        if (llave) {
+            this.txtCodigo.setText(codigo);
+            llave = false;
+        }
+        
     }
     private class ActualizarLobby implements IEventoActualizarLobby {
 

@@ -300,7 +300,6 @@ public class LogicaPrincipal {
 
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {
-            lobbyLogica.inicializarnos(nombre, avatar);
             lobbyLogica.votarParaIniciarPartida(votoDeJugador);
         }
     }

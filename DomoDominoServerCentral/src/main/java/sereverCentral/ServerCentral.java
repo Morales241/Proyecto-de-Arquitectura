@@ -59,7 +59,7 @@ public class ServerCentral {
 
             this.infoPartidas.put(jugador.getCodigo(), nodos);
 
-            this.VotosParaInciarPartidas.put(jugador.getCodigo(), 1);
+            this.VotosParaInciarPartidas.put(jugador.getCodigo(), 0);
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
 
@@ -88,10 +88,6 @@ public class ServerCentral {
 
             if (nodos.size() < 4) {
                 infoPartidas.get(jugador.getCodigo()).add(jugador);
-
-                int numJugadores = VotosParaInciarPartidas.get(jugador.getCodigo());
-
-                this.VotosParaInciarPartidas.replace(jugador.getCodigo(), numJugadores++);
 
                 JugadorBase jugadorBase = new JugadorBase(jugador.getNombre(), jugador.getAvatar());
 
