@@ -64,12 +64,12 @@ public class InicializadorMVC {
         mediador.registrarPantalla("unirsePartida", unirseAPartidaContenedor);
         
         //MVC Tablero
-        TableroModel tableroModel = new TableroModel();
-        TableroView tableroView = new TableroView(tableroModel);
-        tableroView.setMediador(mediador);
-        TableroController tableroController = new TableroController(tableroModel, tableroView);
-        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel, tableroView, tableroController);
-        mediador.registrarPantalla("tablero", tableroContenedor);
+//        TableroModel tableroModel = new TableroModel();
+//        TableroView tableroView = new TableroView(tableroModel);
+//        tableroView.setMediador(mediador);
+//        TableroController tableroController = new TableroController(tableroModel, tableroView);
+//        ContenedorMvc<TableroModel, TableroView, TableroController> tableroContenedor = new ContenedorMvc<>(tableroModel, tableroView, tableroController);
+//        mediador.registrarPantalla("tablero", tableroContenedor);
         
         //MVC Aviso
         AvisoModel avisoModel = new AvisoModel();

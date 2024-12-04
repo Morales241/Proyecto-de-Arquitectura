@@ -5,52 +5,40 @@
 package dtos;
 
 import java.util.List;
-
-
-
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author favel
  */
-public class ArregloDto {
+public class Array {
 
     private int[][] tablero;
     private int extremoIzquierdo, extremoDerecha;
     private int extremo1Columna, extremo1Fila;
     private int extremo2Columna, extremo2Fila;
 
-    public ArregloDto() {
-        tablero = new int[30][30];
-        reiniciarTablero();
-        tablero[4][4] = 6;
-        extremoIzquierdo = 6;
-        extremoDerecha = 6;
-        extremo1Columna = 4;
-        extremo1Fila = 4;
-        extremo2Columna = 4;
-        extremo2Fila = 4;
-    }
+   public Array() {
+    tablero = new int[15][25];
+    reiniciarTablero();
+    
+   
+    int centroFila = tablero.length / 2; 
+    int centroColumna = tablero[0].length / 2;
 
+    tablero[centroFila][centroColumna] = 6;
+    
+    extremoIzquierdo = 6;
+    extremoDerecha = 6;
+    extremo1Columna = centroColumna;
+    extremo1Fila = centroFila;
+    extremo2Columna = centroColumna;
+    extremo2Fila = centroFila;
+}
     public boolean estaVacio(int fila, int columna) {
         return tablero[fila][columna] == -1;
     }
-   /**
-     * Verifica si el jugador tiene alguna ficha que coincida con los extremos.
-     * Si no tiene fichas válidas, muestra un mensaje de aviso.
-     * @param fichasJugador Lista de fichas del jugador.
-     * @return true si el jugador tiene fichas válidas, false en caso contrario.
-     */
-    public boolean verificarPosiblesMovimientos(List<FichaDto> fichasJugador) {
-        for (FichaDto ficha : fichasJugador) {
-            
-            if (ficha.getLado1() == extremoIzquierdo || ficha.getLado2() == extremoIzquierdo ||
-                ficha.getLado1() == extremoDerecha || ficha.getLado2() == extremoDerecha) {
-                return true;
-            }
-        }
-        return false;
-    }
+  
     public boolean colocarFichaExtremoIzquierdo(FichaDto ficha) {
         //Colocar la ficha si es mula
         if (ficha.esMula()) {

@@ -23,24 +23,44 @@ public class TableroFachada implements ITableroFachada {
           this.tableroModel = tableroModel;
      }
      
-     @Override
-     public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
-          this.tableroModel.agregarIEventoPonerFIcha(listener);
-     }
+//     @Override
+//     public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
+//          this.tableroModel.agregarIEventoPonerFIcha(listener);
+//     }
+//
+//     @Override
+//     public void agregarIEventoTomarFIchaDelPozo(IEventoTomarFichaDelPozo listener) {
+//         this.tableroModel.agregarIEventoSacarFichaDelPozo(listener);
+//     }
+//
+//     @Override
+//     public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
+//         this.tableroModel.agregarEventoPasarTurno(listener);
+//     }
+//
+//     @Override
+//     public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
+//         this.tableroModel.agregarIEventoSalirDePartida(listener);
+//     }
 
-     @Override
-     public void agregarIEventoTomarFIchaDelPozo(IEventoTomarFichaDelPozo listener) {
-         this.tableroModel.agregarIEventoSacarFichaDelPozo(listener);
-     }
+    @Override
+    public void agregarIEventoPonerFicha(IEventoPonerFicha listener) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-     @Override
-     public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
-         this.tableroModel.agregarEventoPasarTurno(listener);
-     }
+    @Override
+    public void agregarIEventoTomarFIchaDelPozo(IEventoTomarFichaDelPozo listener) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-     @Override
-     public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
-         this.tableroModel.agregarIEventoSalirDePartida(listener);
-     }
+    @Override
+    public void agregarIEventoPasarTurno(IEventoPasarTurno listener) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
      
 }

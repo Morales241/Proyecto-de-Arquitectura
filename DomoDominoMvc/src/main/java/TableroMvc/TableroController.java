@@ -19,10 +19,10 @@ public class TableroController {
      public TableroController(TableroModel tableroModel, TableroView tableroView) {
           this.tableroModel = tableroModel;
           this.tableroView = tableroView;
-          tableroView.agregarIEventoPonerFicha(new accionPonerFicha());
-          tableroView.agregarEventoTomarFichaDelPozo(new accionTomarFichaDelPozo());
-          tableroView.agregarEventoPasarTurno(new accionPasarTurno());
-          tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
+//          tableroView.agregarIEventoPonerFicha(new accionPonerFicha());
+//          tableroView.agregarEventoTomarFichaDelPozo(new accionTomarFichaDelPozo());
+//          tableroView.agregarEventoPasarTurno(new accionPasarTurno());
+//          tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
      }
 
      private class accionPonerFicha implements IEventoPonerFicha {

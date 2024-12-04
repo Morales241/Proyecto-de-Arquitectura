@@ -9,6 +9,7 @@ observers\IEventoAviso.class
 observersLogicaAServidorCentral\IEventoSalirDePartida.class
 serializables\Jugador.class
 observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.class
+dtos\Array.class
 observers\IEventoAcabarPartida.class
 dtos\UsuarioDto.class
 eventos\NodoDto.class
