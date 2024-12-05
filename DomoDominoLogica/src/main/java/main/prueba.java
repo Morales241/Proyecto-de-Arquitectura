@@ -53,7 +53,11 @@ public class prueba {
         jugadorBases.add(new JugadorBase("Alfredo", 1));
         jugadorBases.add(new JugadorBase("Mariana", 3));
         
+        
         model.iniciarPartida(jugadorDto, array, jugadorBases);
+        model.setTurno(true);
+        
+        
     }
     
     private static class accionArreglo implements IEventoPonerFicha {

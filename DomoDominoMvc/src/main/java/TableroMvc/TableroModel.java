@@ -116,9 +116,7 @@ public class TableroModel {
     }
 
     public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
-         
-         
-         
+        
         setJugador(jugadorDto);
         setCompañeros(jugadorBases);
         setArray(arrayDto);
@@ -132,6 +130,7 @@ public class TableroModel {
 
     public void setTurno(boolean turno) {
         this.turno = turno;
+        ejecutarObserverActualizar();
     }
     
     
