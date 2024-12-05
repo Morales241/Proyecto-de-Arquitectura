@@ -297,7 +297,9 @@ public class LogicaPrincipal {
                 logicaTablero.mandarArregloActualizado(arreglo);
 
                 logicaTablero.mandarJugadorActualizado(jugador);
-
+                
+                logicaTurnos.pasarTurno();
+                
                 boolean seAcaboPartida = false;
 
                 if (jugador.getFichas().size() == 0) {
@@ -322,7 +324,7 @@ public class LogicaPrincipal {
     }
 
     public void acabarPartida(List<JugadorBase> jugadoresBase) {
-        
+
         jugadoresBase.forEach(compañero -> {
 
             String nombre = compañero.getNombre();
@@ -332,17 +334,17 @@ public class LogicaPrincipal {
             comunicaciones.enviarMensaje(eventoAcabarPartidaDto, nombre);
 
         });
-        
+
         comunicaciones.enviarMensaje(new EventoAcabarPartidaDto(codigo), "serverCentral");
-        
+
         jugadoresBase.forEach(compañero -> {
 
             String nombre = compañero.getNombre();
 
-            comunicaciones.cerrarComunicacionConNodo( nombre);
+            comunicaciones.cerrarComunicacionConNodo(nombre);
 
         });
-        
+
         logicaAviso.mostrarAviso("Has ganado");
         mediador.mostrarPantallaConcreta("inicio");
     }
@@ -485,7 +487,7 @@ public class LogicaPrincipal {
             logicaAviso.mostrarAviso("Se acabo la partida");
 
             mediador.MostrarAviso();
-            
+
             mediador.mostrarPantallaConcreta("inicio");
         }
 

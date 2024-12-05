@@ -129,7 +129,6 @@ public class TableroView extends JFrame implements IComponente {
         }
     }
 
-        
     private void mostrarBotonesSeleccion(JButton fichaLabel) {
         botonesPanel.removeAll();
 
@@ -246,15 +245,14 @@ public class TableroView extends JFrame implements IComponente {
                         }
 
                         URL recurso = getClass().getResource(rutaImagen);
-
                         if (recurso != null) {
                             ImageIcon fichaIcono = new ImageIcon(recurso);
 
                             g2d.translate(offsetX + j * cellWidth + cellWidth / 2.0, offsetY + i * cellHeight + cellHeight / 2.0);
-
                             g2d.drawImage(fichaIcono.getImage(), -cellWidth / 2, -cellHeight / 2, cellWidth, cellHeight, this);
-
                             g2d.translate(-(offsetX + j * cellWidth + cellWidth / 2.0), -(offsetY + i * cellHeight + cellHeight / 2.0));
+                        } else {
+                            System.err.println("No se encontró la imagen para la ruta: " + rutaImagen);
                         }
                     }
                 }
@@ -342,7 +340,7 @@ public class TableroView extends JFrame implements IComponente {
                         ejecutarObserverTomarFichaDelPozo();
                     }
                 });
-            }else{
+            } else {
                 botonPozo.setEnabled(false);
             }
         }
