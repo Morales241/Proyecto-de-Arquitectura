@@ -52,6 +52,7 @@ public class TableroModel {
     public void ejecutarObserverPonerFicha(PonerFichaDto ponerFicha) {
         if (eventoPonerFicha != null) {
             ponerFicha.setCompañeros(compañeros);
+            ponerFicha.setJugador(jugador);
             eventoPonerFicha.ponerFicha(ponerFicha);
         }
     }

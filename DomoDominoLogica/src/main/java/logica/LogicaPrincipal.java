@@ -187,7 +187,7 @@ public class LogicaPrincipal {
         comunicaciones.agregarObservadorRespuestaUnirseAPartida(new AccionRecibirRespuestaUnirseAPartida());
 //      comunicaciones.agregarObservadorSalioUnJugador(observador);
         comunicaciones.agregarObservadorIniciarPartidaAdmin(new AccionComenzarPartidaAdministrador());
-//      comunicaciones.agregarObservadorPucieronFicha(new AccionPucieronFicha());
+        comunicaciones.agregarObservadorPusieronFicha(new AccionPusieronFicha());
         comunicaciones.agregarObservadorSalioUnJugador(new AccionJugadorSalioDePartida());
         comunicaciones.agregarObservadorSeUnieronAtuPartida(new AccionSeUnioJugadorAlaPartida());
 
@@ -272,10 +272,22 @@ public class LogicaPrincipal {
 
         @Override
         public void ponerFicha(PonerFichaDto ponerFicha) {
-            IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
-            ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
-            
-            logicaTablero.mandarArregloActualizado(arreglo);
+
+            boolean respuesta = IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
+            ArregloDto arreglo;
+
+            if (respuesta) {
+                arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+
+                ponerFicha.getCompañeros().forEach(jugador -> {
+                    comunicaciones.enviarMensaje(ponerFicha, jugador.getNombre());
+                });
+
+                JugadorDto jugador = ponerFicha.getJugador();
+                jugador.getFichas().remove(ponerFicha.getFicha());
+                logicaTablero.mandarArregloActualizado(arreglo);
+                logicaTablero.mandarJugadorActualizado(jugador);
+            }
         }
     }
 
@@ -350,11 +362,15 @@ public class LogicaPrincipal {
 
     }
 
-    private class AccionPucieronFicha implements IEventoPonerFicha {
+    private class AccionPusieronFicha implements IEventoPonerFicha {
 
         @Override
         public void ponerFicha(PonerFichaDto ponerFicha) {
+            IArreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
 
+            ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+
+            logicaTablero.mandarArregloActualizado(arreglo);
         }
 
     }

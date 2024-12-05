@@ -28,4 +28,5 @@ public interface ITableroFachada {
      public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases);
      
      public void mandarArregloActualizado(ArregloDto arrayDto);
+     public void mandarJugadorActualizado(JugadorDto jugadorDto);
 }

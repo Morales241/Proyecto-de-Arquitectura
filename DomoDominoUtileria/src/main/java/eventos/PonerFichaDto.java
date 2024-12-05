@@ -14,6 +14,7 @@ public class PonerFichaDto implements Serializable{
     private static final long serialVersionUID = 1L;
     private FichaDto ficha;
     private boolean extremo;
+    private int columna;
     private String direccion;
     private JugadorDto jugador;
     private List<JugadorBase> compañeros;
