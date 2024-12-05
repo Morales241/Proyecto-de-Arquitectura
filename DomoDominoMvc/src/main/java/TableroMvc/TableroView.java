@@ -126,7 +126,9 @@ public class TableroView extends JFrame implements IComponente {
     private void mostrarBotonesSeleccion(JButton fichaLabel) {
         botonesPanel.removeAll();
         
-        botonesPanel.setBounds(fichaLabel.getX(), fichaLabel.getY() + 20, 200, 50);
+        botonesPanel.setOpaque(false);
+        
+        botonesPanel.setBounds(450, 490, 200, 60);
         botonesPanel.setBackground(Color.LIGHT_GRAY);
         
         botonesPanel.setLayout(new FlowLayout());
@@ -156,6 +158,8 @@ public class TableroView extends JFrame implements IComponente {
             botonDireccion.addActionListener(e -> ejectutarPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, direccion)));
             botonesPanel.add(botonDireccion);
         }
+        
+        botonesPanel.setOpaque(false);
         botonesPanel.setVisible(true);
         botonesPanel.revalidate();
         
