@@ -34,7 +34,7 @@ public class TableroModel {
     private IEventoSalirDePartida eventoSalirDePartida;
     private IEventoValidarFichas eventoValidarFichas;
     private IObserver actualizar;
-    private boolean poso;
+    private boolean pozo;
 
     public TableroModel() {
          
@@ -151,12 +151,12 @@ public class TableroModel {
         ejecutarObserverActualizar();
     }
 
-    public boolean isPoso() {
-        return poso;
+    public boolean isPozo() {
+        return pozo;
     }
 
-    public void setPoso(boolean poso) {
-        this.poso = poso;
+    public void setPoso(boolean pozo) {
+        this.pozo = pozo;
         ejecutarObserverActualizar();
     }
     

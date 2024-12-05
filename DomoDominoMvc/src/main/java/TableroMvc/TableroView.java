@@ -333,7 +333,7 @@ protected void paintComponent(Graphics g) {
                 }
             }
             
-            if (!model.isPoso()) {
+            if (!model.isPozo()) {
                 
                 botonPozo.setEnabled(true);
                 botonPozo.addMouseListener(new MouseAdapter() {

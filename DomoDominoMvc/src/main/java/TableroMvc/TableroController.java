@@ -6,6 +6,7 @@ import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import java.util.List;
 import observers.IEventoPasarTurno;
+import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
 import observers.IEventoTomarFichaDelPozo;
@@ -22,7 +23,7 @@ public class TableroController {
         tableroView.agregarObserverPonerFicha(new accionPonerFicha());
         tableroView.agregarObserverValidarFichas(new AccionValidarFichas());
 
-//          tableroView.agregarEventoTomarFichaDelPozo(new accionTomarFichaDelPozo());
+          tableroView.agregarObserverTomarFichaDelPozo(new accionTomarFichaDelPozo());
 //          tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
     }
 
@@ -34,12 +35,12 @@ public class TableroController {
         }
     }
 
-    private class accionTomarFichaDelPozo implements IEventoTomarFichaDelPozo {
+    private class accionTomarFichaDelPozo implements IEventoPedirFichaAlPozo {
 
-        @Override
-        public void tomarFichaDelPozo(FichaDto fichaSacada) {
-
-        }
+          @Override
+          public void pedirFicha() {
+               tableroModel.ejecutarObserverTomarFichaDelPozo();
+          }
     }
 
     private class accionSalirDePartida implements IEventoSalirDePartida {
