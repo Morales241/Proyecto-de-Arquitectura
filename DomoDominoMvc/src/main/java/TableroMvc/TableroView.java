@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -16,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import mediador.IComponente;
@@ -62,7 +65,7 @@ public class TableroView extends JFrame implements IComponente {
         layeredPane = new JLayeredPane();
         setContentPane(layeredPane);
 
-        tableroPanel = new TableroPanel(null);
+        tableroPanel = new TableroPanel(null, null);
         tableroPanel.setBounds(0, 0, 1200, 700);
         layeredPane.add(tableroPanel, JLayeredPane.DEFAULT_LAYER);
 
@@ -91,7 +94,6 @@ public class TableroView extends JFrame implements IComponente {
         }
         botonPozo.setBounds(1080, 550, 110, 110);
         layeredPane.add(botonPozo, JLayeredPane.PALETTE_LAYER);
-
 
     }
 
@@ -183,12 +185,15 @@ public class TableroView extends JFrame implements IComponente {
     public class TableroPanel extends JPanel {
 
         private int[][] tablero;
+        private List<PonerFichaDto> fichasTablero;
         private final ImageIcon fondoImagen;
 
-        public TableroPanel(ArregloDto array) {
+        public TableroPanel(ArregloDto array, List<PonerFichaDto> fichasTableroP) {
             if (array == null || array.getTablero() == null) {
                 this.tablero = new int[10][10];
+                this.fichasTablero = new ArrayList<>();
             } else {
+                this.fichasTablero = fichasTableroP;
                 this.tablero = array.getTablero();
             }
             this.fondoImagen = new ImageIcon(getClass().getResource("/imgPartidaFichas/imagenFondo.png"));
@@ -197,42 +202,67 @@ public class TableroView extends JFrame implements IComponente {
 
         @Override
         protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        int cellSize = 50;
 
-            int cellSize = 40;
-            int rows = tablero.length;
-            int cols = tablero[0].length;
+        // Dibujar matriz
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[0].length; j++) {
+                g2d.setColor(Color.YELLOW);
+                g2d.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                g2d.setColor(Color.GREEN);
+                g2d.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
 
-            int panelWidth = getWidth();
-            int panelHeight = getHeight();
-            int tableroWidth = cols * cellSize;
-            int tableroHeight = rows * cellSize;
-
-            int offsetX = (panelWidth - tableroWidth) / 2;
-            int offsetY = (panelHeight - tableroHeight) / 2;
-
-            g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
-
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    if (tablero[i][j] != -1) {
-                        g.setColor(Color.GRAY);
-                        g.fillRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
-                        g.setColor(Color.BLACK);
-                        g.drawRect(offsetX + j * cellSize, offsetY + i * cellSize, cellSize, cellSize);
-                        g.drawString(String.valueOf(tablero[i][j]),
-                                offsetX + j * cellSize + cellSize / 4,
-                                offsetY + i * cellSize + cellSize / 2);
-                    }
+                if (tablero[i][j] != 0) {
+                    g2d.setColor(Color.BLUE);
+                    g2d.drawString(String.valueOf(tablero[i][j]), j * cellSize + 20, i * cellSize + 30);
                 }
             }
         }
+
+        // Dibujar piezas
+        Color[] colors = {Color.CYAN, Color.GREEN, Color.PINK, Color.YELLOW, Color.MAGENTA};
+        for (int idx = 0; idx < fichasTablero.size(); idx++) {
+            PonerFichaDto ficha = fichasTablero.get(idx);
+            int fila = ficha.getFila();
+            int columna = ficha.getColumna();
+            String orientacion = ficha.getDireccion();
+            int lado1 = ficha.getFicha().getLado1();
+            int lado2 = ficha.getFicha().getLado2();
+            int[] lados = {lado1, lado2};
+            g2d.setColor(colors[idx % colors.length]);
+
+            if (orientacion.equals("vertical")) {
+                g2d.fillRect(columna * cellSize, fila * cellSize, cellSize, cellSize * 2);
+            } else if (orientacion.equals("horizontal")) {
+                g2d.fillRect(columna * cellSize, fila * cellSize, cellSize * 2, cellSize);
+            }
+
+            g2d.setColor(Color.BLUE);
+            g2d.drawRect(columna * cellSize, fila * cellSize, cellSize, orientacion.equals("vertical") ? cellSize * 2 : cellSize);
+            g2d.drawString(String.valueOf(lados[0]), columna * cellSize + 20, fila * cellSize + 30);
+            if (orientacion.equals("vertical")) {
+                g2d.drawString(String.valueOf(lados[1]), columna * cellSize + 20, (fila + 1) * cellSize + 30);
+            } else {
+                g2d.drawString(String.valueOf(lados[1]), (columna + 1) * cellSize + 20, fila * cellSize + 30);
+            }
+        }
+    }
     }
 
     private class Actualizar implements IObserver {
 
         @Override
         public void actualizar() {
+            ArregloDto nuevoArray = model.getArray();
+            List<PonerFichaDto> nuevasFichas = model.getFichasTablero();
+            if (nuevoArray != null) {
+                tableroPanel.tablero = nuevoArray.getTablero();
+                tableroPanel.fichasTablero = nuevasFichas;
+            }
+            tableroPanel.revalidate();
+            tableroPanel.repaint();
 
             JLabel avatarJugador = new JLabel();
             String rutaImagen2 = String.format("/imgPartidaFichas/avatar%d.png", model.getJugador().getAvatar());
@@ -272,59 +302,19 @@ public class TableroView extends JFrame implements IComponente {
             avatarJugador.setBounds(550, 0, 110, 110);
             layeredPane.add(nombreJugador, JLayeredPane.PALETTE_LAYER);
 
-            ArregloDto nuevoArray = model.getArray();
-            if (nuevoArray != null) {
-                tableroPanel.tablero = nuevoArray.getTablero();
-            }
-            tableroPanel.repaint();
-
             fichasJugadorPanel.removeAll();
             for (FichaDto ficha : model.getJugador().getFichas()) {
                 agregarFichaAlPanel(ficha);
             }
-JLabel avatarJugador = new JLabel();
-        String rutaImagen2 =String.format("/imgPartidaFichas/avatar%d.png",model.getJugador().getAvatar());
-        URL recurso2 = getClass().getResource(rutaImagen2);
-        if (recurso2 != null) {
-            ImageIcon icono2 = new ImageIcon(recurso2);
-            avatarJugador.setIcon(icono2);
-        } else {
-            System.err.println("Imagen no encontrada para: " + rutaImagen2);
-        }
-         avatarJugador.setBounds(0, 250, 110, 110);
-        layeredPane.add(avatarJugador, JLayeredPane.PALETTE_LAYER);
-        
-         JLabel nombreJugador = new JLabel();
-       
-           nombreJugador.setText(model.getJugador().getNombre());
-        
-        nombreJugador.setBounds(0, 110, 110, 110);
-        layeredPane.add(nombreJugador, JLayeredPane.PALETTE_LAYER);
-        
-         JLabel avatarJugadorContrincante = new JLabel();
-        String rutaImagen3 =String.format("/imgPartidaFichas/avatar%d.png",model.getCompañeros().get(0).getAvatar());
-        URL recurso3 = getClass().getResource(rutaImagen3);
-        if (recurso3 != null) {
-            ImageIcon icono3 = new ImageIcon(recurso3);
-            avatarJugadorContrincante.setIcon(icono3);
-        } else {
-            System.err.println("Imagen no encontrada para: " + rutaImagen2);
-        }
-        avatarJugadorContrincante.setBounds(550, 50, 110, 110);
-        layeredPane.add(avatarJugadorContrincante, JLayeredPane.PALETTE_LAYER);
-        
-         JLabel nombreJugadorContrincante = new JLabel();
-       
-           nombreJugadorContrincante.setText(model.getCompañeros().get(0).getNombre());
-        
-        nombreJugador.setBounds(550, 20, 110, 110);
-        layeredPane.add(nombreJugador, JLayeredPane.PALETTE_LAYER);
+            
+            nombreJugador.setBounds(550, 20, 110, 110);
+            layeredPane.add(nombreJugador, JLayeredPane.PALETTE_LAYER);
             fichasJugadorPanel.revalidate();
             fichasJugadorPanel.repaint();
-
+            
         }
-
     }
+    
 
     public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
         this.eventoPonerFicha = eventoPonerFicha;
@@ -338,4 +328,3 @@ JLabel avatarJugador = new JLabel();
         }
     }
 }
-

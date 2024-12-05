@@ -13,7 +13,6 @@ import eventos.PonerFichaDto;
 import java.util.List;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
-import observers.IEventoTomarFichaDelPozo;
 import observers.IObserver;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
 
@@ -25,6 +24,7 @@ public class TableroModel {
 
 //    private ArregloDto array  = new ArregloDto(new int[30][30], 0, 0, 15, 15, 15, 15);
     private ArregloDto array;
+    private List<PonerFichaDto> fichasTablero;
     private boolean turno;
     private JugadorDto jugador;
     private List<JugadorBase> compañeros;
@@ -53,6 +53,7 @@ public class TableroModel {
         if (eventoPonerFicha != null) {
             ponerFicha.setCompañeros(compañeros);
             ponerFicha.setJugador(jugador);
+            fichasTablero.add(ponerFicha);
             eventoPonerFicha.ponerFicha(ponerFicha);
         }
     }
@@ -111,18 +112,23 @@ public class TableroModel {
         return compañeros;
     }
 
+    public List<PonerFichaDto> getFichasTablero() {
+        return fichasTablero;
+    }
+
+    public void setFichasTablero(List<PonerFichaDto> fichasTablero) {
+        this.fichasTablero = fichasTablero;
+    }
+
     public void setCompañeros(List<JugadorBase> compañeros) {
         this.compañeros = compañeros;
     }
 
     public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
          
-         
-         
         setJugador(jugadorDto);
         setCompañeros(jugadorBases);
         setArray(arrayDto);
-
         ejecutarObserverActualizar();
     }
 
