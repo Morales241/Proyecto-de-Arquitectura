@@ -317,7 +317,7 @@ public class LogicaPrincipal {
                 logicaTablero.avisarDePasoDeTurno(false);
 
                 if (seAcaboPartida) {
-
+                    acabarPartida(ponerFicha.getCompañeros());
                 }
             }
         }
@@ -623,7 +623,16 @@ public class LogicaPrincipal {
 
             if (logicaTurnos.obtenerTurnoActual().equals(nombre)) {
                 turno = true;
+                
+                JugadorDto jugadorDto = new JugadorDto(yo.getNombre(), yo.getAvatar(), yo.getFichasDelJugador());
+                
+                AccionPonerFicha accionPonerFicha = new AccionPonerFicha();
+                PonerFichaDto fichaDto = new PonerFichaDto(jugadorDto.getFichas().get(0), true, "", jugadorDto);
+                fichaDto.setCompañeros(yo.getJugadoresDePartida());
+                accionPonerFicha.ponerFicha(fichaDto);
             }
+            
+            
 
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 

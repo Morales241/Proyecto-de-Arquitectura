@@ -62,14 +62,6 @@ public class SetUpDto implements Serializable {
         this.avatar = avatar;
     }
 
-    public List<JugadorBase> getJugadoresDePartiada() {
-        return jugadoresDePartida;
-    }
-
-    public void setJugadoresDePartiada(List<JugadorBase> jugadoresDePartiada) {
-        this.jugadoresDePartida = jugadoresDePartiada;
-    }
-
     public List<FichaDto> getFichasDelJugador() {
         return fichasDelJugador;
     }
