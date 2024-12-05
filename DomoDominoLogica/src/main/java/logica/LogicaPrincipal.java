@@ -278,15 +278,26 @@ public class LogicaPrincipal {
 
             if (respuesta) {
                 arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
+                
                 JugadorDto jugador = ponerFicha.getJugador();
+                
                 jugador.getFichas().remove(ponerFicha.getFicha());
+                
                 logicaTablero.mandarArregloActualizado(arreglo);
+                
                 logicaTablero.mandarJugadorActualizado(jugador);
                 
+                logicaTurnos.pasarTurno();
+                
                 ponerFicha.getCompañeros().forEach(compañero -> {
-                    String nombre =compañero.getNombre();
+                    
+                    String nombre = compañero.getNombre();
+                    
                     comunicaciones.enviarMensaje(ponerFicha, nombre);
+
                 });
+               
+                logicaTablero.avisarDePasoDeTurno(false);
             }
         }
     }
@@ -295,7 +306,9 @@ public class LogicaPrincipal {
 
         @Override
         public void pedirFicha() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            FichaDto fichaSacada = IPozo.sacarFicha();
+            logicaTablero.enviarFichaDelPozo(fichaSacada);
+            comunicaciones.enviarMensajesACompañeros(fichaSacada);
         }
     }
 
@@ -348,9 +361,10 @@ public class LogicaPrincipal {
 
         @Override
         public void tomarFichaDelPozo(FichaDto fichaSacada) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            List<FichaDto> fichas = new ArrayList<>();
+            fichas.add(fichaSacada);
+            IPozo.sacarFichasEspecificasPozo(fichas);
         }
-
     }
 
     private class AccionPasaronTurno implements IEventoPasarTurno {
@@ -371,15 +385,20 @@ public class LogicaPrincipal {
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
             logicaTablero.mandarArregloActualizado(arreglo);
-        }
 
+            logicaTurnos.pasarTurno();
+
+            if (logicaTurnos.obtenerTurnoActual().equals(nombre)) {
+                logicaTablero.avisarDePasoDeTurno(true);
+            }
+        }
     }
 
     private class AccionJugadorSalioDePartida implements IEventoSalirDePartida {
 
         @Override
         public void salirDePartida(JugadorAEliminarDto jugador) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            throw new UnsupportedOperationException("Not supported yet.");
         }
 
     }
@@ -389,18 +408,25 @@ public class LogicaPrincipal {
         @Override
         public void iniciarPartida(SetUpDto setUp) {
 
-            setUp.getJugadoresDePartiada().forEach( O -> comunicaciones.conectarAServidor(O));
-            
+            setUp.getJugadoresDePartiada().forEach(O -> comunicaciones.conectarAServidor(O));
+
             logicaTurnos.sincronizarTurnosConClaseExterna(setUp.getTurnos());
 
+            boolean turno = false;
+
+            if (logicaTurnos.obtenerTurnoActual().equals(nombre)) {
+                turno = true;
+            }
+
             List<FichaDto> fichas = setUp.getFichasSacadasDelPozo();
+
             IPozo.sacarFichasEspecificasPozo(fichas);
 
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
             JugadorDto jugadorDto = new JugadorDto(setUp.getNombre(), setUp.getAvatar(), setUp.getFichasDelJugador());
 
-            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada());
+            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada(), turno);
 
             mediador.mostrarPantallaConcreta("tablero");
         }
@@ -544,13 +570,20 @@ public class LogicaPrincipal {
             });
 
             SetUpDto yo = jugadores.get(miNombre);
+
             logicaTurnos.sincronizarTurnosConClaseExterna(yo.getTurnos());
+
+            boolean turno = false;
+
+            if (logicaTurnos.obtenerTurnoActual().equals(nombre)) {
+                turno = true;
+            }
 
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
             JugadorDto jugadorDto = new JugadorDto(yo.getNombre(), yo.getAvatar(), yo.getFichasDelJugador());
 
-            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, yo.getJugadoresDePartiada());
+            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, yo.getJugadoresDePartiada(), turno);
 
             mediador.mostrarPantallaConcreta("tablero");
 

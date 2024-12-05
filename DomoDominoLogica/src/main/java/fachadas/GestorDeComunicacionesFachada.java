@@ -113,5 +113,10 @@ public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFac
     public void agregarObservadorIniciarPartidaAdmin(IEventoIniciarPartidaAdmin observador) {
         comunicaciones.agregarObservadorIniciarPartidaAdmin(observador);
     }
+
+    @Override
+    public void enviarMensajesACompañeros(Object mensaje) {
+        comunicaciones.enviarMensajesACompañeros(mensaje);
+    }
     
 }

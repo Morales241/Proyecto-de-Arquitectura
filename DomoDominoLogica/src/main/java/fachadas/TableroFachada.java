@@ -7,6 +7,7 @@ package fachadas;
 import fachadasInterfaz.ITableroFachada;
 import TableroMvc.TableroModel;
 import dtos.ArregloDto;
+import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.JugadorBase;
 import java.util.List;
@@ -47,12 +48,22 @@ public class TableroFachada implements ITableroFachada {
     }
 
     @Override
-    public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
-        tableroModel.iniciarPartida(jugadorDto, arrayDto, jugadorBases);
+    public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases, boolean turno) {
+        tableroModel.iniciarPartida(jugadorDto, arrayDto, jugadorBases, turno);
     }
 
     @Override
     public void mandarJugadoroActualizado(JugadorDto jugadorDto) {
         tableroModel.setJugador(jugadorDto);
+    }
+
+    @Override
+    public void avisarDePasoDeTurno(boolean turno) {
+        tableroModel.setTurno(turno);
+    }
+
+    @Override
+    public void enviarFichaDelPozo(FichaDto ficha) {
+        tableroModel.getJugador().getFichas().add(ficha);
     }
 }

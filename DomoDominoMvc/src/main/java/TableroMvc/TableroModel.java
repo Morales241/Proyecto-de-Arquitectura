@@ -117,12 +117,12 @@ public class TableroModel {
         this.compañeros = compañeros;
     }
 
-    public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
+    public void iniciarPartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases, boolean turno) {
         
         setJugador(jugadorDto);
         setCompañeros(jugadorBases);
         setArray(arrayDto);
-        setTurno(true);
+        setTurno(turno);
         ejecutarObserverActualizar();
     }
 

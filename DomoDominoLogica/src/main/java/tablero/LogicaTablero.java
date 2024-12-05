@@ -1,6 +1,7 @@
 package tablero;
 
 import dtos.ArregloDto;
+import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.JugadorBase;
 import fachadasInterfaz.ITableroFachada;
@@ -37,8 +38,8 @@ public class LogicaTablero implements ILogicaTablero {
     }
     
     @Override
-    public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases) {
-        tableroFachada.mandarDatosDeInicioDePartida(jugadorDto, arrayDto, jugadorBases);
+    public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases, boolean turno) {
+        tableroFachada.mandarDatosDeInicioDePartida(jugadorDto, arrayDto, jugadorBases, turno);
     }
     
     @Override
@@ -51,4 +52,14 @@ public class LogicaTablero implements ILogicaTablero {
     public void mandarJugadorActualizado(JugadorDto jugadorDto) {
         tableroFachada.mandarJugadoroActualizado(jugadorDto);
         }
+
+    @Override
+    public void avisarDePasoDeTurno(boolean turno) {
+        tableroFachada.avisarDePasoDeTurno(turno);
+    }
+
+    @Override
+    public void enviarFichaDelPozo(FichaDto ficha) {
+        tableroFachada.enviarFichaDelPozo(ficha);
+    }
 }

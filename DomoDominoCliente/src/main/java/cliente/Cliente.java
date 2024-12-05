@@ -45,6 +45,23 @@ public class Cliente {
         }
     }
 
+    public void enviarMensajesACompañeros(Object mensaje) {
+
+        nodosConectados.forEach((nombre, output) -> {
+            if (!nombre.equals("serverCentral")) {
+                
+                if (output != null) {
+                    try {
+                        output.writeObject(mensaje);
+                        output.flush();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+    }
+
     public void cerrarConexion() {
         try {
             if (socket != null) {

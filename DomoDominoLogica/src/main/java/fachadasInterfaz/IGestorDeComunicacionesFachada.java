@@ -38,4 +38,5 @@ public interface IGestorDeComunicacionesFachada {
     public void conectarAServidorCentral(String ip, int puerto);
     public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador);
     public void agregarObservadorIniciarPartidaAdmin(IEventoIniciarPartidaAdmin observador);
+    public void enviarMensajesACompañeros(Object mensaje);
 }

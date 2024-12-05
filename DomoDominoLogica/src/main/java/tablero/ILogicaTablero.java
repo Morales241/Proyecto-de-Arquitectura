@@ -5,6 +5,7 @@
 package tablero;
 
 import dtos.ArregloDto;
+import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.JugadorBase;
 import java.util.List;
@@ -23,10 +24,13 @@ public interface ILogicaTablero {
      
      public void agregarIEventoSalirDePartida(IEventoSalirDePartida listener);
      
-     public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases);
+     public void mandarDatosDeInicioDePartida(JugadorDto jugadorDto, ArregloDto arrayDto, List<JugadorBase> jugadorBases, boolean turno);
      
      public void mandarArregloActualizado(ArregloDto arrayDto);
      
      public void mandarJugadorActualizado(JugadorDto jugadorDto);
-
+     
+     public void avisarDePasoDeTurno(boolean turno);
+     
+     public void enviarFichaDelPozo(FichaDto ficha);
 }

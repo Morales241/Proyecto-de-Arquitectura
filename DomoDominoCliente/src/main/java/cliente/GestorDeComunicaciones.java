@@ -45,6 +45,9 @@ public class GestorDeComunicaciones {
         cliente.conectarAServidor("serverCentral", new NodoDto(ip, puerto));
     }
     
+    public void enviarMensajesACompañeros(Object mensaje){
+        cliente.enviarMensajesACompañeros(mensaje);
+    }
     public void enviarMensaje(Object mensaje, String nombre) {
         cliente.enviarMensaje(mensaje, nombre);
     }
