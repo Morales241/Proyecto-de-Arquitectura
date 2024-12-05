@@ -74,6 +74,7 @@ public class prueba {
                 model.setArray(ad);
                 model.setJugador(jugadorDto);
             }
+            
         }
     }
 }
