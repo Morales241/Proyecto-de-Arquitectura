@@ -1,47 +1,47 @@
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\contenedor\ContenedorMvc.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\ArregloDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\UsuarioDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\enumerados\RespuestaServidor.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\EventoAcabarPartidaDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\IniciarPartidaAdmin.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorAEliminarDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorBase.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorCrearPartidaDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorSeUnioAPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorUnirseAPartidaDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\NodoDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PasarTurno.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PonerFichaDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaDePartidaCreada.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaDeUnirseAPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaServidorCentral.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\SetUpDto.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\VotoDeJugador.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IComponente.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAcabarPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoActualizarLobby.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAviso.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoIniciarPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPedirFichaAlPozo.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidarFichas.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoSalirDeLobby.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoSalirDePartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoVotarParaIniciarPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoIniciarPartidaAdmin.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaServidorCentral.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoSeUnieronAtuPartida.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
-C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAviso.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IComponente.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoAcabarPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoActualizarLobby.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoSeUnieronAtuPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaDeUnirseAPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\enumerados\RespuestaServidor.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\mediador\IMediador.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoSalirDePartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoRespuestaServidorCentral.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoSalirDeLobby.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\contenedor\ContenedorMvc.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\NodoDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPedirFichaAlPozo.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\JugadorDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorAEliminarDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorCrearPartidaDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\UsuarioDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\FichaDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoIniciarPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugador.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorBase.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaDePartidaCreada.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PasarTurno.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorUnirseAPartidaDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\IniciarPartidaAdmin.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\SetUpDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\PonerFichaDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\JugadorSeUnioAPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersServerCentralALogica\IEventoIniciarPartidaAdmin.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\dtos\ArregloDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPonerFicha.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\EventoAcabarPartidaDto.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\RespuestaServidorCentral.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\eventos\VotoDeJugador.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidarFichas.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoIniciarPartidaServerCentral.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\serializables\Jugada.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoVotarParaIniciarPartida.java
+D:\Berry\Documents\NetBeansProjects\Proyecti de arqui\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoPasarTurno.java

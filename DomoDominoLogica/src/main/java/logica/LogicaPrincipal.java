@@ -297,9 +297,9 @@ public class LogicaPrincipal {
                 logicaTablero.mandarArregloActualizado(arreglo);
 
                 logicaTablero.mandarJugadorActualizado(jugador);
-                
+
                 logicaTurnos.pasarTurno();
-                
+
                 boolean seAcaboPartida = false;
 
                 if (jugador.getFichas().size() == 0) {
@@ -470,7 +470,7 @@ public class LogicaPrincipal {
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
             JugadorDto jugadorDto = new JugadorDto(setUp.getNombre(), setUp.getAvatar(), setUp.getFichasDelJugador());
-            
+
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartida(), turno);
 
             mediador.mostrarPantallaConcreta("tablero");
@@ -623,16 +623,23 @@ public class LogicaPrincipal {
 
             if (logicaTurnos.obtenerTurnoActual().equals(nombre)) {
                 turno = true;
-                
+
                 JugadorDto jugadorDto = new JugadorDto(yo.getNombre(), yo.getAvatar(), yo.getFichasDelJugador());
-                
+                FichaDto fichaMulaMasAlta = null;
+                int valorMulaMasAlta = -1;
+
+                for (FichaDto ficha : jugadorDto.getFichas()) {
+                    if (ficha.esMula() && ficha.getLado1() > valorMulaMasAlta) {
+                        fichaMulaMasAlta = ficha;
+                        valorMulaMasAlta = ficha.getLado1();
+                    }
+                }
+
                 AccionPonerFicha accionPonerFicha = new AccionPonerFicha();
-                PonerFichaDto fichaDto = new PonerFichaDto(jugadorDto.getFichas().get(0), true, "", jugadorDto);
+                PonerFichaDto fichaDto = new PonerFichaDto(fichaMulaMasAlta, true, "", jugadorDto);
                 fichaDto.setCompañeros(yo.getJugadoresDePartida());
                 accionPonerFicha.ponerFicha(fichaDto);
             }
-            
-            
 
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
