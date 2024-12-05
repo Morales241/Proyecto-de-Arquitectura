@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import mediador.IComponente;
 import mediador.IMediador;
+import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
 import observers.IEventoValidarFichas;
 import observers.IObserver;
@@ -39,6 +40,7 @@ public class TableroView extends JFrame implements IComponente {
     private IEventoPonerFicha eventoPonerFicha;
     private JButton botonPozo;
     private IEventoValidarFichas eventoValidarFichas;
+    private IEventoPedirFichaAlPozo eventoTomarFichaDelPozo;
     
     public TableroView(TableroModel model) {
         this.model = model;
@@ -334,11 +336,26 @@ protected void paintComponent(Graphics g) {
             if (!model.isPoso()) {
                 
                 botonPozo.setEnabled(true);
+                botonPozo.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        ejecutarObserverTomarFichaDelPozo();
+                    }
+                });
+                
             }
         }
         
     }
-    
+         public void agregarObserverTomarFichaDelPozo(IEventoPedirFichaAlPozo eventoTomarFichaDelPozo) {
+        this.eventoTomarFichaDelPozo = eventoTomarFichaDelPozo;
+    }
+        
+        public void ejecutarObserverTomarFichaDelPozo() {
+        if (eventoTomarFichaDelPozo != null) {
+            eventoTomarFichaDelPozo.pedirFicha();
+        }
+    }
     public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
         this.eventoPonerFicha = eventoPonerFicha;
         
