@@ -399,7 +399,7 @@ public class LogicaPrincipal {
 
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada());
 
-            mediador.cerrarPantallaConcreta("tablero");
+            mediador.mostrarPantallaConcreta("tablero");
         }
 
     }
