@@ -62,15 +62,8 @@ public class ArregloFachada implements IArregloFachada {
 
         if (this.estaVacio(medioDeArreglo(), medioDeArreglo())) {
             if (ficha.esMula()) {
-                obtenerTablero()[medioDeArreglo()][medioDeArreglo()] = ficha.getLado1();
-                arreglo.setExtremo1(ficha.getLado1());
-                arreglo.setExtremo2(ficha.getLado1());
-                arreglo.setExtremo1(ficha.getLado1());
-                arreglo.setExtremo2(ficha.getLado1());
-                arreglo.setExtremo1Fila(medioDeArreglo());
-                arreglo.setExtremo1Columna(medioDeArreglo());
-                arreglo.setExtremo2Fila(medioDeArreglo());
-                arreglo.setExtremo2Columna(medioDeArreglo());
+                ponerPrimeraFicha(ficha, extremo, direccion);
+                
                 return true;
             } else {
                 return false;
@@ -92,6 +85,18 @@ public class ArregloFachada implements IArregloFachada {
             }
         }
         return false;
+    }
+
+    public void ponerPrimeraFicha(FichaDto ficha, boolean extremo, String direccion) {
+        obtenerTablero()[medioDeArreglo()][medioDeArreglo()] = ficha.getLado1();
+        arreglo.setExtremo1(ficha.getLado1());
+        arreglo.setExtremo2(ficha.getLado1());
+        arreglo.setExtremo1(ficha.getLado1());
+        arreglo.setExtremo2(ficha.getLado1());
+        arreglo.setExtremo1Fila(medioDeArreglo());
+        arreglo.setExtremo1Columna(medioDeArreglo());
+        arreglo.setExtremo2Fila(medioDeArreglo());
+        arreglo.setExtremo2Columna(medioDeArreglo());
     }
 
     @Override
