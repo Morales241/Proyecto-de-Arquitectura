@@ -1,6 +1,8 @@
 package main;
 
 import Arreglo.LogicaArreglo;
+import Inicializador.InicializadorClases;
+import Inicializador.InicializadorComunicaciones;
 import Pozo.ILogicaPozo;
 import Pozo.LogicaPozo;
 import TableroMvc.TableroController;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
+import tablero.ILogicaTablero;
 import tablero.LogicaTablero;
 
 /**
@@ -26,22 +29,20 @@ import tablero.LogicaTablero;
  */
 public class prueba {
 
+     private InicializadorClases inicializadorClases = new  InicializadorClases();
+    
      private static ArregloFachada fachada = new ArregloFachada();
      private static ITableroFachada tifachada;
-
-     private final ILogicaPozo IPozo = new LogicaPozo();
-
+     private static  ILogicaPozo IPozo = new LogicaPozo();
      private static LogicaArreglo arreglo = new LogicaArreglo(fachada);
      private static LogicaPozo pozo = new LogicaPozo();
-     private static LogicaTablero tablero = new LogicaTablero(tifachada);
-
+     private static   LogicaTablero tablero = new LogicaTablero(tifachada);
      private static TableroModel model = new TableroModel();
-
      private static TableroFachada tfachada = new TableroFachada(model);
-
      private static TableroView view = new TableroView(model);
      private static TableroController controller = new TableroController(model, view);
 
+     
      /**
       * @param args the command line arguments
       */
@@ -91,12 +92,12 @@ public class prueba {
           }
      }
 
-     public static class accionPozo implements IEventoPedirFichaAlPozo {
+     private static  class accionPozo implements IEventoPedirFichaAlPozo {
 
           @Override
           public void pedirFicha() {
-//               FichaDto fichaSacada = IPozo.sacarFicha();
-//               logicaTablero.enviarFichaDelPozo(fichaSacada);
+               FichaDto fichaSacada = IPozo.sacarFicha();
+               tablero.enviarFichaDelPozo(fichaSacada);
           }
      }
 }

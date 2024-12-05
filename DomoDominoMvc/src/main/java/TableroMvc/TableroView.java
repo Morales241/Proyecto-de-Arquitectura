@@ -339,6 +339,7 @@ public class TableroView extends JFrame implements IComponente {
                          @Override
                          public void mouseClicked(MouseEvent e) {
                               ejecutarObserverTomarFichaDelPozo();
+                              
                          }
                     });
 
