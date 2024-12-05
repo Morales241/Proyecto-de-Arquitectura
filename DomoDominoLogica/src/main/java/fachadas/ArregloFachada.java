@@ -16,7 +16,8 @@ import java.util.List;
  *
  * @author tacot
  */
-public class ArregloFachada implements IArregloFachada{
+public class ArregloFachada implements IArregloFachada {
+
     private Arreglo arreglo;
 
     public ArregloFachada() {
@@ -28,10 +29,10 @@ public class ArregloFachada implements IArregloFachada{
         return arreglo.getTablero();
     }
 
-    public Arreglo obtenerArreglo(){
+    public Arreglo obtenerArreglo() {
         return arreglo;
     }
-    
+
     @Override
     public boolean estaVacio(int fila, int columna) {
         return obtenerTablero()[fila][columna] == -1;
@@ -52,18 +53,34 @@ public class ArregloFachada implements IArregloFachada{
         return false;
     }
 
+    public int medioDeArreglo() {
+        return (arreglo.getTablero().length - 1) / 2;
+    }
+
+    public void ponerPrimeraFicha(FichaDto ficha, boolean extremo, String direccion) {
+        obtenerTablero()[medioDeArreglo()][medioDeArreglo()] = ficha.getLado1();
+        arreglo.setExtremo1(ficha.getLado1());
+        arreglo.setExtremo2(ficha.getLado1());
+        arreglo.setExtremo1(ficha.getLado1());
+        arreglo.setExtremo2(ficha.getLado1());
+        arreglo.setExtremo1Fila(medioDeArreglo());
+        arreglo.setExtremo1Columna(medioDeArreglo());
+        arreglo.setExtremo2Fila(medioDeArreglo());
+        arreglo.setExtremo2Columna(medioDeArreglo());
+    }
+
     @Override
     public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion) {
-         
-         if (this.estaVacio(15, 15)) {
-              if (ficha.esMula()) {
-                   arreglo.setExtremo1(ficha.getLado1());
-                   arreglo.setExtremo2(ficha.getLado1());
-              } else {
-                   return false;
-              }
-         }
-         
+
+        if (this.estaVacio(medioDeArreglo(), medioDeArreglo())) {
+            if (ficha.esMula()) {
+                ponerPrimeraFicha(ficha, extremo, direccion);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         switch (direccion) {
             case "Izquierda":
                 return colocarFichaIzquierda(ficha, extremo);
