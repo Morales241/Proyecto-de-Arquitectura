@@ -474,6 +474,23 @@ public class LogicaPrincipal {
             logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartida(), turno);
 
             mediador.mostrarPantallaConcreta("tablero");
+            
+            // si quieres eliminar elemina esto
+                FichaDto fichaMulaMasAlta = null;
+                int valorMulaMasAlta = -1;
+
+                for (FichaDto ficha : jugadorDto.getFichas()) {
+                    if (ficha.esMula() && ficha.getLado1() > valorMulaMasAlta) {
+                        fichaMulaMasAlta = ficha;
+                        valorMulaMasAlta = ficha.getLado1();
+                    }
+                }
+
+                AccionPonerFicha accionPonerFicha = new AccionPonerFicha();
+                PonerFichaDto fichaDto = new PonerFichaDto(fichaMulaMasAlta, true, "", jugadorDto);
+                fichaDto.setCompañeros(setUp.getJugadoresDePartida());
+                accionPonerFicha.ponerFicha(fichaDto);
+                // si quieres eliminar elemina esto
         }
 
     }
@@ -623,7 +640,7 @@ public class LogicaPrincipal {
 
             if (logicaTurnos.obtenerTurnoActual().equals(nombre)) {
                 turno = true;
-
+// si quieres eliminar elemina esto
                 JugadorDto jugadorDto = new JugadorDto(yo.getNombre(), yo.getAvatar(), yo.getFichasDelJugador());
                 FichaDto fichaMulaMasAlta = null;
                 int valorMulaMasAlta = -1;
@@ -639,6 +656,7 @@ public class LogicaPrincipal {
                 PonerFichaDto fichaDto = new PonerFichaDto(fichaMulaMasAlta, true, "", jugadorDto);
                 fichaDto.setCompañeros(yo.getJugadoresDePartida());
                 accionPonerFicha.ponerFicha(fichaDto);
+                // si quieres eliminar elemina esto
             }
 
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
