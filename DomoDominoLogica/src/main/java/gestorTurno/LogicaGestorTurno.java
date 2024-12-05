@@ -1,5 +1,6 @@
 package gestorTurno;
 
+import Entidades.Jugador;
 import dtos.JugadorDto;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import fachadasInterfaz.IGestorDeTurnosFachada;
@@ -37,7 +38,7 @@ public class LogicaGestorTurno implements ILogicaGestorTurno {
     }
 
     @Override
-    public void sincronizarTurnosConClaseExterna(List<String> turnosExterna) {
+    public void sincronizarTurnosConClaseExterna(List<JugadorDto> turnosExterna) {
         turnosFachada.sincronizarTurnosConClaseExterna(turnosExterna);
     }
 }

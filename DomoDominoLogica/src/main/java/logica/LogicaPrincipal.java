@@ -550,15 +550,11 @@ public class LogicaPrincipal {
             logicaTurnos.inicializarTurnos(jugadorDtos);
 
             List<JugadorDto> ordenTurnos = logicaTurnos.obtenerOrdenDeTurnos();
-            List<String> nombresEnOrden = new ArrayList<>();
 
-            for (JugadorDto jugador : ordenTurnos) {
-                nombresEnOrden.add(jugador.getNombre());
-            }
 
             for (String nombre : jugadores.keySet()) {
                 SetUpDto setUpDto = jugadores.get(nombre);
-                setUpDto.setTurnos(new ArrayList<>(nombresEnOrden));
+                setUpDto.setTurnos(ordenTurnos);
                 setUpDto.setFichasSacadasDelPozo(fichasSacasDelPozo);
 
             }

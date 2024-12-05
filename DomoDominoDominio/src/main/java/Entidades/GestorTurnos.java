@@ -6,15 +6,13 @@ import java.util.ArrayList;
 
 public class GestorTurnos {
 
-    private final List<Jugador> turnos;
+    private List<Jugador> turnos;
     private int indiceActual;
-    private List<String> turnosSincronizados;
 
     // Constructor
     public GestorTurnos() {
         this.turnos = new ArrayList<>();
         this.indiceActual = 0;
-        this.turnosSincronizados = new ArrayList<>();
     }
 
     public void inicializarTurnos(Map<String, Jugador> jugadores) {
@@ -68,11 +66,8 @@ public class GestorTurnos {
         return new ArrayList<>(turnos);
     }
 
-    public void setTurnos(List<String> turnos) {
-        this.turnosSincronizados = new ArrayList<>(turnos);
+    public void setTurnos(List<Jugador> turnos) {
+        this.turnos = turnos;
     }
-
-    public List<String> getTurnosSincronizados() {
-        return turnosSincronizados;
-    }
+    
 }

@@ -54,10 +54,7 @@ public class prueba {
         jugadorBases.add(new JugadorBase("Mariana", 3));
         
         
-        model.iniciarPartida(jugadorDto, array, jugadorBases);
-        model.setTurno(true);
-        
-        
+        model.iniciarPartida(jugadorDto, array, jugadorBases, true);
     }
     
     private static class accionArreglo implements IEventoPonerFicha {
@@ -74,7 +71,6 @@ public class prueba {
                 model.setArray(ad);
                 model.setJugador(jugadorDto);
             }
-            
         }
     }
 }

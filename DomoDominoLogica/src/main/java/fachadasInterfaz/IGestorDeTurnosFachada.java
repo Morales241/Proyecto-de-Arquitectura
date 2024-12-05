@@ -1,5 +1,6 @@
 package fachadasInterfaz;
 
+import Entidades.Jugador;
 import dtos.JugadorDto;
 import java.util.List;
 
@@ -8,5 +9,5 @@ public interface IGestorDeTurnosFachada {
     String obtenerTurnoActual();
     void pasarTurno();
     List<JugadorDto> obtenerOrdenDeTurnos();
-    public void sincronizarTurnosConClaseExterna(List<String> turnosExterna);
+    public void sincronizarTurnosConClaseExterna(List<JugadorDto> turnosExterna);
 }

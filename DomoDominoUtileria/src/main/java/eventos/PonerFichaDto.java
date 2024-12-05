@@ -9,8 +9,8 @@ import java.util.List;
  *
  * @author tacot
  */
-public class PonerFichaDto implements Serializable{
-    
+public class PonerFichaDto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private FichaDto ficha;
     private boolean extremo;
@@ -22,18 +22,18 @@ public class PonerFichaDto implements Serializable{
     public PonerFichaDto() {
     }
 
-     public PonerFichaDto(FichaDto ficha, boolean extremo, String direccion, JugadorDto jugador) {
-          this.ficha = ficha;
-          this.extremo = extremo;
-          this.direccion = direccion;
-          this.jugador = jugador;
-     }
+    public PonerFichaDto(FichaDto ficha, boolean extremo, String direccion, JugadorDto jugador) {
+        this.ficha = ficha;
+        this.extremo = extremo;
+        this.direccion = direccion;
+        this.jugador = jugador;
+    }
 
-     public PonerFichaDto(FichaDto ficha, boolean extremo, String direccion) {
-          this.ficha = ficha;
-          this.extremo = extremo;
-          this.direccion = direccion;
-     }
+    public PonerFichaDto(FichaDto ficha, boolean extremo, String direccion) {
+        this.ficha = ficha;
+        this.extremo = extremo;
+        this.direccion = direccion;
+    }
 
     public List<JugadorBase> getCompañeros() {
         return compañeros;
@@ -42,26 +42,22 @@ public class PonerFichaDto implements Serializable{
     public void setCompañeros(List<JugadorBase> compañeros) {
         this.compañeros = compañeros;
     }
-     
-     
 
-     public boolean getExtremo() {
-          return extremo;
-     }
+    public boolean getExtremo() {
+        return extremo;
+    }
 
-     public void setExtremo(boolean extremo) {
-          this.extremo = extremo;
-     }
+    public void setExtremo(boolean extremo) {
+        this.extremo = extremo;
+    }
 
-     public String getDireccion() {
-          return direccion;
-     }
+    public String getDireccion() {
+        return direccion;
+    }
 
-     public void setDireccion(String direccion) {
-          this.direccion = direccion;
-     }
-
-    
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
     public FichaDto getFicha() {
         return ficha;
@@ -78,6 +74,5 @@ public class PonerFichaDto implements Serializable{
     public void setJugador(JugadorDto jugador) {
         this.jugador = jugador;
     }
-    
-    
+
 }

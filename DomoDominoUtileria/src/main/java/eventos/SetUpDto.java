@@ -15,7 +15,7 @@ public class SetUpDto implements Serializable {
     private static final long serialVersionUID = 1L;
     private String nombre;
     private int avatar;
-    private List<String> turnos;
+    private List<JugadorDto> turnos;
     private List<JugadorBase> jugadoresDePartida;
     private List<FichaDto> fichasDelJugador;
     private List<FichaDto> fichasSacadasDelPozo;
@@ -28,13 +28,23 @@ public class SetUpDto implements Serializable {
         this.fichasSacadasDelPozo = fichasSacadasDelPozo;
     }
 
-    public List<String> getTurnos() {
+    public List<JugadorDto> getTurnos() {
         return turnos;
     }
 
-    public void setTurnos(List<String> turnos) {
+    public void setTurnos(List<JugadorDto> turnos) {
         this.turnos = turnos;
     }
+
+    public List<JugadorBase> getJugadoresDePartida() {
+        return jugadoresDePartida;
+    }
+
+    public void setJugadoresDePartida(List<JugadorBase> jugadoresDePartida) {
+        this.jugadoresDePartida = jugadoresDePartida;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;

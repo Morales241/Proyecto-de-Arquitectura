@@ -15,5 +15,5 @@ public interface ILogicaGestorTurno {
 
     public List<JugadorDto> obtenerOrdenDeTurnos();
     
-    public void sincronizarTurnosConClaseExterna(List<String> turnosExterna);
+    public void sincronizarTurnosConClaseExterna(List<JugadorDto> turnosExterna);
 }
