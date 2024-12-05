@@ -219,7 +219,7 @@ public class LogicaPrincipal {
         @Override
         public void validarFichas(List<FichaDto> fichas) {
             boolean posibleMovimiento = IArreglo.verificarPosiblesMovimientos(fichas);
-            
+
             logicaTablero.enviarValidacionDeFichas(posibleMovimiento);
         }
 
@@ -298,7 +298,7 @@ public class LogicaPrincipal {
 
                 logicaTablero.mandarJugadorActualizado(jugador);
 
-                logicaTurnos.pasarTurno();
+                boolean seAcaboPartida = logicaTurnos.pasarTurno();
 
                 ponerFicha.getCompañeros().forEach(compañero -> {
 
@@ -309,6 +309,19 @@ public class LogicaPrincipal {
                 });
 
                 logicaTablero.avisarDePasoDeTurno(false);
+
+                if (seAcaboPartida) {
+                    
+                    ponerFicha.getCompañeros().forEach(compañero -> {
+
+                        String nombre = compañero.getNombre();
+
+                        EventoAcabarPartidaDto eventoAcabarPartidaDto = new EventoAcabarPartidaDto(codigo);
+                        
+                        comunicaciones.enviarMensaje(eventoAcabarPartidaDto, nombre);
+
+                    });
+                }
             }
         }
     }
@@ -449,6 +462,9 @@ public class LogicaPrincipal {
         @Override
         public void acabarPartida(EventoAcabarPartidaDto codigo) {
             logicaTerminarPartida.acabarPartida(codigo);
+            //aqui deberia ir un algoritmo de el puesto dependiendo de la lista
+            logicaAviso.mostrarAviso("Se acabo la partida");
+            
         }
 
     }

@@ -11,7 +11,7 @@ public interface ILogicaGestorTurno {
 
     public String obtenerTurnoActual();
 
-    public void pasarTurno();
+    public boolean pasarTurno();
 
     public List<JugadorDto> obtenerOrdenDeTurnos();
     

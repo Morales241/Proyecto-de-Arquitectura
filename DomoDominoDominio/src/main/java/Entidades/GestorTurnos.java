@@ -3,11 +3,13 @@ package Entidades;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class GestorTurnos {
 
     private List<Jugador> turnos;
     private int indiceActual;
+    private Pozo pozo = Pozo.obtenerInstancia();
 
     // Constructor
     public GestorTurnos() {
@@ -70,4 +72,22 @@ public class GestorTurnos {
         this.turnos = turnos;
     }
     
+    public boolean seAcaboLaPartida() {
+        boolean jugadorSinFichas = turnos.stream().anyMatch(jugador -> jugador.getFichas().isEmpty());
+        
+        boolean pozoVacio = pozo.obtenerFichas().isEmpty();
+
+        return jugadorSinFichas || (pozoVacio);
+    }
+
+    public List<Jugador> calcularPuntajeFinal() {
+
+        List<Jugador> jugadoresOrdenados = new ArrayList<>(turnos);
+
+        jugadoresOrdenados.sort(Comparator.comparingInt(jugador -> jugador.getFichas().stream()
+                .mapToInt(ficha -> ficha.getLado1() + ficha.getLado2())
+                .sum()));
+
+        return jugadoresOrdenados;
+    }
 }

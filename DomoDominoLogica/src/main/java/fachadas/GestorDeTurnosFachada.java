@@ -50,8 +50,8 @@ public class GestorDeTurnosFachada implements IGestorDeTurnosFachada {
         List<JugadorDto> turnosDTO = new ArrayList<>();
         for (Jugador jugador : GestorTurno.obtenerOrdenDeTurnos()) {
             List<FichaDto> fichas = new ArrayList<>();
-            jugador.getFichas().forEach( ficha -> {
-                
+            jugador.getFichas().forEach(ficha -> {
+
                 fichas.add(new FichaDto(ficha.getLado1(), ficha.getLado2()));
             });
             JugadorDto dto = new JugadorDto(jugador.getNombre(), jugador.getAvatar(), fichas);
@@ -59,13 +59,34 @@ public class GestorDeTurnosFachada implements IGestorDeTurnosFachada {
         }
         return turnosDTO;
     }
-    
+
     @Override
     public void sincronizarTurnosConClaseExterna(List<JugadorDto> turnosExterna) {
         List<Jugador> turnosList = new ArrayList<>();
-        turnosExterna.forEach( o -> turnosList.add(new Jugador(o.getNombre())));
-        
-        
-        GestorTurno.setTurnos(turnosList); 
+        turnosExterna.forEach(o -> turnosList.add(new Jugador(o.getNombre())));
+
+        GestorTurno.setTurnos(turnosList);
+    }
+
+    @Override
+    public boolean seAcaboLaPartida() {
+        return GestorTurno.seAcaboLaPartida();
+    }
+
+    @Override
+    public List<JugadorDto> calcularPuntajeFinal() {
+        List<Jugador> jugadoresOrdenados = GestorTurno.calcularPuntajeFinal();
+
+        List<JugadorDto> jugadoresDTO = new ArrayList<>();
+        for (Jugador jugador : jugadoresOrdenados) {
+            List<FichaDto> fichas = new ArrayList<>();
+            for (Ficha ficha : jugador.getFichas()) {
+                fichas.add(new FichaDto(ficha.getLado1(), ficha.getLado2()));
+            }
+            JugadorDto dto = new JugadorDto(jugador.getNombre(), jugador.getAvatar(), fichas);
+            jugadoresDTO.add(dto);
+        }
+
+        return jugadoresDTO;
     }
 }
