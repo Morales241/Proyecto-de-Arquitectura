@@ -14,6 +14,7 @@ import java.util.List;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
 import observers.IEventoTomarFichaDelPozo;
+import observers.IEventoValidarFichas;
 import observers.IObserver;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
 
@@ -31,12 +32,25 @@ public class TableroModel {
     private IEventoPonerFicha eventoPonerFicha;
     private IEventoPedirFichaAlPozo eventoTomarFichaDelPozo;
     private IEventoSalirDePartida eventoSalirDePartida;
+    private IEventoValidarFichas eventoValidarFichas;
     private IObserver actualizar;
+    private boolean poso;
 
     public TableroModel() {
          
     }
 
+    public void agregarObserverValidarFichas(IEventoValidarFichas listener) {
+        this.eventoValidarFichas = listener;
+    }
+
+    public void ejecutarObserverValidarFichas(List<FichaDto> fichas) {
+        if (eventoValidarFichas != null) {
+            fichas = getJugador().getFichas();
+            eventoValidarFichas.validarFichas(fichas);
+        }
+    }
+    
     public void agregarObserverPonerFicha(IEventoPonerFicha eventoPonerFicha) {
         this.eventoPonerFicha = eventoPonerFicha;
     }
@@ -124,6 +138,8 @@ public class TableroModel {
         setArray(arrayDto);
         setTurno(turno);
         ejecutarObserverActualizar();
+        
+        ejecutarObserverValidarFichas(getJugador().getFichas());
     }
 
     public boolean isTurno() {
@@ -132,6 +148,15 @@ public class TableroModel {
 
     public void setTurno(boolean turno) {
         this.turno = turno;
+        ejecutarObserverActualizar();
+    }
+
+    public boolean isPoso() {
+        return poso;
+    }
+
+    public void setPoso(boolean poso) {
+        this.poso = poso;
         ejecutarObserverActualizar();
     }
     

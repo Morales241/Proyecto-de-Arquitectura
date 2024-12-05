@@ -32,6 +32,7 @@ C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoSeleccion.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoTomarFichaDelPozo.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidacionDeNombre.java
+C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IEventoValidarFichas.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observers\IObserver.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoAgregarJugadorAPartida.java
 C:\Users\tacot\Documents\GitHub\Proyecto-de-Arquitectura\DomoDominoUtileria\src\main\java\observersLogicaAServidorCentral\IEventoCrearPartida.java

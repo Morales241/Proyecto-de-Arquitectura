@@ -35,7 +35,7 @@ public class LogicaArreglo implements ILogicaArreglo {
     }
 
     @Override
-    public boolean verificarPosiblesMovimientos(List<Ficha> fichasJugador) {
+    public boolean verificarPosiblesMovimientos(List<FichaDto> fichasJugador) {
         return arregloFachada.verificarPosiblesMovimientos(fichasJugador);
     }
 

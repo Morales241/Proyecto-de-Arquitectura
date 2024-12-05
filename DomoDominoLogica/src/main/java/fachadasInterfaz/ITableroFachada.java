@@ -12,6 +12,7 @@ import java.util.List;
 import observers.IEventoPasarTurno;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
+import observers.IEventoValidarFichas;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
 
 /**
@@ -35,5 +36,7 @@ public interface ITableroFachada {
     public void avisarDePasoDeTurno(boolean turno);
 
     public void enviarFichaDelPozo(FichaDto ficha);
+    
+    public void agregarIEventoValidarFichas(IEventoValidarFichas listener);
 
 }

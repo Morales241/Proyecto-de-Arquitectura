@@ -19,6 +19,7 @@ eventos\VotoDeJugador.class
 eventos\JugadorBase.class
 observers\IEventoIniciarPartida.class
 observers\IEventoPartida.class
+observers\IEventoValidarFichas.class
 eventos\RespuestaDeUnirseAPartida.class
 mediador\IComponente.class
 observers\IObserver.class

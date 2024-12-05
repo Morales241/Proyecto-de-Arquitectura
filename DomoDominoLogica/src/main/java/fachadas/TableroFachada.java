@@ -13,6 +13,7 @@ import eventos.JugadorBase;
 import java.util.List;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
+import observers.IEventoValidarFichas;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
 
 /**
@@ -65,5 +66,10 @@ public class TableroFachada implements ITableroFachada {
     @Override
     public void enviarFichaDelPozo(FichaDto ficha) {
         tableroModel.getJugador().getFichas().add(ficha);
+    }
+
+    @Override
+    public void agregarIEventoValidarFichas(IEventoValidarFichas listener) {
+        tableroModel.agregarObserverValidarFichas(listener);
     }
 }

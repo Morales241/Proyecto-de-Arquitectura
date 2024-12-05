@@ -8,6 +8,7 @@ import fachadasInterfaz.ITableroFachada;
 import java.util.List;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
+import observers.IEventoValidarFichas;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
 
 /**
@@ -61,5 +62,10 @@ public class LogicaTablero implements ILogicaTablero {
     @Override
     public void enviarFichaDelPozo(FichaDto ficha) {
         tableroFachada.enviarFichaDelPozo(ficha);
+    }
+
+    @Override
+    public void agregarIEventoValidarFichas(IEventoValidarFichas listener) {
+        tableroFachada.agregarIEventoValidarFichas(listener);
     }
 }

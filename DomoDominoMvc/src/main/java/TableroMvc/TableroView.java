@@ -2,7 +2,6 @@ package TableroMvc;
 
 import dtos.ArregloDto;
 import dtos.FichaDto;
-import dtos.JugadorDto;
 import eventos.PonerFichaDto;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -19,11 +17,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.net.URL;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import mediador.IComponente;
 import mediador.IMediador;
 import observers.IEventoPonerFicha;
+import observers.IEventoValidarFichas;
 import observers.IObserver;
 
 public class TableroView extends JFrame implements IComponente {
@@ -37,6 +37,8 @@ public class TableroView extends JFrame implements IComponente {
     private JLayeredPane layeredPane;
     private IObserver actualizar;
     private IEventoPonerFicha eventoPonerFicha;
+    private JButton botonPozo;
+    private IEventoValidarFichas eventoValidarFichas;
     
     public TableroView(TableroModel model) {
         this.model = model;
@@ -77,8 +79,10 @@ public class TableroView extends JFrame implements IComponente {
         fichasJugadorPanel.setBounds(100, 550, 960, 120);
         layeredPane.add(fichasJugadorPanel, JLayeredPane.PALETTE_LAYER);
         
-        JButton botonPozo = new JButton();
+        botonPozo = new JButton();
         botonPozo.setEnabled(false);
+        botonPozo.addActionListener(l -> ejecutarObserverValidarFichas(null));
+        
         
         String rutaImagen = "/imgPartidaFichas/Pozo.png";
         URL recurso = getClass().getResource(rutaImagen);
@@ -326,6 +330,11 @@ protected void paintComponent(Graphics g) {
                     }
                 }
             }
+            
+            if (!model.isPoso()) {
+                
+                botonPozo.setEnabled(true);
+            }
         }
         
     }
@@ -339,6 +348,16 @@ protected void paintComponent(Graphics g) {
         if (this.eventoPonerFicha != null) {
             eventoPonerFicha.ponerFicha(ponerFicha);
             botonesPanel.setVisible(false);
+        }
+    }
+    
+    public void agregarObserverValidarFichas(IEventoValidarFichas listener) {
+        this.eventoValidarFichas = listener;
+    }
+
+    public void ejecutarObserverValidarFichas(List<FichaDto> fichas) {
+        if (eventoValidarFichas != null) {
+            eventoValidarFichas.validarFichas(fichas);
         }
     }
 }

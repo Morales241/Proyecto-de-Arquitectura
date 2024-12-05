@@ -10,7 +10,10 @@ import Entidades.Ficha;
 import dtos.ArregloDto;
 import dtos.FichaDto;
 import fachadasInterfaz.IArregloFachada;
+import java.util.ArrayList;
 import java.util.List;
+import observers.IEventoValidarFichas;
+
 
 /**
  *
@@ -39,10 +42,15 @@ public class ArregloFachada implements IArregloFachada {
     }
 
     @Override
-    public boolean verificarPosiblesMovimientos(List<Ficha> fichasJugador) {
+    public boolean verificarPosiblesMovimientos(List<FichaDto> fichasDto) {
+
+        List<Ficha> fichas = new ArrayList<>();
+        
+        fichasDto.forEach(o -> fichas.add(new Ficha(o.getLado1(), o.getLado2())));
+
         int extremoIzquierdo = arreglo.getExtremo1();
         int extremoDerecho = arreglo.getExtremo2();
-        for (Ficha ficha : fichasJugador) {
+        for (Ficha ficha : fichas) {
             if (ficha.getLado1() == extremoIzquierdo || ficha.getLado2() == extremoIzquierdo
                     || ficha.getLado1() == extremoDerecho || ficha.getLado2() == extremoDerecho) {
                 System.out.println("Extremo 1: " + arreglo.getExtremo1());

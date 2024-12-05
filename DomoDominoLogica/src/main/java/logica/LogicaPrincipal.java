@@ -37,14 +37,12 @@ import fachadasInterfaz.IInicioFachada;
 import fachadasInterfaz.ITableroFachada;
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
-import fachadasInterfaz.IGestorDeTurnosFachada;
 import gestorTurno.ILogicaGestorTurno;
 import gestorTurno.LogicaGestorTurno;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import lobby.ILobbyLogica;
 import lobby.LobbyLogica;
 import mediador.Mediador;
@@ -60,6 +58,7 @@ import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import observers.IEventoAcabarPartida;
 import observers.IEventoPedirFichaAlPozo;
+import observers.IEventoValidarFichas;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
 import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
@@ -177,6 +176,7 @@ public class LogicaPrincipal {
         logicaTablero.agregarIEventoPonerFicha(new AccionPonerFicha());
         logicaTablero.agregarIEventoTomarFIchaDelPozo(new AccionTomarFichaDelPozo());
         logicaTablero.agregarIEventoSalirDePartida(new AccionSalirDePartida());
+        logicaTablero.agregarIEventoValidarFichas(new AccionValidarFicha());
 
         //agregar observers de comunicaciones
         comunicaciones.agregarObservadorAcabarPartida(new AccionAcabarPartida());
@@ -211,6 +211,15 @@ public class LogicaPrincipal {
     public void iniciarJuego() {
 
         mediador.mostrarPantallaConcreta("inicio");
+
+    }
+
+    private class AccionValidarFicha implements IEventoValidarFichas {
+
+        @Override
+        public void validarFichas(List<FichaDto> fichas) {
+            boolean posibleMovimiento = IArreglo.verificarPosiblesMovimientos(fichas);
+        }
 
     }
 
@@ -278,25 +287,25 @@ public class LogicaPrincipal {
 
             if (respuesta) {
                 arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
-                
+
                 JugadorDto jugador = ponerFicha.getJugador();
-                
+
                 jugador.getFichas().remove(ponerFicha.getFicha());
-                
+
                 logicaTablero.mandarArregloActualizado(arreglo);
-                
+
                 logicaTablero.mandarJugadorActualizado(jugador);
-                
+
                 logicaTurnos.pasarTurno();
-                
+
                 ponerFicha.getCompañeros().forEach(compañero -> {
-                    
+
                     String nombre = compañero.getNombre();
-                    
+
                     comunicaciones.enviarMensaje(ponerFicha, nombre);
 
                 });
-               
+
                 logicaTablero.avisarDePasoDeTurno(false);
             }
         }
@@ -550,7 +559,6 @@ public class LogicaPrincipal {
             logicaTurnos.inicializarTurnos(jugadorDtos);
 
             List<JugadorDto> ordenTurnos = logicaTurnos.obtenerOrdenDeTurnos();
-
 
             for (String nombre : jugadores.keySet()) {
                 SetUpDto setUpDto = jugadores.get(nombre);

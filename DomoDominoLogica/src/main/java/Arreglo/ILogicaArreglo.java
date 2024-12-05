@@ -18,7 +18,7 @@ public interface ILogicaArreglo {
     
     public Arreglo obtenerArreglo();
     
-    public boolean verificarPosiblesMovimientos(List<Ficha> fichasJugador);
+    public boolean verificarPosiblesMovimientos(List<FichaDto> fichasJugador);
     
     public boolean colocarFicha(FichaDto ficha, boolean extremo, String direccion);
     
