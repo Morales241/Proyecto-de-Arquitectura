@@ -6,7 +6,7 @@ import Entidades.Ficha;
  *
  * @author favel
  */
-public final class Arreglo {
+public class Arreglo {
 
     private int[][] tablero;
     private int extremoIzquierdo, extremoDerecha;
@@ -16,12 +16,12 @@ public final class Arreglo {
     private static Arreglo instanciaUnica;
 
     public Arreglo() {
-        tablero = new int[10][10];
+        tablero = new int[30][30];
         reiniciarTablero();
-        extremo1Columna = 5;
-        extremo1Fila = 5;
-        extremo2Columna = 5;
-        extremo2Fila = 5;
+        extremo1Columna = 15;
+        extremo1Fila = 15;
+        extremo2Columna = 15;
+        extremo2Fila = 15;
     }
 
     public static Arreglo getInstance() {

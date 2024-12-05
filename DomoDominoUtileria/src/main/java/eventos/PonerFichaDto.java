@@ -15,7 +15,6 @@ public class PonerFichaDto implements Serializable{
     private FichaDto ficha;
     private boolean extremo;
     private int columna;
-    private int Fila;
     private String direccion;
     private JugadorDto jugador;
     private List<JugadorBase> compañeros;
@@ -43,7 +42,9 @@ public class PonerFichaDto implements Serializable{
     public void setCompañeros(List<JugadorBase> compañeros) {
         this.compañeros = compañeros;
     }
-   
+     
+     
+
      public boolean getExtremo() {
           return extremo;
      }
@@ -60,21 +61,7 @@ public class PonerFichaDto implements Serializable{
           this.direccion = direccion;
      }
 
-    public int getColumna() {
-        return columna;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
-    }
-
-    public int getFila() {
-        return Fila;
-    }
-
-    public void setFila(int Fila) {
-        this.Fila = Fila;
-    }
+    
 
     public FichaDto getFicha() {
         return ficha;
