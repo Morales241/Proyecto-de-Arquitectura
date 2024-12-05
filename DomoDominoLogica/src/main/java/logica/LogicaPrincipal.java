@@ -323,6 +323,16 @@ public class LogicaPrincipal {
         }
     }
 
+    private class AccionTomaronFichaDelPozo implements IEventoTomarFichaDelPozo {
+
+        @Override
+        public void tomarFichaDelPozo(FichaDto fichaSacada) {
+            List<FichaDto> fichas = new ArrayList<>();
+            fichas.add(fichaSacada);
+            IPozo.sacarFichasEspecificasPozo(fichas);
+        }
+    }
+    
     private class AccionElejirFicha {
 
     }
@@ -368,15 +378,6 @@ public class LogicaPrincipal {
         ENTRE LOS COMUNICACIONES Y LA LOGICA
      */
     //EN ESPERA
-    private class AccionTomaronFichaDelPozo implements IEventoTomarFichaDelPozo {
-
-        @Override
-        public void tomarFichaDelPozo(FichaDto fichaSacada) {
-            List<FichaDto> fichas = new ArrayList<>();
-            fichas.add(fichaSacada);
-            IPozo.sacarFichasEspecificasPozo(fichas);
-        }
-    }
 
     private class AccionPasaronTurno implements IEventoPasarTurno {
 
