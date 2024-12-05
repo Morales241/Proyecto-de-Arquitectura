@@ -2,14 +2,11 @@ package TableroMvc;
 
 import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
-import eventos.PasarTurno;
 import eventos.PonerFichaDto;
 import java.util.List;
-import observers.IEventoPasarTurno;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
-import observers.IEventoTomarFichaDelPozo;
 import observers.IEventoValidarFichas;
 
 public class TableroController {
