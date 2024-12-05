@@ -68,4 +68,9 @@ public class LogicaTablero implements ILogicaTablero {
     public void agregarIEventoValidarFichas(IEventoValidarFichas listener) {
         tableroFachada.agregarIEventoValidarFichas(listener);
     }
+
+    @Override
+    public void enviarValidacionDeFichas(boolean validacion) {
+        tableroFachada.enviarValidacionDeFichas(validacion);
+    }
 }

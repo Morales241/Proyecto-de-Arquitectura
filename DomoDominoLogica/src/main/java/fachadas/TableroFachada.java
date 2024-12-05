@@ -72,4 +72,9 @@ public class TableroFachada implements ITableroFachada {
     public void agregarIEventoValidarFichas(IEventoValidarFichas listener) {
         tableroModel.agregarObserverValidarFichas(listener);
     }
+
+    @Override
+    public void enviarValidacionDeFichas(boolean validacion) {
+        tableroModel.setPoso(validacion);
+    }
 }

@@ -36,4 +36,6 @@ public interface ILogicaTablero {
      public void enviarFichaDelPozo(FichaDto ficha);
      
     public void agregarIEventoValidarFichas(IEventoValidarFichas listener);
+    
+    public void enviarValidacionDeFichas(boolean validacion);
 }

@@ -219,6 +219,8 @@ public class LogicaPrincipal {
         @Override
         public void validarFichas(List<FichaDto> fichas) {
             boolean posibleMovimiento = IArreglo.verificarPosiblesMovimientos(fichas);
+            
+            logicaTablero.enviarValidacionDeFichas(posibleMovimiento);
         }
 
     }
