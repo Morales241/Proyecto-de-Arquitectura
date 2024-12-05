@@ -20,8 +20,6 @@ public class ArregloDto {
         this.extremo2Fila = extremo2Fila;
     }
 
-    
-    
     public int[][] getTablero() {
         return tablero;
     }

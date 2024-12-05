@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
  */
 public class FichaDto implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Integer lado1;
     private Integer lado2;
 
