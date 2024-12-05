@@ -453,7 +453,7 @@ public class LogicaPrincipal {
         @Override
         public void iniciarPartida(SetUpDto setUp) {
 
-            setUp.getJugadoresDePartiada().forEach(O -> comunicaciones.conectarAServidor(O));
+            setUp.getJugadoresDePartida().forEach(O -> comunicaciones.conectarAServidor(O));
 
             logicaTurnos.sincronizarTurnosConClaseExterna(setUp.getTurnos());
 
@@ -470,8 +470,8 @@ public class LogicaPrincipal {
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 
             JugadorDto jugadorDto = new JugadorDto(setUp.getNombre(), setUp.getAvatar(), setUp.getFichasDelJugador());
-
-            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartiada(), turno);
+            
+            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, setUp.getJugadoresDePartida(), turno);
 
             mediador.mostrarPantallaConcreta("tablero");
         }
@@ -592,7 +592,7 @@ public class LogicaPrincipal {
                     }
                 });
 
-                setUpDto.setJugadoresDePartiada(compañeros);
+                setUpDto.setJugadoresDePartida(compañeros);
                 fichasSacasDelPozo.addAll(fichasDeJugador);
                 jugadores.put(nombre, setUpDto);
                 jugadorDtos.add(new JugadorDto(nombre, avatar, fichasDeJugador));
@@ -638,7 +638,7 @@ public class LogicaPrincipal {
 
             JugadorDto jugadorDto = new JugadorDto(yo.getNombre(), yo.getAvatar(), yo.getFichasDelJugador());
 
-            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, yo.getJugadoresDePartiada(), turno);
+            logicaTablero.mandarDatosDeInicioDePartida(jugadorDto, arreglo, yo.getJugadoresDePartida(), turno);
 
             mediador.mostrarPantallaConcreta("tablero");
 
