@@ -28,8 +28,15 @@ public class LogicaGestorTurno implements ILogicaGestorTurno {
     }
 
     @Override
-    public void pasarTurno() {
-        turnosFachada.pasarTurno();
+    public boolean pasarTurno() {
+        if(turnosFachada.seAcaboLaPartida()){
+            turnosFachada.calcularPuntajeFinal();
+            return false;
+        }
+        else{
+            turnosFachada.pasarTurno();
+            return true;
+        } 
     }
 
     @Override

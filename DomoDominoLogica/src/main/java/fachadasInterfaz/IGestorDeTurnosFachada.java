@@ -10,4 +10,7 @@ public interface IGestorDeTurnosFachada {
     void pasarTurno();
     List<JugadorDto> obtenerOrdenDeTurnos();
     public void sincronizarTurnosConClaseExterna(List<JugadorDto> turnosExterna);
+    public boolean seAcaboLaPartida();
+    
+    public List<JugadorDto> calcularPuntajeFinal();
 }
