@@ -298,7 +298,11 @@ public class LogicaPrincipal {
 
                 logicaTablero.mandarJugadorActualizado(jugador);
 
-                boolean seAcaboPartida = logicaTurnos.pasarTurno();
+                boolean seAcaboPartida = false;
+
+                if (jugador.getFichas().size() == 0) {
+                    seAcaboPartida = true;
+                }
 
                 ponerFicha.getCompañeros().forEach(compañero -> {
 
@@ -311,19 +315,36 @@ public class LogicaPrincipal {
                 logicaTablero.avisarDePasoDeTurno(false);
 
                 if (seAcaboPartida) {
-                    
-                    ponerFicha.getCompañeros().forEach(compañero -> {
 
-                        String nombre = compañero.getNombre();
-
-                        EventoAcabarPartidaDto eventoAcabarPartidaDto = new EventoAcabarPartidaDto(codigo);
-                        
-                        comunicaciones.enviarMensaje(eventoAcabarPartidaDto, nombre);
-
-                    });
                 }
             }
         }
+    }
+
+    public void acabarPartida(List<JugadorBase> jugadoresBase) {
+        
+        jugadoresBase.forEach(compañero -> {
+
+            String nombre = compañero.getNombre();
+
+            EventoAcabarPartidaDto eventoAcabarPartidaDto = new EventoAcabarPartidaDto(codigo);
+
+            comunicaciones.enviarMensaje(eventoAcabarPartidaDto, nombre);
+
+        });
+        
+        comunicaciones.enviarMensaje(new EventoAcabarPartidaDto(codigo), "serverCentral");
+        
+        jugadoresBase.forEach(compañero -> {
+
+            String nombre = compañero.getNombre();
+
+            comunicaciones.cerrarComunicacionConNodo( nombre);
+
+        });
+        
+        logicaAviso.mostrarAviso("Has ganado");
+        mediador.mostrarPantallaConcreta("inicio");
     }
 
     private class AccionTomarFichaDelPozo implements IEventoPedirFichaAlPozo {
@@ -340,12 +361,10 @@ public class LogicaPrincipal {
 
         @Override
         public void tomarFichaDelPozo(FichaDto fichaSacada) {
-            List<FichaDto> fichas = new ArrayList<>();
-            fichas.add(fichaSacada);
-            IPozo.sacarFichasEspecificasPozo(fichas);
+            IPozo.sacarFichaEspecifica(fichaSacada);
         }
     }
-    
+
     private class AccionElejirFicha {
 
     }
@@ -391,7 +410,6 @@ public class LogicaPrincipal {
         ENTRE LOS COMUNICACIONES Y LA LOGICA
      */
     //EN ESPERA
-
     private class AccionPasaronTurno implements IEventoPasarTurno {
 
         @Override
@@ -465,7 +483,10 @@ public class LogicaPrincipal {
             logicaTerminarPartida.acabarPartida(codigo);
             //aqui deberia ir un algoritmo de el puesto dependiendo de la lista
             logicaAviso.mostrarAviso("Se acabo la partida");
+
+            mediador.MostrarAviso();
             
+            mediador.mostrarPantallaConcreta("inicio");
         }
 
     }

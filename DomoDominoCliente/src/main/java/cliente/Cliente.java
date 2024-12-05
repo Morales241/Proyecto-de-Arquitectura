@@ -61,13 +61,9 @@ public class Cliente {
             }
         });
     }
-
-    public void cerrarConexion() {
-        try {
-            if (socket != null) {
-                socket.close();
-            }
-        } catch (IOException e) {
-        }
+    
+    public void cerrarConexion(String nombreNodo) {
+        
+        nodosConectados.remove(nombreNodo);
     }
 }

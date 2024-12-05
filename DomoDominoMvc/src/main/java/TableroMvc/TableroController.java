@@ -20,7 +20,7 @@ public class TableroController {
         tableroView.agregarObserverPonerFicha(new accionPonerFicha());
         tableroView.agregarObserverValidarFichas(new AccionValidarFichas());
 
-          tableroView.agregarObserverTomarFichaDelPozo(new accionTomarFichaDelPozo());
+        tableroView.agregarObserverTomarFichaDelPozo(new accionTomarFichaDelPozo());
 //          tableroView.agregarEventoSalirDePartida(new accionSalirDePartida());
     }
 
@@ -34,10 +34,10 @@ public class TableroController {
 
     private class accionTomarFichaDelPozo implements IEventoPedirFichaAlPozo {
 
-          @Override
-          public void pedirFicha() {
-               tableroModel.ejecutarObserverTomarFichaDelPozo();
-          }
+        @Override
+        public void pedirFicha() {
+            tableroModel.ejecutarObserverTomarFichaDelPozo();
+        }
     }
 
     private class accionSalirDePartida implements IEventoSalirDePartida {
@@ -52,8 +52,8 @@ public class TableroController {
 
         @Override
         public void validarFichas(List<FichaDto> fichas) {
-        
-        tableroModel.ejecutarObserverValidarFichas(fichas);
+
+            tableroModel.ejecutarObserverValidarFichas(fichas);
         }
 
     }

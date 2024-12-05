@@ -21,5 +21,7 @@ public interface ILogicaPozo {
     public boolean pozoVacio();
 
     public void sacarFichasEspecificasPozo(List<FichaDto> fichas);
+    
+    public void sacarFichaEspecifica(FichaDto ficha);
 
 }

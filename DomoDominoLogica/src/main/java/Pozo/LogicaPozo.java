@@ -10,73 +10,94 @@ import java.util.Random;
 import Entidades.Pozo;
 import Entidades.Ficha;
 import dtos.FichaDto;
+import java.util.Iterator;
 
 public class LogicaPozo implements ILogicaPozo {
 
-     private final Pozo pozo;
+    private final Pozo pozo;
 
-     public LogicaPozo() {
-          this.pozo = Pozo.obtenerInstancia();
-          crearFichasPozo();
-     }
+    public LogicaPozo() {
+        this.pozo = Pozo.obtenerInstancia();
+        crearFichasPozo();
+    }
 
-     @Override
-     public void crearFichasPozo() {
-          for (int i = 0; i <= 6; i++) {
-               for (int j = i; j <= 6; j++) {
-                    Ficha ficha = new Ficha(i, j);
-                    pozo.obtenerFichas().add(ficha);
-               }
-          }
-     }
+    @Override
+    public void crearFichasPozo() {
+        for (int i = 0; i <= 6; i++) {
+            for (int j = i; j <= 6; j++) {
+                Ficha ficha = new Ficha(i, j);
+                pozo.obtenerFichas().add(ficha);
+            }
+        }
+    }
 
-     @Override
-     public FichaDto sacarFicha() {
-          Random random = new Random();
-          if (!pozoVacio()) {
-               int posicion = random.nextInt(Pozo.obtenerInstancia().obtenerFichas().size());
-               Ficha fichaSeleccionada = Pozo.obtenerInstancia().obtenerFichas().get(posicion);
+    @Override
+    public FichaDto sacarFicha() {
+        Random random = new Random();
+        if (!pozoVacio()) {
+            int posicion = random.nextInt(Pozo.obtenerInstancia().obtenerFichas().size());
+            Ficha fichaSeleccionada = Pozo.obtenerInstancia().obtenerFichas().get(posicion);
 
-               FichaDto fichadto = new FichaDto(fichaSeleccionada.getLado1(), fichaSeleccionada.getLado2());
-               Pozo.obtenerInstancia().obtenerFichas().remove(posicion);
+            FichaDto fichadto = new FichaDto(fichaSeleccionada.getLado1(), fichaSeleccionada.getLado2());
+            Pozo.obtenerInstancia().obtenerFichas().remove(posicion);
 
-               return fichadto;
-          }
-          return null;
-     }
+            return fichadto;
+        }
+        return null;
+    }
 
-     @Override
-     public List<FichaDto> repartirFichas(int numeroFichas) {
-          List<FichaDto> fichasARepartir = new ArrayList<>();
-          for (int i = 0; i < numeroFichas; i++) {
-               FichaDto ficha = sacarFicha();
-               if (ficha != null) {
-                    fichasARepartir.add(ficha);
-               }
-          }
-          return fichasARepartir;
-     }
+    @Override
+    public List<FichaDto> repartirFichas(int numeroFichas) {
+        List<FichaDto> fichasARepartir = new ArrayList<>();
+        for (int i = 0; i < numeroFichas; i++) {
+            FichaDto ficha = sacarFicha();
+            if (ficha != null) {
+                fichasARepartir.add(ficha);
+            }
+        }
+        return fichasARepartir;
+    }
 
-     @Override
-     public void recibirFichas(List<Ficha> fichasJugador) {
-          pozo.obtenerFichas().addAll(fichasJugador);
-     }
+    @Override
+    public void recibirFichas(List<Ficha> fichasJugador) {
+        pozo.obtenerFichas().addAll(fichasJugador);
+    }
 
-     @Override
-     public boolean pozoVacio() {
-          return Pozo.obtenerInstancia().obtenerFichas().isEmpty();
-     }
+    @Override
+    public boolean pozoVacio() {
+        return Pozo.obtenerInstancia().obtenerFichas().isEmpty();
+    }
 
-     @Override
-     public void sacarFichasEspecificasPozo(List<FichaDto> fichas) {
+    @Override
+    public void sacarFichasEspecificasPozo(List<FichaDto> fichas) {
 
-          List<Ficha> fichasEntidad = new ArrayList<>();
+        List<Ficha> fichasEntidad = new ArrayList<>();
 
-          for (FichaDto ficha : fichas) {
-               fichasEntidad.add(new Ficha(ficha.getLado1(), ficha.getLado2()));
-          }
+        for (FichaDto ficha : fichas) {
+            fichasEntidad.add(new Ficha(ficha.getLado1(), ficha.getLado2()));
+        }
 
-          fichasEntidad.forEach(o -> pozo.obtenerFichas().remove(o));
+        pozo.obtenerFichas().removeAll(fichasEntidad);
 
-     }
+    }
+
+    public void sacarFichaEspecifica(FichaDto ficha) {
+        if (ficha == null) {
+            System.err.println("Error: La ficha proporcionada es nula.");
+            return;
+        }
+
+        Ficha fichaNormal = new Ficha(ficha.getLado1(), ficha.getLado2());
+        Iterator<Ficha> iterator = pozo.obtenerFichas().iterator();
+
+        while (iterator.hasNext()) {
+            Ficha obtenerFicha = iterator.next();
+
+            if (obtenerFicha.getLado1() == fichaNormal.getLado1()
+                    && obtenerFicha.getLado2() == fichaNormal.getLado2()) {
+                iterator.remove(); 
+                return; 
+            }
+        }
+    }
 }

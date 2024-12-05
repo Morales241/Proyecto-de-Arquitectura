@@ -65,7 +65,8 @@ public class TableroFachada implements ITableroFachada {
 
     @Override
     public void enviarFichaDelPozo(FichaDto ficha) {
-        tableroModel.getJugador().getFichas().add(ficha);
+        tableroModel.agregarFicha(ficha);
+        tableroModel.ejecutarObserverActualizar();
     }
 
     @Override

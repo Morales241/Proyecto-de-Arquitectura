@@ -92,4 +92,7 @@ public class GestorDeComunicaciones {
         gestorMensajes.agregarObservadorIniciarPartidaAdmin(observador);
     }
     
+    public void cerrarComunicacionConNodo(String nombre){ 
+        cliente.cerrarConexion(nombre);
+    }
 }

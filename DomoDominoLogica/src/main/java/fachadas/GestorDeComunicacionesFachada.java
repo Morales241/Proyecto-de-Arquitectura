@@ -24,7 +24,7 @@ import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
  * @author Jesus Alberto Morales Rojas - 00000245335
  */
 public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFachada {
-
+    
     private static GestorDeComunicacionesFachada instancia;
     private final GestorDeComunicaciones comunicaciones;
     
@@ -108,15 +108,20 @@ public class GestorDeComunicacionesFachada implements IGestorDeComunicacionesFac
     public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador) {
         comunicaciones.agregarObservadorSeUnieronAtuPartida(observador);
     }
-
+    
     @Override
     public void agregarObservadorIniciarPartidaAdmin(IEventoIniciarPartidaAdmin observador) {
         comunicaciones.agregarObservadorIniciarPartidaAdmin(observador);
     }
-
+    
     @Override
     public void enviarMensajesACompañeros(Object mensaje) {
         comunicaciones.enviarMensajesACompañeros(mensaje);
+    }
+    
+    @Override
+    public void cerrarComunicacionConNodo(String nombre) {
+        comunicaciones.cerrarComunicacionConNodo(nombre);
     }
     
 }

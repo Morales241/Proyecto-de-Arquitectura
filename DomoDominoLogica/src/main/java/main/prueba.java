@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import observers.IEventoPedirFichaAlPozo;
 import observers.IEventoPonerFicha;
-import tablero.ILogicaTablero;
 import tablero.LogicaTablero;
 
 /**
@@ -29,68 +28,74 @@ import tablero.LogicaTablero;
  */
 public class prueba {
 
-     private InicializadorClases inicializadorClases = new  InicializadorClases();
-    
-     private static ArregloFachada fachada = new ArregloFachada();
-     private static ITableroFachada tifachada;
-     private static  ILogicaPozo IPozo = new LogicaPozo();
-     private static LogicaArreglo arreglo = new LogicaArreglo(fachada);
-     private static LogicaPozo pozo = new LogicaPozo();
-     private static   LogicaTablero tablero = new LogicaTablero(tifachada);
-     private static TableroModel model = new TableroModel();
-     private static TableroFachada tfachada = new TableroFachada(model);
-     private static TableroView view = new TableroView(model);
-     private static TableroController controller = new TableroController(model, view);
-
+    private InicializadorClases inicializadorClases = new  InicializadorClases();
      
-     /**
-      * @param args the command line arguments
-      */
-     public static void main(String[] args) {
+    
+    private static ArregloFachada fachada = new ArregloFachada();
+    private static ITableroFachada tifachada;
 
-          
-          
-          model.agregarObserverPonerFicha(new accionArreglo());
-          model.agregarObserverTomarFichaDelPozo(new accionPozo());
+    private static final ILogicaPozo IPozo = new LogicaPozo();
 
-          view.setVisible(true);
+    private static LogicaArreglo arreglo = new LogicaArreglo(fachada);
+    private static LogicaPozo pozo = new LogicaPozo();
+    private static LogicaTablero tablero = new LogicaTablero(tifachada);
 
-          ArregloDto array = arreglo.convertirEntidad(arreglo.obtenerArreglo());
+//    private static TableroModel model = new TableroModel();
 
-          List<FichaDto> fichas = new ArrayList<>();
-          fichas.add(new FichaDto(2, 2));
-//        fichas.add(new FichaDto(2, 3));
-//        fichas.add(new FichaDto(2, 4));
-          fichas.add(new FichaDto(3, 5));
-//        fichas.add(new FichaDto(4, 6));
+//    private static TableroFachada tfachada = new TableroFachada(model);
+//
+//    private static TableroView view = new TableroView(model);
+//    private static TableroController controller = new TableroController(model, view);
 
-          JugadorDto jugadorDto = new JugadorDto("jesus", 3, fichas);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
 
-          List<JugadorBase> jugadorBases = new ArrayList<>();
+//        model.agregarObserverPonerFicha(new accionArreglo());
+//        model.agregarObserverTomarFichaDelPozo(new accionPozo());
+//
+//        view.setVisible(true);
 
-          jugadorBases.add(new JugadorBase("Victor", 2));
-          jugadorBases.add(new JugadorBase("Alfredo", 1));
-          jugadorBases.add(new JugadorBase("Mariana", 3));
+        ArregloDto array = arreglo.convertirEntidad(arreglo.obtenerArreglo());
 
-          model.iniciarPartida(jugadorDto, array, jugadorBases, true);
-     }
+        List<FichaDto> fichas = new ArrayList<>();
+        fichas.add(new FichaDto(2, 2));
+        fichas.add(new FichaDto(0, 3));
+        fichas.add(new FichaDto(0, 4));
+        fichas.add(new FichaDto(3, 5));
+        fichas.add(new FichaDto(0, 0));
 
-     private static class accionArreglo implements IEventoPonerFicha {
+        JugadorDto jugadorDto = new JugadorDto("jesus", 3, fichas);
 
-          @Override
-          public void ponerFicha(PonerFichaDto ponerFicha) {
+        List<JugadorBase> jugadorBases = new ArrayList<>();
 
-               boolean llave = arreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
-               if (llave) {
+        jugadorBases.add(new JugadorBase("Victor", 2));
+        jugadorBases.add(new JugadorBase("Alfredo", 1));
+        jugadorBases.add(new JugadorBase("Mariana", 3));
 
-                    ArregloDto ad = arreglo.convertirEntidad(arreglo.obtenerArreglo());
-                    JugadorDto jugadorDto = ponerFicha.getJugador();
-                    jugadorDto.getFichas().remove(ponerFicha.getFicha());
-                    model.setArray(ad);
-                    model.setJugador(jugadorDto);
-               }
-          }
-     }
+//        model.iniciarPartida(jugadorDto, array, jugadorBases, true);
+//        model.setPoso(true);
+    }
+
+    private static class accionArreglo implements IEventoPonerFicha {
+
+        @Override
+        public void ponerFicha(PonerFichaDto ponerFicha) {
+
+            boolean llave = arreglo.colocarFicha(ponerFicha.getFicha(), ponerFicha.getExtremo(), ponerFicha.getDireccion());
+            if (llave) {
+
+                ArregloDto ad = arreglo.convertirEntidad(arreglo.obtenerArreglo());
+                JugadorDto jugadorDto = ponerFicha.getJugador();
+                jugadorDto.getFichas().remove(ponerFicha.getFicha());
+//                model.setArray(ad);
+//                model.setJugador(jugadorDto);
+                
+                
+            }
+        }
+    }
 
      private static  class accionPozo implements IEventoPedirFichaAlPozo {
 

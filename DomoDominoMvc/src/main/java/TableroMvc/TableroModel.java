@@ -138,8 +138,6 @@ public class TableroModel {
         setArray(arrayDto);
         setTurno(turno);
         ejecutarObserverActualizar();
-        
-        ejecutarObserverValidarFichas(getJugador().getFichas());
     }
 
     public boolean isTurno() {
@@ -157,6 +155,7 @@ public class TableroModel {
 
     public void setPoso(boolean pozo) {
         this.pozo = pozo;
+        
         ejecutarObserverActualizar();
     }
     

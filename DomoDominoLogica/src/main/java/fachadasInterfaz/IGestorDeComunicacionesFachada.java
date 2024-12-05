@@ -39,4 +39,5 @@ public interface IGestorDeComunicacionesFachada {
     public void agregarObservadorSeUnieronAtuPartida(IEventoSeUnieronAtuPartida observador);
     public void agregarObservadorIniciarPartidaAdmin(IEventoIniciarPartidaAdmin observador);
     public void enviarMensajesACompañeros(Object mensaje);
+    public void cerrarComunicacionConNodo(String nombre);
 }
