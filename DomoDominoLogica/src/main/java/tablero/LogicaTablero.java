@@ -49,6 +49,6 @@ public class LogicaTablero implements ILogicaTablero {
 
     @Override
     public void mandarJugadorActualizado(JugadorDto jugadorDto) {
-        tableroFachada.mandarJugadorActualizado(jugadorDto);
+        tableroFachada.mandarJugadoroActualizado(jugadorDto);
         }
 }
