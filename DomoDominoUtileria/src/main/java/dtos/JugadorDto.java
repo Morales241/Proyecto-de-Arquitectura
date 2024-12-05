@@ -1,6 +1,7 @@
 package dtos;
 
 import eventos.JugadorBase;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,10 @@ import java.util.List;
  * @author favel
  */
 
-public class JugadorDto {
+public class JugadorDto implements Serializable{
+    
+    
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private int avatar;
     private List<FichaDto> fichas;

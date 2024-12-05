@@ -278,15 +278,15 @@ public class LogicaPrincipal {
 
             if (respuesta) {
                 arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
-
-                ponerFicha.getCompañeros().forEach(jugador -> {
-                    comunicaciones.enviarMensaje(ponerFicha, jugador.getNombre());
-                });
-
                 JugadorDto jugador = ponerFicha.getJugador();
                 jugador.getFichas().remove(ponerFicha.getFicha());
                 logicaTablero.mandarArregloActualizado(arreglo);
                 logicaTablero.mandarJugadorActualizado(jugador);
+                
+                ponerFicha.getCompañeros().forEach(compañero -> {
+                    String nombre =compañero.getNombre();
+                    comunicaciones.enviarMensaje(ponerFicha, nombre);
+                });
             }
         }
     }
@@ -389,9 +389,12 @@ public class LogicaPrincipal {
         @Override
         public void iniciarPartida(SetUpDto setUp) {
 
+            setUp.getJugadoresDePartiada().forEach( O -> comunicaciones.conectarAServidor(O));
+            
             logicaTurnos.sincronizarTurnosConClaseExterna(setUp.getTurnos());
 
-            IPozo.sacarFichasEspecificasPozo(setUp.getFichasSacadasDelPozo());
+            List<FichaDto> fichas = setUp.getFichasSacadasDelPozo();
+            IPozo.sacarFichasEspecificasPozo(fichas);
 
             ArregloDto arreglo = IArreglo.convertirEntidad(IArreglo.obtenerArreglo());
 

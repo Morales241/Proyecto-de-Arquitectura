@@ -85,8 +85,10 @@ public class TableroModel {
     }
 
     public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada, String Direccion) {
-
-        ejecutarObserverPonerFicha(new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, Direccion));
+        PonerFichaDto fichaDto = new PonerFichaDto(fichaSeleccionada, extremoIzquierdo, Direccion);
+        fichaDto.setJugador(jugador);
+        fichaDto.setCompañeros(compañeros);
+        ejecutarObserverPonerFicha(fichaDto);
 
     }
 
@@ -120,7 +122,7 @@ public class TableroModel {
         setJugador(jugadorDto);
         setCompañeros(jugadorBases);
         setArray(arrayDto);
-
+        setTurno(true);
         ejecutarObserverActualizar();
     }
 

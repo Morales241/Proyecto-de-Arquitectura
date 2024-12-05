@@ -43,7 +43,7 @@ public class LogicaUnirseAPartida implements ILogicaUnirseAPartida {
 //            ip = "192.168.100.11";
             jugador.setNodo(new NodoDto(ip, 8198));
 
-            comunicaciones.conectarAServidorCentral("10.202.107.85", 8190);
+            comunicaciones.conectarAServidorCentral(ip, 8190);
         } catch (UnknownHostException ex) {
             Logger.getLogger(LogicaUnirseAPartida.class.getName()).log(Level.SEVERE, null, ex);
         }

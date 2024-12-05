@@ -51,7 +51,7 @@ public class InicializadorClases {
     private AvisoFachada avisoFachada;
 
     private ILobbyFachada lobbyFachada;
-
+    
     private IGestorDeTurnosFachada turnosFachada;
 
     private IArregloFachada arregloFachada;

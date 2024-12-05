@@ -76,6 +76,8 @@ public class LogicaPozo implements ILogicaPozo {
             fichasEntidad.add(new Ficha(ficha.getLado1(), ficha.getLado2()));
         }
         
-        pozo.sacarFichasEspecificasPozo(fichasEntidad);
+        fichasEntidad.forEach(o -> pozo.obtenerFichas().remove(o));
+        
+        
     }
 }
