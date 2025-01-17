@@ -81,23 +81,11 @@ public class LogicaPozo implements ILogicaPozo {
 
     }
 
-    public void sacarFichaEspecifica(FichaDto ficha) {
-        if (ficha == null) {
-            System.err.println("Error: La ficha proporcionada es nula.");
-            return;
-        }
-
-        Ficha fichaNormal = new Ficha(ficha.getLado1(), ficha.getLado2());
-        Iterator<Ficha> iterator = pozo.obtenerFichas().iterator();
-
-        while (iterator.hasNext()) {
-            Ficha obtenerFicha = iterator.next();
-
-            if (obtenerFicha.getLado1() == fichaNormal.getLado1()
-                    && obtenerFicha.getLado2() == fichaNormal.getLado2()) {
-                iterator.remove(); 
-                return; 
-            }
-        }
+    @Override
+    public void sacarFichaEspecifica(int lado1, int lado2) {
+        Ficha ficha = new Ficha(lado1, lado2);
+        
+        pozo.obtenerFichas().remove(ficha);
+        
     }
 }

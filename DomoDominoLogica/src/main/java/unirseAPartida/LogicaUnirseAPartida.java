@@ -40,8 +40,8 @@ public class LogicaUnirseAPartida implements ILogicaUnirseAPartida {
         try {
 
             String ip = InetAddress.getLocalHost().getHostAddress();
-//            ip = "192.168.100.11";
-            jugador.setNodo(new NodoDto(ip, 8198));
+            ip = "192.168.100.11";
+            jugador.setNodo(new NodoDto(ip, 8201));
 
             comunicaciones.conectarAServidorCentral(ip, 8190);
         } catch (UnknownHostException ex) {

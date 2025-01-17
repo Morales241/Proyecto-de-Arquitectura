@@ -363,7 +363,7 @@ public class LogicaPrincipal {
 
         @Override
         public void tomarFichaDelPozo(FichaDto fichaSacada) {
-            IPozo.sacarFichaEspecifica(fichaSacada);
+            IPozo.sacarFichaEspecifica(fichaSacada.getLado1(), fichaSacada.getLado2());
         }
     }
 

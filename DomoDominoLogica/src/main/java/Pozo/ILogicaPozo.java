@@ -22,6 +22,6 @@ public interface ILogicaPozo {
 
     public void sacarFichasEspecificasPozo(List<FichaDto> fichas);
     
-    public void sacarFichaEspecifica(FichaDto ficha);
+    public void sacarFichaEspecifica(int lado1, int lado2);
 
 }

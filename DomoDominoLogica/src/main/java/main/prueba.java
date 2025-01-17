@@ -40,12 +40,12 @@ public class prueba {
     private static LogicaPozo pozo = new LogicaPozo();
     private static LogicaTablero tablero = new LogicaTablero(tifachada);
 
-//    private static TableroModel model = new TableroModel();
+    private static TableroModel model = new TableroModel();
 
-//    private static TableroFachada tfachada = new TableroFachada(model);
-//
-//    private static TableroView view = new TableroView(model);
-//    private static TableroController controller = new TableroController(model, view);
+    private static TableroFachada tfachada = new TableroFachada(model);
+
+    private static TableroView view = new TableroView(model);
+    private static TableroController controller = new TableroController(model, view);
 
     /**
      * @param args the command line arguments
