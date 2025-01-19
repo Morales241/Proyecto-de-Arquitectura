@@ -1,6 +1,9 @@
 package pantallaPrincipal;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.net.URL;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,21 +19,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      */
     public PantallaPrincipal() {
         initComponents();
-        String rutaImagen = "/fichasNormales/ficha3_3.png";
-        URL recurso = getClass().getResource(rutaImagen);
-        ImageIcon icono = new ImageIcon(recurso);
-        JButton fichaLabel = new JButton(icono);
-//        fichaLabel.setContentAreaFilled(false);
-        fichaLabel.setBorderPainted(false);
-        this.PanelJugador1.add(fichaLabel);
-
-//        for (int i = 0; i <= 0; i++) {
-//            for (int j = i; j < 1; j++) {
-//
-//            }
-//        }
+        agregarFondos();
+        agregarFichasDelJugador();
         
-        this.repaint();
     }
 
     /**
@@ -89,7 +80,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addComponent(FichasJugador2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        Principal.add(PanelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 400, 100));
+        Principal.add(PanelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 300, 100));
 
         PanelJugador3.setBackground(new java.awt.Color(0, 0, 0,0));
         PanelJugador3.setPreferredSize(new java.awt.Dimension(100, 300));
@@ -135,6 +126,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         PanelScrollJugador1.setBackground(new java.awt.Color(0,0,0,0));
 
+        PanelJugador1.setBackground(new java.awt.Color(96, 61, 33));
+
         javax.swing.GroupLayout PanelJugador1Layout = new javax.swing.GroupLayout(PanelJugador1);
         PanelJugador1.setLayout(PanelJugador1Layout);
         PanelJugador1Layout.setHorizontalGroup(
@@ -143,12 +136,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         PanelJugador1Layout.setVerticalGroup(
             PanelJugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 114, Short.MAX_VALUE)
+            .addGap(0, 134, Short.MAX_VALUE)
         );
 
         PanelScrollJugador1.setViewportView(PanelJugador1);
 
-        Principal.add(PanelScrollJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, 410, 120));
+        Principal.add(PanelScrollJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 410, 140));
 
         PanelJugador4.setBackground(new java.awt.Color(0, 0, 0,0));
         PanelJugador4.setPreferredSize(new java.awt.Dimension(100, 300));
@@ -182,7 +175,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         Principal.add(PanelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, 250));
 
-        PanelTablero.setBackground(new java.awt.Color(0,0,0,0));
+        PanelTablero.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout PanelTableroLayout = new javax.swing.GroupLayout(PanelTablero);
         PanelTablero.setLayout(PanelTableroLayout);
@@ -192,14 +185,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         PanelTableroLayout.setVerticalGroup(
             PanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 330, Short.MAX_VALUE)
         );
 
-        Principal.add(PanelTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 130, 618, 340));
+        Principal.add(PanelTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 130, 618, 330));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo_Tablero.png"))); // NOI18N
         Fondo.setName(""); // NOI18N
-        Principal.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        Principal.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,6 +242,51 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 new PantallaPrincipal().setVisible(true);
             }
         });
+    }
+    
+    private void agregarFondos() {
+        //fondo del tablero
+        JLabel fondo = new JLabel(new ImageIcon(getClass().getResource("/fondos/Fondo_Tablero2.png")));
+        fondo.setBounds(0, 0, PanelTablero.getWidth(), PanelTablero.getHeight());
+        PanelTablero.add(fondo);
+        PanelTablero.setComponentZOrder(fondo, PanelTablero.getComponentCount() - 1);
+
+        //fondo del panel del jugador 1
+        JLabel fondoJ1 = new JLabel(new ImageIcon(getClass().getResource("/fondos/Fondo_PanelJ1.png")));
+        fondoJ1.setBounds(0, 0, PanelJugador1.getWidth(), PanelJugador1.getHeight());
+        PanelJugador1.add(fondoJ1);
+        PanelJugador1.setComponentZOrder(fondoJ1, PanelJugador1.getComponentCount() - 1);
+    }
+    
+    public void agregarFichasDelJugador() {
+        int alto = 102;
+        int ancho = 56;
+        
+        PanelJugador1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));        
+        PanelJugador1.removeAll();        
+        
+        for (int i = 0; i <= 1; i++) {
+            for (int j = i; j <= 4; j++) {
+                String rutaImagen = String.format("/fichasNormales/ficha%d_%d.png", i, j);
+                
+                URL urlImagen = getClass().getResource(rutaImagen);
+                
+                ImageIcon icon = new ImageIcon(urlImagen);
+                
+                JButton button = new JButton(icon);
+                button.setBorderPainted(false);
+                button.setContentAreaFilled(false);
+                button.setFocusable(false);
+                button.setFocusPainted(false);
+                button.setOpaque(false);
+                button.setRolloverEnabled(false);
+                button.setPreferredSize(new Dimension(ancho, alto));                
+                
+                PanelJugador1.add(button);
+            }
+        }
+        PanelJugador1.revalidate();
+        PanelJugador1.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
