@@ -1,12 +1,19 @@
 package pantallaPrincipal;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.plaf.ColorUIResource;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -19,8 +26,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      */
     public PantallaPrincipal() {
         initComponents();
-        agregarFondos();
+        agregarFondoTablero();
+        agregarFondoPanelJugador1();
         agregarFichasDelJugador();
+        pintarTablero();
         
     }
 
@@ -175,24 +184,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         Principal.add(PanelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, 250));
 
-        PanelTablero.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout PanelTableroLayout = new javax.swing.GroupLayout(PanelTablero);
-        PanelTablero.setLayout(PanelTableroLayout);
-        PanelTableroLayout.setHorizontalGroup(
-            PanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
-        );
-        PanelTableroLayout.setVerticalGroup(
-            PanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
-        );
-
+        PanelTablero.setBackground(new java.awt.Color(187, 135, 89));
+        PanelTablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Principal.add(PanelTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 130, 618, 330));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo_Tablero.png"))); // NOI18N
         Fondo.setName(""); // NOI18N
-        Principal.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
+        Principal.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,13 +241,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void agregarFondos() {
+
+    private void agregarFondoTablero() {
         //fondo del tablero
         JLabel fondo = new JLabel(new ImageIcon(getClass().getResource("/fondos/Fondo_Tablero2.png")));
         fondo.setBounds(0, 0, PanelTablero.getWidth(), PanelTablero.getHeight());
         PanelTablero.add(fondo);
         PanelTablero.setComponentZOrder(fondo, PanelTablero.getComponentCount() - 1);
+
+    }
+
+    private void agregarFondoPanelJugador1() {
 
         //fondo del panel del jugador 1
         JLabel fondoJ1 = new JLabel(new ImageIcon(getClass().getResource("/fondos/Fondo_PanelJ1.png")));
@@ -257,36 +259,76 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         PanelJugador1.add(fondoJ1);
         PanelJugador1.setComponentZOrder(fondoJ1, PanelJugador1.getComponentCount() - 1);
     }
-    
-    public void agregarFichasDelJugador() {
+
+    private void agregarFichasDelJugador() {
         int alto = 102;
         int ancho = 56;
-        
-        PanelJugador1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));        
-        PanelJugador1.removeAll();        
-        
+
+        PanelJugador1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        PanelJugador1.removeAll();
+
         for (int i = 0; i <= 1; i++) {
             for (int j = i; j <= 4; j++) {
                 String rutaImagen = String.format("/fichasNormales/ficha%d_%d.png", i, j);
-                
+
                 URL urlImagen = getClass().getResource(rutaImagen);
-                
+
                 ImageIcon icon = new ImageIcon(urlImagen);
-                
+
                 JButton button = new JButton(icon);
+
+                button.addMouseListener(new MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        button.setBackground(new ColorUIResource(96, 61, 33));
+                    }
+                });
+
                 button.setBorderPainted(false);
-                button.setContentAreaFilled(false);
                 button.setFocusable(false);
                 button.setFocusPainted(false);
                 button.setOpaque(false);
                 button.setRolloverEnabled(false);
-                button.setPreferredSize(new Dimension(ancho, alto));                
-                
+                button.setPreferredSize(new Dimension(ancho, alto));
+
                 PanelJugador1.add(button);
             }
         }
         PanelJugador1.revalidate();
         PanelJugador1.repaint();
+    }
+
+    private void pintarTablero() {
+
+        PanelTablero.removeAll();
+        
+        agregarFondoTablero();
+        
+        Graphics2D g2d = (Graphics2D) PanelTablero.getGraphics().create();
+        
+        int anchoDeCelda = 30;
+        int altoDeCelada = 30;
+        
+        int filas = 20;
+        int columnas = 20;
+        
+        int anchoDePanel  = PanelTablero.getWidth();
+        int altoDePanel = PanelTablero.getHeight();
+        
+        int anchoDeTablero = columnas * anchoDeCelda;
+        int altoDeTablero = filas * altoDeCelada;
+        
+        int guiaX = (anchoDePanel - anchoDeTablero)/2;
+        int guiaY = (altoDePanel - altoDeTablero)/2;
+        
+        for (int i = 0; i < filas ; i++) {
+            for (int j = 0; j < columnas; j++) {
+                
+//                int valor = tablero[i][j];
+
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
