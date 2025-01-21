@@ -55,7 +55,7 @@ public class ServerCentral {
     public void agregarPartida(JugadorCrearPartidaDto jugador) {
 
         List<JugadorBase> nodos = new ArrayList<>();
-        String codigo= jugador.getCodigo();
+        String codigo = jugador.getCodigo();
         conectarJugadorAlServer(jugador);
         try {
             nodos.add(jugador);
@@ -63,7 +63,7 @@ public class ServerCentral {
             this.infoPartidas.put(codigo, nodos);
 
             this.VotosParaInciarPartidas.put(codigo, 0);
-            
+
             this.fichasDePartida.put(codigo, jugador.getFichasIniciales());
 
             log.log(Level.INFO, "Método: agregarPartida - Clase: ServerCentral - Proyecto: Server Central");
@@ -103,19 +103,19 @@ public class ServerCentral {
                 List<JugadorBase> jugadores = informacionDePartidaPorCodigo(jugador.getCodigo());
 
                 respuesta.setJugadores(jugadores);
-              
+
                 jugadores.forEach(jugadorMensaje -> {
-                    
+
                     if (jugador.getNombre().equals(jugadorMensaje.getNombre())) {
-                        
+
                         mandarMensaje(respuesta, jugadorMensaje.getNombre());
-                        
-                    }else{
-                        JugadorSeUnioAPartida jugadorSeUnioAPartida = new JugadorSeUnioAPartida(jugador.getNombre(), jugador.getAvatar()); 
-                        
+
+                    } else {
+                        JugadorSeUnioAPartida jugadorSeUnioAPartida = new JugadorSeUnioAPartida(jugador.getNombre(), jugador.getAvatar());
+
                         mandarMensaje(jugadorSeUnioAPartida, jugadorMensaje.getNombre());
                     }
-                    
+
                 });
 
             } else {
@@ -218,9 +218,8 @@ public class ServerCentral {
         log.log(Level.INFO, "Método: mandarInfoDePartida - Clase: ServerCentral - Proyecto: Server Central");
 
         int numeroDeFichas = fichasDePartida.get(codigo);
-        
+
         IniciarPartidaAdmin infoAdmin = new IniciarPartidaAdmin(numeroDeFichas, infoPartidas.get(codigo));
-        
 
         String nombreAdmin = infoPartidas.get(codigo).get(0).getNombre();
 
@@ -228,9 +227,20 @@ public class ServerCentral {
 
     }
 
-    /**
-     * smn
-     */
+    public void votarParaInciarPartida(String codigo) {
+        int numeroJugadores = infoPartidas.get(codigo).size();
+
+        int numeroVotos = VotosParaInciarPartidas.get(codigo);
+
+        numeroVotos++;
+
+        VotosParaInciarPartidas.replace(codigo, numeroVotos);
+
+        if (numeroJugadores >= numeroVotos && numeroVotos != 1 && numeroJugadores != 1) {
+            mandarInfoParaIniciarPartida(codigo);
+        }
+    }
+
     //CLASES PRIVADAS
     private class AccionCrearPartida implements IEventoCrearPartida {
 
@@ -263,8 +273,7 @@ public class ServerCentral {
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {
 
-//            votarParaInciarPartida(votoDeJugador.getCodigo());
-
+            votarParaInciarPartida(votoDeJugador.getCodigo());
         }
     }
 
