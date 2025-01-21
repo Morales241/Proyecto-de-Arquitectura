@@ -5,7 +5,6 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Ficha implements Serializable {
 

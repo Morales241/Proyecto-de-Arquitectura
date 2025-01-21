@@ -1,19 +1,15 @@
 package pantallaPrincipal;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.net.URL;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.plaf.ColorUIResource;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -29,7 +25,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         agregarFondoTablero();
         agregarFondoPanelJugador1();
         agregarFichasDelJugador();
-        pintarTablero();
+//        pintarTablero();
         
     }
 
@@ -185,7 +181,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Principal.add(PanelJugador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, 250));
 
         PanelTablero.setBackground(new java.awt.Color(187, 135, 89));
-        PanelTablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout PanelTableroLayout = new javax.swing.GroupLayout(PanelTablero);
+        PanelTablero.setLayout(PanelTableroLayout);
+        PanelTableroLayout.setHorizontalGroup(
+            PanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+        PanelTableroLayout.setVerticalGroup(
+            PanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+        );
+
         Principal.add(PanelTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 130, 618, 330));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondos/Fondo_Tablero.png"))); // NOI18N
