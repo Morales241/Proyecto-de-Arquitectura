@@ -228,19 +228,9 @@ public class ServerCentral {
 
     }
 
-    public void votarParaInciarPartida(String codigo) {
-        int numeroJugadores = infoPartidas.get(codigo).size();
-
-        int numeroVotos = VotosParaInciarPartidas.get(codigo);
-
-        numeroVotos++;
-
-        VotosParaInciarPartidas.replace(codigo, numeroVotos);
-
-        if (numeroJugadores >= numeroVotos && numeroVotos != 1 && numeroJugadores != 1) {
-            mandarInfoParaIniciarPartida(codigo);
-        }
-    }
+    /**
+     * sdmsadnsa
+     */
 
     //CLASES PRIVADAS
     private class AccionCrearPartida implements IEventoCrearPartida {
@@ -273,7 +263,7 @@ public class ServerCentral {
 
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {
-            votarParaInciarPartida(votoDeJugador.getCodigo());
+//            votarParaInciarPartida(votoDeJugador.getCodigo());
         }
     }
 
