@@ -221,7 +221,6 @@ public class ServerCentral {
         
         IniciarPartidaAdmin infoAdmin = new IniciarPartidaAdmin(numeroDeFichas, infoPartidas.get(codigo));
         
-        System.out.println("");
 
         String nombreAdmin = infoPartidas.get(codigo).get(0).getNombre();
 
