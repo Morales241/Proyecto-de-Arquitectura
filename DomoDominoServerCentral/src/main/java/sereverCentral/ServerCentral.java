@@ -262,7 +262,9 @@ public class ServerCentral {
 
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {
-            
+
+//            votarParaInciarPartida(votoDeJugador.getCodigo());
+
         }
     }
 
