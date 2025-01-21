@@ -229,9 +229,8 @@ public class ServerCentral {
     }
 
     /**
-     * sdmsadnsa
+     * smn
      */
-
     //CLASES PRIVADAS
     private class AccionCrearPartida implements IEventoCrearPartida {
 
@@ -263,7 +262,9 @@ public class ServerCentral {
 
         @Override
         public void iniciarPartida(VotoDeJugador votoDeJugador) {
+
 //            votarParaInciarPartida(votoDeJugador.getCodigo());
+
         }
     }
 
