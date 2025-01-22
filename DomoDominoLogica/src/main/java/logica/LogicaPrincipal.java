@@ -614,6 +614,7 @@ public class LogicaPrincipal {
                 jugadores.put(nombre, setUpDto);
                 jugadorDtos.add(new JugadorDto(nombre, avatar, fichasDeJugador));
             });
+            
 
             logicaTurnos.inicializarTurnos(jugadorDtos);
 
