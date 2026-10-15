@@ -1,11 +1,35 @@
-/DomoDominoPersistencia/nbproject/private/
-/EjemploMvc/target/
-/DomoDominoMvc/target/
-/DomoDominoPersistencia/target/
-/DomoDominoLogica/target/
-/DomoDominoPatrones/target/
-/DomoDominoDominio/target/
-/DomoDominoServerInterno/target/
-/DomoDominoCliente/target/
-/DomoDominoUtileriaComunicaciones/target/
-/DomoDominoUtileria/target/
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Binarios generados (se reconstruyen con mvn package)
+*.exe
+*.jar
+*.war
+*.ear
+*.zip
+*.rar
+
+# IntelliJ / NetBeans
+.idea/
+*.iml
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local
+local.properties
