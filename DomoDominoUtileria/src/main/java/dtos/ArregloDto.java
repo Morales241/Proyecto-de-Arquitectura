@@ -2,7 +2,7 @@ package dtos;
 
 public class ArregloDto {
 
-    private int[][] tablero;
+    private FichaDto[][] tablero;
     private int extremoIzquierdo;
     private int extremoDerecha;
     private int extremo1Columna;
@@ -10,7 +10,7 @@ public class ArregloDto {
     private int extremo2Columna;
     private int extremo2Fila;
 
-    public ArregloDto(int[][] tablero, int extremoIzquierdo, int extremoDerecha,int extremo1Columna, int extremo1Fila,int extremo2Columna, int extremo2Fila) {
+    public ArregloDto(FichaDto[][] tablero, int extremoIzquierdo, int extremoDerecha,int extremo1Columna, int extremo1Fila,int extremo2Columna, int extremo2Fila) {
         this.tablero = tablero;
         this.extremoIzquierdo = extremoIzquierdo;
         this.extremoDerecha = extremoDerecha;
@@ -20,11 +20,11 @@ public class ArregloDto {
         this.extremo2Fila = extremo2Fila;
     }
 
-    public int[][] getTablero() {
+    public FichaDto[][] getTablero() {
         return tablero;
     }
 
-    public void setTablero(int[][] tablero) {
+    public void setTablero(FichaDto[][] tablero) {
         this.tablero = tablero;
     }
 

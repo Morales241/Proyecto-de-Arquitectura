@@ -8,15 +8,13 @@ import Entidades.Ficha;
  */
 public class Arreglo {
 
-    private int[][] tablero;
+    private Ficha[][] tablero;
     private int extremoIzquierdo, extremoDerecha;
     private int extremo1Columna, extremo1Fila;
     private int extremo2Columna, extremo2Fila;
 
-    private static Arreglo instanciaUnica;
-
     public Arreglo() {
-        tablero = new int[10][10];
+        tablero = new Ficha[10][10];
         reiniciarTablero();
         extremo1Columna = 5;
         extremo1Fila = 5;
@@ -24,17 +22,10 @@ public class Arreglo {
         extremo2Fila = 5;
     }
 
-    public static Arreglo getInstance() {
-        if (instanciaUnica == null) {
-            instanciaUnica = new Arreglo();
-        }
-        return instanciaUnica;
-    }
-
     public void reiniciarTablero() {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                tablero[i][j] = -1;
+                tablero[i][j] = null;
             }
         }
     }
@@ -55,11 +46,11 @@ public class Arreglo {
         this.extremoDerecha = extremoDerecha;
     }
 
-    public int[][] getTablero() {
+    public Ficha[][] getTablero() {
         return tablero;
     }
 
-    public void setTablero(int[][] tablero) {
+    public void setTablero(Ficha[][] tablero) {
         this.tablero = tablero;
     }
 

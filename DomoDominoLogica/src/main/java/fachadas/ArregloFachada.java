@@ -24,11 +24,11 @@ public class ArregloFachada implements IArregloFachada {
     private Arreglo arreglo;
 
     public ArregloFachada() {
-        this.arreglo = Arreglo.getInstance();
+        this.arreglo = new Arreglo();
     }
 
     @Override
-    public int[][] obtenerTablero() {
+    public Ficha[][] obtenerTablero() {
         return arreglo.getTablero();
     }
 
@@ -38,7 +38,7 @@ public class ArregloFachada implements IArregloFachada {
 
     @Override
     public boolean estaVacio(int fila, int columna) {
-        return obtenerTablero()[fila][columna] == -1;
+        return obtenerTablero()[fila][columna] == null;
     }
 
     @Override
@@ -66,7 +66,8 @@ public class ArregloFachada implements IArregloFachada {
     }
 
     public void ponerPrimeraFicha(FichaDto ficha, boolean extremo, String direccion) {
-        obtenerTablero()[medioDeArreglo()][medioDeArreglo()] = ficha.getLado1();
+        Ficha colocada = new Ficha(ficha.getLado1(), ficha.getLado2());
+        obtenerTablero()[medioDeArreglo()][medioDeArreglo()] = colocada;
         arreglo.setExtremo1(ficha.getLado1());
         arreglo.setExtremo2(ficha.getLado1());
         arreglo.setExtremo1(ficha.getLado1());
@@ -107,23 +108,24 @@ public class ArregloFachada implements IArregloFachada {
         int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
         int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
         int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+        Ficha colocada = new Ficha(ficha.getLado1(), ficha.getLado2());
 
         if (ficha.esMula() && ficha.getLado1() == lado && columna - 1 >= 0 && estaVacio(fila, columna - 1)) {
-            obtenerTablero()[fila][columna - 1] = ficha.getLado1();
+            obtenerTablero()[fila][columna - 1] = colocada;
             actualizarExtremos(extremo, ficha.getLado1(), columna - 1, fila);
             return true;
         }
 
         if (columna - 2 >= 0 && estaVacio(fila, columna - 1) && estaVacio(fila, columna - 2)) {
             if (ficha.getLado1() == lado) {
-                obtenerTablero()[fila][columna - 1] = ficha.getLado1();
-                obtenerTablero()[fila][columna - 2] = ficha.getLado2();
+                obtenerTablero()[fila][columna - 1] = colocada;
+                obtenerTablero()[fila][columna - 2] = colocada;
                 actualizarExtremos(extremo, ficha.getLado2(), columna - 2, fila);
                 return true;
             }
             if (ficha.getLado2() == lado) {
-                obtenerTablero()[fila][columna - 1] = ficha.getLado2();
-                obtenerTablero()[fila][columna - 2] = ficha.getLado1();
+                obtenerTablero()[fila][columna - 1] = colocada;
+                obtenerTablero()[fila][columna - 2] = colocada;
                 actualizarExtremos(extremo, ficha.getLado1(), columna - 2, fila);
                 return true;
             }
@@ -136,23 +138,24 @@ public class ArregloFachada implements IArregloFachada {
         int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
         int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
         int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+        Ficha colocada = new Ficha(ficha.getLado1(), ficha.getLado2());
 
         if (ficha.esMula() && ficha.getLado1() == lado && columna + 1 < obtenerTablero()[0].length && estaVacio(fila, columna + 1)) {
-            obtenerTablero()[fila][columna + 1] = ficha.getLado1();
+            obtenerTablero()[fila][columna + 1] = colocada;
             actualizarExtremos(extremo, ficha.getLado1(), columna + 1, fila);
             return true;
         }
 
         if (columna + 2 < obtenerTablero()[0].length && estaVacio(fila, columna + 1) && estaVacio(fila, columna + 2)) {
             if (ficha.getLado1() == lado) {
-                obtenerTablero()[fila][columna + 1] = ficha.getLado1();
-                obtenerTablero()[fila][columna + 2] = ficha.getLado2();
+                obtenerTablero()[fila][columna + 1] = colocada;
+                obtenerTablero()[fila][columna + 2] = colocada;
                 actualizarExtremos(extremo, ficha.getLado2(), columna + 2, fila);
                 return true;
             }
             if (ficha.getLado2() == lado) {
-                obtenerTablero()[fila][columna + 1] = ficha.getLado2();
-                obtenerTablero()[fila][columna + 2] = ficha.getLado1();
+                obtenerTablero()[fila][columna + 1] = colocada;
+                obtenerTablero()[fila][columna + 2] = colocada;
                 actualizarExtremos(extremo, ficha.getLado1(), columna + 2, fila);
                 return true;
             }
@@ -165,23 +168,24 @@ public class ArregloFachada implements IArregloFachada {
         int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
         int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
         int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+        Ficha colocada = new Ficha(ficha.getLado1(), ficha.getLado2());
 
         if (ficha.esMula() && ficha.getLado1() == lado && fila - 1 >= 0 && estaVacio(fila - 1, columna)) {
-            obtenerTablero()[fila - 1][columna] = ficha.getLado1();
+            obtenerTablero()[fila - 1][columna] = colocada;
             actualizarExtremos(extremo, ficha.getLado1(), columna, fila - 1);
             return true;
         }
 
         if (fila - 2 >= 0 && estaVacio(fila - 1, columna) && estaVacio(fila - 2, columna)) {
             if (ficha.getLado1() == lado) {
-                obtenerTablero()[fila - 1][columna] = ficha.getLado1();
-                obtenerTablero()[fila - 2][columna] = ficha.getLado2();
+                obtenerTablero()[fila - 1][columna] = colocada;
+                obtenerTablero()[fila - 2][columna] = colocada;
                 actualizarExtremos(extremo, ficha.getLado2(), columna, fila - 2);
                 return true;
             }
             if (ficha.getLado2() == lado) {
-                obtenerTablero()[fila - 1][columna] = ficha.getLado2();
-                obtenerTablero()[fila - 2][columna] = ficha.getLado1();
+                obtenerTablero()[fila - 1][columna] = colocada;
+                obtenerTablero()[fila - 2][columna] = colocada;
                 actualizarExtremos(extremo, ficha.getLado1(), columna, fila - 2);
                 return true;
             }
@@ -194,23 +198,24 @@ public class ArregloFachada implements IArregloFachada {
         int fila = extremo ? arreglo.getExtremo1Fila() : arreglo.getExtremo2Fila();
         int columna = extremo ? arreglo.getExtremo1Columna() : arreglo.getExtremo2Columna();
         int lado = extremo ? arreglo.getExtremo1() : arreglo.getExtremo2();
+        Ficha colocada = new Ficha(ficha.getLado1(), ficha.getLado2());
 
         if (ficha.esMula() && ficha.getLado1() == lado && fila + 1 < obtenerTablero().length && estaVacio(fila + 1, columna)) {
-            obtenerTablero()[fila + 1][columna] = ficha.getLado1();
+            obtenerTablero()[fila + 1][columna] = colocada;
             actualizarExtremos(extremo, ficha.getLado1(), columna, fila + 1);
             return true;
         }
 
         if (fila + 2 < obtenerTablero().length && estaVacio(fila + 1, columna) && estaVacio(fila + 2, columna)) {
             if (ficha.getLado1() == lado) {
-                obtenerTablero()[fila + 1][columna] = ficha.getLado1();
-                obtenerTablero()[fila + 2][columna] = ficha.getLado2();
+                obtenerTablero()[fila + 1][columna] = colocada;
+                obtenerTablero()[fila + 2][columna] = colocada;
                 actualizarExtremos(extremo, ficha.getLado2(), columna, fila + 2);
                 return true;
             }
             if (ficha.getLado2() == lado) {
-                obtenerTablero()[fila + 1][columna] = ficha.getLado2();
-                obtenerTablero()[fila + 2][columna] = ficha.getLado1();
+                obtenerTablero()[fila + 1][columna] = colocada;
+                obtenerTablero()[fila + 2][columna] = colocada;
                 actualizarExtremos(extremo, ficha.getLado1(), columna, fila + 2);
                 return true;
             }

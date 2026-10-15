@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IArregloFachada {
 
-    public int[][] obtenerTablero();
+    public Ficha[][] obtenerTablero();
 
     public boolean estaVacio(int fila, int columna);
 

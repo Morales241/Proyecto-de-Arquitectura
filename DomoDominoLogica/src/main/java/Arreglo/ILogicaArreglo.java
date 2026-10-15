@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ILogicaArreglo {
     
-    public int[][] obtenerTablero();
+    public Ficha[][] obtenerTablero();
 
     public boolean estaVacio(int fila, int columna);
     

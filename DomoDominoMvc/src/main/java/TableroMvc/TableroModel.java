@@ -24,7 +24,7 @@ import observersLogicaAServidorCentral.IEventoSalirDePartida;
  */
 public class TableroModel {
 
-//    private ArregloDto array  = new ArregloDto(new int[30][30], 0, 0, 15, 15, 15, 15);
+//    private ArregloDto array  = new ArregloDto(new FichaDto[30][30], 0, 0, 15, 15, 15, 15);
     private ArregloDto array;
     private boolean turno;
     private JugadorDto jugador;

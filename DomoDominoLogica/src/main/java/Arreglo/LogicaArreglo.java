@@ -25,7 +25,7 @@ public class LogicaArreglo implements ILogicaArreglo {
     }
 
     @Override
-    public int[][] obtenerTablero() {
+    public Ficha[][] obtenerTablero() {
         return arregloFachada.obtenerTablero();
     }
 
@@ -81,8 +81,16 @@ public class LogicaArreglo implements ILogicaArreglo {
 
     @Override
     public ArregloDto convertirEntidad(Arreglo arreglo) {
+        Ficha[][] tablero = arreglo.getTablero();
+        FichaDto[][] tableroDto = new FichaDto[tablero.length][tablero[0].length];
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                Ficha ficha = tablero[i][j];
+                tableroDto[i][j] = ficha == null ? null : new FichaDto(ficha.getLado1(), ficha.getLado2());
+            }
+        }
         return new ArregloDto(
-            arreglo.getTablero(),
+            tableroDto,
             arreglo.getExtremoIzquierdo(),
             arreglo.getExtremoDerecha(),
             arreglo.getExtremo1Columna(),

@@ -196,12 +196,12 @@ public class TableroView extends JFrame implements IComponente {
 
     public class TableroPanel extends JPanel {
 
-        private int[][] tablero;
+        private FichaDto[][] tablero;
         private final ImageIcon fondoImagen;
 
         public TableroPanel(ArregloDto array) {
             if (array == null || array.getTablero() == null) {
-                this.tablero = new int[10][10];
+                this.tablero = new FichaDto[10][10];
             } else {
                 this.tablero = array.getTablero();
             }
@@ -230,15 +230,16 @@ public class TableroView extends JFrame implements IComponente {
 
             g.drawImage(fondoImagen.getImage(), 0, 0, getWidth(), getHeight(), this);
 
-            for (int i = 0; i < rows; i++) {
+                for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    int valor = tablero[i][j];
-                    if (valor != -1) {
-                        int lado1 = valor / 10;
-                        int lado2 = valor % 10;
+                    FichaDto ficha = tablero[i][j];
+                    if (ficha != null) {
+                        int lado1 = ficha.getLado1();
+                        int lado2 = ficha.getLado2();
+                        int valor = lado1 * 10 + lado2;
 
                         String rutaImagen;
-                        if (lado1 == lado2) {
+                        if (ficha.esMula()) {
                             rutaImagen = String.format("/imgPartidaFichas/fichaMula%d.png", lado1);
                         } else {
                             rutaImagen = String.format("/imgPartidaFichasSeparadas/ficha_%d.png", valor);
