@@ -29,7 +29,6 @@ import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import eventos.VotoDeJugador;
 import fachadas.ArregloFachada;
-import fachadas.AvisoFachada;
 import fachadas.LobbyFachada;
 import fachadasInterfaz.IAvisoFachada;
 import fachadasInterfaz.ICrearPartidaFachada;
@@ -45,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import lobby.ILobbyLogica;
 import lobby.LobbyLogica;
-import mediador.Mediador;
+import mediador.IMediador;
 import observers.IEventoPasarTurno;
 import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
 import observersLogicaAServidorCentral.IEventoCrearPartida;
@@ -79,7 +78,7 @@ import terminarPartida.LogicaTerminarPartida;
  */
 public class LogicaPrincipal {
 
-    private final Mediador mediador;
+    private final IMediador mediador;
 
     private final ILogicaInicio lInicio;
     private final ILogicaCrearPartida lCrearPartida;
@@ -107,18 +106,18 @@ public class LogicaPrincipal {
     private InicializadorClases inicializadorClases;
 
     //poner variables de las fachadas que conectan a los modelos de los diferentes MVC
-    public LogicaPrincipal() {
-        mediador = Mediador.getInstancia();
+    public LogicaPrincipal(IMediador mediador) {
+        this.mediador = mediador;
 
         inicializarClases();
 
         comunicaciones = inicalizadorComunicaciones.getComunicaciones();
 
-        lInicio = new LogicaInicio();
+        lInicio = new LogicaInicio(mediador);
 
-        IUnirsePartida = new LogicaUnirseAPartida(comunicaciones);
+        IUnirsePartida = new LogicaUnirseAPartida(comunicaciones, mediador);
 
-        lCrearPartida = new LogicaCrearPartida(comunicaciones);
+        lCrearPartida = new LogicaCrearPartida(comunicaciones, mediador);
 
         IPozo = new LogicaPozo();
 
@@ -130,7 +129,7 @@ public class LogicaPrincipal {
 
         avisoFachada = inicializadorClases.getAvisoFachada();
 
-        logicaAviso = new LogicaAviso((AvisoFachada) avisoFachada);
+        logicaAviso = new LogicaAviso(avisoFachada, mediador);
 
         lobbyLogica = new LobbyLogica((LobbyFachada) inicializadorClases.getLobbyFachada(), comunicaciones);
 

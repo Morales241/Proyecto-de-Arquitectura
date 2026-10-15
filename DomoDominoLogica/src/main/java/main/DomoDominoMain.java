@@ -1,6 +1,7 @@
 package main;
 
 import logica.LogicaPrincipal;
+import mediador.Mediador;
 
 /**
  * Clase principal encargada de correr el proyecto
@@ -13,7 +14,7 @@ import logica.LogicaPrincipal;
 public class DomoDominoMain {
 
     public static void main(String[] args) {
-        LogicaPrincipal logicaPrincipal = new LogicaPrincipal();
+        LogicaPrincipal logicaPrincipal = new LogicaPrincipal(Mediador.getInstancia());
         logicaPrincipal.iniciarJuego();
     }
     

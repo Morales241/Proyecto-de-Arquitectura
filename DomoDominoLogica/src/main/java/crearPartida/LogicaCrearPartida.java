@@ -13,7 +13,6 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mediador.IMediador;
-import mediador.Mediador;
 
 /**
  *
@@ -24,8 +23,8 @@ public class LogicaCrearPartida implements ILogicaCrearPartida {
     private final IMediador mediador;
     private final IGestorDeComunicacionesFachada comunicaciones;
 
-    public LogicaCrearPartida(IGestorDeComunicacionesFachada comunicacionesParametro) {
-        this.mediador = Mediador.getInstancia();
+    public LogicaCrearPartida(IGestorDeComunicacionesFachada comunicacionesParametro, IMediador mediadorParametro) {
+        this.mediador = mediadorParametro;
         this.comunicaciones = comunicacionesParametro;
     }
 

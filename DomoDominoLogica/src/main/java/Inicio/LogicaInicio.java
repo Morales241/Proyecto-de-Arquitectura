@@ -4,7 +4,6 @@ import fachadasInterfaz.IInicioFachada;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mediador.IMediador;
-import mediador.Mediador;
 import observers.IEventoValidacionDeNombre;
 
 /**
@@ -19,8 +18,8 @@ public class LogicaInicio implements ILogicaInicio {
 
     private final IMediador mediador;
 
-    public LogicaInicio() {
-        this.mediador = Mediador.getInstancia();
+    public LogicaInicio(IMediador mediador) {
+        this.mediador = mediador;
     }
 
     @Override

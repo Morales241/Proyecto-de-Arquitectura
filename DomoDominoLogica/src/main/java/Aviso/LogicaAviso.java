@@ -1,7 +1,7 @@
 package Aviso;
 
-import fachadas.AvisoFachada;
-import mediador.Mediador;
+import fachadasInterfaz.IAvisoFachada;
+import mediador.IMediador;
 
 /**
  *
@@ -9,12 +9,12 @@ import mediador.Mediador;
  */
 public class LogicaAviso implements ILogicaAviso{
 
-    private final AvisoFachada avisoFachada;
-    private final Mediador mediador;
+    private final IAvisoFachada avisoFachada;
+    private final IMediador mediador;
 
-    public LogicaAviso(AvisoFachada avisoFachada) {
+    public LogicaAviso(IAvisoFachada avisoFachada, IMediador mediador) {
         this.avisoFachada = avisoFachada;
-        this.mediador = Mediador.getInstancia();
+        this.mediador = mediador;
     }
 
     @Override

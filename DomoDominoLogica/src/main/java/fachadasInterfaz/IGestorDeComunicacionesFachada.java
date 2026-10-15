@@ -1,7 +1,6 @@
 package fachadasInterfaz;
 
 import eventos.JugadorBase;
-import fachadas.GestorDeComunicacionesFachada;
 import observers.IEventoPasarTurno;
 import observers.IEventoPonerFicha;
 import observersLogicaAServidorCentral.IEventoSalirDePartida;
@@ -24,7 +23,7 @@ import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
 public interface IGestorDeComunicacionesFachada {
     
     public void crearServidor(int puerto);
-    public GestorDeComunicacionesFachada getInstancia();
+    public IGestorDeComunicacionesFachada getInstancia();
     public void conectarAServidor(JugadorBase jugadorBase);
     public void enviarMensaje(Object mensaje, String nombre);
     public void agregarObservadorAcabarPartida(IEventoAcabarPartida observador);

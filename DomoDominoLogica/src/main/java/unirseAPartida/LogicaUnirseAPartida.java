@@ -12,7 +12,6 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mediador.IMediador;
-import mediador.Mediador;
 
 /**
  *
@@ -23,8 +22,8 @@ public class LogicaUnirseAPartida implements ILogicaUnirseAPartida {
     private final IMediador mediador;
     private IGestorDeComunicacionesFachada comunicaciones;
 
-    public LogicaUnirseAPartida(IGestorDeComunicacionesFachada comunicaciones) {
-        this.mediador = Mediador.getInstancia();
+    public LogicaUnirseAPartida(IGestorDeComunicacionesFachada comunicaciones, IMediador mediador) {
+        this.mediador = mediador;
         this.comunicaciones = comunicaciones;
     }
 
