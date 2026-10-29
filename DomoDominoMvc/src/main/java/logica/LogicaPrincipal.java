@@ -29,7 +29,6 @@ import eventos.RespuestaServidorCentral;
 import eventos.SetUpDto;
 import eventos.VotoDeJugador;
 import fachadas.ArregloFachada;
-import fachadas.LobbyFachada;
 import fachadasInterfaz.IAvisoFachada;
 import fachadasInterfaz.ICrearPartidaFachada;
 import fachadasInterfaz.IInicioFachada;
@@ -131,7 +130,7 @@ public class LogicaPrincipal {
 
         logicaAviso = new LogicaAviso(avisoFachada, mediador);
 
-        lobbyLogica = new LobbyLogica((LobbyFachada) inicializadorClases.getLobbyFachada(), comunicaciones);
+        lobbyLogica = new LobbyLogica(inicializadorClases.getLobbyFachada(), comunicaciones);
 
         logicaTurnos = new LogicaGestorTurno(comunicaciones, inicializadorClases.getTurnosFachada());
 

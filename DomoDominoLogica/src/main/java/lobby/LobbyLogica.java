@@ -7,7 +7,7 @@ package lobby;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.VotoDeJugador;
-import fachadas.LobbyFachada;
+import fachadasInterfaz.ILobbyFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
 import observersLogicaAServidorCentral.IEventoSalirDeLobby;
 import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
@@ -18,12 +18,12 @@ import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
  */
 public class LobbyLogica implements ILobbyLogica {
 
-    private final LobbyFachada lobbyFachada;
+    private final ILobbyFachada lobbyFachada;
     private final IGestorDeComunicacionesFachada comunicaciones;
     private String nombre;
     private int avatar;
 
-    public LobbyLogica(LobbyFachada lobbyFachada, IGestorDeComunicacionesFachada comunicaciones) {
+    public LobbyLogica(ILobbyFachada lobbyFachada, IGestorDeComunicacionesFachada comunicaciones) {
         this.lobbyFachada = lobbyFachada;
         this.comunicaciones = comunicaciones;
     }
