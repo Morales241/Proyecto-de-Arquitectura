@@ -19,6 +19,7 @@ import fachadas.LobbyFachada;
 import fachadas.TableroFachada;
 import fachadas.UnirseAPartidaFachada;
 import fachadasInterfaz.IArregloFachada;
+import fachadasInterfaz.IAvisoFachada;
 import fachadasInterfaz.IGestorDeTurnosFachada;
 import fachadasInterfaz.ILobbyFachada;
 import lobby.LobbyModel;
@@ -48,7 +49,7 @@ public class InicializadorClases {
 
     private ITableroFachada tableroFachada;
 
-    private AvisoFachada avisoFachada;
+    private IAvisoFachada avisoFachada;
 
     private ILobbyFachada lobbyFachada;
     
@@ -127,7 +128,7 @@ public class InicializadorClases {
         return tableroFachada;
     }
 
-    public AvisoFachada getAvisoFachada() {
+    public IAvisoFachada getAvisoFachada() {
         return avisoFachada;
     }
 
