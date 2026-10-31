@@ -26,6 +26,9 @@ import eventos.IEventoVotarParaIniciarPartida;
 import servidor.GestorMensajes;
 
 /**
+ * Orquesta la partida del lado del servidor: crea partidas, une jugadores,
+ * junta votos para iniciar y reparte cada jugada a todos los conectados.
+ * No pinta nada: solo recibe mensajes y notifica eventos.
  *
  * @author tacot
  */

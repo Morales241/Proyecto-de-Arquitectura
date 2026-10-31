@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
+/**
+ * Monton de fichas sin repartir. Instancia unica porque hay un solo pozo por juego.
+ */
 public class Pozo {
 
      private static Pozo instancia; 

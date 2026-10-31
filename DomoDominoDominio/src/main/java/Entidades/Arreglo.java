@@ -6,6 +6,10 @@ import Entidades.Ficha;
  *
  * @author favel
  */
+/**
+ * Tablero del juego: matriz de Fichas con cursores a los 2 extremos.
+ * Una celda en null esta vacia; cada partida usa su propia instancia.
+ */
 public class Arreglo {
 
     private Ficha[][] tablero;

@@ -6,6 +6,9 @@ package Entidades;
 
 import java.io.Serializable;
 
+/**
+ * Ficha de domino con sus 2 lados. Es mula cuando coinciden.
+ */
 public class Ficha implements Serializable {
 
     private Integer lado1;

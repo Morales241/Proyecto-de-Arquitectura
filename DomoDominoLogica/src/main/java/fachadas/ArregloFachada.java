@@ -16,6 +16,9 @@ import eventos.IEventoValidarFichas;
 
 
 /**
+ * Reglas de colocacion sobre el tablero de Fichas: solo abre una mula al
+ * centro, cada ficha ocupa 2 celdas (1 si es mula) y los extremos mandan
+ * que encaja. Celdas vacias son null.
  *
  * @author tacot
  */

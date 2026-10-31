@@ -14,6 +14,8 @@ import servidor.GestorMensajes;
 import servidor.Servidor;
 
 /**
+ * Puerta de red del jugador: levanta su servidor local, se conecta al
+ * central y manda/recibe mensajes serializados con Gson.
  *
  * @author tacot
  */

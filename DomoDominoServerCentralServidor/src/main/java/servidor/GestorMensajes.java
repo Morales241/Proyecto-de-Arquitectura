@@ -13,6 +13,10 @@ import eventos.IEventoCrearPartida;
 import eventos.IEventoSalirDePartida;
 import eventos.IEventoVotarParaIniciarPartida;
 
+/**
+ * Traduce mensajes de red a eventos tipados (crear/unirse/salir/votar/acabar).
+ * Quien se registra recibe el DTO del evento, no un aviso ciego.
+ */
 public class GestorMensajes {
 
     private static final Logger log = Logger.getLogger(GestorMensajes.class.getName());

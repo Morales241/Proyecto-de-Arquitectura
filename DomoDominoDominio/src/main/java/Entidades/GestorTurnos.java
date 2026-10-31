@@ -12,6 +12,9 @@ public class GestorTurnos {
     private Pozo pozo = Pozo.obtenerInstancia();
 
     // Constructor
+    /**
+     * Rota el turno en el orden dado. Empieza quien tenga la mula mas alta.
+     */
     public GestorTurnos() {
         this.turnos = new ArrayList<>();
         this.indiceActual = 0;

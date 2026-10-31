@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Socket del servidor: acepta clientes, lee objetos y le pasa cada mensaje
+ * a GestorMensajes, que avisa a los listeners registrados.
+ */
 public class Servidor {
 
     private ServerSocket serverSocket;
