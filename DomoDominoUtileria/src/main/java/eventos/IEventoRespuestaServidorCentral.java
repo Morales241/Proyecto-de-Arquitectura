@@ -1,4 +1,4 @@
-package observersServerCentralALogica;
+package eventos;
 
 import eventos.RespuestaServidorCentral;
 

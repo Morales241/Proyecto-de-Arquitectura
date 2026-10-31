@@ -1,8 +1,8 @@
 package fachadasInterfaz;
 
 import eventos.JugadorBase;
-import observersLogicaAServidorCentral.IEventoSalirDeLobby;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IEventoSalirDeLobby;
+import eventos.IEventoVotarParaIniciarPartida;
 
 /**
  *

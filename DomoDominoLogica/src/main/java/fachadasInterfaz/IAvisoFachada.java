@@ -4,7 +4,7 @@
  */
 package fachadasInterfaz;
 
-import observers.IObserver;
+import eventos.IObserver;
 
 /**
  *

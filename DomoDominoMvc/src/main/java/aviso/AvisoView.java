@@ -2,8 +2,8 @@ package aviso;
 
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoAviso;
-import observers.IObserver;
+import eventos.IEventoAviso;
+import eventos.IObserver;
 
 /**
  *

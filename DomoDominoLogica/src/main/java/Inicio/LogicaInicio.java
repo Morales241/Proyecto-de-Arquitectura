@@ -4,7 +4,7 @@ import fachadasInterfaz.IInicioFachada;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mediador.IMediador;
-import observers.IEventoValidacionDeNombre;
+import eventos.IEventoValidacionDeNombre;
 
 /**
  * Clase principal de Logica en la que inicia el juego

@@ -1,6 +1,6 @@
 package InicioMvc;
 
-import observers.IObserver;
+import eventos.IObserver;
 
 public class InicioController {
 

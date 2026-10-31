@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import org.mockito.ArgumentCaptor;
-import observers.IEventoPonerFicha;
+import eventos.IEventoPonerFicha;
 
 /**
  * TableroModel solo arma el evento y lo entrega al listener.

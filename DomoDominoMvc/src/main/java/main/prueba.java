@@ -18,8 +18,8 @@ import fachadas.TableroFachada;
 import fachadasInterfaz.ITableroFachada;
 import java.util.ArrayList;
 import java.util.List;
-import observers.IEventoPedirFichaAlPozo;
-import observers.IEventoPonerFicha;
+import eventos.IEventoPedirFichaAlPozo;
+import eventos.IEventoPonerFicha;
 import tablero.LogicaTablero;
 
 /**

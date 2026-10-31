@@ -5,11 +5,11 @@ import eventos.NodoDto;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import observers.IEventoAcabarPartida;
-import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
-import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observersLogicaAServidorCentral.IEventoSalirDePartida;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IEventoAcabarPartida;
+import eventos.IEventoAgregarJugadorAPartida;
+import eventos.IEventoCrearPartida;
+import eventos.IEventoSalirDePartida;
+import eventos.IEventoVotarParaIniciarPartida;
 import servidor.GestorMensajes;
 import servidor.Servidor;
 

@@ -4,10 +4,10 @@ import dtos.FichaDto;
 import eventos.JugadorAEliminarDto;
 import eventos.PonerFichaDto;
 import java.util.List;
-import observers.IEventoPedirFichaAlPozo;
-import observers.IEventoPonerFicha;
-import observersLogicaAServidorCentral.IEventoSalirDePartida;
-import observers.IEventoValidarFichas;
+import eventos.IEventoPedirFichaAlPozo;
+import eventos.IEventoPonerFicha;
+import eventos.IEventoSalirDePartida;
+import eventos.IEventoValidarFichas;
 
 public class TableroController {
 

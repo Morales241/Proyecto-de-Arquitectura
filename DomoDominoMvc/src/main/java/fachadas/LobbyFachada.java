@@ -3,8 +3,8 @@ package fachadas;
 import eventos.JugadorBase;
 import fachadasInterfaz.ILobbyFachada;
 import lobby.LobbyModel;
-import observersLogicaAServidorCentral.IEventoSalirDeLobby;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IEventoSalirDeLobby;
+import eventos.IEventoVotarParaIniciarPartida;
 
 /**
  *

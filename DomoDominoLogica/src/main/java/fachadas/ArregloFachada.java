@@ -12,7 +12,7 @@ import dtos.FichaDto;
 import fachadasInterfaz.IArregloFachada;
 import java.util.ArrayList;
 import java.util.List;
-import observers.IEventoValidarFichas;
+import eventos.IEventoValidarFichas;
 
 
 /**

@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package eventos;
+
+import eventos.JugadorSeUnioAPartida;
 
 /**
  *
  * @author tacot
  */
-public interface IEventoValidacionDeNombre {
-    public void validacionDeNombre(String mensajeDeValidacion);
+public interface IEventoSeUnieronAtuPartida {
+    public void avisarAJugadores(JugadorSeUnioAPartida jugadorSeUnioAPartida);
 }

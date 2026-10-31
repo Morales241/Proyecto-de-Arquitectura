@@ -22,10 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoPedirFichaAlPozo;
-import observers.IEventoPonerFicha;
-import observers.IEventoValidarFichas;
-import observers.IObserver;
+import eventos.IEventoPedirFichaAlPozo;
+import eventos.IEventoPonerFicha;
+import eventos.IEventoValidarFichas;
+import eventos.IObserver;
 
 public class TableroView extends JFrame implements IComponente {
 

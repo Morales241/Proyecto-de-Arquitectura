@@ -1,9 +1,9 @@
 package crearPartida;
 
 import eventos.JugadorCrearPartidaDto;
-import observers.IEventoSeleccion;
-import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observers.IObserver;
+import eventos.IEventoSeleccion;
+import eventos.IEventoCrearPartida;
+import eventos.IObserver;
 
 /**
  *

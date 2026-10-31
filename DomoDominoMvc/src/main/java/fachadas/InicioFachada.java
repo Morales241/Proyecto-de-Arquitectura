@@ -2,8 +2,8 @@ package fachadas;
 
 import fachadasInterfaz.IInicioFachada;
 import InicioMvc.InicioModel;
-import observers.IEventoValidacionDeNombre;
-import observers.IObserver;
+import eventos.IEventoValidacionDeNombre;
+import eventos.IObserver;
 
 /**
  * Fachada para manejar el modelo de inicio del juego sin exponer su implementación directa.

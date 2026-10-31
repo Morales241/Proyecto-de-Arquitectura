@@ -1,4 +1,4 @@
-package observers;
+package eventos;
 
 import dtos.FichaDto;
 import java.util.List;

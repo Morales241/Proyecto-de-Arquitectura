@@ -1,8 +1,8 @@
 package crearPartida;
 
 import eventos.JugadorCrearPartidaDto;
-import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observers.IObserver;
+import eventos.IEventoCrearPartida;
+import eventos.IObserver;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

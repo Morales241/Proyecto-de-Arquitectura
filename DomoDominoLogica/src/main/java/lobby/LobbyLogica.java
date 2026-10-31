@@ -9,8 +9,8 @@ import eventos.JugadorBase;
 import eventos.VotoDeJugador;
 import fachadasInterfaz.ILobbyFachada;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
-import observersLogicaAServidorCentral.IEventoSalirDeLobby;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IEventoSalirDeLobby;
+import eventos.IEventoVotarParaIniciarPartida;
 
 /**
  *

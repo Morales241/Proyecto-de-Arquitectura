@@ -4,8 +4,8 @@
  */
 package fachadasInterfaz;
 
-import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
-import observers.IObserver;
+import eventos.IEventoAgregarJugadorAPartida;
+import eventos.IObserver;
 
 /**
  *

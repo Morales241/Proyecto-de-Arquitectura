@@ -1,6 +1,6 @@
 package fachadasInterfaz;
 
-import observers.IObserver;
+import eventos.IObserver;
 
 /**
  * Interfaz para la Fachada del Inicio del juego.

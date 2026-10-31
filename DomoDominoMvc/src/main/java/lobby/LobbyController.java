@@ -4,9 +4,9 @@ import dtos.JugadorDto;
 import eventos.JugadorAEliminarDto;
 import eventos.VotoDeJugador;
 import java.util.List;
-import observers.IObserver;
-import observersLogicaAServidorCentral.IEventoSalirDeLobby;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IObserver;
+import eventos.IEventoSalirDeLobby;
+import eventos.IEventoVotarParaIniciarPartida;
 
 /**
  * Controlador del lobby

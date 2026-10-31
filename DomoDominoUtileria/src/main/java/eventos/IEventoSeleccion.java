@@ -2,12 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package eventos;
 
-/**
- *
- * @author tacot
- */
-public interface IEventoAviso {
-    public void notificarAlUsuario(String mensaje);
+public interface IEventoSeleccion {
+    
+    public void actualizarAvatar();
+           
 }

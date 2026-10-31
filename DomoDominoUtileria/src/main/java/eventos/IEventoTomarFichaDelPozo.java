@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observers;
+package eventos;
 
-import eventos.PonerFichaDto;
+import dtos.FichaDto;
 
 /**
  *
  * @author tacot
  */
-public interface IEventoPonerFicha {
-    public void ponerFicha(PonerFichaDto ponerFicha);
+public interface IEventoTomarFichaDelPozo {
+    public void tomarFichaDelPozo(FichaDto fichaSacada);
 }

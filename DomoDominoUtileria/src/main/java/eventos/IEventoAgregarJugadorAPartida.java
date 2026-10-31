@@ -1,4 +1,4 @@
-package observersLogicaAServidorCentral;
+package eventos;
 
 import eventos.JugadorUnirseAPartidaDto;
 

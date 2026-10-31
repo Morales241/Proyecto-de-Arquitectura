@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoSeleccion;
-import observersLogicaAServidorCentral.IEventoAgregarJugadorAPartida;
-import observers.IObserver;
+import eventos.IEventoSeleccion;
+import eventos.IEventoAgregarJugadorAPartida;
+import eventos.IObserver;
 
 /**
  *

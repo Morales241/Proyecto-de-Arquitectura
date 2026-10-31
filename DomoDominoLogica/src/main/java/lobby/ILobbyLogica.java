@@ -3,8 +3,8 @@ package lobby;
 import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.VotoDeJugador;
-import observersLogicaAServidorCentral.IEventoSalirDeLobby;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IEventoSalirDeLobby;
+import eventos.IEventoVotarParaIniciarPartida;
 
 /**
  *

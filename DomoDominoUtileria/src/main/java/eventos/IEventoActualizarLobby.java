@@ -1,4 +1,4 @@
-package observers;
+package eventos;
 
 import eventos.JugadorBase;
 

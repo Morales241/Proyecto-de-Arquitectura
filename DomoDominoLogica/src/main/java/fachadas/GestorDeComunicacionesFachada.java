@@ -4,15 +4,15 @@ import cliente.GestorDeComunicaciones;
 import eventos.JugadorBase;
 import eventos.NodoDto;
 import fachadasInterfaz.IGestorDeComunicacionesFachada;
-import observers.IEventoPasarTurno;
-import observers.IEventoPonerFicha;
-import observersLogicaAServidorCentral.IEventoSalirDePartida;
-import observers.IEventoTomarFichaDelPozo;
-import observers.IEventoAcabarPartida;
-import observers.IEventoIniciarPartida;
-import observersServerCentralALogica.IEventoIniciarPartidaAdmin;
-import observersServerCentralALogica.IEventoRespuestaServidorCentral;
-import observersServerCentralALogica.IEventoSeUnieronAtuPartida;
+import eventos.IEventoPasarTurno;
+import eventos.IEventoPonerFicha;
+import eventos.IEventoSalirDePartida;
+import eventos.IEventoTomarFichaDelPozo;
+import eventos.IEventoAcabarPartida;
+import eventos.IEventoIniciarPartida;
+import eventos.IEventoIniciarPartidaAdmin;
+import eventos.IEventoRespuestaServidorCentral;
+import eventos.IEventoSeUnieronAtuPartida;
 
 /**
  * Fachada

@@ -11,12 +11,12 @@ import eventos.JugadorAEliminarDto;
 import eventos.JugadorBase;
 import eventos.PonerFichaDto;
 import java.util.List;
-import observers.IEventoPedirFichaAlPozo;
-import observers.IEventoPonerFicha;
-import observers.IEventoTomarFichaDelPozo;
-import observers.IEventoValidarFichas;
-import observers.IObserver;
-import observersLogicaAServidorCentral.IEventoSalirDePartida;
+import eventos.IEventoPedirFichaAlPozo;
+import eventos.IEventoPonerFicha;
+import eventos.IEventoTomarFichaDelPozo;
+import eventos.IEventoValidarFichas;
+import eventos.IObserver;
+import eventos.IEventoSalirDePartida;
 
 /**
  *

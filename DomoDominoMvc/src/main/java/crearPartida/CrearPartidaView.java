@@ -5,9 +5,9 @@ import eventos.NodoDto;
 import javax.swing.*;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoSeleccion;
-import observersLogicaAServidorCentral.IEventoCrearPartida;
-import observers.IObserver;
+import eventos.IEventoSeleccion;
+import eventos.IEventoCrearPartida;
+import eventos.IObserver;
 
 /**
  *

@@ -6,7 +6,7 @@ package fachadas;
 
 import aviso.AvisoModel;
 import fachadasInterfaz.IAvisoFachada;
-import observers.IObserver;
+import eventos.IObserver;
 
 /**
  *

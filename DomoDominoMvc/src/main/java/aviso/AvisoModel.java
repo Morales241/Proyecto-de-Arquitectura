@@ -4,8 +4,8 @@
  */
 package aviso;
 
-import observers.IEventoAviso;
-import observers.IObserver;
+import eventos.IEventoAviso;
+import eventos.IObserver;
 
 /**
  *

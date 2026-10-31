@@ -1,4 +1,4 @@
-package observers;
+package eventos;
 
 public interface IObserver {
     

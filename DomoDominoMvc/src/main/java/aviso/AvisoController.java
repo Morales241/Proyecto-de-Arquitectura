@@ -1,6 +1,6 @@
 package aviso;
 
-import observers.IObserver;
+import eventos.IObserver;
 
 /**
  *

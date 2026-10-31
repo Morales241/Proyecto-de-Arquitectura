@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package observersServerCentralALogica;
+package eventos;
 
-import eventos.JugadorSeUnioAPartida;
+import eventos.PasarTurno;
 
 /**
  *
  * @author tacot
  */
-public interface IEventoSeUnieronAtuPartida {
-    public void avisarAJugadores(JugadorSeUnioAPartida jugadorSeUnioAPartida);
+public interface IEventoPasarTurno {
+    public void pasarTurno(PasarTurno pasarTurno);
 }

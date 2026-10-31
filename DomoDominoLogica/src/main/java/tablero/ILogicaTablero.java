@@ -9,10 +9,10 @@ import dtos.FichaDto;
 import dtos.JugadorDto;
 import eventos.JugadorBase;
 import java.util.List;
-import observers.IEventoPedirFichaAlPozo;
-import observers.IEventoPonerFicha;
-import observers.IEventoValidarFichas;
-import observersLogicaAServidorCentral.IEventoSalirDePartida;
+import eventos.IEventoPedirFichaAlPozo;
+import eventos.IEventoPonerFicha;
+import eventos.IEventoValidarFichas;
+import eventos.IEventoSalirDePartida;
 
 /**
  *

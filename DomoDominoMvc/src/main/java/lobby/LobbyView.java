@@ -10,10 +10,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import mediador.IComponente;
 import mediador.IMediador;
-import observers.IEventoActualizarLobby;
-import observers.IObserver;
-import observersLogicaAServidorCentral.IEventoSalirDeLobby;
-import observersLogicaAServidorCentral.IEventoVotarParaIniciarPartida;
+import eventos.IEventoActualizarLobby;
+import eventos.IObserver;
+import eventos.IEventoSalirDeLobby;
+import eventos.IEventoVotarParaIniciarPartida;
 
 /**
  * Vista del lobby
