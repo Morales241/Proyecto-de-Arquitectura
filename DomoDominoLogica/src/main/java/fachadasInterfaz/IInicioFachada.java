@@ -1,6 +1,7 @@
 package fachadasInterfaz;
 
-import eventos.IObserver;
+import eventos.IEventoIrACrearPartida;
+import eventos.IEventoIrAUnirseAPartida;
 
 /**
  * Interfaz para la Fachada del Inicio del juego.
@@ -12,12 +13,12 @@ public interface IInicioFachada {
      *
      * @param observer El observador que se agregará.
      */
-    void agregarIObserverCrearPartida(IObserver observer);
+    void agregarEventoIrACrearPartida(IEventoIrACrearPartida observer);
     
     /**
      * Método para agregar un observador al modelo de crear partida.
      *
      * @param observer El observador que se agregará.
      */
-    void agregarIObserverUnirseAPartida(IObserver observer);
+    void agregarEventoIrAUnirseAPartida(IEventoIrAUnirseAPartida observer);
 }

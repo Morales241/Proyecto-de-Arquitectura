@@ -5,7 +5,7 @@
 package fachadasInterfaz;
 
 import eventos.IEventoAgregarJugadorAPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
 
 /**
  *
@@ -15,5 +15,5 @@ public interface IUnirseAPartidaFachada {
      
      public void agregarIEventoUnirseAPartida(IEventoAgregarJugadorAPartida listener);
      
-     public void agregarIEventoRegresar(IObserver listener);
+     public void agregarIEventoRegresar(IEventoRegresar listener);
 }

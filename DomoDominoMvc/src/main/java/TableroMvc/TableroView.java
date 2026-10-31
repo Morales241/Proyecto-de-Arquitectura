@@ -25,7 +25,7 @@ import mediador.IMediador;
 import eventos.IEventoPedirFichaAlPozo;
 import eventos.IEventoPonerFicha;
 import eventos.IEventoValidarFichas;
-import eventos.IObserver;
+import eventos.IEventoTableroCambio;
 
 public class TableroView extends JFrame implements IComponente {
 
@@ -36,7 +36,7 @@ public class TableroView extends JFrame implements IComponente {
     private FichaDto fichaSeleccionada = null;
     private JPanel botonesPanel;
     private JLayeredPane layeredPane;
-    private IObserver actualizar;
+    private IEventoTableroCambio actualizar;
     private IEventoPonerFicha eventoPonerFicha;
     private JButton botonPozo;
     private IEventoValidarFichas eventoValidarFichas;
@@ -44,7 +44,7 @@ public class TableroView extends JFrame implements IComponente {
 
     public TableroView(TableroModel model) {
         this.model = model;
-        this.model.agregarObserverActualizar(new Actualizar());
+        this.model.agregarEventoTableroCambio(new Actualizar());
 
         this.setSize(1210, 730);
         setTitle("Tablero de Dominó");
@@ -263,10 +263,10 @@ public class TableroView extends JFrame implements IComponente {
         }
     }
 
-    private class Actualizar implements IObserver {
+    private class Actualizar implements IEventoTableroCambio {
 
         @Override
-        public void actualizar() {
+        public void tableroCambio() {
 
             JLabel avatarJugador = new JLabel();
             String rutaImagen2 = String.format("/imgPartidaFichas/avatar%d.png", model.getJugador().getAvatar());

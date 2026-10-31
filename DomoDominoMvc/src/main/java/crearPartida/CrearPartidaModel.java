@@ -2,7 +2,9 @@ package crearPartida;
 
 import eventos.JugadorCrearPartidaDto;
 import eventos.IEventoCrearPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
+import eventos.IEventoNombreInvalido;
+import eventos.IEventoAvatarSeleccionado;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,10 +21,10 @@ public class CrearPartidaModel {
     };
     private int indiceAvatar = 0;
     
-    private IObserver observadoresCambioAvatar;
+    private IEventoAvatarSeleccionado observadoresCambioAvatar;
     private IEventoCrearPartida observerCrearPartida;
-    private IObserver observerNombreInvalido;
-    private IObserver observerRegresar;
+    private IEventoNombreInvalido observerNombreInvalido;
+    private IEventoRegresar observerRegresar;
 
     public CrearPartidaModel() {
     }
@@ -38,13 +40,13 @@ public class CrearPartidaModel {
         }
     }
 
-    public void agregarIEventoNombreInvalido(IObserver listener) {
+    public void agregarIEventoNombreInvalido(IEventoNombreInvalido listener) {
         this.observerNombreInvalido = listener;
     }
 
     public void ejecutarAccionNombreInvalido() {
         if (observerNombreInvalido != null) {
-            observerNombreInvalido.actualizar();
+            observerNombreInvalido.nombreInvalido();
         }
     }
     
@@ -58,13 +60,13 @@ public class CrearPartidaModel {
         }
     }
     
-    public void agregarIEventoRegresar(IObserver listener) {
+    public void agregarIEventoRegresar(IEventoRegresar listener) {
         this.observerRegresar = listener;
     }
 
     public void ejecutarAccionRegresar() {
         if (observerRegresar != null) {
-            observerRegresar.actualizar();
+            observerRegresar.regresar();
         }
     }
 
@@ -78,13 +80,13 @@ public class CrearPartidaModel {
         notificarCambioAvatar();
     }
 
-    public void agregarObservadorCambioAvatar(IObserver observador) {
+    public void agregarObservadorCambioAvatar(IEventoAvatarSeleccionado observador) {
         observadoresCambioAvatar = observador;
     }
 
     private void notificarCambioAvatar() {
         if(observadoresCambioAvatar != null) {
-            observadoresCambioAvatar.actualizar();
+            observadoresCambioAvatar.avatarSeleccionado();
         }
     }
 }

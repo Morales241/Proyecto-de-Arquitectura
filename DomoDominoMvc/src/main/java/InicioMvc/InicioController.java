@@ -1,6 +1,7 @@
 package InicioMvc;
 
-import eventos.IObserver;
+import eventos.IEventoIrACrearPartida;
+import eventos.IEventoIrAUnirseAPartida;
 
 public class InicioController {
 
@@ -23,18 +24,18 @@ public class InicioController {
         inicioModel.ejecutarAccionUnirseAPartida();
     }
 
-    private class OyenteCrearPartida implements IObserver {
+    private class OyenteCrearPartida implements IEventoIrACrearPartida {
 
         @Override
-        public void actualizar() {
+        public void irACrearPartida() {
             crearPartida();
         }
     }
 
-    private class OyenteUnirseAPartida implements IObserver {
+    private class OyenteUnirseAPartida implements IEventoIrAUnirseAPartida {
 
         @Override
-        public void actualizar() {
+        public void irAUnirseAPartida() {
             unirseAPartida();
         }
     }

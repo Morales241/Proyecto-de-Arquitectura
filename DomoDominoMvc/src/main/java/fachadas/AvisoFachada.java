@@ -6,7 +6,7 @@ package fachadas;
 
 import aviso.AvisoModel;
 import fachadasInterfaz.IAvisoFachada;
-import eventos.IObserver;
+import eventos.IEventoCerrarAviso;
 
 /**
  *
@@ -21,7 +21,7 @@ public class AvisoFachada implements IAvisoFachada{
     }
     
     @Override
-    public void agregarEventoCerrarPantalla(IObserver eventoCerrarPantalla) {
+    public void agregarEventoCerrarPantalla(IEventoCerrarAviso eventoCerrarPantalla) {
         avisoModel.agregarEventoCerrarPantalla(eventoCerrarPantalla);
     }
 

@@ -5,7 +5,7 @@
 package aviso;
 
 import eventos.IEventoAviso;
-import eventos.IObserver;
+import eventos.IEventoCerrarAviso;
 
 /**
  *
@@ -14,7 +14,7 @@ import eventos.IObserver;
 public class AvisoModel {
     
     private IEventoAviso eventoAviso;
-    private IObserver eventoCerrarPantalla;
+    private IEventoCerrarAviso eventoCerrarPantalla;
     private String mensaje;
     private int jugadores;
 
@@ -40,14 +40,14 @@ public class AvisoModel {
         this.mensaje = mensaje;
     }
 
-    public void agregarEventoCerrarPantalla(IObserver eventoCerrarPantalla) {
+    public void agregarEventoCerrarPantalla(IEventoCerrarAviso eventoCerrarPantalla) {
         this.eventoCerrarPantalla = eventoCerrarPantalla;
     }
     
     public void notificarEventoCerrarPantalla(){
         if (eventoCerrarPantalla != null) {
             
-            eventoCerrarPantalla.actualizar();
+            eventoCerrarPantalla.cerrarAviso();
             
         }
     }

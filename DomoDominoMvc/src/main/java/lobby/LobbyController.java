@@ -4,7 +4,6 @@ import dtos.JugadorDto;
 import eventos.JugadorAEliminarDto;
 import eventos.VotoDeJugador;
 import java.util.List;
-import eventos.IObserver;
 import eventos.IEventoSalirDeLobby;
 import eventos.IEventoVotarParaIniciarPartida;
 

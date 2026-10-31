@@ -7,7 +7,7 @@ package fachadas;
 import fachadasInterfaz.ICrearPartidaFachada;
 import crearPartida.CrearPartidaModel;
 import eventos.IEventoCrearPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
 
 /**
  *
@@ -28,7 +28,7 @@ public class CrearPartidaFachada implements ICrearPartidaFachada {
     }
 
     @Override
-    public void agregarIEventoRegresar(IObserver listener) {
+    public void agregarIEventoRegresar(IEventoRegresar listener) {
         crearMesaModel.agregarIEventoRegresar(listener);
         
     }

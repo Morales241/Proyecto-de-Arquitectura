@@ -6,7 +6,6 @@ import eventos.VotoDeJugador;
 import java.util.ArrayList;
 import java.util.List;
 import eventos.IEventoActualizarLobby;
-import eventos.IObserver;
 import eventos.IEventoSalirDeLobby;
 import eventos.IEventoVotarParaIniciarPartida;
 

@@ -6,7 +6,7 @@ package fachadas;
 
 import fachadasInterfaz.IUnirseAPartidaFachada;
 import eventos.IEventoAgregarJugadorAPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
 import unirseAPartida.UnirseAPartidaModel;
 
 /**
@@ -27,7 +27,7 @@ public class UnirseAPartidaFachada implements IUnirseAPartidaFachada {
      }
 
      @Override
-     public void agregarIEventoRegresar(IObserver listener) {
+     public void agregarIEventoRegresar(IEventoRegresar listener) {
           unirseAPartidaModel.agregarIEventoRegresar(listener);
      }
      

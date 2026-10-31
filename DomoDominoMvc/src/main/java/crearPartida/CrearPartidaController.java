@@ -3,7 +3,7 @@ package crearPartida;
 import eventos.JugadorCrearPartidaDto;
 import eventos.IEventoSeleccion;
 import eventos.IEventoCrearPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
 
 /**
  *
@@ -44,10 +44,10 @@ public class CrearPartidaController {
         crearMesaModel.cambiarAvatar(direccion);
     }
 
-    private class accionRegresar implements IObserver {
+    private class accionRegresar implements IEventoRegresar {
 
         @Override
-        public void actualizar() {
+        public void regresar() {
             regresar();
         }
     }

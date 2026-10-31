@@ -5,7 +5,7 @@
 package fachadasInterfaz;
 
 import eventos.IEventoCrearPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
 
 /**
  *
@@ -15,5 +15,5 @@ public interface ICrearPartidaFachada {
     
     public void agregarIEventoCrearPartida(IEventoCrearPartida listener);
     
-     public void agregarIEventoRegresar(IObserver listener);
+     public void agregarIEventoRegresar(IEventoRegresar listener);
 }

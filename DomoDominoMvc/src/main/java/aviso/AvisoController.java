@@ -1,6 +1,6 @@
 package aviso;
 
-import eventos.IObserver;
+import eventos.IEventoCerrarAviso;
 
 /**
  *
@@ -21,10 +21,10 @@ public class AvisoController {
         avisoModel.notificarEventoCerrarPantalla();
     }
 
-    private class AccionCerrarPantalla implements IObserver{
+    private class AccionCerrarPantalla implements IEventoCerrarAviso{
 
         @Override
-        public void actualizar() {
+        public void cerrarAviso() {
             cerrarPantalla();
         }
     

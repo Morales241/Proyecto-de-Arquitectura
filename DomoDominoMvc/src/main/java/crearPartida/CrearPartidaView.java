@@ -7,7 +7,9 @@ import mediador.IComponente;
 import mediador.IMediador;
 import eventos.IEventoSeleccion;
 import eventos.IEventoCrearPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
+import eventos.IEventoNombreInvalido;
+import eventos.IEventoAvatarSeleccionado;
 
 /**
  *
@@ -20,7 +22,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
     private IEventoCrearPartida observerCrearPartida;
     private IEventoSeleccion observerSeleccionIzquierda;
     private IEventoSeleccion observerSeleccionDerecha;
-    private IObserver observerRegresar;
+    private IEventoRegresar observerRegresar;
     private int avatar = 0;
 
     /**
@@ -208,7 +210,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         }
     }
 
-    public void agregarIEventoRegresar(IObserver listener) {
+    public void agregarIEventoRegresar(IEventoRegresar listener) {
         this.observerRegresar = listener;
 
     }
@@ -235,7 +237,7 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
 
     public void ejecutarAccionRegresar() {
         if (observerRegresar != null) {
-            observerRegresar.actualizar();
+            observerRegresar.regresar();
         }
     }
 
@@ -269,18 +271,18 @@ public class CrearPartidaView extends javax.swing.JFrame implements IComponente 
         this.mediador = mediador;
     }
 
-    private class accionNombreInvalido implements IObserver {
+    private class accionNombreInvalido implements IEventoNombreInvalido {
 
         @Override
-        public void actualizar() {
+        public void nombreInvalido() {
             validarDatos();
         }
     }
 
-    private class accionSeleccionAvatar implements IObserver {
+    private class accionSeleccionAvatar implements IEventoAvatarSeleccionado {
 
         @Override
-        public void actualizar() {
+        public void avatarSeleccionado() {
             actualizarAvatar();
         }
     }

@@ -1,32 +1,33 @@
 package InicioMvc;
 
-import eventos.IObserver;
+import eventos.IEventoIrACrearPartida;
+import eventos.IEventoIrAUnirseAPartida;
 
 public class InicioModel {
 
-    private IObserver observerCrearPartida;
-    private IObserver observerUnirsePartida;
+    private IEventoIrACrearPartida observerCrearPartida;
+    private IEventoIrAUnirseAPartida observerUnirsePartida;
 
     public InicioModel() {
     }
 
-    public void agregarIEventoCrearPartida(IObserver listener) {
+    public void agregarIEventoCrearPartida(IEventoIrACrearPartida listener) {
         this.observerCrearPartida = listener;
     }
 
     public void ejecutarAccionCrearPartida() {
         if (observerCrearPartida != null) {
-            observerCrearPartida.actualizar();
+            observerCrearPartida.irACrearPartida();
         }
     }
 
-    public void agregarIEventoUnirseAPartida(IObserver listener) {
+    public void agregarIEventoUnirseAPartida(IEventoIrAUnirseAPartida listener) {
         this.observerUnirsePartida = listener;
     }
 
     public void ejecutarAccionUnirseAPartida() {
         if (observerUnirsePartida != null) {
-            observerUnirsePartida.actualizar();
+            observerUnirsePartida.irAUnirseAPartida();
         }
 
     }

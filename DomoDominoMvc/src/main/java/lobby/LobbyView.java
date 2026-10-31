@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import mediador.IComponente;
 import mediador.IMediador;
 import eventos.IEventoActualizarLobby;
-import eventos.IObserver;
 import eventos.IEventoSalirDeLobby;
 import eventos.IEventoVotarParaIniciarPartida;
 

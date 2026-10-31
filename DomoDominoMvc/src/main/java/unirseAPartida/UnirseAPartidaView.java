@@ -14,7 +14,9 @@ import mediador.IComponente;
 import mediador.IMediador;
 import eventos.IEventoSeleccion;
 import eventos.IEventoAgregarJugadorAPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
+import eventos.IEventoNombreInvalido;
+import eventos.IEventoAvatarSeleccionado;
 
 /**
  *
@@ -27,7 +29,7 @@ public class UnirseAPartidaView extends javax.swing.JFrame implements IComponent
     private IEventoAgregarJugadorAPartida observerUnirseAPartida;
     private IEventoSeleccion observerSeleccionIzquierda;
     private IEventoSeleccion observerSeleccionDerecha;
-    private IObserver observerRegresar;
+    private IEventoRegresar observerRegresar;
     private int avatar = 0;
 
     /**
@@ -204,14 +206,14 @@ public class UnirseAPartidaView extends javax.swing.JFrame implements IComponent
         JOptionPane.showMessageDialog(null, "No se permiten caracteres especiales(solo '_') ni espacios, el nombre tiene que ser mayor a 3 y menor a 15 caracteres");
     }
 
-    public void agregarIEventoRegresar(IObserver listener) {
+    public void agregarIEventoRegresar(IEventoRegresar listener) {
         this.observerRegresar = listener;
 
     }
 
     public void ejecutarAccionRegresar() {
         if (observerRegresar != null) {
-            observerRegresar.actualizar();
+            observerRegresar.regresar();
         }
     }
 
@@ -269,18 +271,18 @@ public class UnirseAPartidaView extends javax.swing.JFrame implements IComponent
         this.mediador = mediador;
     }
 
-    private class accionNombreInvalido implements IObserver {
+    private class accionNombreInvalido implements IEventoNombreInvalido {
 
         @Override
-        public void actualizar() {
+        public void nombreInvalido() {
             validarDatos();
         }
     }
 
-    private class accionSeleccionAvatar implements IObserver {
+    private class accionSeleccionAvatar implements IEventoAvatarSeleccionado {
 
         @Override
-        public void actualizar() {
+        public void avatarSeleccionado() {
             actualizarAvatar();
         }
     }

@@ -2,14 +2,15 @@ package InicioMvc;
 
 import mediador.IComponente;
 import mediador.IMediador;
-import eventos.IObserver;
+import eventos.IEventoIrACrearPartida;
+import eventos.IEventoIrAUnirseAPartida;
 
 public class InicioView extends javax.swing.JFrame implements IComponente {
 
     private final InicioModel inicioModel;
     private IMediador mediador;
-    private IObserver observerCrearPartida;
-    private IObserver observerUnirsePartida;
+    private IEventoIrACrearPartida observerCrearPartida;
+    private IEventoIrAUnirseAPartida observerUnirsePartida;
 
     /**
      * Creates new form InicioView
@@ -100,23 +101,23 @@ public class InicioView extends javax.swing.JFrame implements IComponente {
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 
-    public void agregarIEventoCrearPartida(IObserver listener) {
+    public void agregarIEventoCrearPartida(IEventoIrACrearPartida listener) {
         this.observerCrearPartida = listener;
     }
 
     public void ejecutarAccionCrearPartida() {
         if (observerCrearPartida != null) {
-            observerCrearPartida.actualizar();
+            observerCrearPartida.irACrearPartida();
         }
     }
 
-    public void agregarIEventoUnirseAPartida(IObserver listener) {
+    public void agregarIEventoUnirseAPartida(IEventoIrAUnirseAPartida listener) {
         this.observerUnirsePartida = listener;
     }
 
     public void ejecutarAccionUnirseAPartida() {
         if (observerUnirsePartida != null) {
-            observerUnirsePartida.actualizar();
+            observerUnirsePartida.irAUnirseAPartida();
         }
     }
     

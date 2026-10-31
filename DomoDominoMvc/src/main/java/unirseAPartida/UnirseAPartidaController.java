@@ -7,7 +7,7 @@ package unirseAPartida;
 import eventos.JugadorUnirseAPartidaDto;
 import eventos.IEventoSeleccion;
 import eventos.IEventoAgregarJugadorAPartida;
-import eventos.IObserver;
+import eventos.IEventoRegresar;
 
 /**
  *
@@ -44,10 +44,10 @@ public class UnirseAPartidaController {
 
     }
 
-    private class accionRegresar implements IObserver {
+    private class accionRegresar implements IEventoRegresar {
 
         @Override
-        public void actualizar() {
+        public void regresar() {
             regresar();
         }
     }

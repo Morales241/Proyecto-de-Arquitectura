@@ -3,7 +3,7 @@ package aviso;
 import mediador.IComponente;
 import mediador.IMediador;
 import eventos.IEventoAviso;
-import eventos.IObserver;
+import eventos.IEventoCerrarAviso;
 
 /**
  *
@@ -12,7 +12,7 @@ import eventos.IObserver;
 public class AvisoView extends javax.swing.JFrame implements IComponente{
 
     private final AvisoModel avisoModel;
-    private IObserver eventoCerrarPantalla;
+    private IEventoCerrarAviso eventoCerrarPantalla;
     private IMediador mediador;
 
     public AvisoView(AvisoModel avisoModel) {
@@ -82,14 +82,14 @@ public class AvisoView extends javax.swing.JFrame implements IComponente{
 
     }
 
-    public void agregarEventoCerrarPantalla(IObserver eventoCerrarPantalla) {
+    public void agregarEventoCerrarPantalla(IEventoCerrarAviso eventoCerrarPantalla) {
         this.eventoCerrarPantalla = eventoCerrarPantalla;
     }
 
     public void notificarEventoCerrarPantalla() {
         if (eventoCerrarPantalla != null) {
 
-            eventoCerrarPantalla.actualizar();
+            eventoCerrarPantalla.cerrarAviso();
 
         }
     }

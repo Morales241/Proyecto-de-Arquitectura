@@ -15,7 +15,7 @@ import eventos.IEventoPedirFichaAlPozo;
 import eventos.IEventoPonerFicha;
 import eventos.IEventoTomarFichaDelPozo;
 import eventos.IEventoValidarFichas;
-import eventos.IObserver;
+import eventos.IEventoTableroCambio;
 import eventos.IEventoSalirDePartida;
 
 /**
@@ -33,7 +33,7 @@ public class TableroModel {
     private IEventoPedirFichaAlPozo eventoTomarFichaDelPozo;
     private IEventoSalirDePartida eventoSalirDePartida;
     private IEventoValidarFichas eventoValidarFichas;
-    private IObserver actualizar;
+    private IEventoTableroCambio eventoTableroCambio;
     private boolean pozo;
 
     public TableroModel() {
@@ -83,19 +83,19 @@ public class TableroModel {
         }
     }
 
-    public void agregarObserverActualizar(IObserver actualizar) {
-        this.actualizar = actualizar;
+    public void agregarEventoTableroCambio(IEventoTableroCambio eventoTableroCambio) {
+        this.eventoTableroCambio = eventoTableroCambio;
     }
 
-    public void ejecutarObserverActualizar() {
-        if (actualizar != null) {
-            actualizar.actualizar();
+    public void notificarTableroCambio() {
+        if (eventoTableroCambio != null) {
+            eventoTableroCambio.tableroCambio();
         }
     }
 
     public void agregarFicha(FichaDto ficha) {
         jugador.getFichas().add(ficha);
-        ejecutarObserverActualizar();
+        notificarTableroCambio();
     }
 
     public void colocarFicha(boolean extremoIzquierdo, FichaDto fichaSeleccionada, String Direccion) {
@@ -120,7 +120,7 @@ public class TableroModel {
 
     public void setArray(ArregloDto array) {
         this.array = array;
-        ejecutarObserverActualizar();
+        notificarTableroCambio();
     }
 
     public List<JugadorBase> getCompañeros() {
@@ -137,7 +137,7 @@ public class TableroModel {
         setCompañeros(jugadorBases);
         setArray(arrayDto);
         setTurno(turno);
-        ejecutarObserverActualizar();
+        notificarTableroCambio();
     }
 
     public boolean isTurno() {
@@ -146,7 +146,7 @@ public class TableroModel {
 
     public void setTurno(boolean turno) {
         this.turno = turno;
-        ejecutarObserverActualizar();
+        notificarTableroCambio();
     }
 
     public boolean isPozo() {
@@ -156,7 +156,7 @@ public class TableroModel {
     public void setPoso(boolean pozo) {
         this.pozo = pozo;
         
-        ejecutarObserverActualizar();
+        notificarTableroCambio();
     }
     
     

@@ -51,7 +51,10 @@ import eventos.IEventoIniciarPartida;
 import eventos.IEventoPonerFicha;
 import eventos.IEventoSalirDePartida;
 import eventos.IEventoTomarFichaDelPozo;
-import eventos.IObserver;
+import eventos.IEventoCerrarAviso;
+import eventos.IEventoRegresar;
+import eventos.IEventoIrACrearPartida;
+import eventos.IEventoIrAUnirseAPartida;
 import unirseAPartida.ILogicaUnirseAPartida;
 import unirseAPartida.LogicaUnirseAPartida;
 import eventos.IEventoAcabarPartida;
@@ -156,8 +159,8 @@ public class LogicaPrincipal {
 
     public void agregarObservers() {
         //agregar observers de fachadas
-        inicioFachada.agregarIObserverCrearPartida(new AccionCambiarDePantallaCrearPartida());
-        inicioFachada.agregarIObserverUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
+        inicioFachada.agregarEventoIrACrearPartida(new AccionCambiarDePantallaCrearPartida());
+        inicioFachada.agregarEventoIrAUnirseAPartida(new AccionCambiarDePantallaUnirseAPartida());
 
         //agregar observers de aviso
         avisoFachada.agregarEventoCerrarPantalla(new AccionCerrarAviso());
@@ -223,26 +226,26 @@ public class LogicaPrincipal {
 
     }
 
-    private class AccionRegresarAlInicio implements IObserver {
+    private class AccionRegresarAlInicio implements IEventoRegresar {
 
         @Override
-        public void actualizar() {
+        public void regresar() {
             lInicio.regresarAlInicio();
         }
     }
 
-    private class AccionCambiarDePantallaCrearPartida implements IObserver {
+    private class AccionCambiarDePantallaCrearPartida implements IEventoIrACrearPartida {
 
         @Override
-        public void actualizar() {
+        public void irACrearPartida() {
             lInicio.crearPartida();
         }
     }
 
-    private class AccionCambiarDePantallaUnirseAPartida implements IObserver {
+    private class AccionCambiarDePantallaUnirseAPartida implements IEventoIrAUnirseAPartida {
 
         @Override
-        public void actualizar() {
+        public void irAUnirseAPartida() {
             lInicio.unirseAPartida();
         }
     }
@@ -369,10 +372,10 @@ public class LogicaPrincipal {
 
     }
 
-    private class AccionCerrarAviso implements IObserver {
+    private class AccionCerrarAviso implements IEventoCerrarAviso {
 
         @Override
-        public void actualizar() {
+        public void cerrarAviso() {
             logicaAviso.cerrarAviso();
         }
 
