@@ -98,4 +98,4 @@ Matriz de `Ficha` (no números): `null` = vacío. Cada ficha ocupa 2 celdas (1 s
 
 ## Estado
 
-En reestructura (`reestructuracion`): tablero con entidades, Lógica sin dependencia a Vista, eventos con nombre, 8 tests verdes. Pendiente: exportar diagramas draw.io y gif de 2 clientes.
+v2 refactorizada: eventos tipados, Logica sin dependencia a la Vista, tablero con entidades y 8 tests en verde con JUnit. Roadmap: exportar diagramas draw.io y GIF de una partida con 2 clientes.
